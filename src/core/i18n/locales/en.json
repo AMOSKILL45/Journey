@@ -1,0 +1,23 @@
+{
+  "app": {
+    "name": "This Is The Journey",
+    "tagline": "Plan together. Travel together. Adventure together."
+  },
+  "welcome": {
+    "title": "Welcome",
+    "subtitle": "Your adventure starts here",
+    "cta": "Get started"
+  },
+  "common": {
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back",
+    "next": "Next",
+    "skip": "Skip",
+    "done": "Done",
+    "loading": "Loading...",
+    "error": "Something went wrong"
+  }
+}

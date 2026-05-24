@@ -1,0 +1,23 @@
+{
+  "app": {
+    "name": "This Is The Journey",
+    "tagline": "Planifie ensemble. Voyage ensemble. Vis l'aventure ensemble."
+  },
+  "welcome": {
+    "title": "Bienvenue",
+    "subtitle": "Ton aventure commence ici",
+    "cta": "C'est parti"
+  },
+  "common": {
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "back": "Retour",
+    "next": "Suivant",
+    "skip": "Passer",
+    "done": "Terminé",
+    "loading": "Chargement...",
+    "error": "Quelque chose a mal tourné"
+  }
+}

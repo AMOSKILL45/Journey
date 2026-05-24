@@ -44,14 +44,14 @@ export default {
         'dark-border': '#000000',
       },
       fontFamily: {
-        // Cf spec Section 6.4
-        pixel: ['PressStart2P-Regular'],
-        heading: ['Fredoka-SemiBold'],
-        'heading-bold': ['Fredoka-Bold'],
-        body: ['Nunito-Regular'],
-        'body-medium': ['Nunito-Medium'],
-        'body-semibold': ['Nunito-SemiBold'],
-        'body-bold': ['Nunito-Bold'],
+        // Cf spec Section 6.4 (using @expo-google-fonts naming convention)
+        pixel: ['PressStart2P_400Regular'],
+        heading: ['Fredoka_600SemiBold'],
+        'heading-bold': ['Fredoka_700Bold'],
+        body: ['Nunito_400Regular'],
+        'body-medium': ['Nunito_500Medium'],
+        'body-semibold': ['Nunito_600SemiBold'],
+        'body-bold': ['Nunito_700Bold'],
       },
       fontSize: {
         // Cf spec Section 6.4 type scale

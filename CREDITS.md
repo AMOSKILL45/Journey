@@ -43,9 +43,9 @@ This Is The Journey stands on the shoulders of incredible open-source projects.
 
 ### Fonts
 
-- [Press Start 2P](https://fonts.google.com/specimen/Press+Start+2P) — Open Font License.
-- [Fredoka](https://fonts.google.com/specimen/Fredoka) — Open Font License.
-- [Nunito](https://fonts.google.com/specimen/Nunito) — Open Font License.
+- [Press Start 2P](https://fonts.google.com/specimen/Press+Start+2P) — Open Font License. Distributed via `@expo-google-fonts/press-start-2p`.
+- [Fredoka](https://fonts.google.com/specimen/Fredoka) — Open Font License. Distributed via `@expo-google-fonts/fredoka`.
+- [Nunito](https://fonts.google.com/specimen/Nunito) — Open Font License. Distributed via `@expo-google-fonts/nunito`.
 
 ### Audio
 

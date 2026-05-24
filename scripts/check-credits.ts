@@ -48,6 +48,7 @@ for (const dep of allDeps) {
   if (allowlist.has(dep)) continue;
   if (dep.startsWith('expo-')) continue;
   if (dep.startsWith('@expo/')) continue;
+  if (dep.startsWith('@expo-google-fonts/')) continue;
   if (dep.startsWith('@typescript-eslint/')) continue;
   if (dep.startsWith('eslint-')) continue;
   if (dep.startsWith('react-native-')) continue;

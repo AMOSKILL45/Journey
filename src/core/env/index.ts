@@ -22,6 +22,4 @@ if (!parsed.success) {
   console.warn('[env] Validation warnings:', parsed.error.format());
 }
 
-export const env = parsed.success
-  ? parsed.data
-  : (raw as z.infer<typeof envSchema>);
+export const env = parsed.success ? parsed.data : (raw as z.infer<typeof envSchema>);

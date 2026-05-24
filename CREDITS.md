@@ -23,8 +23,12 @@ This Is The Journey stands on the shoulders of incredible open-source projects.
 
 - [Expo](https://expo.dev/) — MIT License.
 - [Supabase](https://supabase.com/) — Apache 2.0 (server), MIT (SDK).
-- [Lucide React Native](https://github.com/lucide-icons/lucide) — ISC License.
+- [Lucide React Native](https://github.com/lucide-icons/lucide) (`lucide-react-native`) — ISC License.
 - [NativeWind](https://www.nativewind.dev/) — MIT.
+- [Sentry React Native](https://github.com/getsentry/sentry-react-native) — MIT License.
+- [React Native Async Storage](https://github.com/react-native-async-storage/async-storage) — MIT License.
+- [i18n-js](https://github.com/fnando/i18n-js) — MIT License.
+- [PostHog React Native](https://github.com/PostHog/posthog-js-lite) (`posthog-react-native`) — MIT License.
 
 ## Assets
 

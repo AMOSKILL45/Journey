@@ -6,3 +6,6 @@ android
 .references
 *.generated.ts
 package-lock.json
+.claude
+.github
+

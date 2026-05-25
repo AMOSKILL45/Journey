@@ -5,7 +5,6 @@ import { env } from '@core/env';
 export const initSentry = (): void => {
   if (!env.sentryDsn) {
     if (__DEV__) {
-      // eslint-disable-next-line no-console
       console.warn('[sentry] DSN not configured, skipping init');
     }
     return;

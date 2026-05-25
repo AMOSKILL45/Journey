@@ -1,5 +1,4 @@
 import { supabase } from '@core/supabase/client';
-
 import type { Database } from '@core/supabase/types';
 
 export type Profile = Database['public']['Tables']['profiles']['Row'];

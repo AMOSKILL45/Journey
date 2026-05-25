@@ -1,6 +1,12 @@
 import { useState } from 'react';
 
-import { AuthCancelledError, signInWithApple, signInWithMagicLink, signOut } from '../api/auth';
+import {
+  AuthCancelledError,
+  signInWithApple,
+  signInWithGoogle,
+  signInWithMagicLink,
+  signOut,
+} from '../api/auth';
 
 export function useAuth() {
   const [pending, setPending] = useState(false);
@@ -33,6 +39,20 @@ export function useAuth() {
     }
   };
 
+  const signInGoogle = async () => {
+    setPending(true);
+    setError(null);
+    try {
+      await signInWithGoogle();
+    } catch (e) {
+      if (e instanceof AuthCancelledError) return;
+      setError(e instanceof Error ? e : new Error(String(e)));
+      throw e;
+    } finally {
+      setPending(false);
+    }
+  };
+
   const logOut = async () => {
     setPending(true);
     try {
@@ -42,5 +62,5 @@ export function useAuth() {
     }
   };
 
-  return { sendMagicLink, signInApple, logOut, pending, error };
+  return { sendMagicLink, signInApple, signInGoogle, logOut, pending, error };
 }

@@ -1,5 +1,5 @@
-import { I18n } from 'i18n-js';
 import { getLocales } from 'expo-localization';
+import { I18n } from 'i18n-js';
 import { useSyncExternalStore } from 'react';
 
 import en from './locales/en.json';

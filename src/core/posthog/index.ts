@@ -10,7 +10,6 @@ let posthogInstance: PostHog | null = null;
 export const initPostHog = async (): Promise<void> => {
   if (!env.posthogApiKey) {
     if (__DEV__) {
-      // eslint-disable-next-line no-console
       console.warn('[posthog] API key not configured, skipping init');
     }
     return;

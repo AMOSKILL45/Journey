@@ -14,3 +14,19 @@ jest.mock('@react-native-async-storage/async-storage', () => ({
   multiSet: jest.fn(() => Promise.resolve()),
   multiRemove: jest.fn(() => Promise.resolve()),
 }));
+
+// Mock expo-constants so env validation doesn't fail in CI / unit tests
+jest.mock('expo-constants', () => ({
+  __esModule: true,
+  default: {
+    expoConfig: {
+      extra: {
+        supabaseUrl: 'https://test.supabase.co',
+        supabaseAnonKey: 'sb_publishable_test_key',
+        sentryDsn: undefined,
+        posthogApiKey: undefined,
+        posthogHost: 'https://us.i.posthog.com',
+      },
+    },
+  },
+}));

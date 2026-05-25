@@ -135,12 +135,15 @@ npm run references:clone # OSS reference repos
 
 **Phase 0 — Bootstrap** ✅ DONE (14/15, T15 EAS build deferred).
 **Phase 1 — Auth + Trips Foundation** ✅ DONE (18/20, T15/T20 cleanup pending).
+**Phase 2 — Milestones + Path UI** ✅ DONE (14/15, T15 = this commit batch).
 
 Phase 0 done: T1 git+config · T2 LICENSE/README · T3 Expo+TS · T4 EAS+env · T5 NativeWind+tokens · T6 ESLint+Prettier+Husky · T7 OSS refs+credits CI · T8 design tokens+fonts · T9 i18n + tests · T10 Supabase client (project ewsoupkfkachxidmuwoi) · T11 GH Actions CI · T12 Sentry+PostHog · T13 root layout + PixelText · T14 Welcome screen.
 
 Phase 1 done: T1-T3 DB migrations (profiles + trips + members + invitations + RLS) + TS types generated · T4 12 avatar sprites + manifest · T5-T8 PixelButton/Card/Input/Chip DS components · T9 auth (magic link + AuthGuard + screens) · T10-T11 profile (onboarding + sprite picker + 50-country picker) · T12 QueryClientProvider + deep link handler · T13 5-tab shell · T14-T16 trips CRUD (api + hooks + TripCard + CreateTripScreen + TripDetailScreen) · T17 trip members + invitations + accept-invitation edge function (deployed v1 ACTIVE) · T18 Home with upcoming trip card · T19 first-login routing in AuthGuard.
 
-Deferred: T15 EAS dev client build (needs interactive setup) · Apple/Google Sign-In (Phase 1.5) · Stripe Identity (Phase 1.5).
+Phase 2 done: T1-T2 DB migrations (milestones + checkins + PostGIS + RLS) + TS types regen · T3 30 milestone sprites + manifest · T4 PixelBottomSheet (gorhom) · T5 PixelDialog · T6 milestones API + hooks (CRUD + checkins) · T7 MapTiler geocoding service · T8 MilestoneNode (Duolingo circle + sprite + 4 states) · T9 MilestoneEdge (SVG Bézier) · T10 PathView + pathLayout (sanidhyy indentation cycle + 6 tests) · T11 MilestoneCreationSheet (type chips + debounced geocoding + boss toggle + sprite picker) · T12 SpritePicker (modal grid filterable by category) · T13 Wire PathView into TripDetailScreen with FAB + empty state · T14 CheckinAnim Reanimated coin burst + optimistic update. 69 tests passing.
+
+Deferred: T15 EAS dev client build (needs interactive setup) · Apple/Google Sign-In (Phase 1.5) · Stripe Identity (Phase 1.5) · Map tab MapLibre overworld (Phase 3) · sounds (Phase 6).
 
 ## Code-validator agent — MANDATORY
 

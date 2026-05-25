@@ -67,8 +67,12 @@
     "greeting": "Hey %{name} 👋",
     "greetingAnonymous": "Hey adventurer 👋",
     "emptyTitle": "🌍 Your adventures start here",
-    "emptyBody": "Tap the Trips tab to create your first journey.",
-    "comingSoon": "Coming soon"
+    "emptyBody": "Plan your first journey to see it light up here.",
+    "createCta": "+ Create your first trip",
+    "comingSoon": "Coming soon",
+    "nextTrip": "NEXT TRIP",
+    "nextTripLabel": "Next trip: %{name}",
+    "inDays": "in %{count} days"
   },
   "trips": {
     "list": {

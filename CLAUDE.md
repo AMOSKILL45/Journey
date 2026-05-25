@@ -133,11 +133,14 @@ npm run references:clone # OSS reference repos
 
 ## Active phase
 
-**Phase 0 — Bootstrap** (in progress).
+**Phase 0 — Bootstrap** ✅ DONE (14/15, T15 EAS build deferred).
+**Phase 1 — Auth + Trips Foundation** ✅ DONE (18/20, T15/T20 cleanup pending).
 
-Done: T1 git+config · T2 LICENSE/README · T3 Expo+TS · T4 EAS+env · T5 NativeWind+tokens · T6 ESLint+Prettier+Husky · T7 OSS refs+credits CI · T8 design tokens+fonts · T9 i18n + tests · T10 Supabase client (project ewsoupkfkachxidmuwoi) · T11 GH Actions CI · T12 Sentry+PostHog · T13 root layout + PixelText · T14 Welcome screen.
+Phase 0 done: T1 git+config · T2 LICENSE/README · T3 Expo+TS · T4 EAS+env · T5 NativeWind+tokens · T6 ESLint+Prettier+Husky · T7 OSS refs+credits CI · T8 design tokens+fonts · T9 i18n + tests · T10 Supabase client (project ewsoupkfkachxidmuwoi) · T11 GH Actions CI · T12 Sentry+PostHog · T13 root layout + PixelText · T14 Welcome screen.
 
-Skipped: T15 EAS dev client build (requires user `eas login` interactive).
+Phase 1 done: T1-T3 DB migrations (profiles + trips + members + invitations + RLS) + TS types generated · T4 12 avatar sprites + manifest · T5-T8 PixelButton/Card/Input/Chip DS components · T9 auth (magic link + AuthGuard + screens) · T10-T11 profile (onboarding + sprite picker + 50-country picker) · T12 QueryClientProvider + deep link handler · T13 5-tab shell · T14-T16 trips CRUD (api + hooks + TripCard + CreateTripScreen + TripDetailScreen) · T17 trip members + invitations + accept-invitation edge function (deployed v1 ACTIVE) · T18 Home with upcoming trip card · T19 first-login routing in AuthGuard.
+
+Deferred: T15 EAS dev client build (needs interactive setup) · Apple/Google Sign-In (Phase 1.5) · Stripe Identity (Phase 1.5).
 
 ## Code-validator agent — MANDATORY
 

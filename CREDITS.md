@@ -30,6 +30,7 @@ This Is The Journey stands on the shoulders of incredible open-source projects.
 - [i18n-js](https://github.com/fnando/i18n-js) — MIT License.
 - [PostHog React Native](https://github.com/PostHog/posthog-js-lite) (`posthog-react-native`) — MIT License.
 - [React Native Community DateTimePicker](https://github.com/react-native-datetimepicker/datetimepicker) (`@react-native-community/datetimepicker`) — MIT License.
+- [Gorhom Bottom Sheet](https://github.com/gorhom/react-native-bottom-sheet) (`@gorhom/bottom-sheet`) — MIT License.
 
 ## Assets
 

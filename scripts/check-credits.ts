@@ -22,6 +22,7 @@ const allowlist = new Set([
   'react',
   'react-dom',
   'react-native',
+  'react-test-renderer',
   'typescript',
   '@types/react',
   '@types/jest',

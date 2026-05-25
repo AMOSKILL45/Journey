@@ -1,5 +1,28 @@
 import { ExpoConfig, ConfigContext } from 'expo/config';
 
+const googleIosUrlScheme = process.env.EXPO_PUBLIC_GOOGLE_IOS_URL_SCHEME;
+
+const corePlugins: NonNullable<ExpoConfig['plugins']> = [
+  'expo-router',
+  'expo-font',
+  'expo-apple-authentication',
+];
+
+if (googleIosUrlScheme) {
+  corePlugins.push([
+    '@react-native-google-signin/google-signin',
+    { iosUrlScheme: googleIosUrlScheme },
+  ]);
+}
+
+corePlugins.push([
+  'expo-build-properties',
+  {
+    ios: { useFrameworks: 'static' },
+    android: { compileSdkVersion: 35, targetSdkVersion: 35 },
+  },
+]);
+
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   name: 'This Is The Journey',
@@ -25,6 +48,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     infoPlist: {
       ITSAppUsesNonExemptEncryption: false,
     },
+    usesAppleSignIn: true,
   },
   android: {
     package: 'com.thisisthejourney.app',
@@ -34,24 +58,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     },
     edgeToEdgeEnabled: true,
   },
-  plugins: [
-    'expo-router',
-    'expo-font',
-    'expo-apple-authentication',
-    [
-      '@react-native-google-signin/google-signin',
-      {
-        iosUrlScheme: process.env.EXPO_PUBLIC_GOOGLE_IOS_URL_SCHEME ?? '',
-      },
-    ],
-    [
-      'expo-build-properties',
-      {
-        ios: { useFrameworks: 'static' },
-        android: { compileSdkVersion: 35, targetSdkVersion: 35 },
-      },
-    ],
-  ],
+  plugins: corePlugins,
   experiments: {
     typedRoutes: true,
   },

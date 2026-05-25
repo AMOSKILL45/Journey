@@ -29,6 +29,7 @@ This Is The Journey stands on the shoulders of incredible open-source projects.
 - [React Native Async Storage](https://github.com/react-native-async-storage/async-storage) — MIT License.
 - [i18n-js](https://github.com/fnando/i18n-js) — MIT License.
 - [PostHog React Native](https://github.com/PostHog/posthog-js-lite) (`posthog-react-native`) — MIT License.
+- [React Native Community DateTimePicker](https://github.com/react-native-datetimepicker/datetimepicker) (`@react-native-community/datetimepicker`) — MIT License.
 
 ## Assets
 

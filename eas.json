@@ -19,6 +19,9 @@
     "preview": {
       "distribution": "internal",
       "channel": "preview",
+      "env": {
+        "SENTRY_DISABLE_AUTO_UPLOAD": "true"
+      },
       "ios": {
         "resourceClass": "m-medium",
         "image": "latest"
@@ -30,6 +33,9 @@
     "production": {
       "channel": "production",
       "autoIncrement": true,
+      "env": {
+        "SENTRY_DISABLE_AUTO_UPLOAD": "true"
+      },
       "ios": {
         "resourceClass": "m-medium",
         "image": "latest"

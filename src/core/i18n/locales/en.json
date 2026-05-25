@@ -94,9 +94,24 @@
     "detail": {
       "status": "Status",
       "visibility": "Visibility",
+      "members": "Crew",
       "pathComingSoon": "Path UI + map land in Phase 2. For now this is a placeholder.",
       "confirmDeleteTitle": "Delete trip?",
       "confirmDeleteBody": "This cannot be undone."
+    },
+    "members": {
+      "empty": "No members yet."
+    },
+    "invite": {
+      "title": "Invite a traveler",
+      "subtitle": "Share a magic link or send an invitation by email.",
+      "emailLabel": "Email (optional)",
+      "sendButton": "Send invitation by email",
+      "linkOnlyButton": "Generate share link only",
+      "linkReady": "Link ready — share it with your crew",
+      "shareButton": "Share",
+      "shareMessage": "Join my adventure on This Is The Journey: %{link}",
+      "acceptError": "Could not accept invitation. It may be expired or already used."
     }
   }
 }

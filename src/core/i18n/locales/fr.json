@@ -94,9 +94,24 @@
     "detail": {
       "status": "Statut",
       "visibility": "Visibilité",
+      "members": "Équipe",
       "pathComingSoon": "Le path UI + la map arrivent en Phase 2. Pour l'instant c'est un placeholder.",
       "confirmDeleteTitle": "Supprimer le voyage ?",
       "confirmDeleteBody": "Action irréversible."
+    },
+    "members": {
+      "empty": "Aucun membre pour l'instant."
+    },
+    "invite": {
+      "title": "Inviter un voyageur",
+      "subtitle": "Partage un lien magique ou envoie une invitation par email.",
+      "emailLabel": "Email (optionnel)",
+      "sendButton": "Envoyer l'invitation par email",
+      "linkOnlyButton": "Générer un lien partageable",
+      "linkReady": "Lien prêt — partage-le avec ton équipe",
+      "shareButton": "Partager",
+      "shareMessage": "Rejoins mon aventure sur This Is The Journey : %{link}",
+      "acceptError": "Impossible d'accepter l'invitation. Elle est peut-être expirée ou déjà utilisée."
     }
   }
 }

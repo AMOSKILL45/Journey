@@ -15,6 +15,7 @@ module.exports = [
       '.references/**',
       '**/*.generated.ts',
       'eslint.config.js',
+      'supabase/functions/**', // Deno runtime — JSR imports cannot be resolved by Node ESLint
     ],
   },
   ...compat.config({

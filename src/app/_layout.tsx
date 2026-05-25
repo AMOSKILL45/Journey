@@ -15,7 +15,7 @@ import { PressStart2P_400Regular } from '@expo-google-fonts/press-start-2p';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useFonts } from 'expo-font';
 import * as Linking from 'expo-linking';
-import { Stack } from 'expo-router';
+import { router, Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
@@ -25,10 +25,30 @@ import { initPostHog } from '@core/posthog';
 import { initSentry } from '@core/sentry';
 import { supabase } from '@core/supabase/client';
 import { colors } from '@core/theme';
+import { acceptInvitation } from '@features/trips';
 
 const QUERY_STALE_MS = 60_000;
+const INVITE_TOKEN_REGEX = /\/invite\/([A-Za-z0-9_-]+)/;
 
 SplashScreen.preventAutoHideAsync();
+
+async function handleInviteDeepLink(url: string): Promise<void> {
+  const match = INVITE_TOKEN_REGEX.exec(url);
+  if (!match) return;
+  const token = match[1];
+  try {
+    const { trip_id } = await acceptInvitation(token);
+    router.push(`/(modals)/trip/${trip_id}`);
+  } catch {
+    // Silent fail at the global handler level. The trip detail screen will surface
+    // any user-facing error if they retry the action explicitly.
+  }
+}
+
+function handleDeepLink(url: string): void {
+  handleAuthDeepLink(url);
+  void handleInviteDeepLink(url);
+}
 
 function handleAuthDeepLink(url: string): void {
   if (!url.includes('auth/callback')) return;
@@ -73,9 +93,9 @@ export default function RootLayout() {
   }, []);
 
   useEffect(() => {
-    const sub = Linking.addEventListener('url', ({ url }) => handleAuthDeepLink(url));
+    const sub = Linking.addEventListener('url', ({ url }) => handleDeepLink(url));
     void Linking.getInitialURL().then((url) => {
-      if (url) handleAuthDeepLink(url);
+      if (url) handleDeepLink(url);
     });
     return () => sub.remove();
   }, []);

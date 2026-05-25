@@ -11,6 +11,8 @@ import { PixelText } from '@shared/components/PixelText';
 import { SCREEN_PADDING } from '@shared/constants/layout';
 
 import { deleteTrip } from '../api/trips';
+import { InviteMemberForm } from '../components/InviteMemberForm';
+import { MembersList } from '../components/MembersList';
 import { useTrip } from '../hooks/useTrip';
 import { TRIPS_QUERY_KEY } from '../hooks/useTrips';
 
@@ -89,23 +91,35 @@ export function TripDetailScreen() {
       <PixelText size="body" className="mb-4 text-text-secondary">
         {t('trips.detail.pathComingSoon')}
       </PixelText>
-      <PixelButton
-        variant="danger"
-        onPress={confirmDelete}
-        loading={del.isPending}
-        fullWidth
-        className="mb-3"
-      >
-        {t('common.delete')}
-      </PixelButton>
-      {deleteError ? (
-        <PixelText size="caption" className="mb-2 text-center text-error">
-          {deleteError}
-        </PixelText>
-      ) : null}
-      <PixelButton variant="ghost" onPress={() => router.back()} fullWidth>
-        {t('common.back')}
-      </PixelButton>
+
+      <PixelText size="h2" className="mb-2 mt-2">
+        {t('trips.detail.members')}
+      </PixelText>
+      <MembersList tripId={trip.id} />
+
+      <View className="mt-6">
+        <InviteMemberForm tripId={trip.id} />
+      </View>
+
+      <View className="mt-8">
+        <PixelButton
+          variant="danger"
+          onPress={confirmDelete}
+          loading={del.isPending}
+          fullWidth
+          className="mb-3"
+        >
+          {t('common.delete')}
+        </PixelButton>
+        {deleteError ? (
+          <PixelText size="caption" className="mb-2 text-center text-error">
+            {deleteError}
+          </PixelText>
+        ) : null}
+        <PixelButton variant="ghost" onPress={() => router.back()} fullWidth>
+          {t('common.back')}
+        </PixelButton>
+      </View>
     </ScrollView>
   );
 }

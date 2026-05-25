@@ -139,9 +139,19 @@ Done: T1 git+config · T2 LICENSE/README · T3 Expo+TS · T4 EAS+env · T5 Nativ
 
 Skipped: T15 EAS dev client build (requires user `eas login` interactive).
 
-## Code-validator agent
+## Code-validator agent — MANDATORY
 
-Use `code-validator` agent after every code change. Runs typecheck + lint + tests on changed files. Spec at `.claude/agents/code-validator.md`. Adapted from Chiron-MVP project.
+**HARD RULE**: After EVERY code change (any file touched in `/src`, `/app`, jest config, eslint config, tsconfig, package.json), invoke the `code-validator` agent. No exceptions.
+
+```
+Task tool (general-purpose):
+  description: "Validate recent code changes"
+  prompt: "Run the code-validator agent flow defined in .claude/agents/code-validator.md on the most recently modified files. Report PASS/FAIL with specific errors and fixes."
+```
+
+The agent runs typecheck + lint + tests + static checks on the changed code. Catches bugs before they ship.
+
+When NOT to invoke: pure docs changes (`*.md`), tests-only changes (run tests directly), config files unrelated to code (e.g. .editorconfig).
 
 ## Useful MCPs
 

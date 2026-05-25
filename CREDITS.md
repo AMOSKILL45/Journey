@@ -31,6 +31,8 @@ This Is The Journey stands on the shoulders of incredible open-source projects.
 - [PostHog React Native](https://github.com/PostHog/posthog-js-lite) (`posthog-react-native`) — MIT License.
 - [React Native Community DateTimePicker](https://github.com/react-native-datetimepicker/datetimepicker) (`@react-native-community/datetimepicker`) — MIT License.
 - [Gorhom Bottom Sheet](https://github.com/gorhom/react-native-bottom-sheet) (`@gorhom/bottom-sheet`) — MIT License.
+- [Expo Apple Authentication](https://github.com/expo/expo/tree/main/packages/expo-apple-authentication) (`expo-apple-authentication`) — MIT License.
+- [Google Sign-In for React Native](https://github.com/react-native-google-signin/google-signin) (`@react-native-google-signin/google-signin`) — MIT License.
 
 ## Assets
 

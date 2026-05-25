@@ -8,6 +8,8 @@ const envSchema = z.object({
   posthogApiKey: z.string().optional(),
   posthogHost: z.string().url().optional(),
   maptilerApiKey: z.string().optional(),
+  googleWebClientId: z.string().optional(),
+  googleIosClientId: z.string().optional(),
 });
 
 const raw = (Constants.expoConfig?.extra ?? {}) as Record<string, unknown>;

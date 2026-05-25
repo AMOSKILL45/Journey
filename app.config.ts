@@ -37,6 +37,13 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   plugins: [
     'expo-router',
     'expo-font',
+    'expo-apple-authentication',
+    [
+      '@react-native-google-signin/google-signin',
+      {
+        iosUrlScheme: process.env.EXPO_PUBLIC_GOOGLE_IOS_URL_SCHEME ?? '',
+      },
+    ],
     [
       'expo-build-properties',
       {
@@ -58,5 +65,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     posthogApiKey: process.env.EXPO_PUBLIC_POSTHOG_API_KEY,
     posthogHost: process.env.EXPO_PUBLIC_POSTHOG_HOST ?? 'https://us.i.posthog.com',
     maptilerApiKey: process.env.EXPO_PUBLIC_MAPTILER_API_KEY,
+    googleWebClientId: process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID,
+    googleIosClientId: process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID,
   },
 });

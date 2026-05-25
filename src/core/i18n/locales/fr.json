@@ -69,5 +69,34 @@
     "emptyTitle": "🌍 Tes aventures commencent ici",
     "emptyBody": "Tape sur l'onglet Voyages pour créer ton premier trip.",
     "comingSoon": "Bientôt disponible"
+  },
+  "trips": {
+    "list": {
+      "title": "Mes voyages",
+      "newButton": "+ Nouveau",
+      "cardLabel": "Voyage : %{name}, %{dateRange}",
+      "empty": {
+        "title": "Tes aventures t'attendent",
+        "subtitle": "Planifie ton premier voyage — tape le bouton ci-dessous",
+        "cta": "Créer mon premier voyage"
+      }
+    },
+    "create": {
+      "title": "Nouvelle aventure",
+      "nameLabel": "Nom du voyage",
+      "namePlaceholder": "Côte Ouest USA 2026",
+      "startDateLabel": "Date de départ",
+      "endDateLabel": "Date de retour",
+      "destinationLabel": "Pays de destination",
+      "createButton": "Créer le voyage",
+      "pickDate": "Choisir une date"
+    },
+    "detail": {
+      "status": "Statut",
+      "visibility": "Visibilité",
+      "pathComingSoon": "Le path UI + la map arrivent en Phase 2. Pour l'instant c'est un placeholder.",
+      "confirmDeleteTitle": "Supprimer le voyage ?",
+      "confirmDeleteBody": "Action irréversible."
+    }
   }
 }

@@ -17,12 +17,10 @@ describe('auth.api', () => {
   });
 
   it('signInWithMagicLink throws on supabase error', async () => {
-    jest
-      .spyOn(supabase.auth, 'signInWithOtp')
-      .mockResolvedValue({
-        data: { user: null, session: null },
-        error: { message: 'Boom' },
-      } as never);
+    jest.spyOn(supabase.auth, 'signInWithOtp').mockResolvedValue({
+      data: { user: null, session: null },
+      error: { message: 'Boom' },
+    } as never);
     await expect(signInWithMagicLink('x@y.com')).rejects.toMatchObject({ message: 'Boom' });
   });
 

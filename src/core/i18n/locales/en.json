@@ -69,5 +69,34 @@
     "emptyTitle": "🌍 Your adventures start here",
     "emptyBody": "Tap the Trips tab to create your first journey.",
     "comingSoon": "Coming soon"
+  },
+  "trips": {
+    "list": {
+      "title": "My Trips",
+      "newButton": "+ New",
+      "cardLabel": "Trip: %{name}, %{dateRange}",
+      "empty": {
+        "title": "Your adventures await",
+        "subtitle": "Plan your first trip — tap the button below",
+        "cta": "Create my first trip"
+      }
+    },
+    "create": {
+      "title": "New Adventure",
+      "nameLabel": "Trip name",
+      "namePlaceholder": "USA West Coast 2026",
+      "startDateLabel": "Start date",
+      "endDateLabel": "End date",
+      "destinationLabel": "Destination country",
+      "createButton": "Create trip",
+      "pickDate": "Pick a date"
+    },
+    "detail": {
+      "status": "Status",
+      "visibility": "Visibility",
+      "pathComingSoon": "Path UI + map land in Phase 2. For now this is a placeholder.",
+      "confirmDeleteTitle": "Delete trip?",
+      "confirmDeleteBody": "This cannot be undone."
+    }
   }
 }

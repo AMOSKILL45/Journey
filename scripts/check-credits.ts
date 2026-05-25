@@ -5,9 +5,10 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-const packageJson = JSON.parse(
-  readFileSync(join(process.cwd(), 'package.json'), 'utf-8'),
-) as { dependencies: Record<string, string>; devDependencies: Record<string, string> };
+const packageJson = JSON.parse(readFileSync(join(process.cwd(), 'package.json'), 'utf-8')) as {
+  dependencies: Record<string, string>;
+  devDependencies: Record<string, string>;
+};
 
 const credits = readFileSync(join(process.cwd(), 'CREDITS.md'), 'utf-8');
 

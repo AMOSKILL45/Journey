@@ -76,25 +76,63 @@ const modules = {
   },
   DeviceInfo: {
     getConstants() {
-      return { Dimensions: { window: { width: 375, height: 667, scale: 2, fontScale: 1 }, screen: { width: 375, height: 667, scale: 2, fontScale: 1 } } };
+      return {
+        Dimensions: {
+          window: { width: 375, height: 667, scale: 2, fontScale: 1 },
+          screen: { width: 375, height: 667, scale: 2, fontScale: 1 },
+        },
+      };
     },
   },
   PlatformConstants: {
     getConstants() {
-      return { forceTouchAvailable: false, interfaceIdiom: 'phone', isTesting: true, osVersion: '18.0', systemName: 'iOS' };
+      return {
+        forceTouchAvailable: false,
+        interfaceIdiom: 'phone',
+        isTesting: true,
+        osVersion: '18.0',
+        systemName: 'iOS',
+      };
     },
   },
   Vibration: { vibrate: jest.fn(), cancel: jest.fn() },
-  SourceCode: { getConstants() { return { scriptURL: null }; } },
+  SourceCode: {
+    getConstants() {
+      return { scriptURL: null };
+    },
+  },
   RedBox: null,
   Timing: { createTimer: jest.fn(), deleteTimer: jest.fn() },
-  BlobModule: { getConstants: jest.fn(() => ({ BLOB_URI_SCHEME: 'content', BLOB_URI_HOST: null })), createFromParts: jest.fn(), release: jest.fn() },
+  BlobModule: {
+    getConstants: jest.fn(() => ({ BLOB_URI_SCHEME: 'content', BLOB_URI_HOST: null })),
+    createFromParts: jest.fn(),
+    release: jest.fn(),
+  },
   NetworkingModule: { sendRequest: jest.fn(), abortRequest: jest.fn(), clearCookies: jest.fn() },
-  WebSocketModule: { connect: jest.fn(), close: jest.fn(), send: jest.fn(), sendBinary: jest.fn(), ping: jest.fn() },
+  WebSocketModule: {
+    connect: jest.fn(),
+    close: jest.fn(),
+    send: jest.fn(),
+    sendBinary: jest.fn(),
+    ping: jest.fn(),
+  },
   SettingsManager: { settings: {}, getConstants: jest.fn(() => ({ settings: {} })) },
-  StatusBarManager: { getHeight: jest.fn(), setColor: jest.fn(), setHidden: jest.fn(), setStyle: jest.fn(), setNetworkActivityIndicatorVisible: jest.fn(), addListener: jest.fn(), removeListeners: jest.fn(), HEIGHT: 20 },
+  StatusBarManager: {
+    getHeight: jest.fn(),
+    setColor: jest.fn(),
+    setHidden: jest.fn(),
+    setStyle: jest.fn(),
+    setNetworkActivityIndicatorVisible: jest.fn(),
+    addListener: jest.fn(),
+    removeListeners: jest.fn(),
+    HEIGHT: 20,
+  },
   KeyboardObserver: { addListener: jest.fn(), removeListeners: jest.fn() },
-  AppState: { getConstants: jest.fn(() => ({ initialAppState: 'active' })), addListener: jest.fn(), removeListeners: jest.fn() },
+  AppState: {
+    getConstants: jest.fn(() => ({ initialAppState: 'active' })),
+    addListener: jest.fn(),
+    removeListeners: jest.fn(),
+  },
 };
 
 module.exports = { ...modules, default: modules };

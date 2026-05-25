@@ -25,6 +25,10 @@ module.exports = [
       ecmaVersion: 2022,
       sourceType: 'module',
     },
+    env: {
+      node: true,
+      'react-native/react-native': true,
+    },
     rules: {
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
@@ -40,5 +44,18 @@ module.exports = [
         },
       ],
     },
+    overrides: [
+      {
+        files: ['**/*.test.{ts,tsx,js,jsx}', '**/__tests__/**/*.{ts,tsx,js,jsx}', 'jest.*.js'],
+        env: {
+          jest: true,
+          node: true,
+        },
+        rules: {
+          'import/first': 'off',
+          'import/order': 'off',
+        },
+      },
+    ],
   }),
 ];

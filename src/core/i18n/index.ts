@@ -30,8 +30,7 @@ function getSnapshot() {
   return i18n.locale;
 }
 
-export const t = (key: string, options?: Record<string, unknown>): string =>
-  i18n.t(key, options);
+export const t = (key: string, options?: Record<string, unknown>): string => i18n.t(key, options);
 
 export const setLocale = (loc: SupportedLocale): void => {
   i18n.locale = loc;

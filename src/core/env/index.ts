@@ -7,6 +7,7 @@ const envSchema = z.object({
   sentryDsn: z.string().url().optional(),
   posthogApiKey: z.string().optional(),
   posthogHost: z.string().url().optional(),
+  maptilerApiKey: z.string().optional(),
 });
 
 const raw = (Constants.expoConfig?.extra ?? {}) as Record<string, unknown>;
@@ -18,7 +19,7 @@ if (!parsed.success) {
   if (!__DEV__) {
     throw new Error(`Env validation failed: ${parsed.error.message}`);
   }
-  // eslint-disable-next-line no-console
+
   console.warn('[env] Validation warnings:', parsed.error.format());
 }
 

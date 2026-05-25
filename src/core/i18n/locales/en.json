@@ -99,7 +99,6 @@
       "status": "Status",
       "visibility": "Visibility",
       "members": "Crew",
-      "pathComingSoon": "Path UI + map land in Phase 2. For now this is a placeholder.",
       "confirmDeleteTitle": "Delete trip?",
       "confirmDeleteBody": "This cannot be undone."
     },
@@ -116,6 +115,60 @@
       "shareButton": "Share",
       "shareMessage": "Join my adventure on This Is The Journey: %{link}",
       "acceptError": "Could not accept invitation. It may be expired or already used."
+    }
+  },
+  "milestones": {
+    "addCta": "+ Add milestone",
+    "empty": {
+      "title": "No milestones yet",
+      "body": "Add your first stop to build the path."
+    },
+    "create": {
+      "title": "New milestone",
+      "typeLabel": "Type",
+      "nameLabel": "Name",
+      "namePlaceholder": "Eiffel Tower",
+      "locationLabel": "Location",
+      "locationPlaceholder": "Search a place...",
+      "locationSearching": "Searching...",
+      "locationEmpty": "No results",
+      "locationNotConfigured": "Location search is not configured yet",
+      "arrivalLabel": "Arrival",
+      "departureLabel": "Departure",
+      "bossLabel": "Mark as boss milestone",
+      "spriteLabel": "Sprite",
+      "spritePick": "Pick a sprite",
+      "saveButton": "Add milestone",
+      "nameRequired": "Name is required"
+    },
+    "types": {
+      "city": "City",
+      "hotel": "Hotel",
+      "activity": "Activity",
+      "transport": "Transport",
+      "food": "Food",
+      "landmark": "Landmark",
+      "custom": "Custom"
+    },
+    "spritePicker": {
+      "title": "Pick a sprite",
+      "all": "All",
+      "categories": {
+        "hotel": "Hotels",
+        "city": "Cities",
+        "activity": "Activities",
+        "transport": "Transport",
+        "food": "Food",
+        "landmark": "Landmarks",
+        "boss": "Boss",
+        "custom": "Custom"
+      }
+    },
+    "checkin": {
+      "confirmTitle": "Check in here?",
+      "confirmBody": "Mark this milestone as completed.",
+      "confirmCta": "Check in",
+      "successToast": "Checked in!"
     }
   }
 }

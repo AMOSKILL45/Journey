@@ -7,11 +7,21 @@ import {
   deleteMilestone,
   listCheckins,
   listMilestones,
+  listTripCheckinMilestoneIds,
   type CreateMilestoneInput,
 } from '../api/milestones';
 
 export const milestonesQueryKey = (tripId: string) => ['milestones', tripId] as const;
 export const checkinsQueryKey = (milestoneId: string) => ['checkins', milestoneId] as const;
+export const tripCheckinsQueryKey = (tripId: string) => ['tripCheckins', tripId] as const;
+
+export function useTripCheckinMilestoneIds(tripId: string) {
+  return useQuery({
+    queryKey: tripCheckinsQueryKey(tripId),
+    queryFn: () => listTripCheckinMilestoneIds(tripId),
+    enabled: Boolean(tripId),
+  });
+}
 
 export function useMilestones(tripId: string) {
   return useQuery({
@@ -57,6 +67,7 @@ export function useCreateCheckin(milestoneId: string, tripId: string) {
     onSuccess: () => {
       void qc.invalidateQueries({ queryKey: checkinsQueryKey(milestoneId) });
       void qc.invalidateQueries({ queryKey: milestonesQueryKey(tripId) });
+      void qc.invalidateQueries({ queryKey: tripCheckinsQueryKey(tripId) });
     },
   });
 }

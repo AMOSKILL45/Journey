@@ -57,5 +57,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     sentryDsn: process.env.EXPO_PUBLIC_SENTRY_DSN,
     posthogApiKey: process.env.EXPO_PUBLIC_POSTHOG_API_KEY,
     posthogHost: process.env.EXPO_PUBLIC_POSTHOG_HOST ?? 'https://us.i.posthog.com',
+    maptilerApiKey: process.env.EXPO_PUBLIC_MAPTILER_API_KEY,
   },
 });

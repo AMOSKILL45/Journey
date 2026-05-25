@@ -1,10 +1,22 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { Alert, ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTranslation } from '@core/i18n';
+import {
+  CheckinAnim,
+  MilestoneCreationSheet,
+  type MilestoneCreationSheetRef,
+  PathView,
+  createCheckin,
+  tripCheckinsQueryKey,
+  useMilestones,
+  useTripCheckinMilestoneIds,
+  milestonesQueryKey,
+  type Milestone,
+} from '@features/milestones';
 import { PixelButton } from '@shared/components/PixelButton';
 import { PixelCard } from '@shared/components/PixelCard';
 import { PixelText } from '@shared/components/PixelText';
@@ -18,17 +30,23 @@ import { TRIPS_QUERY_KEY } from '../hooks/useTrips';
 
 export function TripDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
+  const tripId = id ?? '';
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const qc = useQueryClient();
-  const { data: trip, isLoading } = useTrip(id ?? '');
+  const sheetRef = useRef<MilestoneCreationSheetRef>(null);
+  const { data: trip, isLoading } = useTrip(tripId);
+  const { data: milestones = [] } = useMilestones(tripId);
+  const { data: checkedInIds = [] } = useTripCheckinMilestoneIds(tripId);
+  const checkedInSet = useMemo(() => new Set(checkedInIds), [checkedInIds]);
   const [deleteError, setDeleteError] = useState<string | null>(null);
+  const [animMilestoneId, setAnimMilestoneId] = useState<string | null>(null);
 
   const del = useMutation({
     mutationFn: () => {
-      if (!id) throw new Error('No trip id');
-      return deleteTrip(id);
+      if (!tripId) throw new Error('No trip id');
+      return deleteTrip(tripId);
     },
     onSuccess: () => {
       void qc.invalidateQueries({ queryKey: TRIPS_QUERY_KEY });
@@ -36,6 +54,25 @@ export function TripDetailScreen() {
     },
     onError: (e) => {
       setDeleteError(e instanceof Error ? e.message : t('common.error'));
+    },
+  });
+
+  const checkin = useMutation({
+    mutationFn: (milestoneId: string) => createCheckin(milestoneId),
+    onMutate: async (milestoneId: string) => {
+      await qc.cancelQueries({ queryKey: tripCheckinsQueryKey(tripId) });
+      const previous = qc.getQueryData<string[]>(tripCheckinsQueryKey(tripId)) ?? [];
+      qc.setQueryData<string[]>(tripCheckinsQueryKey(tripId), [...previous, milestoneId]);
+      setAnimMilestoneId(milestoneId);
+      return { previous };
+    },
+    onError: (_e, _id, ctx) => {
+      if (ctx?.previous) qc.setQueryData(tripCheckinsQueryKey(tripId), ctx.previous);
+      setAnimMilestoneId(null);
+    },
+    onSettled: () => {
+      void qc.invalidateQueries({ queryKey: milestonesQueryKey(tripId) });
+      void qc.invalidateQueries({ queryKey: tripCheckinsQueryKey(tripId) });
     },
   });
 
@@ -57,69 +94,111 @@ export function TripDetailScreen() {
     ]);
   };
 
+  const handleNodeLongPress = (milestone: Milestone) => {
+    if (checkedInSet.has(milestone.id)) return;
+    Alert.alert(t('milestones.checkin.confirmTitle'), milestone.name, [
+      { text: t('common.cancel'), style: 'cancel' },
+      {
+        text: t('milestones.checkin.confirmCta'),
+        onPress: () => checkin.mutate(milestone.id),
+      },
+    ]);
+  };
+
   return (
-    <ScrollView
-      className="flex-1 bg-cream"
-      contentContainerStyle={{
-        padding: SCREEN_PADDING,
-        paddingTop: insets.top + SCREEN_PADDING,
-      }}
-    >
-      <PixelText size="h1" className="mb-4">
-        {trip.name}
-      </PixelText>
-      <PixelCard className="mb-4">
-        <View className="gap-1">
-          <PixelText size="small" className="text-text-secondary">
-            {t('trips.detail.status')}: {trip.status}
-          </PixelText>
-          <PixelText size="small" className="text-text-secondary">
-            {t('trips.detail.visibility')}: {trip.visibility}
-          </PixelText>
-          {trip.start_date || trip.end_date ? (
+    <View className="flex-1 bg-cream">
+      <ScrollView
+        className="flex-1"
+        contentContainerStyle={{
+          padding: SCREEN_PADDING,
+          paddingTop: insets.top + SCREEN_PADDING,
+          paddingBottom: 120,
+        }}
+      >
+        <PixelText size="h1" className="mb-4">
+          {trip.name}
+        </PixelText>
+        <PixelCard className="mb-4">
+          <View className="gap-1">
             <PixelText size="small" className="text-text-secondary">
-              {trip.start_date ?? '—'} → {trip.end_date ?? '—'}
+              {t('trips.detail.status')}: {trip.status}
             </PixelText>
-          ) : null}
-          {trip.destination_country ? (
             <PixelText size="small" className="text-text-secondary">
-              📍 {trip.destination_country}
+              {t('trips.detail.visibility')}: {trip.visibility}
             </PixelText>
-          ) : null}
+            {trip.start_date || trip.end_date ? (
+              <PixelText size="small" className="text-text-secondary">
+                {trip.start_date ?? '—'} → {trip.end_date ?? '—'}
+              </PixelText>
+            ) : null}
+            {trip.destination_country ? (
+              <PixelText size="small" className="text-text-secondary">
+                📍 {trip.destination_country}
+              </PixelText>
+            ) : null}
+          </View>
+        </PixelCard>
+
+        {milestones.length === 0 ? (
+          <PixelCard className="mb-6 items-center">
+            <PixelText size="h2" className="mb-2">
+              {t('milestones.empty.title')}
+            </PixelText>
+            <PixelText size="body" className="mb-4 text-center text-text-secondary">
+              {t('milestones.empty.body')}
+            </PixelText>
+            <PixelButton variant="primary" onPress={() => sheetRef.current?.open()}>
+              {t('milestones.addCta')}
+            </PixelButton>
+          </PixelCard>
+        ) : (
+          <View className="mb-6">
+            <PathView
+              milestones={milestones}
+              checkedInIds={checkedInSet}
+              onNodeLongPress={handleNodeLongPress}
+            />
+            <View className="mt-4 items-center">
+              <PixelButton variant="primary" onPress={() => sheetRef.current?.open()}>
+                {t('milestones.addCta')}
+              </PixelButton>
+            </View>
+          </View>
+        )}
+
+        <PixelText size="h2" className="mb-2 mt-2">
+          {t('trips.detail.members')}
+        </PixelText>
+        <MembersList tripId={trip.id} />
+
+        <View className="mt-6">
+          <InviteMemberForm tripId={trip.id} />
         </View>
-      </PixelCard>
-      <PixelText size="body" className="mb-4 text-text-secondary">
-        {t('trips.detail.pathComingSoon')}
-      </PixelText>
 
-      <PixelText size="h2" className="mb-2 mt-2">
-        {t('trips.detail.members')}
-      </PixelText>
-      <MembersList tripId={trip.id} />
+        <View className="mt-8">
+          <PixelButton
+            variant="danger"
+            onPress={confirmDelete}
+            loading={del.isPending}
+            fullWidth
+            className="mb-3"
+          >
+            {t('common.delete')}
+          </PixelButton>
+          {deleteError ? (
+            <PixelText size="caption" className="mb-2 text-center text-error">
+              {deleteError}
+            </PixelText>
+          ) : null}
+          <PixelButton variant="ghost" onPress={() => router.back()} fullWidth>
+            {t('common.back')}
+          </PixelButton>
+        </View>
+      </ScrollView>
 
-      <View className="mt-6">
-        <InviteMemberForm tripId={trip.id} />
-      </View>
+      <MilestoneCreationSheet ref={sheetRef} tripId={tripId} />
 
-      <View className="mt-8">
-        <PixelButton
-          variant="danger"
-          onPress={confirmDelete}
-          loading={del.isPending}
-          fullWidth
-          className="mb-3"
-        >
-          {t('common.delete')}
-        </PixelButton>
-        {deleteError ? (
-          <PixelText size="caption" className="mb-2 text-center text-error">
-            {deleteError}
-          </PixelText>
-        ) : null}
-        <PixelButton variant="ghost" onPress={() => router.back()} fullWidth>
-          {t('common.back')}
-        </PixelButton>
-      </View>
-    </ScrollView>
+      <CheckinAnim visible={animMilestoneId !== null} onComplete={() => setAnimMilestoneId(null)} />
+    </View>
   );
 }

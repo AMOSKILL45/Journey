@@ -6,6 +6,7 @@ export {
   getMilestone,
   listMilestones,
   listCheckins,
+  listTripCheckinMilestoneIds,
   updateMilestone,
 } from './api/milestones';
 export type {
@@ -23,8 +24,10 @@ export {
   useDeleteCheckin,
   useDeleteMilestone,
   useMilestones,
+  useTripCheckinMilestoneIds,
   milestonesQueryKey,
   checkinsQueryKey,
+  tripCheckinsQueryKey,
 } from './hooks/useMilestones';
 export { MilestoneNode } from './components/MilestoneNode';
 export type { MilestoneNodeProps, MilestoneNodeState } from './components/MilestoneNode';
@@ -40,3 +43,14 @@ export {
   INDENTATION_PATTERN,
   NODE_RADIUS,
 } from './utils/pathLayout';
+export { searchPlaces, GeocodingNotConfiguredError } from './api/geocoding';
+export type { GeocodingResult } from './api/geocoding';
+export { SpritePicker } from './components/SpritePicker';
+export type { SpritePickerProps } from './components/SpritePicker';
+export { MilestoneCreationSheet } from './components/MilestoneCreationSheet';
+export type {
+  MilestoneCreationSheetProps,
+  MilestoneCreationSheetRef,
+} from './components/MilestoneCreationSheet';
+export { CheckinAnim } from './components/CheckinAnim';
+export type { CheckinAnimProps } from './components/CheckinAnim';

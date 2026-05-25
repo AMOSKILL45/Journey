@@ -99,7 +99,6 @@
       "status": "Statut",
       "visibility": "Visibilité",
       "members": "Équipe",
-      "pathComingSoon": "Le path UI + la map arrivent en Phase 2. Pour l'instant c'est un placeholder.",
       "confirmDeleteTitle": "Supprimer le voyage ?",
       "confirmDeleteBody": "Action irréversible."
     },
@@ -116,6 +115,60 @@
       "shareButton": "Partager",
       "shareMessage": "Rejoins mon aventure sur This Is The Journey : %{link}",
       "acceptError": "Impossible d'accepter l'invitation. Elle est peut-être expirée ou déjà utilisée."
+    }
+  },
+  "milestones": {
+    "addCta": "+ Ajouter une étape",
+    "empty": {
+      "title": "Aucune étape pour l'instant",
+      "body": "Ajoute ta première étape pour construire le chemin."
+    },
+    "create": {
+      "title": "Nouvelle étape",
+      "typeLabel": "Type",
+      "nameLabel": "Nom",
+      "namePlaceholder": "Tour Eiffel",
+      "locationLabel": "Localisation",
+      "locationPlaceholder": "Cherche un lieu...",
+      "locationSearching": "Recherche...",
+      "locationEmpty": "Aucun résultat",
+      "locationNotConfigured": "La recherche de lieu n'est pas configurée",
+      "arrivalLabel": "Arrivée",
+      "departureLabel": "Départ",
+      "bossLabel": "Marquer comme étape boss",
+      "spriteLabel": "Sprite",
+      "spritePick": "Choisir un sprite",
+      "saveButton": "Ajouter l'étape",
+      "nameRequired": "Le nom est requis"
+    },
+    "types": {
+      "city": "Ville",
+      "hotel": "Hôtel",
+      "activity": "Activité",
+      "transport": "Transport",
+      "food": "Resto",
+      "landmark": "Site",
+      "custom": "Autre"
+    },
+    "spritePicker": {
+      "title": "Choisis un sprite",
+      "all": "Tous",
+      "categories": {
+        "hotel": "Hôtels",
+        "city": "Villes",
+        "activity": "Activités",
+        "transport": "Transport",
+        "food": "Restos",
+        "landmark": "Sites",
+        "boss": "Boss",
+        "custom": "Autre"
+      }
+    },
+    "checkin": {
+      "confirmTitle": "Check-in ici ?",
+      "confirmBody": "Marquer cette étape comme terminée.",
+      "confirmCta": "Check-in",
+      "successToast": "Check-in fait !"
     }
   }
 }

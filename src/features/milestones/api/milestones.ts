@@ -137,3 +137,19 @@ export async function deleteCheckin(milestoneId: string): Promise<void> {
     .eq('user_id', userData.user.id);
   if (error) throw error;
 }
+
+export async function listTripCheckinMilestoneIds(tripId: string): Promise<string[]> {
+  const { data: ms, error: msErr } = await supabase
+    .from('milestones')
+    .select('id')
+    .eq('trip_id', tripId);
+  if (msErr) throw msErr;
+  const ids = (ms ?? []).map((m) => m.id);
+  if (ids.length === 0) return [];
+  const { data, error } = await supabase
+    .from('checkins')
+    .select('milestone_id')
+    .in('milestone_id', ids);
+  if (error) throw error;
+  return Array.from(new Set((data ?? []).map((r) => r.milestone_id)));
+}

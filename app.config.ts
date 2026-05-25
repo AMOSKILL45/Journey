@@ -6,6 +6,8 @@ const corePlugins: NonNullable<ExpoConfig['plugins']> = [
   'expo-router',
   'expo-font',
   'expo-apple-authentication',
+  '@react-native-community/datetimepicker',
+  '@sentry/react-native/expo',
 ];
 
 if (googleIosUrlScheme) {
@@ -56,7 +58,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       foregroundImage: './src/assets/images/icon.png',
       backgroundColor: '#FFF8EC',
     },
-    edgeToEdgeEnabled: true,
   },
   plugins: corePlugins,
   experiments: {

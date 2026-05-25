@@ -42,6 +42,8 @@ const allowlist = new Set([
   '@tanstack/react-query-persist-client',
   'expo',
   '@babel/core',
+  'fs-extra',
+  '@types/fs-extra',
 ]);
 
 const missing: string[] = [];

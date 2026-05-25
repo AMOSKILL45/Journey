@@ -59,6 +59,7 @@
 **Files:** apply via Supabase MCP `apply_migration`, save to `supabase/migrations/20260525120001_milestones.sql`.
 
 SQL:
+
 ```sql
 CREATE EXTENSION IF NOT EXISTS postgis;
 
@@ -148,6 +149,7 @@ After T1 migration applied, call `mcp__plugin_supabase_supabase__generate_typesc
 ## Task 3: SpriteLibrary curation (~30 Kenney sprites)
 
 Download Kenney packs (CC0):
+
 - **Tiny Town** → city/town markers (8 sprites)
 - **Medieval RTS** → castle/hotel sprites (6 sprites)
 - **Pixel Platformer** → flag/star/coin markers (8 sprites)
@@ -159,9 +161,19 @@ Save under `src/assets/sprites/milestones/` (32x32 PNG). Build manifest:
 ```typescript
 // src/assets/sprites/milestones/manifest.ts
 export const MILESTONE_SPRITES = [
-  { id: 'milestones/castle_red', source: require('./castle_red.png'), category: 'hotel', label: 'Castle' },
+  {
+    id: 'milestones/castle_red',
+    source: require('./castle_red.png'),
+    category: 'hotel',
+    label: 'Castle',
+  },
   { id: 'milestones/flag_red', source: require('./flag_red.png'), category: 'city', label: 'Flag' },
-  { id: 'milestones/star_gold', source: require('./star_gold.png'), category: 'activity', label: 'Star' },
+  {
+    id: 'milestones/star_gold',
+    source: require('./star_gold.png'),
+    category: 'activity',
+    label: 'Star',
+  },
   // ... 30 entries
 ] as const;
 
@@ -169,13 +181,20 @@ export type MilestoneSpriteId = (typeof MILESTONE_SPRITES)[number]['id'];
 
 export const defaultSpriteForType = (type: string): MilestoneSpriteId => {
   switch (type) {
-    case 'hotel': return 'milestones/castle_red';
-    case 'city': return 'milestones/flag_red';
-    case 'activity': return 'milestones/star_gold';
-    case 'transport': return 'milestones/airplane';
-    case 'food': return 'milestones/pizza';
-    case 'landmark': return 'milestones/mountain';
-    default: return 'milestones/flag_red';
+    case 'hotel':
+      return 'milestones/castle_red';
+    case 'city':
+      return 'milestones/flag_red';
+    case 'activity':
+      return 'milestones/star_gold';
+    case 'transport':
+      return 'milestones/airplane';
+    case 'food':
+      return 'milestones/pizza';
+    case 'landmark':
+      return 'milestones/mountain';
+    default:
+      return 'milestones/flag_red';
   }
 };
 ```
@@ -207,11 +226,14 @@ Reusable modal with spring entrance + dark scrim. Used for confirmations and qui
 
 ```typescript
 // src/features/milestones/api/milestones.ts
-export async function listMilestones(tripId: string): Promise<Milestone[]>
-export async function createMilestone(input: MilestoneInsert): Promise<Milestone>
-export async function updateMilestone(id: string, updates: MilestoneUpdate): Promise<Milestone>
-export async function deleteMilestone(id: string): Promise<void>
-export async function reorderMilestones(tripId: string, orderUpdates: { id: string; order_index: number }[]): Promise<void>
+export async function listMilestones(tripId: string): Promise<Milestone[]>;
+export async function createMilestone(input: MilestoneInsert): Promise<Milestone>;
+export async function updateMilestone(id: string, updates: MilestoneUpdate): Promise<Milestone>;
+export async function deleteMilestone(id: string): Promise<void>;
+export async function reorderMilestones(
+  tripId: string,
+  orderUpdates: { id: string; order_index: number }[],
+): Promise<void>;
 ```
 
 Hooks: `useMilestones(tripId)`, `useMilestone(id)`, `useCheckin(milestoneId)`.
@@ -230,7 +252,7 @@ export interface GeocodingResult {
   countryCode?: string;
 }
 
-export async function searchPlaces(query: string): Promise<GeocodingResult[]>
+export async function searchPlaces(query: string): Promise<GeocodingResult[]>;
 ```
 
 Use MapTiler API (already in env) free tier. Debounce 300ms in UI.
@@ -252,6 +274,7 @@ export interface MilestoneNodeProps {
 ```
 
 States:
+
 - locked: grayscale + lock icon overlay
 - available: blue bg + pulsing yellow ring
 - current: gold bg + crown sprite above + glow
@@ -283,7 +306,7 @@ Uses `<Path>` from `react-native-svg` with cubic Bézier `M x1,y1 C cx1,cy1 cx2,
 ```typescript
 export const INDENTATION_PATTERN = [0, 1, 2, 1, 0, -1, -2, -1];
 export const HORIZONTAL_STEP = 60; // px per indentation unit
-export const VERTICAL_STEP = 120;  // px between consecutive nodes
+export const VERTICAL_STEP = 120; // px between consecutive nodes
 
 export function nodePosition(index: number): { x: number; y: number } {
   const pattern = INDENTATION_PATTERN[index % INDENTATION_PATTERN.length];
@@ -293,7 +316,10 @@ export function nodePosition(index: number): { x: number; y: number } {
 export function bezierControlPoints(from: Position, to: Position) {
   // mid-point with offset to create sinuous curve
   const midY = (from.y + to.y) / 2;
-  return [{ x: from.x, y: midY }, { x: to.x, y: midY }];
+  return [
+    { x: from.x, y: midY },
+    { x: to.x, y: midY },
+  ];
 }
 ```
 
@@ -306,6 +332,7 @@ Tests: `pathLayout.test.ts` validates indentation cycle and Bézier control poin
 ## Task 11: MilestoneCreationSheet
 
 Bottom sheet with:
+
 - Type chips (city / hotel / activity / transport / food / landmark / custom)
 - Name input
 - Location search (debounced geocoding)
@@ -332,6 +359,7 @@ Remove "Path UI lands in Phase 2" placeholder. Render `<PathView milestones={mil
 ## Task 14: Checkin flow
 
 Long-press on `current` or `available` milestone → CheckinAnim:
+
 - Haptic medium impact
 - Coin burst particles (Skia)
 - Stroke fills next edge (animateProgress 0→1)

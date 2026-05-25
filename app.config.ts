@@ -32,7 +32,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   scheme: 'thisisthejourney',
   version: '0.0.1',
   orientation: 'portrait',
-  icon: './src/assets/images/icon.png',
+  icon: './assets/Icons/ios/AppIcon-AppStore-1024.png',
   userInterfaceStyle: 'automatic',
   newArchEnabled: true,
   splash: {
@@ -44,6 +44,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ios: {
     bundleIdentifier: 'com.thisisthejourney.app',
     supportsTablet: true,
+    icon: './assets/Icons/ios/AppIcon-AppStore-1024.png',
     config: {
       usesNonExemptEncryption: false,
     },
@@ -54,8 +55,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   android: {
     package: 'com.thisisthejourney.app',
+    icon: './assets/Icons/android/ic_launcher_playstore-512.png',
     adaptiveIcon: {
-      foregroundImage: './src/assets/images/icon.png',
+      foregroundImage: './assets/Icons/android/adaptive/ic_launcher_foreground-432.png',
+      backgroundImage: './assets/Icons/android/adaptive/ic_launcher_background-432.png',
+      monochromeImage: './assets/Icons/android/adaptive/ic_launcher_monochrome-432.png',
       backgroundColor: '#FFF8EC',
     },
     edgeToEdgeEnabled: true,

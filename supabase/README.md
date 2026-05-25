@@ -32,6 +32,7 @@ Once authenticated, Claude can apply migrations directly via `mcp__plugin_supaba
 ## Verifying
 
 After migrations, in Supabase Dashboard:
+
 - Tables: should show `profiles`, `trips`, `trip_members`, `trip_invitations` all with RLS enabled
 - Database → Functions: `handle_new_user`, `handle_new_trip`, `set_updated_at`, `is_trip_member`, `is_trip_editor`
 - Database → Triggers: `on_auth_user_created`, `on_trip_created`, `profiles_updated_at`, `trips_updated_at`

@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { z } from 'zod';
 
 import { useTranslation } from '@core/i18n';
-import { useAuth } from '@features/auth';
+import { AppleSignInButton, GoogleSignInButton, useAuth } from '@features/auth';
 import { PixelButton } from '@shared/components/PixelButton';
 import { PixelInput } from '@shared/components/PixelInput';
 import { PixelText } from '@shared/components/PixelText';
@@ -19,6 +19,7 @@ export default function SignInScreen() {
   const { sendMagicLink, pending, error } = useAuth();
   const [email, setEmail] = useState('');
   const [validationError, setValidationError] = useState<string | undefined>();
+  const [socialError, setSocialError] = useState<string | undefined>();
 
   const handleSubmit = async () => {
     const result = emailSchema.safeParse(email);
@@ -69,6 +70,29 @@ export default function SignInScreen() {
         <PixelButton onPress={handleSubmit} loading={pending} fullWidth>
           {t('auth.signIn.sendLinkButton')}
         </PixelButton>
+
+        <View className="my-4 flex-row items-center gap-3">
+          <View className="h-px flex-1 bg-border" />
+          <PixelText size="caption" className="text-text-secondary">
+            {t('auth.signIn.orContinueWith')}
+          </PixelText>
+          <View className="h-px flex-1 bg-border" />
+        </View>
+
+        <View className="gap-3">
+          <AppleSignInButton
+            onError={(e) => setSocialError(e.message || t('auth.signIn.appleError'))}
+          />
+          <GoogleSignInButton
+            onError={(e) => setSocialError(e.message || t('auth.signIn.googleError'))}
+          />
+        </View>
+
+        {socialError ? (
+          <PixelText size="caption" className="mt-3 text-center text-error">
+            {socialError}
+          </PixelText>
+        ) : null}
       </View>
     </KeyboardAvoidingView>
   );

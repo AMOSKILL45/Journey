@@ -29,7 +29,10 @@
       "emailPlaceholder": "toi@example.com",
       "sendLinkButton": "Envoie-moi un lien magique",
       "emailRequired": "L'email est requis",
-      "emailInvalid": "Email invalide"
+      "emailInvalid": "Email invalide",
+      "orContinueWith": "ou continue avec",
+      "appleError": "Échec de connexion Apple",
+      "googleError": "Échec de connexion Google"
     },
     "checkEmail": {
       "title": "Vérifie ta boîte mail",

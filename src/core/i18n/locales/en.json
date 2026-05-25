@@ -29,7 +29,10 @@
       "emailPlaceholder": "you@example.com",
       "sendLinkButton": "Send me a magic link",
       "emailRequired": "Email is required",
-      "emailInvalid": "Please enter a valid email"
+      "emailInvalid": "Please enter a valid email",
+      "orContinueWith": "or continue with",
+      "appleError": "Apple Sign-In failed",
+      "googleError": "Google Sign-In failed"
     },
     "checkEmail": {
       "title": "Check your inbox",

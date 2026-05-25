@@ -10,6 +10,9 @@ jobs:
   quality:
     name: Lint + Typecheck + Tests + Credits
     runs-on: ubuntu-latest
+    env:
+      EXPO_PUBLIC_SUPABASE_URL: https://test.supabase.co
+      EXPO_PUBLIC_SUPABASE_ANON_KEY: sb_publishable_test_key_for_ci
     steps:
       - uses: actions/checkout@v4
 
@@ -32,7 +35,7 @@ jobs:
         run: npm run typecheck
 
       - name: Test
-        run: npm test -- --ci --coverage
+        run: npm test -- --ci --coverage --forceExit
 
       - name: Credits audit
         run: npm run credits:check

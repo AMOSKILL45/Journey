@@ -1,6 +1,7 @@
 {
   "app": {
     "name": "This Is The Journey",
+    "nameDisplay": "THIS IS THE\nJOURNEY",
     "tagline": "Plan together. Travel together. Adventure together."
   },
   "welcome": {
@@ -19,5 +20,54 @@
     "done": "Done",
     "loading": "Loading...",
     "error": "Something went wrong"
+  },
+  "auth": {
+    "signIn": {
+      "title": "Welcome back, adventurer!",
+      "subtitle": "Enter your email and we'll send you a magic link.",
+      "emailLabel": "Email",
+      "emailPlaceholder": "you@example.com",
+      "sendLinkButton": "Send me a magic link",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email"
+    },
+    "checkEmail": {
+      "title": "Check your inbox",
+      "subtitle": "We sent a magic link to %{email}. Tap it from your phone to sign in.",
+      "resend": "Resend link",
+      "back": "Back to sign in"
+    },
+    "signOut": "Sign out"
+  },
+  "profile": {
+    "anonymous": "Anonymous traveler",
+    "countryPicker": {
+      "placeholder": "Tap to pick",
+      "searchPlaceholder": "Search..."
+    },
+    "onboarding": {
+      "title": "Welcome aboard, adventurer!",
+      "subtitle": "Set up your traveler profile.",
+      "displayNameLabel": "Display name",
+      "avatarLabel": "Pick your sprite",
+      "passportLabel": "Passport country (optional)",
+      "passportHelper": "Helps us with smart reminders (visa, ESTA, etc.)",
+      "saveButton": "Start exploring",
+      "skipButton": "Skip for now"
+    }
+  },
+  "tabs": {
+    "home": "Home",
+    "trips": "Trips",
+    "discover": "Discover",
+    "inbox": "Inbox",
+    "profile": "Profile"
+  },
+  "home": {
+    "greeting": "Hey %{name} 👋",
+    "greetingAnonymous": "Hey adventurer 👋",
+    "emptyTitle": "🌍 Your adventures start here",
+    "emptyBody": "Tap the Trips tab to create your first journey.",
+    "comingSoon": "Coming soon"
   }
 }

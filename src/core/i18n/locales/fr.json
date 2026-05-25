@@ -1,6 +1,7 @@
 {
   "app": {
     "name": "This Is The Journey",
+    "nameDisplay": "THIS IS THE\nJOURNEY",
     "tagline": "Planifie ensemble. Voyage ensemble. Vis l'aventure ensemble."
   },
   "welcome": {
@@ -19,5 +20,54 @@
     "done": "Terminé",
     "loading": "Chargement...",
     "error": "Quelque chose a mal tourné"
+  },
+  "auth": {
+    "signIn": {
+      "title": "Bon retour, aventurier·e !",
+      "subtitle": "Entre ton email, on t'envoie un lien magique.",
+      "emailLabel": "Email",
+      "emailPlaceholder": "toi@example.com",
+      "sendLinkButton": "Envoie-moi un lien magique",
+      "emailRequired": "L'email est requis",
+      "emailInvalid": "Email invalide"
+    },
+    "checkEmail": {
+      "title": "Vérifie ta boîte mail",
+      "subtitle": "On a envoyé un lien magique à %{email}. Tape dessus depuis ton téléphone.",
+      "resend": "Renvoyer le lien",
+      "back": "Retour à la connexion"
+    },
+    "signOut": "Se déconnecter"
+  },
+  "profile": {
+    "anonymous": "Voyageur anonyme",
+    "countryPicker": {
+      "placeholder": "Tape pour choisir",
+      "searchPlaceholder": "Chercher..."
+    },
+    "onboarding": {
+      "title": "Bienvenue à bord, aventurier·e !",
+      "subtitle": "Configure ton profil de voyageur.",
+      "displayNameLabel": "Nom affiché",
+      "avatarLabel": "Choisis ton sprite",
+      "passportLabel": "Pays du passeport (optionnel)",
+      "passportHelper": "Pour les rappels smart (visa, ESTA, etc.)",
+      "saveButton": "Commencer l'aventure",
+      "skipButton": "Passer pour l'instant"
+    }
+  },
+  "tabs": {
+    "home": "Accueil",
+    "trips": "Voyages",
+    "discover": "Explorer",
+    "inbox": "Boîte",
+    "profile": "Profil"
+  },
+  "home": {
+    "greeting": "Hey %{name} 👋",
+    "greetingAnonymous": "Hey aventurier·e 👋",
+    "emptyTitle": "🌍 Tes aventures commencent ici",
+    "emptyBody": "Tape sur l'onglet Voyages pour créer ton premier trip.",
+    "comingSoon": "Bientôt disponible"
   }
 }

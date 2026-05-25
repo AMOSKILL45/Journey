@@ -1,26 +1,36 @@
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import WelcomeScreen from '../index';
+import IndexRoute from '../index';
 
-jest.mock('react-native-safe-area-context', () => ({
-  useSafeAreaInsets: () => ({ top: 0, bottom: 0, left: 0, right: 0 }),
-  SafeAreaProvider: ({ children }: { children: React.ReactNode }) => children,
+jest.mock('expo-router', () => ({
+  Redirect: ({ href }: { href: string }) => {
+    const { Text } = require('react-native');
+    return <Text>Redirect:{href}</Text>;
+  },
 }));
 
-describe('WelcomeScreen', () => {
-  it('renders app title', () => {
-    const { getByText } = render(<WelcomeScreen />);
-    expect(getByText(/THIS IS THE/)).toBeTruthy();
+const mockUseSession = jest.fn();
+jest.mock('@features/auth', () => ({
+  useSession: () => mockUseSession(),
+}));
+
+describe('IndexRoute', () => {
+  it('redirects unauthenticated users to sign-in', () => {
+    mockUseSession.mockReturnValue({ session: null, loading: false });
+    const { getByText } = render(<IndexRoute />);
+    expect(getByText('Redirect:/(auth)/sign-in')).toBeTruthy();
   });
 
-  it('renders welcome subtitle (English by default)', () => {
-    const { getByText } = render(<WelcomeScreen />);
-    expect(getByText('Your adventure starts here')).toBeTruthy();
+  it('redirects authenticated users to tabs', () => {
+    mockUseSession.mockReturnValue({ session: { user: { id: 'u1' } }, loading: false });
+    const { getByText } = render(<IndexRoute />);
+    expect(getByText('Redirect:/(tabs)')).toBeTruthy();
   });
 
-  it('has accessibility label', () => {
-    const { getByLabelText } = render(<WelcomeScreen />);
-    expect(getByLabelText('Welcome screen')).toBeTruthy();
+  it('renders loading spinner while session loads', () => {
+    mockUseSession.mockReturnValue({ session: null, loading: true });
+    const { queryByText } = render(<IndexRoute />);
+    expect(queryByText(/Redirect/)).toBeNull();
   });
 });

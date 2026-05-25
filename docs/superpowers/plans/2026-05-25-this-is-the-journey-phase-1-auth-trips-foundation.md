@@ -88,13 +88,16 @@ DB migrations applied via Supabase MCP (`mcp__plugin_supabase_supabase__apply_mi
 ## Task 1: DB schema — profiles table + RLS
 
 **Files:**
+
 - Apply migration via Supabase MCP
 
 - [ ] **Step 1: Apply profiles migration**
 
 Use `mcp__plugin_supabase_supabase__apply_migration` with:
+
 - name: `01_profiles`
 - query:
+
 ```sql
 -- Extension: profiles tied 1:1 to auth.users
 CREATE TABLE IF NOT EXISTS public.profiles (
@@ -186,11 +189,13 @@ Use `mcp__plugin_supabase_supabase__get_advisors` type=security. Expect no criti
 ## Task 2: DB schema — trips + trip_members + trip_invitations + RLS
 
 **Files:**
+
 - Apply migration via Supabase MCP
 
 - [ ] **Step 1: Apply trips migration**
 
 Use `apply_migration` with name `02_trips`, query:
+
 ```sql
 CREATE TABLE IF NOT EXISTS public.trips (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -347,6 +352,7 @@ CREATE POLICY "Anyone authenticated can SELECT an invitation by token (handled i
 ## Task 3: Generate TypeScript types from Supabase + commit
 
 **Files:**
+
 - Modify: `src/core/supabase/types.ts` (replace placeholder with generated content)
 - Modify: `package.json` (verify script `supabase:types`)
 
@@ -357,18 +363,22 @@ Use `mcp__plugin_supabase_supabase__generate_typescript_types` (no args, uses au
 - [ ] **Step 2: Save output to `src/core/supabase/types.ts`**
 
 Replace the file content with the generated types. Example output starts with:
+
 ```typescript
 export type Json = ...
 export interface Database { public: { Tables: { profiles: ..., trips: ..., trip_members: ..., trip_invitations: ... }, ... } }
 ```
 
 - [ ] **Step 3: Run typecheck**
+
 ```bash
 npx tsc --noEmit
 ```
+
 Expected: PASS.
 
 - [ ] **Step 4: Commit Tasks 1-3**
+
 ```bash
 git add src/core/supabase/types.ts docs/superpowers/plans/2026-05-25-this-is-the-journey-phase-1-auth-trips-foundation.md
 git commit -m "feat(db): Phase 1 schema - profiles + trips + members + invitations + RLS + generated types"
@@ -381,6 +391,7 @@ git commit -m "feat(db): Phase 1 schema - profiles + trips + members + invitatio
 ## Task 4: Avatar sprite assets (12 starter sprites)
 
 **Files:**
+
 - Create: `src/assets/sprites/avatars/adventurer_1.png` … `adventurer_12.png`
 - Create: `src/assets/sprites/avatars/manifest.ts` (TS export of paths)
 
@@ -391,6 +402,7 @@ mkdir -p src/assets/sprites/avatars
 ```
 
 Create `src/assets/sprites/avatars/manifest.ts`:
+
 ```typescript
 export const AVATAR_SPRITES = [
   { id: 'avatars/adventurer_1', source: require('./adventurer_1.png'), label: 'Adventurer Red' },
@@ -402,9 +414,17 @@ export const AVATAR_SPRITES = [
   { id: 'avatars/adventurer_7', source: require('./adventurer_7.png'), label: 'Adventurer Orange' },
   { id: 'avatars/adventurer_8', source: require('./adventurer_8.png'), label: 'Adventurer Cyan' },
   { id: 'avatars/adventurer_9', source: require('./adventurer_9.png'), label: 'Adventurer Black' },
-  { id: 'avatars/adventurer_10', source: require('./adventurer_10.png'), label: 'Adventurer White' },
+  {
+    id: 'avatars/adventurer_10',
+    source: require('./adventurer_10.png'),
+    label: 'Adventurer White',
+  },
   { id: 'avatars/adventurer_11', source: require('./adventurer_11.png'), label: 'Adventurer Gold' },
-  { id: 'avatars/adventurer_12', source: require('./adventurer_12.png'), label: 'Adventurer Silver' },
+  {
+    id: 'avatars/adventurer_12',
+    source: require('./adventurer_12.png'),
+    label: 'Adventurer Silver',
+  },
 ] as const;
 
 export type AvatarSpriteId = (typeof AVATAR_SPRITES)[number]['id'];
@@ -413,6 +433,7 @@ export type AvatarSpriteId = (typeof AVATAR_SPRITES)[number]['id'];
 - [ ] **Step 2: Download 12 placeholder sprites**
 
 For now, generate 12 colored placeholder PNGs (64x64) via placehold.co. In Bash:
+
 ```bash
 COLORS=("E63946" "6BBFE2" "2A9D8F" "FFCB05" "5B3B7F" "FF4592" "FF7A4A" "5FCFE6" "0F1A2E" "FFFFFF" "FFD700" "C0C0C0")
 LABELS=("RED" "BLU" "GRN" "YEL" "PUR" "PNK" "ORG" "CYN" "BLK" "WHT" "GLD" "SLV")
@@ -426,6 +447,7 @@ ls -la src/assets/sprites/avatars/
 Should produce 12 PNG files. These are placeholders to swap with real Kenney sprites later.
 
 - [ ] **Step 3: Commit**
+
 ```bash
 git add src/assets/sprites/
 git commit -m "feat(assets): 12 starter avatar sprite placeholders + manifest"
@@ -436,6 +458,7 @@ git commit -m "feat(assets): 12 starter avatar sprite placeholders + manifest"
 ## Task 5: PixelButton component + tests
 
 **Files:**
+
 - Create: `src/shared/components/PixelButton/PixelButton.tsx`
 - Create: `src/shared/components/PixelButton/index.ts`
 - Create: `src/shared/components/PixelButton/PixelButton.test.tsx`
@@ -443,6 +466,7 @@ git commit -m "feat(assets): 12 starter avatar sprite placeholders + manifest"
 - [ ] **Step 1: Implement PixelButton**
 
 Create `src/shared/components/PixelButton/PixelButton.tsx`:
+
 ```typescript
 import { ReactNode } from 'react';
 import { ActivityIndicator, Pressable, PressableProps, View } from 'react-native';
@@ -542,6 +566,7 @@ export const PixelButton = ({
 ```
 
 - [ ] **Step 2: Create index.ts**
+
 ```typescript
 export { PixelButton } from './PixelButton';
 export type { PixelButtonProps } from './PixelButton';
@@ -550,6 +575,7 @@ export type { PixelButtonProps } from './PixelButton';
 - [ ] **Step 3: Write tests**
 
 Create `src/shared/components/PixelButton/PixelButton.test.tsx`:
+
 ```typescript
 import { fireEvent, render } from '@testing-library/react-native';
 
@@ -599,6 +625,7 @@ npm test -- src/shared/components/PixelButton
 Then dispatch code-validator agent.
 
 - [ ] **Step 5: Commit**
+
 ```bash
 git add src/shared/components/PixelButton/
 git commit -m "feat(ds): PixelButton component with 5 variants + tests"
@@ -609,6 +636,7 @@ git commit -m "feat(ds): PixelButton component with 5 variants + tests"
 ## Task 6: PixelCard component + tests
 
 **Files:**
+
 - Create: `src/shared/components/PixelCard/PixelCard.tsx`
 - Create: `src/shared/components/PixelCard/index.ts`
 - Create: `src/shared/components/PixelCard/PixelCard.test.tsx`
@@ -695,6 +723,7 @@ git commit -m "feat(ds): PixelCard component (default/elevated/flat) + tests"
 ## Task 7: PixelInput component + tests
 
 **Files:**
+
 - Create: `src/shared/components/PixelInput/PixelInput.tsx`
 - Create: `src/shared/components/PixelInput/index.ts`
 - Create: `src/shared/components/PixelInput/PixelInput.test.tsx`
@@ -757,6 +786,7 @@ PixelInput.displayName = 'PixelInput';
 ```
 
 - [ ] **Step 2: index.ts**
+
 ```typescript
 export { PixelInput } from './PixelInput';
 export type { PixelInputProps } from './PixelInput';
@@ -805,6 +835,7 @@ git commit -m "feat(ds): PixelInput component with label/helper/error + tests"
 ## Task 8: PixelChip component + tests
 
 **Files:**
+
 - Create: `src/shared/components/PixelChip/PixelChip.tsx`
 - Create: `src/shared/components/PixelChip/index.ts`
 - Create: `src/shared/components/PixelChip/PixelChip.test.tsx`
@@ -897,6 +928,7 @@ git commit -m "feat(ds): PixelChip component (multi-select friendly) + tests"
 ## Task 9: Auth feature module (magic link sign-in)
 
 **Files:**
+
 - Create: `src/features/auth/api/auth.ts`
 - Create: `src/features/auth/hooks/useSession.ts`
 - Create: `src/features/auth/hooks/useAuth.ts`
@@ -911,6 +943,7 @@ git commit -m "feat(ds): PixelChip component (multi-select friendly) + tests"
 - [ ] **Step 1: Add i18n keys**
 
 Edit `src/core/i18n/locales/en.json` to add (alongside existing keys):
+
 ```json
 {
   "auth": {
@@ -935,6 +968,7 @@ Edit `src/core/i18n/locales/en.json` to add (alongside existing keys):
 ```
 
 And in `fr.json`:
+
 ```json
 {
   "auth": {
@@ -988,6 +1022,7 @@ export async function getCurrentSession() {
 - [ ] **Step 3: Implement useSession hook**
 
 `src/features/auth/hooks/useSession.ts`:
+
 ```typescript
 import { Session } from '@supabase/supabase-js';
 import { useEffect, useState } from 'react';
@@ -1018,6 +1053,7 @@ export function useSession() {
 - [ ] **Step 4: Implement useAuth hook**
 
 `src/features/auth/hooks/useAuth.ts`:
+
 ```typescript
 import { useState } from 'react';
 
@@ -1056,6 +1092,7 @@ export function useAuth() {
 - [ ] **Step 5: Implement AuthGuard component**
 
 `src/features/auth/components/AuthGuard.tsx`:
+
 ```typescript
 import { Redirect } from 'expo-router';
 import { ReactNode } from 'react';
@@ -1078,6 +1115,7 @@ export function AuthGuard({ children }: { children: ReactNode }) {
 ```
 
 - [ ] **Step 6: Public API src/features/auth/index.ts**
+
 ```typescript
 export { useAuth } from './hooks/useAuth';
 export { useSession } from './hooks/useSession';
@@ -1088,6 +1126,7 @@ export { signInWithMagicLink, signOut, getCurrentSession } from './api/auth';
 - [ ] **Step 7: Auth screens**
 
 `src/app/(auth)/_layout.tsx`:
+
 ```typescript
 import { Stack } from 'expo-router';
 
@@ -1097,6 +1136,7 @@ export default function AuthLayout() {
 ```
 
 `src/app/(auth)/sign-in.tsx`:
+
 ```typescript
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
@@ -1176,6 +1216,7 @@ export default function SignInScreen() {
 ```
 
 `src/app/(auth)/check-email.tsx`:
+
 ```typescript
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { View } from 'react-native';
@@ -1225,6 +1266,7 @@ export default function CheckEmailScreen() {
 - [ ] **Step 8: Tests**
 
 `src/features/auth/__tests__/auth.test.ts`:
+
 ```typescript
 jest.mock('@core/env', () => ({
   env: { supabaseUrl: 'https://test.supabase.co', supabaseAnonKey: 'sb_publishable_test' },
@@ -1233,7 +1275,9 @@ jest.mock('@core/env', () => ({
 import { signInWithMagicLink } from '../api/auth';
 import { supabase } from '@core/supabase/client';
 
-jest.spyOn(supabase.auth, 'signInWithOtp').mockResolvedValue({ data: { user: null, session: null }, error: null } as never);
+jest
+  .spyOn(supabase.auth, 'signInWithOtp')
+  .mockResolvedValue({ data: { user: null, session: null }, error: null } as never);
 
 describe('auth.api', () => {
   it('signInWithMagicLink calls supabase OTP with redirect', async () => {
@@ -1260,6 +1304,7 @@ Configure Supabase Auth deep link `thisisthejourney://auth/callback` via Supabas
 ## Task 10: Profile feature module + onboarding screen
 
 **Files:**
+
 - Create: `src/features/profile/api/profile.ts`
 - Create: `src/features/profile/hooks/useProfile.ts`
 - Create: `src/features/profile/components/AvatarSpritePicker.tsx`
@@ -1272,6 +1317,7 @@ Configure Supabase Auth deep link `thisisthejourney://auth/callback` via Supabas
 - [ ] **Step 1: Add i18n keys**
 
 `en.json` add:
+
 ```json
 {
   "profile": {
@@ -1354,6 +1400,7 @@ Wrap app in QueryClientProvider — modify `src/app/_layout.tsx` accordingly (ne
 - [ ] **Step 4: Wrap app with QueryClientProvider**
 
 Edit `src/app/_layout.tsx` to add:
+
 ```typescript
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 // inside component, top-level:
@@ -1404,6 +1451,7 @@ export function AvatarSpritePicker({ value, onChange }: AvatarSpritePickerProps)
 - [ ] **Step 6: OnboardingScreen + (modals)/onboarding.tsx**
 
 `src/features/profile/screens/OnboardingScreen.tsx`:
+
 ```typescript
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
@@ -1482,6 +1530,7 @@ export function OnboardingScreen() {
 ```
 
 `src/app/(modals)/onboarding.tsx`:
+
 ```typescript
 import { OnboardingScreen } from '@features/profile/screens/OnboardingScreen';
 
@@ -1499,6 +1548,7 @@ git commit -m "feat(profile): onboarding screen with sprite picker + passport co
 ## Task 11: Country picker component (lightweight ISO 3166 list)
 
 **Files:**
+
 - Create: `src/features/profile/components/CountryPicker.tsx`
 - Create: `src/features/profile/data/countries.ts` (top 200 ISO codes + name + flag emoji)
 - Optional tests
@@ -1659,6 +1709,7 @@ export function CountryPicker({ value, onChange, label, helperText }: CountryPic
 - [ ] **Step 3: Use CountryPicker in OnboardingScreen** (replace the TextInput for `passportCountry`).
 
 - [ ] **Step 4: Commit + code-validator**
+
 ```bash
 git commit -m "feat(profile): country picker (~50 most-traveled countries) + integrate in onboarding"
 ```
@@ -1668,9 +1719,10 @@ git commit -m "feat(profile): country picker (~50 most-traveled countries) + int
 ## Task 12: Auth deep link + root layout AuthGuard integration
 
 **Files:**
+
 - Modify: `src/app/_layout.tsx` — add `<AuthGuard>` for `(tabs)` routes, also Supabase deeplink listener
 
-- [ ] **Step 1: Read existing src/app/_layout.tsx** then modify to wrap routes with QueryClientProvider + handle Supabase auth deep links.
+- [ ] **Step 1: Read existing src/app/\_layout.tsx** then modify to wrap routes with QueryClientProvider + handle Supabase auth deep links.
 
 ```typescript
 // Add to imports
@@ -1718,6 +1770,7 @@ useEffect(() => {
 ```
 
 - [ ] **Step 2: Commit + code-validator**
+
 ```bash
 git commit -m "feat(auth): deep link handler + QueryClientProvider in root layout"
 ```
@@ -1727,6 +1780,7 @@ git commit -m "feat(auth): deep link handler + QueryClientProvider in root layou
 ## Task 13: Bottom tab bar shell (5 tabs)
 
 **Files:**
+
 - Create: `src/app/(tabs)/_layout.tsx`
 - Create: `src/app/(tabs)/index.tsx` (Home)
 - Create: `src/app/(tabs)/discover.tsx` (stub)
@@ -1772,6 +1826,7 @@ export default function TabsLayout() {
 ```
 
 Add to en.json/fr.json:
+
 ```json
 "tabs": {
   "home": "Home",
@@ -1781,11 +1836,13 @@ Add to en.json/fr.json:
   "profile": "Profile"
 }
 ```
+
 (FR: Accueil / Voyages / Explorer / Boîte / Profil)
 
 - [ ] **Step 2: Stub screens** — index (Home), discover, inbox, profile each render a simple welcome with PixelText. Profile shows sign-out button:
 
 `src/app/(tabs)/profile.tsx`:
+
 ```typescript
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -1811,6 +1868,7 @@ export default function ProfileTab() {
 Stubs for discover, inbox, index: render screen title + "Coming soon".
 
 - [ ] **Step 3: Commit + code-validator**
+
 ```bash
 git commit -m "feat(tabs): 5-tab bottom bar with AuthGuard + stub screens"
 ```
@@ -1820,6 +1878,7 @@ git commit -m "feat(tabs): 5-tab bottom bar with AuthGuard + stub screens"
 ## Task 14: My Trips tab (list trips)
 
 **Files:**
+
 - Create: `src/app/(tabs)/trips.tsx`
 - Create: `src/features/trips/api/trips.ts`
 - Create: `src/features/trips/hooks/useTrips.ts`
@@ -1891,7 +1950,12 @@ export async function createTrip(input: TripInsert): Promise<Trip> {
 }
 
 export async function updateTrip(id: string, updates: TripUpdate): Promise<Trip> {
-  const { data, error } = await supabase.from('trips').update(updates).eq('id', id).select().single();
+  const { data, error } = await supabase
+    .from('trips')
+    .update(updates)
+    .eq('id', id)
+    .select()
+    .single();
   if (error) throw error;
   return data;
 }
@@ -1951,6 +2015,7 @@ function formatDateRange(start: string | null, end: string | null, locale: strin
 - [ ] **Step 5: My Trips tab screen**
 
 `src/app/(tabs)/trips.tsx`:
+
 ```typescript
 import { useRouter } from 'expo-router';
 import { FlatList, View } from 'react-native';
@@ -2014,6 +2079,7 @@ git commit -m "feat(trips): My Trips tab with empty state + list + TripCard + te
 ## Task 15: Create Trip modal
 
 **Files:**
+
 - Create: `src/app/(modals)/create-trip.tsx`
 - Create: `src/features/trips/screens/CreateTripScreen.tsx`
 - Add i18n keys (already in Task 14).
@@ -2129,6 +2195,7 @@ git commit -m "feat(trips): create trip modal with name/dates/country + invalida
 ## Task 16: Trip detail placeholder screen
 
 **Files:**
+
 - Create: `src/app/(modals)/trip/[id].tsx`
 - Create: `src/features/trips/screens/TripDetailScreen.tsx`
 - Create: `src/features/trips/hooks/useTrip.ts`
@@ -2219,6 +2286,7 @@ git commit -m "feat(trips): trip detail placeholder + delete confirm"
 ## Task 17: Trip members + invitations (magic link)
 
 **Files:**
+
 - Create: `src/features/trips/api/members.ts`
 - Create: `src/features/trips/hooks/useTripMembers.ts`
 - Create: `src/features/trips/components/InviteMemberForm.tsx`
@@ -2235,7 +2303,11 @@ import type { Database } from '@core/supabase/types';
 export type TripMember = Database['public']['Tables']['trip_members']['Row'];
 export type TripInvitation = Database['public']['Tables']['trip_invitations']['Row'];
 
-export async function listMembers(tripId: string): Promise<(TripMember & { profile: { display_name: string | null; avatar_sprite_id: string | null } })[]> {
+export async function listMembers(
+  tripId: string,
+): Promise<
+  (TripMember & { profile: { display_name: string | null; avatar_sprite_id: string | null } })[]
+> {
   const { data, error } = await supabase
     .from('trip_members')
     .select('*, profile:profiles(display_name, avatar_sprite_id)')
@@ -2244,7 +2316,10 @@ export async function listMembers(tripId: string): Promise<(TripMember & { profi
   return data as never;
 }
 
-export async function createInvitation(tripId: string, email: string | null): Promise<TripInvitation> {
+export async function createInvitation(
+  tripId: string,
+  email: string | null,
+): Promise<TripInvitation> {
   const { data: userData } = await supabase.auth.getUser();
   if (!userData.user) throw new Error('Not authenticated');
   const { data, error } = await supabase
@@ -2258,9 +2333,12 @@ export async function createInvitation(tripId: string, email: string | null): Pr
 
 export async function acceptInvitation(token: string): Promise<{ trip_id: string }> {
   // Will be processed by edge function (handles trip_members insert in single transaction).
-  const { data, error } = await supabase.functions.invoke<{ trip_id: string }>('accept-invitation', {
-    body: { token },
-  });
+  const { data, error } = await supabase.functions.invoke<{ trip_id: string }>(
+    'accept-invitation',
+    {
+      body: { token },
+    },
+  );
   if (error) throw error;
   if (!data) throw new Error('No data returned');
   return data;
@@ -2279,7 +2357,11 @@ import { useQuery } from '@tanstack/react-query';
 import { listMembers } from '../api/members';
 
 export function useTripMembers(tripId: string) {
-  return useQuery({ queryKey: ['trip-members', tripId], queryFn: () => listMembers(tripId), enabled: Boolean(tripId) });
+  return useQuery({
+    queryKey: ['trip-members', tripId],
+    queryFn: () => listMembers(tripId),
+    enabled: Boolean(tripId),
+  });
 }
 ```
 
@@ -2288,6 +2370,7 @@ export function useTripMembers(tripId: string) {
 - [ ] **Step 4: Edge function `supabase/functions/accept-invitation/index.ts`**
 
 Deploy via `mcp__plugin_supabase_supabase__deploy_edge_function` with `name='accept-invitation'`, `verify_jwt=true`, body:
+
 ```typescript
 import 'jsr:@supabase/functions-js/edge-runtime.d.ts';
 import { createClient } from 'jsr:@supabase/supabase-js@2';
@@ -2300,7 +2383,9 @@ Deno.serve(async (req: Request) => {
   const auth = req.headers.get('Authorization');
   if (!auth) return new Response('Unauthorized', { status: 401 });
   const userJwt = auth.replace('Bearer ', '');
-  const { data: { user } } = await admin.auth.getUser(userJwt);
+  const {
+    data: { user },
+  } = await admin.auth.getUser(userJwt);
   if (!user) return new Response('Unauthorized', { status: 401 });
 
   const { token } = await req.json();
@@ -2313,13 +2398,15 @@ Deno.serve(async (req: Request) => {
     .maybeSingle();
   if (invErr || !inv) return new Response('Invitation not found', { status: 404 });
   if (inv.accepted_at) return new Response('Invitation already accepted', { status: 409 });
-  if (new Date(inv.expires_at) < new Date()) return new Response('Invitation expired', { status: 410 });
+  if (new Date(inv.expires_at) < new Date())
+    return new Response('Invitation expired', { status: 410 });
 
   // Atomic: insert member + mark accepted
   const { error: memErr } = await admin
     .from('trip_members')
     .insert({ trip_id: inv.trip_id, user_id: user.id, role: inv.role });
-  if (memErr && !memErr.message.includes('duplicate')) return new Response(memErr.message, { status: 500 });
+  if (memErr && !memErr.message.includes('duplicate'))
+    return new Response(memErr.message, { status: 500 });
 
   await admin
     .from('trip_invitations')
@@ -2345,6 +2432,7 @@ git commit -m "feat(trips): members listing + invitation creation + accept-invit
 ## Task 18: Home tab — upcoming trip card + sign-out
 
 **Files:**
+
 - Modify: `src/app/(tabs)/index.tsx`
 
 - [ ] **Step 1: Home shows current/upcoming trip if any, else welcome empty state**
@@ -2405,6 +2493,7 @@ git commit -m "feat(home): personalized greeting + upcoming trip card OR empty s
 ## Task 19: First-login routing — auto open onboarding if profile incomplete
 
 **Files:**
+
 - Modify: `src/features/auth/components/AuthGuard.tsx` to redirect to onboarding when profile.display_name is null.
 
 - [ ] **Step 1: Enhance AuthGuard**
@@ -2446,15 +2535,19 @@ git commit -m "feat(auth): redirect to onboarding when profile incomplete"
 ## Task 20: Final integration tests + cleanup + push
 
 - [ ] **Step 1: Run full test suite**
+
 ```bash
 npm test -- --ci
 ```
+
 Expected: all tests pass.
 
 - [ ] **Step 2: Typecheck + lint + format**
+
 ```bash
 npm run typecheck && npm run lint && npm run format:check
 ```
+
 Expected: 0 errors.
 
 - [ ] **Step 3: Invoke code-validator agent for full audit.**
@@ -2491,12 +2584,14 @@ When you finish this plan:
 - ✅ i18n keys for auth, profile, tabs, trips namespaces (FR + EN)
 
 **Deferred to Phase 1.5**:
+
 - Apple Sign-In + Google Sign-In
 - Passport verification Tier 2 (MRZ OCR) + Tier 3 (Stripe Identity)
 - Real Kenney sprite assets to replace placeholders
 - Email-template customization for Supabase Auth magic link
 
 **Deferred to Phase 2** (per spec):
+
 - Milestones table + schema
 - Path UI (Duolingo-style)
 - Sprite library for milestones

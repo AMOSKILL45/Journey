@@ -58,6 +58,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       foregroundImage: './src/assets/images/icon.png',
       backgroundColor: '#FFF8EC',
     },
+    edgeToEdgeEnabled: true,
   },
   plugins: corePlugins,
   experiments: {

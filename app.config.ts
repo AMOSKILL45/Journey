@@ -64,7 +64,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   extra: {
     eas: {
-      projectId: process.env.EAS_PROJECT_ID ?? '',
+      // Hardcoded fallback because EAS CLI does NOT load .env when reading dynamic config,
+      // so process.env.EAS_PROJECT_ID would be empty and EAS would refuse to link.
+      projectId: process.env.EAS_PROJECT_ID ?? '4eebd598-ffdc-45e0-a938-971fa25bedd2',
     },
     supabaseUrl: process.env.EXPO_PUBLIC_SUPABASE_URL,
     supabaseAnonKey: process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY,

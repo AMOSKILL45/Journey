@@ -8,6 +8,7 @@ import {
   type MilestoneNodeState,
 } from '@features/milestones';
 
+import { withCoords } from '../types';
 import { latLngToPixel, padBoundingBox, type BoundingBox } from '../utils/mercator';
 
 const REFERENCE_ZOOM = 8;
@@ -58,8 +59,9 @@ export function OverworldLayer({
 
   const positioned: PositionedMilestone[] = milestones
     .map<PositionedMilestone | null>((milestone) => {
-      if (milestone.lat == null || milestone.lng == null) return null;
-      const p = latLngToPixel({ lat: milestone.lat, lng: milestone.lng }, REFERENCE_ZOOM);
+      const m = withCoords(milestone);
+      if (m.lat == null || m.lng == null) return null;
+      const p = latLngToPixel({ lat: m.lat, lng: m.lng }, REFERENCE_ZOOM);
       return {
         milestone,
         x: (p.x - nw.x) * scale + offsetX,

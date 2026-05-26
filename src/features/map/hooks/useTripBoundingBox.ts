@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 
 import type { Milestone } from '@features/milestones';
 
+import { withCoords } from '../types';
 import { computeBoundingBox, type BoundingBox, type LatLng } from '../utils/mercator';
 
 /**
@@ -13,7 +14,8 @@ import { computeBoundingBox, type BoundingBox, type LatLng } from '../utils/merc
 export function useTripBoundingBox(milestones: readonly Milestone[]): BoundingBox | null {
   return useMemo(() => {
     const points: LatLng[] = [];
-    for (const m of milestones) {
+    for (const milestone of milestones) {
+      const m = withCoords(milestone);
       if (m.lat != null && m.lng != null) {
         points.push({ lat: m.lat, lng: m.lng });
       }

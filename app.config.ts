@@ -8,6 +8,7 @@ const corePlugins: NonNullable<ExpoConfig['plugins']> = [
   'expo-apple-authentication',
   '@react-native-community/datetimepicker',
   '@sentry/react-native/expo',
+  '@maplibre/maplibre-react-native',
 ];
 
 if (googleIosUrlScheme) {
@@ -50,6 +51,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     },
     infoPlist: {
       ITSAppUsesNonExemptEncryption: false,
+      NSLocationWhenInUseUsageDescription:
+        'Used to center the map on your position while exploring your trips.',
     },
     usesAppleSignIn: true,
   },

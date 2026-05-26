@@ -10,6 +10,7 @@ const envSchema = z.object({
   maptilerApiKey: z.string().optional(),
   googleWebClientId: z.string().optional(),
   googleIosClientId: z.string().optional(),
+  stripePublishableKey: z.string().optional(),
 });
 
 const raw = (Constants.expoConfig?.extra ?? {}) as Record<string, unknown>;

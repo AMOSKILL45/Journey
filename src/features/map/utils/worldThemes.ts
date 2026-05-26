@@ -1,5 +1,3 @@
-import type { ImageSourcePropType } from 'react-native';
-
 /**
  * World themes for the overworld layer. Phase 3 launches with two themes
  * per spec section 6.3 — additional themes (Europe Forest, Asia Sakura,
@@ -8,13 +6,17 @@ import type { ImageSourcePropType } from 'react-native';
  * Background art under `src/assets/worldThemes/<id>/background.png` is a
  * placeholder gradient that will be replaced with hand-crafted pixel art
  * in Phase 8 (cf. Bold Gambits).
+ *
+ * `background` is typed as `number` — the Metro-resolved asset id returned
+ * by `require()`. This is assignable both to RN's `ImageSourcePropType`
+ * (for `<Image>`) and to Skia's `DataSourceParam` (for `useImage`).
  */
 export type WorldThemeId = 'adventure-generic' | 'usa-desert';
 
 export interface WorldTheme {
   id: WorldThemeId;
   label: string;
-  background: ImageSourcePropType;
+  background: number;
   skyTopColor: string;
   skyBottomColor: string;
   groundColor: string;

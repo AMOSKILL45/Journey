@@ -42,6 +42,12 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     backgroundColor: '#FFF8EC',
   },
   assetBundlePatterns: ['**/*'],
+  updates: {
+    url: 'https://u.expo.dev/4eebd598-ffdc-45e0-a938-971fa25bedd2',
+  },
+  runtimeVersion: {
+    policy: 'appVersion',
+  },
   ios: {
     bundleIdentifier: 'com.thisisthejourney.app',
     supportsTablet: true,

@@ -193,6 +193,16 @@
       "skip": "Maybe later"
     },
     "canceled": "Verification canceled. You can retry anytime.",
-    "success": "You're verified! 🎉"
+    "success": "You're verified! 🎉",
+    "passport": {
+      "expiringSoon": {
+        "title": "Passport expiring soon",
+        "body": "Your passport expires in %{count} days. Many countries require 6 months' validity — renew before your next trip."
+      },
+      "expired": {
+        "title": "Passport expired",
+        "body": "Your passport has expired. Renew it before booking any new trips abroad."
+      }
+    }
   }
 }

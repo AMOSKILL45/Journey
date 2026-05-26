@@ -4,6 +4,7 @@ import { ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTranslation } from '@core/i18n';
+import { PassportExpiryBanner } from '@features/identity';
 import { useProfile } from '@features/profile';
 import { useTrips } from '@features/trips';
 import { PixelButton } from '@shared/components/PixelButton';
@@ -61,6 +62,8 @@ export default function HomeTab() {
       <PixelText size="body" className="mb-6 text-text-secondary">
         {t('app.tagline')}
       </PixelText>
+
+      <PassportExpiryBanner />
 
       {upcoming && upcoming.start_date ? (
         <PixelCard

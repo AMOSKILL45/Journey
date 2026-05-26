@@ -5,7 +5,6 @@ import { View } from 'react-native';
 
 import { MilestoneNode, type Milestone, type MilestoneNodeState } from '@features/milestones';
 
-import { withCoords } from '../types';
 import { buildCozyMapStyle } from '../utils/cozyMapStyle';
 import { bboxCenter, type BoundingBox } from '../utils/mercator';
 
@@ -63,11 +62,17 @@ export function RealMapLayer({
       >
         <Camera center={[center.lng, center.lat]} zoom={zoom} />
         {milestones.map((milestone) => {
-          const m = withCoords(milestone);
-          if (m.lat == null || m.lng == null) return null;
-          const state: MilestoneNodeState = checkedInIds.has(m.id) ? 'completed' : 'available';
+          if (milestone.lat == null || milestone.lng == null) return null;
+          const state: MilestoneNodeState = checkedInIds.has(milestone.id)
+            ? 'completed'
+            : 'available';
           return (
-            <Marker key={m.id} id={m.id} lngLat={[m.lng, m.lat]} anchor="center">
+            <Marker
+              key={milestone.id}
+              id={milestone.id}
+              lngLat={[milestone.lng, milestone.lat]}
+              anchor="center"
+            >
               <View>
                 <MilestoneNode milestone={milestone} state={state} />
               </View>

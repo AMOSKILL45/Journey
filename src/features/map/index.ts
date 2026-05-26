@@ -54,10 +54,6 @@ export type { WorldTheme, WorldThemeId } from './utils/worldThemes';
 export { buildCozyMapStyle } from './utils/cozyMapStyle';
 export type { CozyMapStyle } from './utils/cozyMapStyle';
 
-// Types
-export type { MilestoneWithCoords } from './types';
-export { withCoords } from './types';
-
 // API
 export {
   deleteTripPack,

@@ -184,5 +184,15 @@
       "confirmCta": "Check in",
       "successToast": "Checked in!"
     }
+  },
+  "identity": {
+    "gate": {
+      "title": "Verify your identity",
+      "subtitle": "Before you create a trip, we need a quick ID check. Takes 2 minutes — passport, ID card or driving license.",
+      "cta": "Verify with Stripe",
+      "skip": "Maybe later"
+    },
+    "canceled": "Verification canceled. You can retry anytime.",
+    "success": "You're verified! 🎉"
   }
 }

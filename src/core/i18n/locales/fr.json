@@ -184,5 +184,15 @@
       "confirmCta": "Check-in",
       "successToast": "Check-in fait !"
     }
+  },
+  "identity": {
+    "gate": {
+      "title": "Vérifie ton identité",
+      "subtitle": "Avant de créer un trip, on a besoin de te vérifier rapidement. 2 minutes — passeport, carte d'identité ou permis.",
+      "cta": "Vérifier avec Stripe",
+      "skip": "Plus tard"
+    },
+    "canceled": "Vérification annulée. Tu peux réessayer quand tu veux.",
+    "success": "Tu es vérifié·e ! 🎉"
   }
 }

@@ -1,0 +1,27 @@
+# Smoke test: app boots and the magic-link entry flow renders end-to-end.
+#
+# Catches: env var crashes, font-load deadlocks, font import errors, missing
+# i18n bundles, splash-screen never hiding, and similar boot-time regressions.
+appId: com.thisisthejourney.app
+---
+- launchApp:
+    clearState: true
+
+# Sign-in screen must render. We assert on the FR subtitle copy from auth.signIn.subtitle.
+- assertVisible:
+    text: 'Entre ton email'
+    timeout: 15000
+
+# Fill the email field and submit.
+- tapOn:
+    text: 'Email'
+- inputText: 'smoke-test+maestro@example.com'
+- tapOn:
+    text: 'Envoie-moi un lien magique'
+
+# After successful submission Supabase returns 200 and we navigate to check-email.
+# If the network call fails (offline / wrong env), the screen stays on sign-in and
+# this assert fails fast — which is also a useful signal.
+- assertVisible:
+    text: 'Vérifie ta boîte mail'
+    timeout: 15000

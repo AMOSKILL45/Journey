@@ -1,0 +1,24 @@
+# Smoke test: invite deep link never shows the +not-found 404.
+#
+# Regression coverage for the latent 2026-05-26 bug surfaced by the deep-links
+# contract test — tapping a shared invite link landed users on +not-found.tsx
+# because no /invite/[token] screen existed.
+appId: com.thisisthejourney.app
+---
+- launchApp:
+    clearState: true
+
+# Open an invite link with a bogus token. User is not signed in, so the screen
+# should redirect them to /(auth)/sign-in (see invite/[token].tsx logic).
+- openLink: 'thisisthejourney://invite/fake-token-for-maestro-smoke-test'
+
+# At no point should the 404 screen appear.
+- assertNotVisible:
+    text: '404'
+- assertNotVisible:
+    text: 'Quelque chose a mal tourné'
+
+# Unauthed user with an invite → bounced to sign-in.
+- assertVisible:
+    text: 'Entre ton email'
+    timeout: 15000

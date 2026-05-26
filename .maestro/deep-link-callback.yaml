@@ -1,0 +1,27 @@
+# Smoke test: magic-link auth/callback deep link never shows the +not-found 404.
+#
+# Regression coverage for the 2026-05-26 bug where tapping the magic-link email
+# landed users on src/app/+not-found.tsx because no /auth/callback screen existed.
+# The deep-links-contract Jest test prevents this from re-occurring statically,
+# but this flow proves it at runtime on the real router.
+appId: com.thisisthejourney.app
+---
+- launchApp:
+    clearState: true
+
+# Open the deep link as if the user tapped it from their email client.
+# Tokens are intentionally invalid — Supabase will reject them and the global
+# handler won't set a session. The /auth/callback screen should still render
+# its loader and eventually redirect to /(auth)/sign-in via its 5s timeout.
+- openLink: 'thisisthejourney://auth/callback#access_token=invalid&refresh_token=invalid&expires_in=3600&token_type=bearer&type=magiclink'
+
+# At no point should the 404 screen appear.
+- assertNotVisible:
+    text: '404'
+- assertNotVisible:
+    text: 'Quelque chose a mal tourné'
+
+# Eventually we should land back on sign-in (the callback timeout fallback).
+- assertVisible:
+    text: 'Entre ton email'
+    timeout: 15000

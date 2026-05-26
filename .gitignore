@@ -45,6 +45,10 @@ expo-env.d.ts
 # Tests
 coverage/
 
+# Maestro e2e artifacts (flow definitions ARE committed; outputs are not)
+maestro-debug/
+.maestro/output/
+
 # OSS references (cloned locally, not committed)
 .references/
 

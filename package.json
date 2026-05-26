@@ -15,6 +15,7 @@
     "typecheck": "tsc --noEmit",
     "test": "jest",
     "test:watch": "jest --watch",
+    "e2e": "maestro test .maestro",
     "prepare": "husky",
     "credits:check": "tsx scripts/check-credits.ts",
     "references:clone": "bash scripts/clone-references.sh",

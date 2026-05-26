@@ -21,6 +21,17 @@
     "loading": "Loading...",
     "error": "Something went wrong"
   },
+  "map": {
+    "toggle": { "path": "Path", "map": "Map" },
+    "themes": { "adventure-generic": "Adventure", "usa-desert": "Desert" },
+    "offline": {
+      "download": "Download offline",
+      "downloading": "Downloading…",
+      "downloaded": "Offline ready",
+      "deleteConfirm": "Remove offline data for this trip?"
+    },
+    "empty": "Add milestones to see your trip on the map."
+  },
   "auth": {
     "signIn": {
       "title": "Welcome back, adventurer!",

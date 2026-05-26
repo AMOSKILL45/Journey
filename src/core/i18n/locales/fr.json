@@ -21,6 +21,17 @@
     "loading": "Chargement...",
     "error": "Quelque chose a mal tourné"
   },
+  "map": {
+    "toggle": { "path": "Chemin", "map": "Carte" },
+    "themes": { "adventure-generic": "Aventure", "usa-desert": "Désert" },
+    "offline": {
+      "download": "Télécharger hors-ligne",
+      "downloading": "Téléchargement…",
+      "downloaded": "Disponible hors-ligne",
+      "deleteConfirm": "Supprimer les données hors-ligne de ce voyage ?"
+    },
+    "empty": "Ajoute des étapes pour voir ton voyage sur la carte."
+  },
   "auth": {
     "signIn": {
       "title": "Bon retour, aventurier·e !",

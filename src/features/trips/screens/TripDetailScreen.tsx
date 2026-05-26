@@ -5,6 +5,7 @@ import { Alert, ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTranslation } from '@core/i18n';
+import { MapModeToggle, TripMapView, type MapMode } from '@features/map';
 import {
   CheckinAnim,
   MilestoneCreationSheet,
@@ -42,6 +43,7 @@ export function TripDetailScreen() {
   const checkedInSet = useMemo(() => new Set(checkedInIds), [checkedInIds]);
   const [deleteError, setDeleteError] = useState<string | null>(null);
   const [animMilestoneId, setAnimMilestoneId] = useState<string | null>(null);
+  const [viewMode, setViewMode] = useState<MapMode>('path');
 
   const del = useMutation({
     mutationFn: () => {
@@ -153,11 +155,21 @@ export function TripDetailScreen() {
           </PixelCard>
         ) : (
           <View className="mb-6">
-            <PathView
-              milestones={milestones}
-              checkedInIds={checkedInSet}
-              onNodeLongPress={handleNodeLongPress}
-            />
+            <MapModeToggle mode={viewMode} onChange={setViewMode} />
+            {viewMode === 'path' ? (
+              <PathView
+                milestones={milestones}
+                checkedInIds={checkedInSet}
+                onNodeLongPress={handleNodeLongPress}
+              />
+            ) : (
+              <TripMapView
+                milestones={milestones}
+                checkedInIds={checkedInSet}
+                destinationCountry={trip.destination_country}
+                onNodeLongPress={handleNodeLongPress}
+              />
+            )}
             <View className="mt-4 items-center">
               <PixelButton variant="primary" onPress={() => sheetRef.current?.open()}>
                 {t('milestones.addCta')}

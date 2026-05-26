@@ -130,10 +130,14 @@ SQL columns to TS types. To keep these in sync:
 
 - [ ] Whenever a migration is applied: run `npm run supabase:types` and commit _(actually, the file is gitignored, so this is local-only — but the types must regen for TS to pick up new columns)_
 
-### Pending migrations (apply via Supabase MCP next session)
+### Migration apply history
 
-- [ ] `supabase/migrations/20260525000003_security_hardening.sql` _(carried over from Phase 1)_
-- [ ] `supabase/migrations/20260526120001_milestones_latlng.sql` — Phase 3 T2. Adds `lat` / `lng` GENERATED columns on `milestones`. Without applying, the map layers compile-time pass (TS bridge via `MilestoneWithCoords` cast) but queries return `lat: undefined / lng: undefined` and the map renders an empty space. Apply on the remote DB **before** any user sees the Map tab in TestFlight.
+- [x] `20260525000001_profiles` _(applied 2026-05-25)_
+- [x] `20260525000002_trips` _(applied 2026-05-25)_
+- [x] `20260525000003_security_hardening` _(applied 2026-05-25)_
+- [x] `20260525120001_milestones_and_checkins` _(applied 2026-05-25)_
+- [x] `identity_verification` _(applied 2026-05-26)_
+- [x] `20260526120001_milestones_latlng` _(applied 2026-05-26 via 472a285c… MCP)_
 
 ---
 

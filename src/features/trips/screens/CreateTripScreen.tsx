@@ -2,11 +2,12 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { Platform, ScrollView, View } from 'react-native';
+import { ActivityIndicator, Platform, ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTranslation } from '@core/i18n';
-import { CountryPicker } from '@features/profile';
+import { IdentityGate } from '@features/identity';
+import { CountryPicker, useProfile } from '@features/profile';
 import { PixelButton } from '@shared/components/PixelButton';
 import { PixelInput } from '@shared/components/PixelInput';
 import { PixelText } from '@shared/components/PixelText';
@@ -24,6 +25,7 @@ export function CreateTripScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const qc = useQueryClient();
+  const { data: profile, isLoading: profileLoading } = useProfile();
 
   const [name, setName] = useState('');
   const [startDate, setStartDate] = useState<Date | null>(null);
@@ -53,6 +55,31 @@ export function CreateTripScreen() {
   const canSubmit = name.trim().length >= MIN_NAME_LENGTH;
   const localeStr = locale === 'fr' ? 'fr-FR' : 'en-US';
   const formatPick = (d: Date) => d.toLocaleDateString(localeStr);
+
+  if (profileLoading) {
+    return (
+      <View className="flex-1 items-center justify-center bg-cream">
+        <ActivityIndicator />
+      </View>
+    );
+  }
+
+  if (!profile?.is_verified) {
+    return (
+      <ScrollView
+        className="flex-1 bg-cream"
+        contentContainerStyle={{
+          padding: SCREEN_PADDING,
+          paddingTop: insets.top + SCREEN_PADDING,
+        }}
+      >
+        <PixelText size="h1" className="mb-4">
+          {t('trips.create.title')}
+        </PixelText>
+        <IdentityGate onSkip={() => router.back()} />
+      </ScrollView>
+    );
+  }
 
   return (
     <ScrollView

@@ -31,7 +31,38 @@ interface StripeVerificationSession {
   url?: string;
 }
 
+interface StripeEphemeralKey {
+  id: string;
+  object: 'ephemeral_key';
+  secret: string;
+}
+
 const STRIPE_API = 'https://api.stripe.com/v1/identity/verification_sessions';
+const STRIPE_EPHEMERAL_KEY_API = 'https://api.stripe.com/v1/ephemeral_keys';
+const STRIPE_VERSION = '2024-11-20.acacia';
+
+async function stripeCreateEphemeralKey(
+  secretKey: string,
+  sessionId: string,
+): Promise<StripeEphemeralKey> {
+  const params = new URLSearchParams();
+  params.set('verification_session', sessionId);
+
+  const res = await fetch(STRIPE_EPHEMERAL_KEY_API, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${secretKey}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Stripe-Version': STRIPE_VERSION,
+    },
+    body: params.toString(),
+  });
+
+  if (!res.ok) {
+    throw new Error(`Stripe ephemeral_key error ${res.status}: ${await res.text()}`);
+  }
+  return (await res.json()) as StripeEphemeralKey;
+}
 
 async function stripeCreateSession(
   secretKey: string,
@@ -52,7 +83,7 @@ async function stripeCreateSession(
     headers: {
       Authorization: `Bearer ${secretKey}`,
       'Content-Type': 'application/x-www-form-urlencoded',
-      'Stripe-Version': '2024-11-20.acacia',
+      'Stripe-Version': STRIPE_VERSION,
     },
     body: params.toString(),
   });
@@ -69,7 +100,7 @@ async function stripeRetrieveSession(
   sessionId: string,
 ): Promise<StripeVerificationSession | null> {
   const res = await fetch(`${STRIPE_API}/${sessionId}`, {
-    headers: { Authorization: `Bearer ${secretKey}`, 'Stripe-Version': '2024-11-20.acacia' },
+    headers: { Authorization: `Bearer ${secretKey}`, 'Stripe-Version': STRIPE_VERSION },
   });
   if (res.status === 404) return null;
   if (!res.ok) {
@@ -121,7 +152,15 @@ Deno.serve(async (req: Request) => {
         profile.stripe_identity_session_id,
       );
       if (existing && (existing.status === 'requires_input' || existing.status === 'processing')) {
-        return json({ id: existing.id, client_secret: existing.client_secret }, 200);
+        const ephemeralKey = await stripeCreateEphemeralKey(STRIPE_SECRET_KEY, existing.id);
+        return json(
+          {
+            id: existing.id,
+            client_secret: existing.client_secret,
+            ephemeral_key_secret: ephemeralKey.secret,
+          },
+          200,
+        );
       }
     } catch (_e) {
       // Retrieval failure → fall through and create a new session.
@@ -129,8 +168,10 @@ Deno.serve(async (req: Request) => {
   }
 
   let session: StripeVerificationSession;
+  let ephemeralKey: StripeEphemeralKey;
   try {
     session = await stripeCreateSession(STRIPE_SECRET_KEY, userId);
+    ephemeralKey = await stripeCreateEphemeralKey(STRIPE_SECRET_KEY, session.id);
   } catch (e) {
     return json({ error: e instanceof Error ? e.message : 'Stripe failed' }, 502);
   }
@@ -145,5 +186,12 @@ Deno.serve(async (req: Request) => {
     console.error('[create-identity-session] profile update failed', updateErr.message);
   }
 
-  return json({ id: session.id, client_secret: session.client_secret }, 200);
+  return json(
+    {
+      id: session.id,
+      client_secret: session.client_secret,
+      ephemeral_key_secret: ephemeralKey.secret,
+    },
+    200,
+  );
 });

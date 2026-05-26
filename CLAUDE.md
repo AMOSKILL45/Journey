@@ -136,6 +136,7 @@ npm run references:clone # OSS reference repos
 **Phase 0 — Bootstrap** ✅ DONE (14/15, T15 EAS build deferred).
 **Phase 1 — Auth + Trips Foundation** ✅ DONE (18/20, T15/T20 cleanup pending).
 **Phase 2 — Milestones + Path UI** ✅ DONE (14/15, T15 = this commit batch).
+**Phase 3 — Overworld + Real Map + Crossfade** ✅ DONE (16/16).
 
 Phase 0 done: T1 git+config · T2 LICENSE/README · T3 Expo+TS · T4 EAS+env · T5 NativeWind+tokens · T6 ESLint+Prettier+Husky · T7 OSS refs+credits CI · T8 design tokens+fonts · T9 i18n + tests · T10 Supabase client (project ewsoupkfkachxidmuwoi) · T11 GH Actions CI · T12 Sentry+PostHog · T13 root layout + PixelText · T14 Welcome screen.
 
@@ -143,7 +144,9 @@ Phase 1 done: T1-T3 DB migrations (profiles + trips + members + invitations + RL
 
 Phase 2 done: T1-T2 DB migrations (milestones + checkins + PostGIS + RLS) + TS types regen · T3 30 milestone sprites + manifest · T4 PixelBottomSheet (gorhom) · T5 PixelDialog · T6 milestones API + hooks (CRUD + checkins) · T7 MapTiler geocoding service · T8 MilestoneNode (Duolingo circle + sprite + 4 states) · T9 MilestoneEdge (SVG Bézier) · T10 PathView + pathLayout (sanidhyy indentation cycle + 6 tests) · T11 MilestoneCreationSheet (type chips + debounced geocoding + boss toggle + sprite picker) · T12 SpritePicker (modal grid filterable by category) · T13 Wire PathView into TripDetailScreen with FAB + empty state · T14 CheckinAnim Reanimated coin burst + optimistic update. 69 tests passing.
 
-Deferred: T15 EAS dev client build (needs interactive setup) · Apple/Google Sign-In (Phase 1.5) · Stripe Identity (Phase 1.5) · Map tab MapLibre overworld (Phase 3) · sounds (Phase 6).
+Phase 3 done: T1 MapLibre + Skia deps + Expo plugin · T2 DB migration adding lat/lng generated columns on milestones (apply pending Supabase MCP) · T3 mercator helpers + useTripBoundingBox (11 tests) · T4 world themes (Adventure Generic + USA Desert) with placeholder backgrounds (6 tests) · T5 OverworldBackground Skia component · T6 OverworldLayer with mercator-positioned nodes + Bézier edges · T7 clustering util (40px screen threshold, 8 tests) + PixelCluster bubble · T8 useZoomLevel + useMapCamera shared-value hooks (8 tests) · T9 buildCozyMapStyle (6 tests, MapTiler vector source + Cozy palette) · T10 RealMapLayer + MilestoneWithCoords bridge · T11 usePinchZoom worklet gesture · T12 MapCrossfade orchestrator (zoom 9-11 opacity interpolation, JS-bridge sync) · T13 TripMapView + MapModeToggle in TripDetailScreen · T14 offline pack download API (bbox/zoom 8-16, progress callbacks) · T15 map.* i18n keys (en + fr) · T16 module barrel + final validation. 139 tests passing.
+
+Deferred: T15 Phase 0 EAS dev client build (needs interactive setup) · Phase 3 T2 apply_migration (queued for next Supabase MCP session) · Apple/Google Sign-In (Phase 1.5) · Stripe Identity (Phase 1.5) · sounds (Phase 6) · real overworld pixel art (Phase 8).
 
 ## Code-validator agent — MANDATORY
 

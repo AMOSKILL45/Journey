@@ -62,6 +62,8 @@ export type Database = {
           description: string | null;
           id: string;
           is_boss: boolean | null;
+          lat: number | null;
+          lng: number | null;
           location: unknown;
           metadata: Json | null;
           name: string;

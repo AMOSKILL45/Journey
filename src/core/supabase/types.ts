@@ -143,6 +143,7 @@ export type Database = {
           gender: string | null;
           gender_visible_in_public: boolean | null;
           id: string;
+          identity_verified_at: string | null;
           is_verified: boolean | null;
           languages: string[] | null;
           passport_country: string | null;
@@ -154,6 +155,7 @@ export type Database = {
           show_age_in_public: boolean | null;
           smart_reminders_enabled: boolean | null;
           socials: Json | null;
+          stripe_identity_session_id: string | null;
           travel_style: string[] | null;
           updated_at: string | null;
           username: string | null;
@@ -172,6 +174,7 @@ export type Database = {
           gender?: string | null;
           gender_visible_in_public?: boolean | null;
           id: string;
+          identity_verified_at?: string | null;
           is_verified?: boolean | null;
           languages?: string[] | null;
           passport_country?: string | null;
@@ -183,6 +186,7 @@ export type Database = {
           show_age_in_public?: boolean | null;
           smart_reminders_enabled?: boolean | null;
           socials?: Json | null;
+          stripe_identity_session_id?: string | null;
           travel_style?: string[] | null;
           updated_at?: string | null;
           username?: string | null;
@@ -201,6 +205,7 @@ export type Database = {
           gender?: string | null;
           gender_visible_in_public?: boolean | null;
           id?: string;
+          identity_verified_at?: string | null;
           is_verified?: boolean | null;
           languages?: string[] | null;
           passport_country?: string | null;
@@ -212,6 +217,7 @@ export type Database = {
           show_age_in_public?: boolean | null;
           smart_reminders_enabled?: boolean | null;
           socials?: Json | null;
+          stripe_identity_session_id?: string | null;
           travel_style?: string[] | null;
           updated_at?: string | null;
           username?: string | null;

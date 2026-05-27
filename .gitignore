@@ -54,3 +54,6 @@ maestro-debug/
 
 # Generated
 src/core/supabase/types.generated.ts
+
+# Supabase CLI local cache
+supabase/.temp/

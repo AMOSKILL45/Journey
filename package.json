@@ -111,9 +111,15 @@
     "doctor": {
       "reactNativeDirectoryCheck": {
         "exclude": [
-          "clsx"
+          "clsx",
+          "@stripe/stripe-identity-react-native"
         ]
       }
+    },
+    "install": {
+      "exclude": [
+        "@shopify/react-native-skia"
+      ]
     }
   }
 }

@@ -35,7 +35,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   orientation: 'portrait',
   icon: './assets/Icons/ios/AppIcon-AppStore-1024.png',
   userInterfaceStyle: 'automatic',
-  newArchEnabled: true,
+  // New Architecture (Fabric/TurboModules/Bridgeless) is OFF because
+  // @stripe/stripe-identity-react-native 0.8.0 has no New Arch bindings yet
+  // and `pod install` fails on EAS with newArch=true. Re-enable when Stripe
+  // ships New Arch support (track https://github.com/stripe/stripe-identity-react-native/issues).
+  newArchEnabled: false,
   splash: {
     image: './src/assets/images/splash.png',
     resizeMode: 'contain',

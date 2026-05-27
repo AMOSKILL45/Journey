@@ -63,9 +63,17 @@
       "title": "Welcome aboard, adventurer!",
       "subtitle": "Set up your traveler profile.",
       "displayNameLabel": "Display name",
+      "firstNameLabel": "Legal first name",
+      "firstNameHelper": "Matches your passport. Used for tickets, hotel bookings, etc.",
+      "lastNameLabel": "Legal last name",
+      "phoneLabel": "Phone number (optional)",
+      "phoneHelper": "Include country code, e.g. +33612345678",
       "avatarLabel": "Pick your sprite",
       "passportLabel": "Passport country (optional)",
       "passportHelper": "Helps us with smart reminders (visa, ESTA, etc.)",
+      "passportExpiryLabel": "Passport expiry date (optional)",
+      "passportExpiryPick": "Pick a date",
+      "passportExpiryHelper": "We'll remind you 6 months before — most countries require that buffer.",
       "saveButton": "Start exploring",
       "skipButton": "Skip for now"
     }

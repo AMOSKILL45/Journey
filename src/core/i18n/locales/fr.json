@@ -63,9 +63,17 @@
       "title": "Bienvenue à bord, aventurier·e !",
       "subtitle": "Configure ton profil de voyageur.",
       "displayNameLabel": "Nom affiché",
+      "firstNameLabel": "Prénom (état civil)",
+      "firstNameHelper": "Tel qu'il apparaît sur ton passeport. Pour les billets, réservations hôtel, etc.",
+      "lastNameLabel": "Nom (état civil)",
+      "phoneLabel": "Numéro de téléphone (optionnel)",
+      "phoneHelper": "Avec l'indicatif pays, ex : +33612345678",
       "avatarLabel": "Choisis ton sprite",
       "passportLabel": "Pays du passeport (optionnel)",
       "passportHelper": "Pour les rappels smart (visa, ESTA, etc.)",
+      "passportExpiryLabel": "Date d'expiration passeport (optionnel)",
+      "passportExpiryPick": "Choisir une date",
+      "passportExpiryHelper": "On te préviendra 6 mois avant — la plupart des pays exigent cette marge.",
       "saveButton": "Commencer l'aventure",
       "skipButton": "Passer pour l'instant"
     }

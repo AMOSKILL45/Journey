@@ -59,6 +59,10 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       ITSAppUsesNonExemptEncryption: false,
       NSLocationWhenInUseUsageDescription:
         'Used to center the map on your position while exploring your trips.',
+      NSCameraUsageDescription:
+        'Used to scan your ID document (passport, ID card or driving license) for identity verification.',
+      NSPhotoLibraryUsageDescription:
+        'Used to select an ID document photo from your library when scanning a fresh one is not possible.',
     },
     usesAppleSignIn: true,
   },

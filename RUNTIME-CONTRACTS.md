@@ -155,7 +155,38 @@ Dashboard: <https://cloud.maptiler.com/account/keys/>
 
 ---
 
-## 9. Native build vs OTA update
+## 9. iOS Info.plist purpose strings ↔ shipped SDKs
+
+Apple rejects builds via ITMS-90683 if any compiled-in SDK references a
+sensitive-API class but the Info.plist lacks the matching `NS*UsageDescription`
+purpose string — even if your code never actually triggers the API at runtime.
+The mapping for the SDKs Journey ships:
+
+| SDK                                    | Required Info.plist key(s)                                                         |
+| -------------------------------------- | ---------------------------------------------------------------------------------- |
+| `@maplibre/maplibre-react-native`      | `NSLocationWhenInUseUsageDescription`                                              |
+| `@stripe/stripe-identity-react-native` | `NSCameraUsageDescription` + `NSPhotoLibraryUsageDescription`                      |
+| `expo-image-picker` _(if added)_       | `NSCameraUsageDescription` + `NSPhotoLibraryUsageDescription`                      |
+| `expo-av` _(if added)_                 | `NSMicrophoneUsageDescription`                                                     |
+| `expo-contacts` _(if added)_           | `NSContactsUsageDescription`                                                       |
+| `expo-calendar` _(if added)_           | `NSCalendarsUsageDescription` (`NSRemindersFullAccessUsageDescription` on iOS 17+) |
+| `expo-notifications` _(local only)_    | _no Info.plist key_ — entitlement-based                                            |
+
+The Info.plist is generated from `app.config.ts → ios.infoPlist` on `expo prebuild`.
+
+**Rule before adding a new native SDK:** look up its iOS sensitive APIs, add the
+purpose strings to `app.config.ts` in the **same commit** as the SDK install. If
+Apple rejects an upload with ITMS-90683, the fix is here.
+
+Verified for current build:
+
+- [x] `NSLocationWhenInUseUsageDescription` _(Phase 3, MapLibre)_
+- [x] `NSCameraUsageDescription` _(2026-05-26, Stripe Identity — fixed after ITMS-90683 on build 11)_
+- [x] `NSPhotoLibraryUsageDescription` _(2026-05-26, Stripe Identity)_
+
+---
+
+## 10. Native build vs OTA update
 
 Changes that **require a new native build** (`eas build` + store upload, NOT OTA):
 

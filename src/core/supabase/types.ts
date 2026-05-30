@@ -50,6 +50,66 @@ export type Database = {
           },
         ];
       };
+      documents: {
+        Row: {
+          category: string;
+          external_url: string | null;
+          file_type: string;
+          id: string;
+          milestone_id: string | null;
+          mime_type: string | null;
+          name: string;
+          size_bytes: number | null;
+          storage_path: string | null;
+          trip_id: string;
+          uploaded_at: string;
+          uploaded_by: string;
+        };
+        Insert: {
+          category?: string;
+          external_url?: string | null;
+          file_type: string;
+          id?: string;
+          milestone_id?: string | null;
+          mime_type?: string | null;
+          name: string;
+          size_bytes?: number | null;
+          storage_path?: string | null;
+          trip_id: string;
+          uploaded_at?: string;
+          uploaded_by: string;
+        };
+        Update: {
+          category?: string;
+          external_url?: string | null;
+          file_type?: string;
+          id?: string;
+          milestone_id?: string | null;
+          mime_type?: string | null;
+          name?: string;
+          size_bytes?: number | null;
+          storage_path?: string | null;
+          trip_id?: string;
+          uploaded_at?: string;
+          uploaded_by?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'documents_milestone_id_fkey';
+            columns: ['milestone_id'];
+            isOneToOne: false;
+            referencedRelation: 'milestones';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'documents_trip_id_fkey';
+            columns: ['trip_id'];
+            isOneToOne: false;
+            referencedRelation: 'trips';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       milestones: {
         Row: {
           address: string | null;

@@ -50,6 +50,205 @@ export type Database = {
           },
         ];
       };
+      checklist_item_completions: {
+        Row: {
+          done_at: string;
+          item_id: string;
+          user_id: string;
+        };
+        Insert: {
+          done_at?: string;
+          item_id: string;
+          user_id: string;
+        };
+        Update: {
+          done_at?: string;
+          item_id?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'checklist_item_completions_item_id_fkey';
+            columns: ['item_id'];
+            isOneToOne: false;
+            referencedRelation: 'checklist_items';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      checklist_items: {
+        Row: {
+          assigned_to: string | null;
+          category: string;
+          checklist_id: string;
+          created_at: string;
+          created_by: string;
+          description: string | null;
+          document_id: string | null;
+          done_at: string | null;
+          done_by: string | null;
+          due_date: string | null;
+          id: string;
+          is_done: boolean;
+          label: string;
+          order_index: number;
+          scope: string;
+          trip_id: string;
+        };
+        Insert: {
+          assigned_to?: string | null;
+          category?: string;
+          checklist_id: string;
+          created_at?: string;
+          created_by: string;
+          description?: string | null;
+          document_id?: string | null;
+          done_at?: string | null;
+          done_by?: string | null;
+          due_date?: string | null;
+          id?: string;
+          is_done?: boolean;
+          label: string;
+          order_index?: number;
+          scope?: string;
+          trip_id: string;
+        };
+        Update: {
+          assigned_to?: string | null;
+          category?: string;
+          checklist_id?: string;
+          created_at?: string;
+          created_by?: string;
+          description?: string | null;
+          document_id?: string | null;
+          done_at?: string | null;
+          done_by?: string | null;
+          due_date?: string | null;
+          id?: string;
+          is_done?: boolean;
+          label?: string;
+          order_index?: number;
+          scope?: string;
+          trip_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'checklist_items_checklist_id_fkey';
+            columns: ['checklist_id'];
+            isOneToOne: false;
+            referencedRelation: 'trip_checklists';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'checklist_items_document_id_fkey';
+            columns: ['document_id'];
+            isOneToOne: false;
+            referencedRelation: 'documents';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'checklist_items_trip_id_fkey';
+            columns: ['trip_id'];
+            isOneToOne: false;
+            referencedRelation: 'trips';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      checklist_suggestion_dismissals: {
+        Row: {
+          dismissed_at: string;
+          dismissed_by: string;
+          suggestion_key: string;
+          trip_id: string;
+        };
+        Insert: {
+          dismissed_at?: string;
+          dismissed_by: string;
+          suggestion_key: string;
+          trip_id: string;
+        };
+        Update: {
+          dismissed_at?: string;
+          dismissed_by?: string;
+          suggestion_key?: string;
+          trip_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'checklist_suggestion_dismissals_trip_id_fkey';
+            columns: ['trip_id'];
+            isOneToOne: false;
+            referencedRelation: 'trips';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      checklist_template_items: {
+        Row: {
+          category: string;
+          i18n_key: string | null;
+          id: string;
+          label: string | null;
+          order_index: number;
+          scope: string;
+          template_id: string;
+        };
+        Insert: {
+          category?: string;
+          i18n_key?: string | null;
+          id?: string;
+          label?: string | null;
+          order_index?: number;
+          scope?: string;
+          template_id: string;
+        };
+        Update: {
+          category?: string;
+          i18n_key?: string | null;
+          id?: string;
+          label?: string | null;
+          order_index?: number;
+          scope?: string;
+          template_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'checklist_template_items_template_id_fkey';
+            columns: ['template_id'];
+            isOneToOne: false;
+            referencedRelation: 'checklist_templates';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      checklist_templates: {
+        Row: {
+          created_by: string | null;
+          i18n_key: string;
+          icon_sprite: string | null;
+          id: string;
+          is_system: boolean;
+          sort_order: number;
+        };
+        Insert: {
+          created_by?: string | null;
+          i18n_key: string;
+          icon_sprite?: string | null;
+          id: string;
+          is_system?: boolean;
+          sort_order?: number;
+        };
+        Update: {
+          created_by?: string | null;
+          i18n_key?: string;
+          icon_sprite?: string | null;
+          id?: string;
+          is_system?: boolean;
+          sort_order?: number;
+        };
+        Relationships: [];
+      };
       documents: {
         Row: {
           category: string;
@@ -322,6 +521,44 @@ export type Database = {
           srtext?: string | null;
         };
         Relationships: [];
+      };
+      trip_checklists: {
+        Row: {
+          created_at: string;
+          created_by: string;
+          id: string;
+          is_default: boolean;
+          order_index: number;
+          title: string;
+          trip_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          created_by: string;
+          id?: string;
+          is_default?: boolean;
+          order_index?: number;
+          title: string;
+          trip_id: string;
+        };
+        Update: {
+          created_at?: string;
+          created_by?: string;
+          id?: string;
+          is_default?: boolean;
+          order_index?: number;
+          title?: string;
+          trip_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'trip_checklists_trip_id_fkey';
+            columns: ['trip_id'];
+            isOneToOne: false;
+            referencedRelation: 'trips';
+            referencedColumns: ['id'];
+          },
+        ];
       };
       trip_invitations: {
         Row: {

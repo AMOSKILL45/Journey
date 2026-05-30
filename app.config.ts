@@ -45,6 +45,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   scheme: 'thisisthejourney',
   version: '0.0.1',
   orientation: 'portrait',
+  // No web target (react-native-web isn't installed), so `eas update`/`expo export`
+  // skip web instead of failing on it. Native platforms only.
+  platforms: ['ios', 'android'],
   icon: './assets/Icons/ios/AppIcon-AppStore-1024.png',
   userInterfaceStyle: 'automatic',
   newArchEnabled: true,

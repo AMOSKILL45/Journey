@@ -1,6 +1,6 @@
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { forwardRef, useCallback, useImperativeHandle, useRef, useState } from 'react';
-import { Platform, Pressable, View } from 'react-native';
+import { Alert, Platform, Pressable, View } from 'react-native';
 
 import { useTranslation } from '@core/i18n';
 import { useTripDocuments } from '@features/documents';
@@ -27,7 +27,7 @@ export interface AddItemSheetProps {
 export const AddItemSheet = forwardRef<AddItemSheetRef, AddItemSheetProps>(({ tripId }, ref) => {
   const { t } = useTranslation();
   const sheetRef = useRef<PixelBottomSheetRef>(null);
-  const { addItem, editItem } = useChecklistMutations(tripId);
+  const { addItem, editItem, removeItem } = useChecklistMutations(tripId);
   const { data: members = [] } = useTripMembers(tripId);
   const { data: docs = [] } = useTripDocuments(tripId);
 
@@ -108,6 +108,22 @@ export const AddItemSheet = forwardRef<AddItemSheetRef, AddItemSheetProps>(({ tr
     } catch {
       setError(t('common.error'));
     }
+  };
+
+  const onDelete = () => {
+    if (!editingId) return;
+    Alert.alert(t('checklists.delete.item'), t('checklists.delete.body'), [
+      { text: t('common.cancel'), style: 'cancel' },
+      {
+        text: t('common.delete'),
+        style: 'destructive',
+        onPress: () => {
+          removeItem.mutate(editingId);
+          reset();
+          sheetRef.current?.close();
+        },
+      },
+    ]);
   };
 
   return (
@@ -246,6 +262,12 @@ export const AddItemSheet = forwardRef<AddItemSheetRef, AddItemSheetProps>(({ tr
         >
           {t('common.save')}
         </PixelButton>
+
+        {editingId ? (
+          <PixelButton variant="danger" onPress={onDelete} fullWidth>
+            {t('common.delete')}
+          </PixelButton>
+        ) : null}
       </View>
     </PixelBottomSheet>
   );

@@ -18,7 +18,7 @@ import * as Linking from 'expo-linking';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
@@ -26,6 +26,7 @@ import { initPostHog } from '@core/posthog';
 import { initSentry } from '@core/sentry';
 import { supabase } from '@core/supabase/client';
 import { colors } from '@core/theme';
+import { AnimatedSplash, useAppReady } from '@features/splash';
 
 const QUERY_STALE_MS = 60_000;
 
@@ -89,11 +90,17 @@ export default function RootLayout() {
     return () => sub.remove();
   }, []);
 
-  useEffect(() => {
-    if (fontsLoaded) {
-      void SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
+  const appReady = useAppReady(fontsLoaded);
+  const [splashAnimationDone, setSplashAnimationDone] = useState(false);
+  const nativeSplashHidden = useRef(false);
+
+  // Hand off from the native splash to the JS overlay only once the overlay has
+  // painted its first frame (onLayout), so there is no flash between the two.
+  const hideNativeSplash = useCallback(() => {
+    if (nativeSplashHidden.current) return;
+    nativeSplashHidden.current = true;
+    void SplashScreen.hideAsync();
+  }, []);
 
   if (!fontsLoaded) {
     return null;
@@ -120,6 +127,13 @@ export default function RootLayout() {
               options={{ presentation: 'modal', headerShown: false }}
             />
           </Stack>
+          {!splashAnimationDone && (
+            <AnimatedSplash
+              appReady={appReady}
+              onFinish={() => setSplashAnimationDone(true)}
+              onLayout={hideNativeSplash}
+            />
+          )}
         </SafeAreaProvider>
       </QueryClientProvider>
     </GestureHandlerRootView>

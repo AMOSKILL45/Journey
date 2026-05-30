@@ -5,6 +5,18 @@ const googleIosUrlScheme = process.env.EXPO_PUBLIC_GOOGLE_IOS_URL_SCHEME;
 const corePlugins: NonNullable<ExpoConfig['plugins']> = [
   'expo-router',
   'expo-font',
+  [
+    'expo-splash-screen',
+    {
+      // Native launch screen: the pixel-art mountain icon, small and centred on
+      // cream. `imageWidth` must stay in sync with ICON_WIDTH in AnimatedSplash
+      // so the native splash hands off to the JS dive overlay without a size jump.
+      image: './src/assets/images/launch-icon.png',
+      imageWidth: 160,
+      resizeMode: 'contain',
+      backgroundColor: '#FFF8EC',
+    },
+  ],
   'expo-apple-authentication',
   '@react-native-community/datetimepicker',
   '@sentry/react-native/expo',
@@ -36,11 +48,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   icon: './assets/Icons/ios/AppIcon-AppStore-1024.png',
   userInterfaceStyle: 'automatic',
   newArchEnabled: true,
-  splash: {
-    image: './src/assets/images/splash.png',
-    resizeMode: 'contain',
-    backgroundColor: '#FFF8EC',
-  },
   assetBundlePatterns: ['**/*'],
   updates: {
     url: 'https://u.expo.dev/4eebd598-ffdc-45e0-a938-971fa25bedd2',

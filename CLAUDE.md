@@ -133,10 +133,11 @@ npm run references:clone # OSS reference repos
 
 ## Active phase
 
-**Phase 0 — Bootstrap** ✅ DONE (14/15, T15 EAS build deferred).
+**Phase 0 — Bootstrap** ✅ DONE (15/15 — EAS build pipeline live: dev/preview/production profiles + `eas submit` to TestFlight, ascAppId 6773123707). Note: dev-client profile unused — workflow is TestFlight builds, not local Metro.
 **Phase 1 — Auth + Trips Foundation** ✅ DONE (18/20, T15/T20 cleanup pending).
 **Phase 2 — Milestones + Path UI** ✅ DONE (14/15, T15 = this commit batch).
 **Phase 3 — Overworld + Real Map + Crossfade** ✅ DONE (16/16).
+**Phase 4 — Documents + Checklist + Smart Reminders** — decomposed into 5 sub-projects (4A Documents · 4B Checklists · 4C Push infra · 4D Smart reminders trip · 4E Personal/life reminders). **Phase 4A — Documents** ✅ DONE (11/11 + contract tests + security fix).
 
 Phase 0 done: T1 git+config · T2 LICENSE/README · T3 Expo+TS · T4 EAS+env · T5 NativeWind+tokens · T6 ESLint+Prettier+Husky · T7 OSS refs+credits CI · T8 design tokens+fonts · T9 i18n + tests · T10 Supabase client (project ewsoupkfkachxidmuwoi) · T11 GH Actions CI · T12 Sentry+PostHog · T13 root layout + PixelText · T14 Welcome screen.
 
@@ -146,7 +147,9 @@ Phase 2 done: T1-T2 DB migrations (milestones + checkins + PostGIS + RLS) + TS t
 
 Phase 3 done: T1 MapLibre + Skia deps + Expo plugin · T2 DB migration adding lat/lng generated columns on milestones (apply pending Supabase MCP) · T3 mercator helpers + useTripBoundingBox (11 tests) · T4 world themes (Adventure Generic + USA Desert) with placeholder backgrounds (6 tests) · T5 OverworldBackground Skia component · T6 OverworldLayer with mercator-positioned nodes + Bézier edges · T7 clustering util (40px screen threshold, 8 tests) + PixelCluster bubble · T8 useZoomLevel + useMapCamera shared-value hooks (8 tests) · T9 buildCozyMapStyle (6 tests, MapTiler vector source + Cozy palette) · T10 RealMapLayer + MilestoneWithCoords bridge · T11 usePinchZoom worklet gesture · T12 MapCrossfade orchestrator (zoom 9-11 opacity interpolation, JS-bridge sync) · T13 TripMapView + MapModeToggle in TripDetailScreen · T14 offline pack download API (bbox/zoom 8-16, progress callbacks) · T15 map.\* i18n keys (en + fr) · T16 module barrel + final validation. 139 tests passing.
 
-Deferred: T15 Phase 0 EAS dev client build (needs interactive setup) · Phase 3 T2 apply_migration (queued for next Supabase MCP session) · Apple/Google Sign-In (Phase 1.5) · Stripe Identity (Phase 1.5) · sounds (Phase 6) · real overworld pixel art (Phase 8).
+Phase 4A (Documents) done: deps (document/image picker, image-manipulator, file-system v19, sharing) · `documents` table + RLS (editor-write/viewer-read/owner-moderate) + private `trip-documents` bucket + Storage policies (applied to ewsoupkfkachxidmuwoi, types regen) · fileTypes/offlineCache (File API v19 + AsyncStorage registry)/api (signed URLs + image compression, 25 MB cap) utils · TanStack + offline hooks · DocumentCard/Viewer/UploadSheet (file/photo/camera/url + category + milestone)/Section · `(modals)/documents/[tripId]` route + TripDetailScreen entry · `documents.*` i18n (en+fr) · runtime-contract tests (i18n/route/bucket) + security fix (url scheme validated at open sink). 535 tests passing. Spec + plan: `docs/superpowers/{specs,plans}/2026-05-30-journey-phase-4a-documents*`.
+
+Deferred: Phase 3 T2 apply_migration (queued for next Supabase MCP session) · Apple/Google Sign-In (Phase 1.5) · sounds (Phase 6) · real overworld pixel art (Phase 8). In progress: Stripe Identity / passport verification (Phase 1.5 pulled forward).
 
 ## Code-validator agent — MANDATORY
 

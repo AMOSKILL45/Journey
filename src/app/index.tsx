@@ -1,18 +1,15 @@
 import { Redirect } from 'expo-router';
-import { ActivityIndicator, View } from 'react-native';
+import { View } from 'react-native';
 
-import { colors } from '@core/theme';
 import { useSession } from '@features/auth';
 
 export default function IndexRoute() {
   const { session, loading } = useSession();
 
+  // Neutral cream hold while the session resolves. The launch overlay covers boot,
+  // so this only appears in rare post-splash re-renders — no jarring spinner.
   if (loading) {
-    return (
-      <View className="flex-1 items-center justify-center bg-cream">
-        <ActivityIndicator color={colors.primary[500]} />
-      </View>
-    );
+    return <View className="flex-1 bg-cream" />;
   }
 
   return session ? <Redirect href="/(tabs)" /> : <Redirect href="/(auth)/sign-in" />;

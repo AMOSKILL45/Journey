@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react-native';
 import React from 'react';
+import { ActivityIndicator } from 'react-native';
 
 import IndexRoute from '../index';
 
@@ -28,9 +29,10 @@ describe('IndexRoute', () => {
     expect(getByText('Redirect:/(tabs)')).toBeTruthy();
   });
 
-  it('renders loading spinner while session loads', () => {
+  it('shows a neutral cream fallback (no spinner, no redirect) while the session loads', () => {
     mockUseSession.mockReturnValue({ session: null, loading: true });
-    const { queryByText } = render(<IndexRoute />);
+    const { queryByText, UNSAFE_queryByType } = render(<IndexRoute />);
     expect(queryByText(/Redirect/)).toBeNull();
+    expect(UNSAFE_queryByType(ActivityIndicator)).toBeNull();
   });
 });

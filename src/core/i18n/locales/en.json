@@ -212,5 +212,59 @@
         "body": "Your passport has expired. Renew it before booking any new trips abroad."
       }
     }
+  },
+  "documents": {
+    "title": "Documents",
+    "addCta": "+ Add document",
+    "downloadAll": "Save trip offline",
+    "uploadedBy": "Added by %{name}",
+    "uploadedByUnknown": "a crew member",
+    "empty": {
+      "title": "No documents yet",
+      "body": "Add tickets, bookings or your ESTA so the whole crew has them."
+    },
+    "source": {
+      "files": "File (PDF)",
+      "photo": "Photo library",
+      "camera": "Scan with camera",
+      "url": "Web link"
+    },
+    "form": {
+      "pickSource": "What do you want to add?",
+      "nameLabel": "Name",
+      "namePlaceholder": "e.g. Flight LAX → JFK",
+      "categoryLabel": "Category",
+      "milestoneLabel": "Link to a stop (optional)",
+      "milestoneNone": "None",
+      "urlLabel": "Link",
+      "urlPlaceholder": "https://…",
+      "save": "Add document"
+    },
+    "category": {
+      "tickets": "Tickets",
+      "lodging": "Lodging",
+      "insurance": "Insurance",
+      "visa": "Visa/ESTA",
+      "transport": "Transport",
+      "other": "Other"
+    },
+    "offline": {
+      "download": "Save offline",
+      "remove": "Remove offline copy",
+      "downloaded": "Offline",
+      "downloading": "Downloading…"
+    },
+    "errors": {
+      "tooLarge": "File is too large (max 25 MB).",
+      "uploadFailed": "Upload failed. Please try again.",
+      "invalidUrl": "Enter a valid http(s) link.",
+      "offlineFirst": "Save it offline first to open it here.",
+      "permissionDenied": "Permission denied.",
+      "nameRequired": "Give it a name."
+    },
+    "delete": {
+      "confirmTitle": "Delete document?",
+      "confirmBody": "This removes it for everyone."
+    }
   }
 }

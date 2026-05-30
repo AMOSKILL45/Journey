@@ -212,5 +212,59 @@
         "body": "Ton passeport a expiré. Renouvelle-le avant de réserver un nouveau trip à l'étranger."
       }
     }
+  },
+  "documents": {
+    "title": "Documents",
+    "addCta": "+ Ajouter un document",
+    "downloadAll": "Enregistrer le voyage hors-ligne",
+    "uploadedBy": "Ajouté par %{name}",
+    "uploadedByUnknown": "un membre",
+    "empty": {
+      "title": "Aucun document pour l'instant",
+      "body": "Ajoute billets, réservations ou ton ESTA pour que toute l'équipe les ait."
+    },
+    "source": {
+      "files": "Fichier (PDF)",
+      "photo": "Photothèque",
+      "camera": "Scanner avec l'appareil photo",
+      "url": "Lien web"
+    },
+    "form": {
+      "pickSource": "Qu'est-ce que tu veux ajouter ?",
+      "nameLabel": "Nom",
+      "namePlaceholder": "ex. Vol LAX → JFK",
+      "categoryLabel": "Catégorie",
+      "milestoneLabel": "Lier à une étape (optionnel)",
+      "milestoneNone": "Aucune",
+      "urlLabel": "Lien",
+      "urlPlaceholder": "https://…",
+      "save": "Ajouter le document"
+    },
+    "category": {
+      "tickets": "Billets",
+      "lodging": "Hébergement",
+      "insurance": "Assurance",
+      "visa": "Visa/ESTA",
+      "transport": "Transport",
+      "other": "Autre"
+    },
+    "offline": {
+      "download": "Enregistrer hors-ligne",
+      "remove": "Retirer la copie hors-ligne",
+      "downloaded": "Hors-ligne",
+      "downloading": "Téléchargement…"
+    },
+    "errors": {
+      "tooLarge": "Fichier trop volumineux (max 25 Mo).",
+      "uploadFailed": "Échec de l'envoi. Réessaie.",
+      "invalidUrl": "Entre un lien http(s) valide.",
+      "offlineFirst": "Enregistre-le hors-ligne d'abord pour l'ouvrir ici.",
+      "permissionDenied": "Permission refusée.",
+      "nameRequired": "Donne-lui un nom."
+    },
+    "delete": {
+      "confirmTitle": "Supprimer le document ?",
+      "confirmBody": "Ça le supprime pour tout le monde."
+    }
   }
 }

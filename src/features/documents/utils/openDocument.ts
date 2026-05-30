@@ -3,6 +3,7 @@ import * as Sharing from 'expo-sharing';
 
 import { getSignedUrl, type DocumentRow } from '../api/documents';
 
+import { isValidUrl } from './fileTypes';
 import { downloadDoc, isDownloaded, localPathFor } from './offlineCache';
 
 /**
@@ -10,10 +11,17 @@ import { downloadDoc, isDownloaded, localPathFor } from './offlineCache';
  * (downloaded via signed URL if needed) then handed to the system viewer.
  * Throws if a file is not cached and cannot be fetched (offline) — the caller
  * surfaces `documents.errors.offlineFirst`.
+ *
+ * Security: `external_url` is re-validated here (http/https only) before handing
+ * it to the OS. Upload-time validation is client-side and bypassable, so a
+ * malicious member could otherwise store a `javascript:`/app-scheme deep link
+ * that fires when another member taps it. This is the enforced sink.
  */
 export async function openDocument(doc: DocumentRow): Promise<void> {
   if (doc.file_type === 'url') {
-    if (doc.external_url) await Linking.openURL(doc.external_url);
+    if (doc.external_url && isValidUrl(doc.external_url)) {
+      await Linking.openURL(doc.external_url);
+    }
     return;
   }
   if (!doc.storage_path) throw new Error('Missing storage path');

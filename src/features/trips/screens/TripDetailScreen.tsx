@@ -193,6 +193,16 @@ export function TripDetailScreen() {
           </PixelButton>
         </View>
 
+        <View className="mt-3">
+          <PixelButton
+            variant="secondary"
+            onPress={() => router.push(`/(modals)/checklist/${trip.id}`)}
+            fullWidth
+          >
+            {t('checklists.title')}
+          </PixelButton>
+        </View>
+
         <View className="mt-6">
           <InviteMemberForm tripId={trip.id} />
         </View>

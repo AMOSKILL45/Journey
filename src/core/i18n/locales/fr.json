@@ -266,5 +266,101 @@
       "confirmTitle": "Supprimer le document ?",
       "confirmBody": "Ça le supprime pour tout le monde."
     }
+  },
+  "checklists": {
+    "title": "Checklist",
+    "addCta": "+ Ajouter",
+    "addItem": "Ajouter un item",
+    "editItem": "Modifier l'item",
+    "newChecklist": "Nouvelle checklist",
+    "defaultTitle": "Checklist du voyage",
+    "all": "Tout",
+    "mine": "Ma checklist",
+    "progress": "%{done}/%{total} fait",
+    "empty": {
+      "title": "Rien à préparer… pour l'instant",
+      "body": "Ajoute des items ou pars d'un template."
+    },
+    "scope": {
+      "label": "Qui le fait ?",
+      "shared": "Partagé",
+      "perTraveler": "Par voyageur",
+      "count": "%{x}/%{n}"
+    },
+    "fields": {
+      "label": "Item",
+      "labelPlaceholder": "ex. Prendre une assurance voyage",
+      "description": "Notes",
+      "category": "Catégorie",
+      "assignee": "Assigner à",
+      "assigneeNone": "N'importe qui",
+      "dueDate": "Échéance",
+      "document": "Lier un document",
+      "documentNone": "Aucun"
+    },
+    "linkedDoc": "📎 Document",
+    "startFromTemplate": "Partir d'un template",
+    "applyTemplate": "Utiliser ce template",
+    "suggestions": { "title": "Ajout rapide", "dismiss": "Masquer" },
+    "delete": {
+      "item": "Supprimer l'item ?",
+      "checklist": "Supprimer la checklist ?",
+      "body": "Irréversible."
+    },
+    "readiness": {
+      "title": "Préparation du voyage",
+      "ready": "Tout le monde est prêt ! 🎒",
+      "count": "Prêts : %{x}/%{n}",
+      "late": "En retard : %{names}",
+      "none": "Pas encore de checklist",
+      "homeTitle": "Tes tâches pré-voyage",
+      "homeCount": "%{count} items à cocher sur tes voyages"
+    },
+    "errors": { "labelRequired": "Donne un libellé à l'item." },
+    "templates": {
+      "international": {
+        "name": "Voyage international",
+        "items": {
+          "passport": "Passeport valide 6+ mois",
+          "visa": "Visa / ESTA réglé",
+          "insurance": "Assurance voyage",
+          "flights": "Vols réservés",
+          "accommodation": "Hébergement réservé",
+          "adapter": "Adaptateur de prise",
+          "bank": "Prévenir ta banque"
+        }
+      },
+      "beachSun": {
+        "name": "Plage & soleil",
+        "items": {
+          "sunscreen": "Crème solaire",
+          "swimwear": "Maillot de bain",
+          "accommodation": "Réserver le séjour",
+          "snorkel": "Matériel de snorkeling",
+          "aftersun": "Après-soleil"
+        }
+      },
+      "cityBreak": {
+        "name": "City break",
+        "items": {
+          "transit": "Pass transports / ville",
+          "shoes": "Chaussures confortables",
+          "museums": "Réserver les musées",
+          "restaurants": "Réservations resto",
+          "offlineMap": "Télécharger la carte hors-ligne"
+        }
+      },
+      "roadTrip": {
+        "name": "Road trip",
+        "items": {
+          "license": "Permis valide",
+          "rentCar": "Louer la voiture",
+          "insurance": "Vérifier l'assurance auto",
+          "playlist": "Faire la playlist",
+          "snacks": "Snacks",
+          "stops": "Planifier les étapes"
+        }
+      }
+    }
   }
 }

@@ -266,5 +266,98 @@
       "confirmTitle": "Delete document?",
       "confirmBody": "This removes it for everyone."
     }
+  },
+  "checklists": {
+    "title": "Checklist",
+    "addCta": "+ Add item",
+    "addItem": "Add item",
+    "editItem": "Edit item",
+    "newChecklist": "New checklist",
+    "defaultTitle": "Trip checklist",
+    "all": "All",
+    "mine": "My checklist",
+    "progress": "%{done}/%{total} done",
+    "empty": { "title": "Nothing to pack… yet", "body": "Add items or start from a template." },
+    "scope": {
+      "label": "Who does it?",
+      "shared": "Shared",
+      "perTraveler": "Per traveler",
+      "count": "%{x}/%{n}"
+    },
+    "fields": {
+      "label": "Item",
+      "labelPlaceholder": "e.g. Get travel insurance",
+      "description": "Notes",
+      "category": "Category",
+      "assignee": "Assign to",
+      "assigneeNone": "Anyone",
+      "dueDate": "Due date",
+      "document": "Link a document",
+      "documentNone": "None"
+    },
+    "linkedDoc": "📎 Document",
+    "startFromTemplate": "Start from a template",
+    "applyTemplate": "Use this template",
+    "suggestions": { "title": "Quick add", "dismiss": "Dismiss" },
+    "delete": {
+      "item": "Delete item?",
+      "checklist": "Delete checklist?",
+      "body": "This can't be undone."
+    },
+    "readiness": {
+      "title": "Trip readiness",
+      "ready": "Everyone's ready! 🎒",
+      "count": "Ready: %{x}/%{n}",
+      "late": "Late: %{names}",
+      "none": "No checklist yet",
+      "homeTitle": "Your pre-trip tasks",
+      "homeCount": "%{count} items to tick across your trips"
+    },
+    "errors": { "labelRequired": "Give the item a label." },
+    "templates": {
+      "international": {
+        "name": "International trip",
+        "items": {
+          "passport": "Passport valid 6+ months",
+          "visa": "Visa / ESTA sorted",
+          "insurance": "Travel insurance",
+          "flights": "Flights booked",
+          "accommodation": "Accommodation booked",
+          "adapter": "Power adapter",
+          "bank": "Notify your bank"
+        }
+      },
+      "beachSun": {
+        "name": "Beach & sun",
+        "items": {
+          "sunscreen": "Sunscreen",
+          "swimwear": "Swimwear",
+          "accommodation": "Book the stay",
+          "snorkel": "Snorkel gear",
+          "aftersun": "After-sun"
+        }
+      },
+      "cityBreak": {
+        "name": "City break",
+        "items": {
+          "transit": "Transit / city pass",
+          "shoes": "Comfortable shoes",
+          "museums": "Book museums",
+          "restaurants": "Restaurant reservations",
+          "offlineMap": "Download offline map"
+        }
+      },
+      "roadTrip": {
+        "name": "Road trip",
+        "items": {
+          "license": "Driving license valid",
+          "rentCar": "Rent the car",
+          "insurance": "Check car insurance",
+          "playlist": "Build the playlist",
+          "snacks": "Snacks",
+          "stops": "Plan the stops"
+        }
+      }
+    }
   }
 }

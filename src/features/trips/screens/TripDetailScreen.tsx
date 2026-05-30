@@ -5,6 +5,7 @@ import { Alert, ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTranslation } from '@core/i18n';
+import { TripReadinessCard } from '@features/checklists';
 import { MapModeToggle, TripMapView, type MapMode } from '@features/map';
 import {
   CheckinAnim,
@@ -182,6 +183,10 @@ export function TripDetailScreen() {
           {t('trips.detail.members')}
         </PixelText>
         <MembersList tripId={trip.id} />
+
+        <View className="mt-6">
+          <TripReadinessCard tripId={trip.id} />
+        </View>
 
         <View className="mt-6">
           <PixelButton

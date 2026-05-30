@@ -4,6 +4,7 @@ import { ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTranslation } from '@core/i18n';
+import { HomeChecklistSummary } from '@features/checklists';
 import { PassportExpiryBanner } from '@features/identity';
 import { useProfile } from '@features/profile';
 import { useTrips } from '@features/trips';
@@ -98,6 +99,12 @@ export default function HomeTab() {
           </PixelButton>
         </PixelCard>
       )}
+
+      {upcoming ? (
+        <View className="mt-4">
+          <HomeChecklistSummary tripId={upcoming.id} />
+        </View>
+      ) : null}
     </ScrollView>
   );
 }

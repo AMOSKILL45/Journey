@@ -4,7 +4,7 @@ import { Alert, Platform, Pressable, View } from 'react-native';
 
 import { useTranslation } from '@core/i18n';
 import { useTripDocuments } from '@features/documents';
-import { useTripMembers } from '@features/trips';
+import { useTripMembers } from '@features/trips/hooks/useTripMembers';
 import { PixelBottomSheet, type PixelBottomSheetRef } from '@shared/components/PixelBottomSheet';
 import { PixelButton } from '@shared/components/PixelButton';
 import { PixelChip } from '@shared/components/PixelChip';

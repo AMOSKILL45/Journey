@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTranslation } from '@core/i18n';
 import { supabase } from '@core/supabase/client';
-import { useTripMembers } from '@features/trips';
+import { useTripMembers } from '@features/trips/hooks/useTripMembers';
 import { PixelButton } from '@shared/components/PixelButton';
 import { PixelText } from '@shared/components/PixelText';
 import { SCREEN_PADDING } from '@shared/constants/layout';

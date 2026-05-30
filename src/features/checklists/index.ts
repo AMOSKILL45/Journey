@@ -40,6 +40,8 @@ export { useReadiness } from './hooks/useReadiness';
 export { ChecklistScreen } from './screens/ChecklistScreen';
 export { ReadinessCard } from './components/ReadinessCard';
 export type { ReadinessCardProps } from './components/ReadinessCard';
+export { TripReadinessCard } from './components/TripReadinessCard';
+export { HomeChecklistSummary } from './components/HomeChecklistSummary';
 export {
   isItemComplete,
   itemProgress,

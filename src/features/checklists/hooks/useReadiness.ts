@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { useTripMembers } from '@features/trips';
+import { useTripMembers } from '@features/trips/hooks/useTripMembers';
 
 import type { ChecklistCompletion, ChecklistItem, ItemScope } from '../api/checklists';
 import {

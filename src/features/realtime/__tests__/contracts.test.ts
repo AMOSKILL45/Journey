@@ -8,6 +8,8 @@ import { LOCATION_SHARING_MODES } from '../api/sharing';
 import { tripTopic } from '../utils/channel';
 
 const FEATURE_DIR = path.join(__dirname, '..');
+const MIGRATIONS = path.join(__dirname, '../../../../supabase/migrations');
+const TYPES = path.join(__dirname, '../../../core/supabase/types.ts');
 
 function walk(dir: string): string[] {
   const out: string[] = [];
@@ -59,5 +61,35 @@ describe('realtime runtime contracts', () => {
     expect(topic.startsWith('trip:')).toBe(true);
     // Postgres `substring(realtime.topic() from 6)` is 1-indexed → strips the 5-char "trip:" prefix.
     expect(topic.substring(5)).toBe(id);
+  });
+
+  it('LOCATION_SHARING_MODES (TS) matches the trip_members.location_sharing DB CHECK', () => {
+    const trips = fs.readFileSync(path.join(MIGRATIONS, '20260525000002_trips.sql'), 'utf8');
+    const m = trips.match(/location_sharing[\s\S]*?IN \(([^)]+)\)/);
+    expect(m).toBeTruthy();
+    const dbValues = [...m![1].matchAll(/'([a-z_]+)'/g)].map((x) => x[1]).sort();
+    expect([...LOCATION_SHARING_MODES].sort()).toEqual(dbValues);
+  });
+
+  it('private channel (client) is backed by the Realtime Authorization migration (RLS)', () => {
+    const hook = fs.readFileSync(path.join(FEATURE_DIR, 'hooks/useTripChannel.ts'), 'utf8');
+    expect(hook).toMatch(/private:\s*true/);
+    const mig = fs.readFileSync(
+      path.join(MIGRATIONS, '20260601110002_realtime_authorization.sql'),
+      'utf8',
+    );
+    expect(mig).toMatch(/realtime\.messages/);
+    expect(mig).toMatch(/is_trip_member/);
+    expect(mig).toMatch(/trip:%/);
+  });
+
+  it('tables/columns the channel + sharing rely on exist in the generated types', () => {
+    const types = fs.readFileSync(TYPES, 'utf8');
+    for (const tbl of ['milestones:', 'checkins:', 'trip_members:']) {
+      expect(types).toContain(tbl);
+    }
+    for (const col of ['location_sharing', 'panic_until', 'last_lat', 'last_position_at']) {
+      expect(types).toContain(col);
+    }
   });
 });

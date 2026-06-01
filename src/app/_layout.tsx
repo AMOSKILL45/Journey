@@ -15,7 +15,7 @@ import { PressStart2P_400Regular } from '@expo-google-fonts/press-start-2p';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useFonts } from 'expo-font';
 import * as Linking from 'expo-linking';
-import { Stack } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -26,6 +26,7 @@ import { initPostHog } from '@core/posthog';
 import { initSentry } from '@core/sentry';
 import { supabase } from '@core/supabase/client';
 import { colors } from '@core/theme';
+import { addNotificationTapHandler, registerForPush } from '@features/notifications';
 import { AnimatedSplash, useAppReady } from '@features/splash';
 
 const QUERY_STALE_MS = 60_000;
@@ -77,6 +78,8 @@ export default function RootLayout() {
       }),
   );
 
+  const router = useRouter();
+
   useEffect(() => {
     initSentry();
     void initPostHog();
@@ -89,6 +92,20 @@ export default function RootLayout() {
     });
     return () => sub.remove();
   }, []);
+
+  useEffect(() => {
+    const unsub = addNotificationTapHandler((tripId) => router.push(`/(modals)/trip/${tripId}`));
+    const { data: authSub } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session) void registerForPush();
+    });
+    void supabase.auth.getSession().then(({ data }) => {
+      if (data.session) void registerForPush();
+    });
+    return () => {
+      unsub();
+      authSub.subscription.unsubscribe();
+    };
+  }, [router]);
 
   const appReady = useAppReady(fontsLoaded);
   const [splashAnimationDone, setSplashAnimationDone] = useState(false);

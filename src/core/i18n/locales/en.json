@@ -375,5 +375,89 @@
       "enabled": "Enable notifications",
       "quietHours": "Quiet hours (10pm–8am)"
     }
+  },
+  "smartReminders": {
+    "section": { "title": "Smart tips" },
+    "actions": {
+      "done": "Done",
+      "addToChecklist": "Add to checklist",
+      "snooze": "Snooze",
+      "dismiss": "Dismiss",
+      "open": "Open"
+    },
+    "kb": {
+      "us_esta": {
+        "title": "ESTA required (USA)",
+        "body": "Apply for your ESTA online before flying to the US. Approval is usually quick but can take up to 72h."
+      },
+      "uk_eta": {
+        "title": "UK ETA required",
+        "body": "You need an Electronic Travel Authorisation to enter the UK. Apply online before you travel."
+      },
+      "schengen_etias": {
+        "title": "ETIAS (Europe)",
+        "body": "An ETIAS travel authorisation may be required for the Schengen area. Check the official site before booking."
+      },
+      "canada_eta": {
+        "title": "Canada eTA required",
+        "body": "Visa-exempt air travellers need an eTA to enter Canada. Apply online — it is usually approved within minutes."
+      },
+      "australia_eta": {
+        "title": "Australia ETA required",
+        "body": "An Electronic Travel Authority is required to visit Australia. Apply via the official app before departure."
+      },
+      "india_evisa": {
+        "title": "India e-Visa",
+        "body": "Apply for an India e-Visa online a few weeks before your trip."
+      },
+      "brazil_visa": {
+        "title": "Brazil visa",
+        "body": "A visa may be required for Brazil depending on your nationality. Check processing times early."
+      },
+      "china_visa": {
+        "title": "China visa",
+        "body": "Most travellers need a visa for mainland China. Apply well ahead — processing takes about a week."
+      },
+      "passport_validity_6mo": {
+        "title": "Passport must be valid 6 months",
+        "body": "Many destinations require your passport to be valid for at least 6 months beyond your stay."
+      },
+      "passport_validity_3mo": {
+        "title": "Passport validity (Schengen)",
+        "body": "Schengen countries require your passport to be valid for at least 3 months beyond your departure date."
+      },
+      "schengen_90_180": {
+        "title": "Schengen 90/180 rule",
+        "body": "Visa-exempt visitors can stay up to 90 days within any 180-day period in the Schengen area."
+      },
+      "jp_visa_free_90": {
+        "title": "Japan visa-free stay",
+        "body": "Many nationalities can visit Japan visa-free for up to 90 days."
+      },
+      "yellow_fever_zone": {
+        "title": "Yellow fever vaccination",
+        "body": "A yellow fever certificate may be required or recommended for this destination. Check with a travel clinic."
+      },
+      "cash_10k_eu": {
+        "title": "Declare cash over €10,000",
+        "body": "You must declare cash of €10,000 or more when entering or leaving the EU."
+      },
+      "cash_10k_us": {
+        "title": "Declare cash over $10,000",
+        "body": "You must declare currency of $10,000 or more when entering or leaving the US."
+      },
+      "thailand_visa_free": {
+        "title": "Thailand visa-free stay",
+        "body": "Many nationalities can enter Thailand visa-free for tourism. Check the latest allowed duration."
+      },
+      "travel_insurance_schengen": {
+        "title": "Travel insurance (Schengen)",
+        "body": "Travel medical insurance is recommended (and sometimes required) for the Schengen area."
+      },
+      "vaccine_routine": {
+        "title": "Check routine vaccines",
+        "body": "Make sure your routine vaccinations are up to date before traveling."
+      }
+    }
   }
 }

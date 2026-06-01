@@ -378,5 +378,89 @@
       "enabled": "Activer les notifications",
       "quietHours": "Heures calmes (22h–8h)"
     }
+  },
+  "smartReminders": {
+    "section": { "title": "Conseils malins" },
+    "actions": {
+      "done": "Fait",
+      "addToChecklist": "Ajouter à la checklist",
+      "snooze": "Plus tard",
+      "dismiss": "Ignorer",
+      "open": "Ouvrir"
+    },
+    "kb": {
+      "us_esta": {
+        "title": "ESTA requis (USA)",
+        "body": "Demandez votre ESTA en ligne avant de vous envoler pour les États-Unis. L'approbation est souvent rapide mais peut prendre jusqu'à 72h."
+      },
+      "uk_eta": {
+        "title": "ETA Royaume-Uni requis",
+        "body": "Une autorisation de voyage électronique (ETA) est nécessaire pour entrer au Royaume-Uni. Faites la demande en ligne avant de partir."
+      },
+      "schengen_etias": {
+        "title": "ETIAS (Europe)",
+        "body": "Une autorisation ETIAS peut être requise pour l'espace Schengen. Vérifiez le site officiel avant de réserver."
+      },
+      "canada_eta": {
+        "title": "AVE Canada requise",
+        "body": "Les voyageurs aériens exemptés de visa ont besoin d'une AVE pour entrer au Canada. La demande en ligne est généralement approuvée en quelques minutes."
+      },
+      "australia_eta": {
+        "title": "ETA Australie requise",
+        "body": "Une autorisation de voyage électronique est requise pour visiter l'Australie. Faites la demande via l'application officielle avant le départ."
+      },
+      "india_evisa": {
+        "title": "e-Visa Inde",
+        "body": "Demandez un e-Visa pour l'Inde en ligne quelques semaines avant votre voyage."
+      },
+      "brazil_visa": {
+        "title": "Visa Brésil",
+        "body": "Un visa peut être requis pour le Brésil selon votre nationalité. Vérifiez les délais de traitement tôt."
+      },
+      "china_visa": {
+        "title": "Visa Chine",
+        "body": "La plupart des voyageurs ont besoin d'un visa pour la Chine continentale. Anticipez — le traitement prend environ une semaine."
+      },
+      "passport_validity_6mo": {
+        "title": "Passeport valide 6 mois",
+        "body": "De nombreuses destinations exigent que votre passeport soit valide au moins 6 mois après votre séjour."
+      },
+      "passport_validity_3mo": {
+        "title": "Validité passeport (Schengen)",
+        "body": "Les pays Schengen exigent que votre passeport soit valide au moins 3 mois après votre date de départ."
+      },
+      "schengen_90_180": {
+        "title": "Règle Schengen 90/180",
+        "body": "Les visiteurs exemptés de visa peuvent rester jusqu'à 90 jours sur toute période de 180 jours dans l'espace Schengen."
+      },
+      "jp_visa_free_90": {
+        "title": "Séjour sans visa au Japon",
+        "body": "De nombreuses nationalités peuvent visiter le Japon sans visa jusqu'à 90 jours."
+      },
+      "yellow_fever_zone": {
+        "title": "Vaccin fièvre jaune",
+        "body": "Un certificat de fièvre jaune peut être exigé ou recommandé pour cette destination. Consultez un centre de vaccination."
+      },
+      "cash_10k_eu": {
+        "title": "Déclarer plus de 10 000 €",
+        "body": "Vous devez déclarer 10 000 € ou plus en espèces à l'entrée ou à la sortie de l'UE."
+      },
+      "cash_10k_us": {
+        "title": "Déclarer plus de 10 000 $",
+        "body": "Vous devez déclarer 10 000 $ ou plus en espèces à l'entrée ou à la sortie des États-Unis."
+      },
+      "thailand_visa_free": {
+        "title": "Séjour sans visa en Thaïlande",
+        "body": "De nombreuses nationalités peuvent entrer en Thaïlande sans visa pour le tourisme. Vérifiez la durée autorisée la plus récente."
+      },
+      "travel_insurance_schengen": {
+        "title": "Assurance voyage (Schengen)",
+        "body": "Une assurance médicale de voyage est recommandée (et parfois exigée) pour l'espace Schengen."
+      },
+      "vaccine_routine": {
+        "title": "Vérifier les vaccins de routine",
+        "body": "Assurez-vous que vos vaccinations de routine sont à jour avant de voyager."
+      }
+    }
   }
 }

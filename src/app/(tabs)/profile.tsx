@@ -1,8 +1,9 @@
-import { View } from 'react-native';
+import { ScrollView } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTranslation } from '@core/i18n';
 import { useAuth } from '@features/auth';
+import { NotificationSettings } from '@features/notifications';
 import { useProfile } from '@features/profile';
 import { PixelButton } from '@shared/components/PixelButton';
 import { PixelCard } from '@shared/components/PixelCard';
@@ -15,7 +16,14 @@ export default function ProfileTab() {
   const { data: profile } = useProfile();
 
   return (
-    <View className="flex-1 bg-cream px-6" style={{ paddingTop: insets.top + 24 }}>
+    <ScrollView
+      className="flex-1 bg-cream"
+      contentContainerStyle={{
+        paddingHorizontal: 24,
+        paddingTop: insets.top + 24,
+        paddingBottom: 48,
+      }}
+    >
       <PixelText size="h1" className="mb-6">
         {t('tabs.profile')}
       </PixelText>
@@ -27,9 +35,12 @@ export default function ProfileTab() {
           </PixelText>
         )}
       </PixelCard>
+      <PixelCard padding="lg" className="mb-6">
+        <NotificationSettings />
+      </PixelCard>
       <PixelButton variant="danger" onPress={logOut} loading={pending}>
         {t('auth.signOut')}
       </PixelButton>
-    </View>
+    </ScrollView>
   );
 }

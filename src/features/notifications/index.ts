@@ -12,6 +12,7 @@ export { registerForPush, addNotificationTapHandler } from './registration';
 export { InboxScreen } from './screens/InboxScreen';
 export { NotificationRow } from './components/NotificationRow';
 export type { NotificationRowProps } from './components/NotificationRow';
+export { NotificationSettings } from './components/NotificationSettings';
 export {
   NOTIFICATION_CATEGORIES,
   ALWAYS_ON,

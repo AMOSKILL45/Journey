@@ -24,6 +24,7 @@ import {
   OfflineBanner,
   SharingControls,
   sharingIsLive,
+  useLocationBroadcast,
   useLocationSharing,
   usePresenceStore,
   useTripChannel,
@@ -82,8 +83,32 @@ export function TripDetailScreen() {
         : null,
     [profile, currentMilestoneId],
   );
-  const { status: realtimeStatus } = useTripChannel(tripId, self, sharingIsLive(sharing.data));
-  const liveMembers = usePresenceStore((s) => s.membersByTrip[tripId] ?? EMPTY_MEMBERS);
+  const { status: realtimeStatus, sendPosition } = useTripChannel(
+    tripId,
+    self,
+    sharingIsLive(sharing.data),
+  );
+  const rawMembers = usePresenceStore((s) => s.membersByTrip[tripId] ?? EMPTY_MEMBERS);
+  const positionsByUser = usePresenceStore((s) => s.positionsByUser);
+  const liveMembers = useMemo(
+    () =>
+      rawMembers.map((m) => {
+        const pos = positionsByUser[m.user_id];
+        return pos && Date.now() - pos.ts < 30_000
+          ? { ...m, liveLat: pos.lat, liveLng: pos.lng }
+          : m;
+      }),
+    [rawMembers, positionsByUser],
+  );
+  const sharingMode = sharing.data?.location_sharing ?? 'paused';
+  const panicActive =
+    !!sharing.data?.panic_until && new Date(sharing.data.panic_until).getTime() > Date.now();
+  useLocationBroadcast({
+    tripId,
+    enabled: !panicActive && (sharingMode === 'precise' || sharingMode === 'city_only'),
+    cityOnly: sharingMode === 'city_only',
+    sendPosition,
+  });
 
   const del = useMutation({
     mutationFn: () => {

@@ -63,6 +63,22 @@ export function OverworldLayer({
     })
     .filter(isPositioned);
 
+  // Place each present member: fresh GPS point wins, else their milestone node.
+  const nodePos = new Map(positioned.map((e) => [e.milestone.id, { x: e.x, y: e.y }]));
+  const placements = (liveMembers ?? []).flatMap((m) => {
+    if (m.liveLat != null && m.liveLng != null) {
+      const [p] = projectMilestones(
+        [{ id: m.user_id, lat: m.liveLat, lng: m.liveLng }],
+        bbox,
+        width,
+        height,
+      );
+      return p ? [{ member: m, x: p.x, y: p.y }] : [];
+    }
+    const np = m.current_milestone_id ? nodePos.get(m.current_milestone_id) : undefined;
+    return np ? [{ member: m, x: np.x, y: np.y }] : [];
+  });
+
   return (
     <View
       style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
@@ -104,10 +120,7 @@ export function OverworldLayer({
           </View>
         );
       })}
-      <LiveAvatarsLayer
-        members={liveMembers ?? []}
-        positions={positioned.map((e) => ({ id: e.milestone.id, x: e.x, y: e.y }))}
-      />
+      <LiveAvatarsLayer placements={placements} />
     </View>
   );
 }

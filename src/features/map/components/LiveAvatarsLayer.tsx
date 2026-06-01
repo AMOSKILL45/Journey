@@ -2,8 +2,6 @@ import { View } from 'react-native';
 
 import { PixelAvatar } from '@shared/components/PixelAvatar';
 
-import type { ProjectedPoint } from '../utils/projectMilestones';
-
 /** Structurally compatible with realtime's PresenceMember; kept local so map has no realtime dep. */
 export interface LiveMember {
   user_id: string;
@@ -11,31 +9,36 @@ export interface LiveMember {
   avatar_color: string;
   current_milestone_id: string | null;
   display_name?: string | null;
+  liveLat?: number | null; // 5B: fresh GPS overrides the milestone anchor
+  liveLng?: number | null;
+}
+
+export interface AvatarPlacement {
+  member: LiveMember;
+  x: number;
+  y: number;
 }
 
 export interface LiveAvatarsLayerProps {
-  members: readonly LiveMember[];
-  positions: readonly ProjectedPoint[];
+  placements: readonly AvatarPlacement[];
 }
 
 const AVATAR = 28;
-const FAN_X = 18; // horizontal offset when several travelers share a milestone
+const FAN_X = 18; // fan travelers that share a spot
 const ABOVE_NODE = 36; // sit avatars above the node circle
 
 /**
- * Renders each present traveler's avatar above the milestone they've reached.
- * Travelers at the same milestone fan out horizontally. Pointer-transparent so
- * it never blocks node taps. No projection here — positions come from the layer
- * that owns the camera (OverworldLayer), so avatars stay glued to their node.
+ * Renders each present traveler's avatar at a screen position computed by the
+ * layer that owns the camera (OverworldLayer) — so avatars stay glued to their
+ * node (or live GPS point). Co-located avatars fan out. Pointer-transparent.
  */
-export function LiveAvatarsLayer({ members, positions }: LiveAvatarsLayerProps) {
-  const posById = new Map(positions.map((p) => [p.id, p]));
-  const byMilestone = new Map<string, LiveMember[]>();
-  for (const m of members) {
-    if (!m.current_milestone_id || !posById.has(m.current_milestone_id)) continue;
-    const arr = byMilestone.get(m.current_milestone_id) ?? [];
-    arr.push(m);
-    byMilestone.set(m.current_milestone_id, arr);
+export function LiveAvatarsLayer({ placements }: LiveAvatarsLayerProps) {
+  const groups = new Map<string, AvatarPlacement[]>();
+  for (const p of placements) {
+    const k = `${Math.round(p.x)},${Math.round(p.y)}`;
+    const arr = groups.get(k) ?? [];
+    arr.push(p);
+    groups.set(k, arr);
   }
 
   return (
@@ -43,27 +46,25 @@ export function LiveAvatarsLayer({ members, positions }: LiveAvatarsLayerProps) 
       style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
       pointerEvents="none"
     >
-      {[...byMilestone.entries()].flatMap(([milestoneId, group]) => {
-        const pos = posById.get(milestoneId);
-        if (!pos) return [];
-        return group.map((m, i) => (
+      {[...groups.values()].flatMap((group) =>
+        group.map((pl, i) => (
           <View
-            key={m.user_id}
+            key={pl.member.user_id}
             style={{
               position: 'absolute',
-              left: pos.x - AVATAR / 2 + i * FAN_X,
-              top: pos.y - AVATAR / 2 - ABOVE_NODE,
+              left: pl.x - AVATAR / 2 + i * FAN_X,
+              top: pl.y - AVATAR / 2 - ABOVE_NODE,
             }}
           >
             <PixelAvatar
-              spriteId={m.avatar_sprite_id}
-              color={m.avatar_color}
-              label={m.display_name ?? 'Traveler'}
+              spriteId={pl.member.avatar_sprite_id}
+              color={pl.member.avatar_color}
+              label={pl.member.display_name ?? 'Traveler'}
               size="sm"
             />
           </View>
-        ));
-      })}
+        )),
+      )}
     </View>
   );
 }

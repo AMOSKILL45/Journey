@@ -369,6 +369,7 @@
       "friends_checkin": "Check-ins",
       "friends_photo": "Photos",
       "smart_reminders": "Conseils malins",
+      "life_reminders": "Rappels perso",
       "join": "Arrivées dans l'équipe",
       "polls": "Sondages",
       "achievements": "Succès"
@@ -461,6 +462,29 @@
         "title": "Vérifier les vaccins de routine",
         "body": "Assurez-vous que vos vaccinations de routine sont à jour avant de voyager."
       }
+    }
+  },
+  "lifeReminders": {
+    "screen": {
+      "title": "Rappels",
+      "empty": "Aucun rappel pour le moment.",
+      "add": "Ajouter un rappel"
+    },
+    "form": {
+      "titleLabel": "Titre",
+      "titlePlaceholder": "Que doit-on vous rappeler ?",
+      "dateLabel": "Date (AAAA-MM-JJ)",
+      "save": "Enregistrer"
+    },
+    "tabs": { "notifications": "Notifications", "life": "Rappels perso" },
+    "remindMe": "Me rappeler avant l'expiration",
+    "types": {
+      "passport_expiry": "Expiration du passeport",
+      "visa_expiry": "Expiration du visa",
+      "esta_expiry": "Expiration de l'ESTA",
+      "driving_license_expiry": "Expiration du permis de conduire",
+      "travel_insurance_expiry": "Expiration de l'assurance voyage",
+      "custom": "Rappel"
     }
   }
 }

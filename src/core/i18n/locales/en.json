@@ -366,6 +366,7 @@
       "friends_checkin": "Check-ins",
       "friends_photo": "Photos",
       "smart_reminders": "Smart tips",
+      "life_reminders": "Life reminders",
       "join": "Crew joins",
       "polls": "Polls",
       "achievements": "Achievements"
@@ -458,6 +459,25 @@
         "title": "Check routine vaccines",
         "body": "Make sure your routine vaccinations are up to date before traveling."
       }
+    }
+  },
+  "lifeReminders": {
+    "screen": { "title": "Reminders", "empty": "No reminders yet.", "add": "Add reminder" },
+    "form": {
+      "titleLabel": "Title",
+      "titlePlaceholder": "What should we remind you about?",
+      "dateLabel": "Date (YYYY-MM-DD)",
+      "save": "Save"
+    },
+    "tabs": { "notifications": "Notifications", "life": "Life reminders" },
+    "remindMe": "Remind me before this expires",
+    "types": {
+      "passport_expiry": "Passport expiry",
+      "visa_expiry": "Visa expiry",
+      "esta_expiry": "ESTA expiry",
+      "driving_license_expiry": "Driving license expiry",
+      "travel_insurance_expiry": "Travel insurance expiry",
+      "custom": "Reminder"
     }
   }
 }

@@ -324,6 +324,7 @@ export type Database = {
       documents: {
         Row: {
           category: string;
+          expires_at: string | null;
           external_url: string | null;
           file_type: string;
           id: string;
@@ -338,6 +339,7 @@ export type Database = {
         };
         Insert: {
           category?: string;
+          expires_at?: string | null;
           external_url?: string | null;
           file_type: string;
           id?: string;
@@ -352,6 +354,7 @@ export type Database = {
         };
         Update: {
           category?: string;
+          expires_at?: string | null;
           external_url?: string | null;
           file_type?: string;
           id?: string;
@@ -497,6 +500,71 @@ export type Database = {
           user_id?: string;
         };
         Relationships: [];
+      };
+      personal_reminders: {
+        Row: {
+          body: string | null;
+          created_at: string;
+          fired_lead_times: number[];
+          i18n_key: string | null;
+          id: string;
+          lead_times: number[];
+          notifications_sent_at: string[];
+          related_document_id: string | null;
+          reminder_type: string;
+          snooze_until: string | null;
+          source: string;
+          status: string;
+          target_date: string;
+          title: string | null;
+          updated_at: string;
+          user_id: string;
+        };
+        Insert: {
+          body?: string | null;
+          created_at?: string;
+          fired_lead_times?: number[];
+          i18n_key?: string | null;
+          id?: string;
+          lead_times?: number[];
+          notifications_sent_at?: string[];
+          related_document_id?: string | null;
+          reminder_type: string;
+          snooze_until?: string | null;
+          source?: string;
+          status?: string;
+          target_date: string;
+          title?: string | null;
+          updated_at?: string;
+          user_id: string;
+        };
+        Update: {
+          body?: string | null;
+          created_at?: string;
+          fired_lead_times?: number[];
+          i18n_key?: string | null;
+          id?: string;
+          lead_times?: number[];
+          notifications_sent_at?: string[];
+          related_document_id?: string | null;
+          reminder_type?: string;
+          snooze_until?: string | null;
+          source?: string;
+          status?: string;
+          target_date?: string;
+          title?: string | null;
+          updated_at?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'personal_reminders_related_document_id_fkey';
+            columns: ['related_document_id'];
+            isOneToOne: false;
+            referencedRelation: 'documents';
+            referencedColumns: ['id'];
+          },
+        ];
       };
       profiles: {
         Row: {

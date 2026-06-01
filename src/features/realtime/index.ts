@@ -1,6 +1,7 @@
 export { useTripChannel } from './hooks/useTripChannel';
 export type { RealtimeStatus } from './hooks/useTripChannel';
 export { useLocationSharing } from './hooks/useLocationSharing';
+export { useLocationBroadcast } from './hooks/useLocationBroadcast';
 export { usePresenceStore } from './store/presenceStore';
 export { SharingControls } from './components/SharingControls';
 export { OfflineBanner } from './components/OfflineBanner';

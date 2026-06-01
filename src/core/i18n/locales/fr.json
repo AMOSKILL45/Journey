@@ -488,5 +488,21 @@
       "travel_insurance_expiry": "Expiration de l'assurance voyage",
       "custom": "Rappel"
     }
+  },
+  "realtime": {
+    "offline": "Hors ligne — mises à jour en direct en pause",
+    "sharing": {
+      "label": "Position en direct",
+      "precise": "Précise",
+      "city_only": "Ville seulement",
+      "paused": "Présence seule",
+      "never": "Désactivée"
+    },
+    "panic": { "cta": "Me cacher 1h", "active": "Caché — touchez pour reprendre" },
+    "permission": {
+      "title": "Partager ta position en direct ?",
+      "body": "Journey montre ton avatar à tes compagnons de voyage pendant que vous voyagez ensemble.",
+      "cta": "Activer la localisation"
+    }
   }
 }

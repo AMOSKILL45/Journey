@@ -481,5 +481,21 @@
       "travel_insurance_expiry": "Travel insurance expiry",
       "custom": "Reminder"
     }
+  },
+  "realtime": {
+    "offline": "You're offline — live updates paused",
+    "sharing": {
+      "label": "Live location",
+      "precise": "Precise",
+      "city_only": "City only",
+      "paused": "Presence only",
+      "never": "Off"
+    },
+    "panic": { "cta": "Hide me for 1h", "active": "Hidden — tap to resume" },
+    "permission": {
+      "title": "Share your live location?",
+      "body": "Journey shows your avatar to your trip companions while you travel together.",
+      "cta": "Enable location"
+    }
   }
 }

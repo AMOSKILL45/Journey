@@ -10,6 +10,7 @@ import { useTripBoundingBox } from '../hooks/useTripBoundingBox';
 import { CROSSFADE_END, useZoomLevel } from '../hooks/useZoomLevel';
 import { pickWorldTheme, type WorldThemeId } from '../utils/worldThemes';
 
+import { type LiveMember } from './LiveAvatarsLayer';
 import { OverworldBackground } from './OverworldBackground';
 import { OverworldLayer } from './OverworldLayer';
 import { RealMapLayer } from './RealMapLayer';
@@ -21,6 +22,7 @@ export interface MapCrossfadeProps {
   milestones: readonly Milestone[];
   checkedInIds: ReadonlySet<string>;
   destinationCountry?: string | null;
+  liveMembers?: readonly LiveMember[];
   onNodePress?: (milestone: Milestone) => void;
   onNodeLongPress?: (milestone: Milestone) => void;
   themeIdOverride?: WorldThemeId;
@@ -37,6 +39,7 @@ export function MapCrossfade({
   milestones,
   checkedInIds,
   destinationCountry,
+  liveMembers,
   onNodePress,
   onNodeLongPress,
   themeIdOverride,
@@ -90,6 +93,7 @@ export function MapCrossfade({
             milestones={milestones}
             bbox={bbox}
             checkedInIds={checkedInIds}
+            liveMembers={liveMembers}
             onNodePress={onNodePress}
             onNodeLongPress={onNodeLongPress}
           />

@@ -8,16 +8,18 @@ import {
   type MilestoneNodeState,
 } from '@features/milestones';
 
-import { latLngToPixel, padBoundingBox, type BoundingBox } from '../utils/mercator';
+import { type BoundingBox } from '../utils/mercator';
+import { projectMilestones } from '../utils/projectMilestones';
 
-const REFERENCE_ZOOM = 8;
+import { LiveAvatarsLayer, type LiveMember } from './LiveAvatarsLayer';
+
 const NODE_DIAMETER = 72;
-const BBOX_PADDING_FRACTION = 0.2;
 
 export interface OverworldLayerProps {
   milestones: readonly Milestone[];
   bbox: BoundingBox;
   checkedInIds: ReadonlySet<string>;
+  liveMembers?: readonly LiveMember[];
   onNodePress?: (milestone: Milestone) => void;
   onNodeLongPress?: (milestone: Milestone) => void;
 }
@@ -42,29 +44,22 @@ export function OverworldLayer({
   milestones,
   bbox,
   checkedInIds,
+  liveMembers,
   onNodePress,
   onNodeLongPress,
 }: OverworldLayerProps) {
   const { width, height } = useWindowDimensions();
-  const padded = padBoundingBox(bbox, BBOX_PADDING_FRACTION);
 
-  const nw = latLngToPixel({ lat: padded.maxLat, lng: padded.minLng }, REFERENCE_ZOOM);
-  const se = latLngToPixel({ lat: padded.minLat, lng: padded.maxLng }, REFERENCE_ZOOM);
-  const projectedWidth = Math.max(se.x - nw.x, 1);
-  const projectedHeight = Math.max(se.y - nw.y, 1);
-  const scale = Math.min(width / projectedWidth, height / projectedHeight);
-  const offsetX = (width - projectedWidth * scale) / 2;
-  const offsetY = (height - projectedHeight * scale) / 2;
-
-  const positioned: PositionedMilestone[] = milestones
-    .map<PositionedMilestone | null>((milestone) => {
-      if (milestone.lat == null || milestone.lng == null) return null;
-      const p = latLngToPixel({ lat: milestone.lat, lng: milestone.lng }, REFERENCE_ZOOM);
-      return {
-        milestone,
-        x: (p.x - nw.x) * scale + offsetX,
-        y: (p.y - nw.y) * scale + offsetY,
-      };
+  const byId = new Map(milestones.map((m) => [m.id, m]));
+  const positioned: PositionedMilestone[] = projectMilestones(
+    milestones.map((m) => ({ id: m.id, lat: m.lat, lng: m.lng })),
+    bbox,
+    width,
+    height,
+  )
+    .map<PositionedMilestone | null>((p) => {
+      const milestone = byId.get(p.id);
+      return milestone ? { milestone, x: p.x, y: p.y } : null;
     })
     .filter(isPositioned);
 
@@ -109,6 +104,10 @@ export function OverworldLayer({
           </View>
         );
       })}
+      <LiveAvatarsLayer
+        members={liveMembers ?? []}
+        positions={positioned.map((e) => ({ id: e.milestone.id, x: e.x, y: e.y }))}
+      />
     </View>
   );
 }

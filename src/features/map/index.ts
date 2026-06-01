@@ -15,6 +15,8 @@ export { RealMapLayer } from './components/RealMapLayer';
 export type { RealMapLayerProps } from './components/RealMapLayer';
 export { PixelCluster } from './components/PixelCluster';
 export type { PixelClusterProps } from './components/PixelCluster';
+export { LiveAvatarsLayer } from './components/LiveAvatarsLayer';
+export type { LiveAvatarsLayerProps, LiveMember } from './components/LiveAvatarsLayer';
 
 // Hooks
 export { useTripBoundingBox } from './hooks/useTripBoundingBox';
@@ -44,6 +46,8 @@ export {
 export type { BoundingBox, LatLng, PixelXY } from './utils/mercator';
 export { CLUSTER_THRESHOLD_PX, cluster } from './utils/clustering';
 export type { Cluster, ClusterablePoint } from './utils/clustering';
+export { projectMilestones } from './utils/projectMilestones';
+export type { ProjectedPoint } from './utils/projectMilestones';
 export {
   DEFAULT_WORLD_THEME_ID,
   WORLD_THEME_IDS,

@@ -798,6 +798,7 @@ export type Database = {
         Row: {
           joined_at: string | null;
           location_sharing: string | null;
+          panic_until: string | null;
           role: string;
           trip_id: string;
           user_id: string;
@@ -805,6 +806,7 @@ export type Database = {
         Insert: {
           joined_at?: string | null;
           location_sharing?: string | null;
+          panic_until?: string | null;
           role?: string;
           trip_id: string;
           user_id: string;
@@ -812,6 +814,7 @@ export type Database = {
         Update: {
           joined_at?: string | null;
           location_sharing?: string | null;
+          panic_until?: string | null;
           role?: string;
           trip_id?: string;
           user_id?: string;

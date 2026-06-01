@@ -1,3 +1,4 @@
+import { useRouter } from 'expo-router';
 import { ScrollView } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -14,6 +15,7 @@ export default function ProfileTab() {
   const insets = useSafeAreaInsets();
   const { logOut, pending } = useAuth();
   const { data: profile } = useProfile();
+  const router = useRouter();
 
   return (
     <ScrollView
@@ -38,6 +40,14 @@ export default function ProfileTab() {
       <PixelCard padding="lg" className="mb-6">
         <NotificationSettings />
       </PixelCard>
+      <PixelButton
+        variant="secondary"
+        onPress={() => router.push('/(modals)/reminders')}
+        className="mb-6"
+        fullWidth
+      >
+        {t('lifeReminders.screen.title')}
+      </PixelButton>
       <PixelButton variant="danger" onPress={logOut} loading={pending}>
         {t('auth.signOut')}
       </PixelButton>

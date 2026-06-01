@@ -245,6 +245,8 @@
       "lodging": "Hébergement",
       "insurance": "Assurance",
       "visa": "Visa/ESTA",
+      "esta": "ESTA",
+      "driving_license": "Permis de conduire",
       "transport": "Transport",
       "other": "Autre"
     },

@@ -21,6 +21,13 @@ const corePlugins: NonNullable<ExpoConfig['plugins']> = [
   '@react-native-community/datetimepicker',
   '@sentry/react-native/expo',
   '@maplibre/maplibre-react-native',
+  [
+    'expo-location',
+    {
+      locationWhenInUsePermission:
+        'Journey shows your avatar to your trip companions while you travel together.',
+    },
+  ],
 ];
 
 if (googleIosUrlScheme) {

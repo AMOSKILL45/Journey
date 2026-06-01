@@ -393,6 +393,39 @@ export type Database = {
           },
         ];
       };
+      notifications: {
+        Row: {
+          body: string;
+          category: string;
+          created_at: string;
+          data: Json;
+          id: string;
+          read_at: string | null;
+          title: string;
+          user_id: string;
+        };
+        Insert: {
+          body: string;
+          category: string;
+          created_at?: string;
+          data?: Json;
+          id?: string;
+          read_at?: string | null;
+          title: string;
+          user_id: string;
+        };
+        Update: {
+          body?: string;
+          category?: string;
+          created_at?: string;
+          data?: Json;
+          id?: string;
+          read_at?: string | null;
+          title?: string;
+          user_id?: string;
+        };
+        Relationships: [];
+      };
       profiles: {
         Row: {
           age_range: string | null;
@@ -757,6 +790,39 @@ export type Database = {
             referencedColumns: ['id'];
           },
         ];
+      };
+      user_push_tokens: {
+        Row: {
+          created_at: string;
+          device_id: string;
+          id: string;
+          platform: string;
+          timezone: string | null;
+          token: string;
+          updated_at: string;
+          user_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          device_id: string;
+          id?: string;
+          platform: string;
+          timezone?: string | null;
+          token: string;
+          updated_at?: string;
+          user_id: string;
+        };
+        Update: {
+          created_at?: string;
+          device_id?: string;
+          id?: string;
+          platform?: string;
+          timezone?: string | null;
+          token?: string;
+          updated_at?: string;
+          user_id?: string;
+        };
+        Relationships: [];
       };
     };
     Views: {
@@ -1698,6 +1764,7 @@ export type Database = {
         };
         Returns: string;
       };
+      verify_webhook_secret: { Args: { candidate: string }; Returns: boolean };
     };
     Enums: {
       [_ in never]: never;

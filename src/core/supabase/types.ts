@@ -797,6 +797,9 @@ export type Database = {
       trip_members: {
         Row: {
           joined_at: string | null;
+          last_lat: number | null;
+          last_lng: number | null;
+          last_position_at: string | null;
           location_sharing: string | null;
           panic_until: string | null;
           role: string;
@@ -805,6 +808,9 @@ export type Database = {
         };
         Insert: {
           joined_at?: string | null;
+          last_lat?: number | null;
+          last_lng?: number | null;
+          last_position_at?: string | null;
           location_sharing?: string | null;
           panic_until?: string | null;
           role?: string;
@@ -813,6 +819,9 @@ export type Database = {
         };
         Update: {
           joined_at?: string | null;
+          last_lat?: number | null;
+          last_lng?: number | null;
+          last_position_at?: string | null;
           location_sharing?: string | null;
           panic_until?: string | null;
           role?: string;

@@ -29,6 +29,7 @@ export interface CreateFileDocumentInput {
   uri: string;
   mimeType: string;
   sizeBytes: number;
+  expiresAt?: string | null;
 }
 
 export interface CreateUrlDocumentInput {
@@ -37,6 +38,7 @@ export interface CreateUrlDocumentInput {
   category: string;
   name: string;
   url: string;
+  expiresAt?: string | null;
 }
 
 function storageFileName(ext: string): string {
@@ -96,6 +98,7 @@ export async function createFileDocument(input: CreateFileDocumentInput): Promis
     mime_type: mimeType,
     size_bytes: input.sizeBytes,
     uploaded_by: userData.user.id,
+    expires_at: input.expiresAt ?? null,
   };
   const { data, error } = await supabase.from('documents').insert(insert).select().single();
   if (error) {
@@ -120,6 +123,7 @@ export async function createUrlDocument(input: CreateUrlDocumentInput): Promise<
     mime_type: null,
     size_bytes: null,
     uploaded_by: userData.user.id,
+    expires_at: input.expiresAt ?? null,
   };
   const { data, error } = await supabase.from('documents').insert(insert).select().single();
   if (error) throw error;

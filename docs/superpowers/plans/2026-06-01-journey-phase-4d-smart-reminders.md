@@ -531,8 +531,11 @@ describe('leadTimes', () => {
     // 58 days out, leads [60,30,7], none fired -> fire 60
     expect(nextDueLeadTime(58, [60, 30, 7], [])).toBe(60);
   });
-  it('does not refire an already-fired lead time', () => {
-    expect(nextDueLeadTime(58, [60, 30, 7], [60])).toBe(30);
+  it('does not refire an already-fired lead time (waits until the next is due)', () => {
+    expect(nextDueLeadTime(58, [60, 30, 7], [60])).toBeNull();
+  });
+  it('fires the next lead time once its window arrives', () => {
+    expect(nextDueLeadTime(28, [60, 30, 7], [60])).toBe(30);
   });
   it('returns null when no lead time is due yet', () => {
     expect(nextDueLeadTime(75, [60, 30, 7], [])).toBeNull();

@@ -5,6 +5,10 @@ import { View } from 'react-native';
 
 import { useTranslation } from '@core/i18n';
 import { useMilestones } from '@features/milestones';
+import {
+  createReminderFromDocument,
+  documentCategoryToReminderType,
+} from '@features/personal-reminders';
 import { PixelBottomSheet, type PixelBottomSheetRef } from '@shared/components/PixelBottomSheet';
 import { PixelButton } from '@shared/components/PixelButton';
 import { PixelChip } from '@shared/components/PixelChip';
@@ -19,6 +23,8 @@ export const SUGGESTED_CATEGORIES = [
   'lodging',
   'insurance',
   'visa',
+  'esta',
+  'driving_license',
   'transport',
   'other',
 ] as const;
@@ -56,6 +62,7 @@ export const DocumentUploadSheet = forwardRef<DocumentUploadSheetRef, DocumentUp
     const [category, setCategory] = useState<string>('tickets');
     const [milestoneId, setMilestoneId] = useState<string | null>(null);
     const [formError, setFormError] = useState<string | null>(null);
+    const [expiresAt, setExpiresAt] = useState('');
 
     const reset = useCallback(() => {
       setPicked(null);
@@ -65,6 +72,7 @@ export const DocumentUploadSheet = forwardRef<DocumentUploadSheetRef, DocumentUp
       setCategory('tickets');
       setMilestoneId(null);
       setFormError(null);
+      setExpiresAt('');
     }, []);
 
     useImperativeHandle(ref, () => ({
@@ -131,20 +139,24 @@ export const DocumentUploadSheet = forwardRef<DocumentUploadSheetRef, DocumentUp
         return;
       }
       setFormError(null);
+      const reminderType = documentCategoryToReminderType(category);
+      const expiry = expiresAt.trim() || null;
       try {
+        let createdDoc: { id: string } | null = null;
         if (isUrlMode) {
           if (!isValidUrl(urlValue)) {
             setFormError(t('documents.errors.invalidUrl'));
             return;
           }
-          await createUrl.mutateAsync({
+          createdDoc = await createUrl.mutateAsync({
             name: trimmedName,
             category,
             url: urlValue.trim(),
             milestoneId,
+            expiresAt: expiry,
           });
         } else if (picked) {
-          await createFile.mutateAsync({
+          createdDoc = await createFile.mutateAsync({
             name: trimmedName,
             category,
             fileType: picked.fileType,
@@ -152,10 +164,18 @@ export const DocumentUploadSheet = forwardRef<DocumentUploadSheetRef, DocumentUp
             mimeType: picked.mimeType,
             sizeBytes: picked.sizeBytes,
             milestoneId,
+            expiresAt: expiry,
           });
         } else {
           setFormError(t('documents.form.pickSource'));
           return;
+        }
+        if (createdDoc && reminderType && expiry) {
+          await createReminderFromDocument({
+            documentId: createdDoc.id,
+            category,
+            expiresAt: expiry,
+          });
         }
         reset();
         sheetRef.current?.close();
@@ -244,6 +264,16 @@ export const DocumentUploadSheet = forwardRef<DocumentUploadSheetRef, DocumentUp
               ))}
             </View>
           </View>
+
+          {documentCategoryToReminderType(category) ? (
+            <PixelInput
+              label={t('lifeReminders.remindMe')}
+              placeholder="2026-12-31"
+              autoCapitalize="none"
+              value={expiresAt}
+              onChangeText={setExpiresAt}
+            />
+          ) : null}
 
           {milestones.length > 0 ? (
             <View>

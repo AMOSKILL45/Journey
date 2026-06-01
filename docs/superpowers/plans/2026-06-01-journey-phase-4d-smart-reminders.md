@@ -1005,7 +1005,7 @@ describe('SmartTipCard', () => {
         onOpen={jest.fn()}
       />,
     );
-    expect(screen.getByText(/ESTA/i)).toBeTruthy();
+    expect(screen.getByText(/ESTA required/i)).toBeTruthy(); // body also says "ESTA" -> match the title only
   });
   it('fires onDone when the Done action is pressed', () => {
     const onDone = jest.fn();

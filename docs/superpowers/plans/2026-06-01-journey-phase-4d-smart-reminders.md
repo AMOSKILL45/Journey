@@ -717,9 +717,10 @@ Deno.serve(async (req) => {
 
   const today = new Date().toISOString().slice(0, 10);
   const { data: rules } = await sb.from('country_requirements').select('*');
+  // NB: trips has no `purpose` column (v1.0) — purpose stays null, so purpose-gated rules match regardless.
   const { data: trips } = await sb
     .from('trips')
-    .select('id, start_date, end_date, destination_country, destination_countries, purpose')
+    .select('id, start_date, end_date, destination_country, destination_countries')
     .gte('start_date', today);
   if (!rules?.length || !trips?.length) {
     return new Response(JSON.stringify({ inserted: 0 }), {
@@ -749,7 +750,7 @@ Deno.serve(async (req) => {
         destinationCountry: trip.destination_country,
         destinationCountries: trip.destination_countries ?? [],
         durationDays,
-        purpose: (trip as { purpose?: string | null }).purpose ?? null,
+        purpose: null,
         passportCountry: profile?.passport_country ?? null,
       };
       for (const rule of rules as Rule[]) {

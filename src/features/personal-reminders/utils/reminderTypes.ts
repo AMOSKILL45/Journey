@@ -21,6 +21,7 @@ const DOC_CATEGORY_MAP: Record<string, ReminderType> = {
   visa: 'visa_expiry',
   esta: 'esta_expiry',
   driving_license: 'driving_license_expiry',
+  insurance: 'travel_insurance_expiry', // 4A document category
   travel_insurance: 'travel_insurance_expiry',
 };
 

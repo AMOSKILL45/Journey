@@ -21,6 +21,7 @@ describe('reminderTypes', () => {
   it('maps document categories to reminder types', () => {
     expect(documentCategoryToReminderType('visa')).toBe('visa_expiry');
     expect(documentCategoryToReminderType('travel_insurance')).toBe('travel_insurance_expiry');
+    expect(documentCategoryToReminderType('insurance')).toBe('travel_insurance_expiry');
     expect(documentCategoryToReminderType('boarding_pass')).toBeNull();
   });
 });

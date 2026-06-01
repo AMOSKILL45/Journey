@@ -19,6 +19,16 @@ import {
   milestonesQueryKey,
   type Milestone,
 } from '@features/milestones';
+import { useProfile } from '@features/profile';
+import {
+  OfflineBanner,
+  SharingControls,
+  sharingIsLive,
+  useLocationSharing,
+  usePresenceStore,
+  useTripChannel,
+  type PresenceMember,
+} from '@features/realtime';
 import { SmartTipsSection } from '@features/smart-reminders';
 import { PixelButton } from '@shared/components/PixelButton';
 import { PixelCard } from '@shared/components/PixelCard';
@@ -30,6 +40,8 @@ import { InviteMemberForm } from '../components/InviteMemberForm';
 import { MembersList } from '../components/MembersList';
 import { useTrip } from '../hooks/useTrip';
 import { TRIPS_QUERY_KEY } from '../hooks/useTrips';
+
+const EMPTY_MEMBERS: PresenceMember[] = [];
 
 export function TripDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -46,6 +58,32 @@ export function TripDetailScreen() {
   const [deleteError, setDeleteError] = useState<string | null>(null);
   const [animMilestoneId, setAnimMilestoneId] = useState<string | null>(null);
   const [viewMode, setViewMode] = useState<MapMode>('path');
+
+  // Live presence: track self + read other members for the avatars layer.
+  const { data: profile } = useProfile();
+  const sharing = useLocationSharing(tripId);
+  const currentMilestoneId = useMemo(() => {
+    for (let i = milestones.length - 1; i >= 0; i -= 1) {
+      if (checkedInSet.has(milestones[i].id)) return milestones[i].id;
+    }
+    return null;
+  }, [milestones, checkedInSet]);
+  const self = useMemo<PresenceMember | null>(
+    () =>
+      profile
+        ? {
+            user_id: profile.id,
+            avatar_sprite_id: profile.avatar_sprite_id ?? 'avatars/adventurer_1',
+            avatar_color: profile.avatar_color ?? '#E63946',
+            status: 'online',
+            current_milestone_id: currentMilestoneId,
+            display_name: profile.display_name,
+          }
+        : null,
+    [profile, currentMilestoneId],
+  );
+  const { status: realtimeStatus } = useTripChannel(tripId, self, sharingIsLive(sharing.data));
+  const liveMembers = usePresenceStore((s) => s.membersByTrip[tripId] ?? EMPTY_MEMBERS);
 
   const del = useMutation({
     mutationFn: () => {
@@ -122,6 +160,7 @@ export function TripDetailScreen() {
         <PixelText size="h1" className="mb-4">
           {trip.name}
         </PixelText>
+        <OfflineBanner status={realtimeStatus} />
         <PixelCard className="mb-4">
           <View className="gap-1">
             <PixelText size="small" className="text-text-secondary">
@@ -169,6 +208,7 @@ export function TripDetailScreen() {
                 milestones={milestones}
                 checkedInIds={checkedInSet}
                 destinationCountry={trip.destination_country}
+                liveMembers={liveMembers}
                 onNodeLongPress={handleNodeLongPress}
               />
             )}
@@ -184,6 +224,10 @@ export function TripDetailScreen() {
           {t('trips.detail.members')}
         </PixelText>
         <MembersList tripId={trip.id} />
+
+        <View className="mt-4">
+          <SharingControls tripId={trip.id} />
+        </View>
 
         <View className="mt-6">
           <TripReadinessCard tripId={trip.id} />

@@ -249,6 +249,78 @@ export type Database = {
         };
         Relationships: [];
       };
+      country_requirements: {
+        Row: {
+          action_url: string | null;
+          applies_to_passport_countries: string[];
+          created_at: string;
+          destination_country: string | null;
+          destination_regions: string[];
+          estimated_cost_usd: number | null;
+          estimated_processing_days: number | null;
+          excluded_passport_countries: string[];
+          followup_lead_times: number[];
+          i18n_key: string;
+          id: string;
+          last_verified: string;
+          passport_validity_required_months: number | null;
+          required: boolean;
+          requirement_type: string;
+          severity: string;
+          source_urls: string[];
+          trip_duration_max_days: number | null;
+          trip_duration_min_days: number | null;
+          trip_purpose: string[];
+          updated_at: string;
+        };
+        Insert: {
+          action_url?: string | null;
+          applies_to_passport_countries?: string[];
+          created_at?: string;
+          destination_country?: string | null;
+          destination_regions?: string[];
+          estimated_cost_usd?: number | null;
+          estimated_processing_days?: number | null;
+          excluded_passport_countries?: string[];
+          followup_lead_times?: number[];
+          i18n_key: string;
+          id: string;
+          last_verified: string;
+          passport_validity_required_months?: number | null;
+          required?: boolean;
+          requirement_type: string;
+          severity?: string;
+          source_urls?: string[];
+          trip_duration_max_days?: number | null;
+          trip_duration_min_days?: number | null;
+          trip_purpose?: string[];
+          updated_at?: string;
+        };
+        Update: {
+          action_url?: string | null;
+          applies_to_passport_countries?: string[];
+          created_at?: string;
+          destination_country?: string | null;
+          destination_regions?: string[];
+          estimated_cost_usd?: number | null;
+          estimated_processing_days?: number | null;
+          excluded_passport_countries?: string[];
+          followup_lead_times?: number[];
+          i18n_key?: string;
+          id?: string;
+          last_verified?: string;
+          passport_validity_required_months?: number | null;
+          required?: boolean;
+          requirement_type?: string;
+          severity?: string;
+          source_urls?: string[];
+          trip_duration_max_days?: number | null;
+          trip_duration_min_days?: number | null;
+          trip_purpose?: string[];
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
       documents: {
         Row: {
           category: string;
@@ -689,6 +761,73 @@ export type Database = {
             columns: ['user_id'];
             isOneToOne: false;
             referencedRelation: 'profiles';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      trip_smart_reminders: {
+        Row: {
+          added_to_checklist_item_id: string | null;
+          created_at: string;
+          fired_lead_times: number[];
+          id: string;
+          marked_done_at: string | null;
+          notifications_sent_at: string[];
+          requirement_id: string;
+          snooze_until: string | null;
+          status: string;
+          trip_id: string;
+          updated_at: string;
+          user_id: string;
+        };
+        Insert: {
+          added_to_checklist_item_id?: string | null;
+          created_at?: string;
+          fired_lead_times?: number[];
+          id?: string;
+          marked_done_at?: string | null;
+          notifications_sent_at?: string[];
+          requirement_id: string;
+          snooze_until?: string | null;
+          status?: string;
+          trip_id: string;
+          updated_at?: string;
+          user_id: string;
+        };
+        Update: {
+          added_to_checklist_item_id?: string | null;
+          created_at?: string;
+          fired_lead_times?: number[];
+          id?: string;
+          marked_done_at?: string | null;
+          notifications_sent_at?: string[];
+          requirement_id?: string;
+          snooze_until?: string | null;
+          status?: string;
+          trip_id?: string;
+          updated_at?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'trip_smart_reminders_added_to_checklist_item_id_fkey';
+            columns: ['added_to_checklist_item_id'];
+            isOneToOne: false;
+            referencedRelation: 'checklist_items';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'trip_smart_reminders_requirement_id_fkey';
+            columns: ['requirement_id'];
+            isOneToOne: false;
+            referencedRelation: 'country_requirements';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'trip_smart_reminders_trip_id_fkey';
+            columns: ['trip_id'];
+            isOneToOne: false;
+            referencedRelation: 'trips';
             referencedColumns: ['id'];
           },
         ];

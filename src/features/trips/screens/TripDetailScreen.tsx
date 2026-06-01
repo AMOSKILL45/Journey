@@ -19,6 +19,7 @@ import {
   milestonesQueryKey,
   type Milestone,
 } from '@features/milestones';
+import { SmartTipsSection } from '@features/smart-reminders';
 import { PixelButton } from '@shared/components/PixelButton';
 import { PixelCard } from '@shared/components/PixelCard';
 import { PixelText } from '@shared/components/PixelText';
@@ -186,6 +187,10 @@ export function TripDetailScreen() {
 
         <View className="mt-6">
           <TripReadinessCard tripId={trip.id} />
+        </View>
+
+        <View className="mt-6">
+          <SmartTipsSection tripId={trip.id} />
         </View>
 
         <View className="mt-6">

@@ -362,5 +362,21 @@
         }
       }
     }
+  },
+  "notifications": {
+    "empty": "Aucune notification",
+    "categories": {
+      "friends_checkin": "Check-ins",
+      "friends_photo": "Photos",
+      "smart_reminders": "Conseils malins",
+      "join": "Arrivées dans l'équipe",
+      "polls": "Sondages",
+      "achievements": "Succès"
+    },
+    "settings": {
+      "title": "Notifications",
+      "enabled": "Activer les notifications",
+      "quietHours": "Heures calmes (22h–8h)"
+    }
   }
 }

@@ -359,5 +359,21 @@
         }
       }
     }
+  },
+  "notifications": {
+    "empty": "No notifications yet",
+    "categories": {
+      "friends_checkin": "Check-ins",
+      "friends_photo": "Photos",
+      "smart_reminders": "Smart tips",
+      "join": "Crew joins",
+      "polls": "Polls",
+      "achievements": "Achievements"
+    },
+    "settings": {
+      "title": "Notifications",
+      "enabled": "Enable notifications",
+      "quietHours": "Quiet hours (10pm–8am)"
+    }
   }
 }

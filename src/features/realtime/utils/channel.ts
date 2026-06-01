@@ -4,6 +4,7 @@ export interface PresenceMember {
   avatar_color: string;
   status: 'online' | 'idle';
   current_milestone_id: string | null;
+  display_name?: string | null;
 }
 
 export function tripTopic(tripId: string): string {

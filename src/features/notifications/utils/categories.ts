@@ -2,6 +2,7 @@ export const NOTIFICATION_CATEGORIES = [
   'friends_checkin',
   'friends_photo',
   'smart_reminders',
+  'life_reminders',
   'join',
   'polls',
   'achievements',

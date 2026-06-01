@@ -14,6 +14,11 @@ describe('categories', () => {
     );
   });
 
+  it('includes life_reminders as a category, on by default', () => {
+    expect(NOTIFICATION_CATEGORIES).toContain('life_reminders');
+    expect(defaultPrefs().categories.life_reminders).toBe(true);
+  });
+
   it('defaults: enabled, all categories on, quiet hours on', () => {
     const p = defaultPrefs();
     expect(p.enabled).toBe(true);

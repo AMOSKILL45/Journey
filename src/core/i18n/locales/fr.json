@@ -504,5 +504,109 @@
       "body": "Journey montre ton avatar à tes compagnons de voyage pendant que vous voyagez ensemble.",
       "cta": "Activer la localisation"
     }
+  },
+  "achievements": {
+    "screen": {
+      "title": "Succès",
+      "count": "%{count}/%{total} débloqués",
+      "empty": "Aucun succès pour l'instant — lance ton premier voyage pour en gagner un."
+    },
+    "locked": "Verrouillé",
+    "unlockedOn": "Débloqué le %{date}",
+    "rarity": {
+      "common": "Commun",
+      "rare": "Rare",
+      "epic": "Épique",
+      "legendary": "Légendaire"
+    },
+    "cinematic": {
+      "unlocked": "Succès débloqué !",
+      "skip": "Touchez pour passer"
+    },
+    "toast": {
+      "unlocked": "Débloqué !"
+    },
+    "defs": {
+      "first_trip": {
+        "name": "Bon voyage",
+        "description": "Crée ton premier voyage."
+      },
+      "first_milestone": {
+        "name": "Premiers pas",
+        "description": "Ajoute ta première étape à un voyage."
+      },
+      "first_checkin": {
+        "name": "J'étais là",
+        "description": "Fais ton premier check-in à une étape."
+      },
+      "squad_up": {
+        "name": "L'équipe se forme",
+        "description": "Invite ton premier compagnon de voyage."
+      },
+      "first_doc": {
+        "name": "Premiers papiers",
+        "description": "Ajoute ton premier document de voyage."
+      },
+      "checklist_starter": {
+        "name": "On prépare le sac",
+        "description": "Coche ton premier item de checklist."
+      },
+      "trip_planner_5": {
+        "name": "Organisateur",
+        "description": "Planifie 5 voyages."
+      },
+      "pathfinder_25": {
+        "name": "Éclaireur",
+        "description": "Trace 25 étapes."
+      },
+      "explorer_10": {
+        "name": "Explorateur",
+        "description": "Fais 10 check-ins."
+      },
+      "party_of_4": {
+        "name": "Équipe de quatre",
+        "description": "Voyage avec une équipe de 4 personnes ou plus."
+      },
+      "archivist_10": {
+        "name": "Archiviste",
+        "description": "Ajoute 10 documents de voyage."
+      },
+      "fully_packed": {
+        "name": "Sac bouclé",
+        "description": "Coche tous les items d'une checklist de voyage."
+      },
+      "countries_3": {
+        "name": "Passe-frontières",
+        "description": "Visite 3 pays différents."
+      },
+      "boss_slayer": {
+        "name": "Tueur de boss",
+        "description": "Fais ton premier check-in à une étape boss."
+      },
+      "globetrotter_25": {
+        "name": "Globe-trotteur",
+        "description": "Fais 25 check-ins."
+      },
+      "countries_5": {
+        "name": "Tour du monde",
+        "description": "Visite 5 pays différents."
+      },
+      "journey_complete": {
+        "name": "Voyage accompli",
+        "description": "Termine un voyage avec toutes les étapes validées."
+      },
+      "verified_traveler": {
+        "name": "Voyageur vérifié",
+        "description": "Vérifie ton identité."
+      },
+      "countries_10": {
+        "name": "Conquérant du globe",
+        "description": "Visite 10 pays différents."
+      },
+      "legend_10_trips": {
+        "name": "Légende vivante",
+        "description": "Planifie 10 voyages."
+      }
+    }
   }
 }

@@ -1,0 +1,23 @@
+// Placeholder badge manifest. Real pixel-art drops in later keyed by these ids (spec ADR 6A-8).
+export const BADGE_IDS = [
+  'badge_first_trip',
+  'badge_first_milestone',
+  'badge_first_checkin',
+  'badge_squad_up',
+  'badge_first_doc',
+  'badge_checklist_starter',
+  'badge_trip_planner_5',
+  'badge_pathfinder_25',
+  'badge_explorer_10',
+  'badge_party_of_4',
+  'badge_archivist_10',
+  'badge_fully_packed',
+  'badge_countries_3',
+  'badge_boss_slayer',
+  'badge_globetrotter_25',
+  'badge_countries_5',
+  'badge_journey_complete',
+  'badge_verified_traveler',
+  'badge_countries_10',
+  'badge_legend_10_trips',
+] as const;

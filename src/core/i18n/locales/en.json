@@ -497,5 +497,109 @@
       "body": "Journey shows your avatar to your trip companions while you travel together.",
       "cta": "Enable location"
     }
+  },
+  "achievements": {
+    "screen": {
+      "title": "Achievements",
+      "count": "%{count}/%{total} unlocked",
+      "empty": "No achievements yet — start your first trip to earn one."
+    },
+    "locked": "Locked",
+    "unlockedOn": "Unlocked %{date}",
+    "rarity": {
+      "common": "Common",
+      "rare": "Rare",
+      "epic": "Epic",
+      "legendary": "Legendary"
+    },
+    "cinematic": {
+      "unlocked": "Achievement Unlocked!",
+      "skip": "Tap to skip"
+    },
+    "toast": {
+      "unlocked": "Unlocked!"
+    },
+    "defs": {
+      "first_trip": {
+        "name": "Bon Voyage",
+        "description": "Create your first trip."
+      },
+      "first_milestone": {
+        "name": "First Steps",
+        "description": "Add your first milestone to a trip."
+      },
+      "first_checkin": {
+        "name": "I Was Here",
+        "description": "Check in at your first milestone."
+      },
+      "squad_up": {
+        "name": "Squad Up",
+        "description": "Invite your first travel companion."
+      },
+      "first_doc": {
+        "name": "Paper Trail",
+        "description": "Upload your first travel document."
+      },
+      "checklist_starter": {
+        "name": "Getting Packed",
+        "description": "Tick off your first checklist item."
+      },
+      "trip_planner_5": {
+        "name": "Trip Planner",
+        "description": "Plan 5 trips."
+      },
+      "pathfinder_25": {
+        "name": "Pathfinder",
+        "description": "Map out 25 milestones."
+      },
+      "explorer_10": {
+        "name": "Explorer",
+        "description": "Check in 10 times."
+      },
+      "party_of_4": {
+        "name": "Party of Four",
+        "description": "Travel with a crew of 4 or more."
+      },
+      "archivist_10": {
+        "name": "Archivist",
+        "description": "Upload 10 travel documents."
+      },
+      "fully_packed": {
+        "name": "Fully Packed",
+        "description": "Complete every item on a trip checklist."
+      },
+      "countries_3": {
+        "name": "Border Hopper",
+        "description": "Visit 3 different countries."
+      },
+      "boss_slayer": {
+        "name": "Boss Slayer",
+        "description": "Check in at your first boss milestone."
+      },
+      "globetrotter_25": {
+        "name": "Globetrotter",
+        "description": "Check in 25 times."
+      },
+      "countries_5": {
+        "name": "Worldwide",
+        "description": "Visit 5 different countries."
+      },
+      "journey_complete": {
+        "name": "Journey Complete",
+        "description": "Finish a trip with every milestone checked in."
+      },
+      "verified_traveler": {
+        "name": "Verified Traveler",
+        "description": "Verify your identity."
+      },
+      "countries_10": {
+        "name": "Globe Conqueror",
+        "description": "Visit 10 different countries."
+      },
+      "legend_10_trips": {
+        "name": "Living Legend",
+        "description": "Plan 10 trips."
+      }
+    }
   }
 }

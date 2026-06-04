@@ -12,6 +12,7 @@ const MIGRATIONS = path.join(__dirname, '../../../../supabase/migrations');
 const SEED = fs.readFileSync(path.join(MIGRATIONS, '20260604_achievements_seed.sql'), 'utf8');
 const SCHEMA = fs.readFileSync(path.join(MIGRATIONS, '20260604_achievements_schema.sql'), 'utf8');
 const EVAL = fs.readFileSync(path.join(MIGRATIONS, '20260604_achievements_eval.sql'), 'utf8');
+const TYPES = fs.readFileSync(path.join(__dirname, '../../../core/supabase/types.ts'), 'utf8');
 const REVOKE = fs.readFileSync(
   path.join(MIGRATIONS, '20260604_achievements_triggers_revoke.sql'),
   'utf8',
@@ -103,6 +104,26 @@ describe('achievements runtime contracts', () => {
     expect(REVOKE).toMatch(
       /grant execute on function public\.evaluate_achievements\(\) to authenticated/i,
     );
+  });
+
+  it('realtime: the unlock subscription table is published + its filter column exists', () => {
+    // `.on('postgres_changes', { table: '...' })` is a PLAIN STRING — tsc does NOT type-check it
+    // (unlike `.from()`/`.rpc()`). If it drifts or the publication line is dropped, live unlocks
+    // break silently. Both sides live in the repo → assert they agree.
+    const hook = fs.readFileSync(path.join(FEATURE_DIR, 'hooks/useAchievementUnlocks.ts'), 'utf8');
+    const tableMatch = hook.match(/table:\s*'([a-z_]+)'/);
+    expect(tableMatch).toBeTruthy();
+    const table = tableMatch![1];
+    expect(table).toBe('user_achievements');
+    // schema migration must add that exact table to the realtime publication
+    expect(SCHEMA).toMatch(
+      new RegExp(`alter publication supabase_realtime add table public\\.${table}\\b`, 'i'),
+    );
+    // the postgres_changes filter column must be a real column on the table (generated types)
+    const filterMatch = hook.match(/filter:\s*[`'"]([a-z_]+)=eq\./);
+    expect(filterMatch).toBeTruthy();
+    expect(TYPES).toContain(`${table}:`);
+    expect(TYPES).toMatch(new RegExp(`${table}:[\\s\\S]*?Row:[\\s\\S]*?\\b${filterMatch![1]}\\b`));
   });
 
   it('every static t("achievements.*") key resolves in en and fr', () => {

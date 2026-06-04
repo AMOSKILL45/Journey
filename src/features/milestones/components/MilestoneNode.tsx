@@ -1,8 +1,8 @@
-import * as Haptics from 'expo-haptics';
 import { Image } from 'expo-image';
 import { Pressable, View } from 'react-native';
 
 import { findSpriteById } from '@assets/sprites/milestones/manifest';
+import { haptics } from '@features/feedback';
 import { cn } from '@shared/utils/cn';
 
 import type { Milestone } from '../api/milestones';
@@ -38,16 +38,16 @@ export function MilestoneNode({ milestone, state, onPress, onLongPress }: Milest
 
   const handlePress = () => {
     if (state === 'locked') {
-      void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+      haptics.error();
       return;
     }
-    void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    haptics.light();
     onPress?.();
   };
 
   const handleLongPress = () => {
     if (state === 'locked') return;
-    void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    haptics.medium();
     onLongPress?.();
   };
 

@@ -4,6 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTranslation } from '@core/i18n';
 import { useAuth } from '@features/auth';
+import { FeedbackSettings } from '@features/feedback';
 import { NotificationSettings } from '@features/notifications';
 import { useProfile } from '@features/profile';
 import { PixelButton } from '@shared/components/PixelButton';
@@ -39,6 +40,9 @@ export default function ProfileTab() {
       </PixelCard>
       <PixelCard padding="lg" className="mb-6">
         <NotificationSettings />
+      </PixelCard>
+      <PixelCard padding="lg" className="mb-6">
+        <FeedbackSettings />
       </PixelCard>
       <PixelButton
         variant="secondary"

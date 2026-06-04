@@ -27,6 +27,7 @@ import { initSentry } from '@core/sentry';
 import { supabase } from '@core/supabase/client';
 import { colors } from '@core/theme';
 import { AchievementUnlockPresenter } from '@features/achievements';
+import { initReduceMotion } from '@features/feedback';
 import { addNotificationTapHandler, registerForPush } from '@features/notifications';
 import { AnimatedSplash, useAppReady } from '@features/splash';
 
@@ -86,6 +87,8 @@ export default function RootLayout() {
     initSentry();
     void initPostHog();
   }, []);
+
+  useEffect(() => initReduceMotion(), []);
 
   useEffect(() => {
     const sub = Linking.addEventListener('url', ({ url }) => handleDeepLink(url));

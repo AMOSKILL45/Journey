@@ -1,4 +1,7 @@
-// 6C wires real audio (expo-av). Until then this is intentionally a no-op.
+import { haptics, playSfx } from '@features/feedback';
+
+// 6C: achievement unlock = fanfare SFX + success haptic (both settings-gated).
 export function playUnlockSfx(_rarity: string): void {
-  /* no-op until Phase 6C */
+  playSfx('achievement_fanfare');
+  haptics.success();
 }

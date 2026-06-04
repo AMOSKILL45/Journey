@@ -1,0 +1,22 @@
+insert into public.achievement_definitions (id, name_key, description_key, sprite_id, rarity, trigger_rule, sort_order) values
+('first_trip',        'achievements.defs.first_trip.name','achievements.defs.first_trip.description','badge_first_trip','common','{"type":"count","metric":"trips_created","gte":1}'::jsonb, 10),
+('first_milestone',   'achievements.defs.first_milestone.name','achievements.defs.first_milestone.description','badge_first_milestone','common','{"type":"count","metric":"milestones_created","gte":1}'::jsonb, 20),
+('first_checkin',     'achievements.defs.first_checkin.name','achievements.defs.first_checkin.description','badge_first_checkin','common','{"type":"count","metric":"checkins","gte":1}'::jsonb, 30),
+('squad_up',          'achievements.defs.squad_up.name','achievements.defs.squad_up.description','badge_squad_up','common','{"type":"count","metric":"companions_invited","gte":1}'::jsonb, 40),
+('first_doc',         'achievements.defs.first_doc.name','achievements.defs.first_doc.description','badge_first_doc','common','{"type":"count","metric":"documents_uploaded","gte":1}'::jsonb, 50),
+('checklist_starter', 'achievements.defs.checklist_starter.name','achievements.defs.checklist_starter.description','badge_checklist_starter','common','{"type":"count","metric":"checklist_items_completed","gte":1}'::jsonb, 60),
+('trip_planner_5',    'achievements.defs.trip_planner_5.name','achievements.defs.trip_planner_5.description','badge_trip_planner_5','rare','{"type":"count","metric":"trips_created","gte":5}'::jsonb, 70),
+('pathfinder_25',     'achievements.defs.pathfinder_25.name','achievements.defs.pathfinder_25.description','badge_pathfinder_25','rare','{"type":"count","metric":"milestones_created","gte":25}'::jsonb, 80),
+('explorer_10',       'achievements.defs.explorer_10.name','achievements.defs.explorer_10.description','badge_explorer_10','rare','{"type":"count","metric":"checkins","gte":10}'::jsonb, 90),
+('party_of_4',        'achievements.defs.party_of_4.name','achievements.defs.party_of_4.description','badge_party_of_4','rare','{"type":"count","metric":"max_trip_members","gte":4}'::jsonb, 100),
+('archivist_10',      'achievements.defs.archivist_10.name','achievements.defs.archivist_10.description','badge_archivist_10','rare','{"type":"count","metric":"documents_uploaded","gte":10}'::jsonb, 110),
+('fully_packed',      'achievements.defs.fully_packed.name','achievements.defs.fully_packed.description','badge_fully_packed','rare','{"type":"count","metric":"checklists_completed","gte":1}'::jsonb, 120),
+('countries_3',       'achievements.defs.countries_3.name','achievements.defs.countries_3.description','badge_countries_3','rare','{"type":"count","metric":"countries_visited","gte":3}'::jsonb, 130),
+('boss_slayer',       'achievements.defs.boss_slayer.name','achievements.defs.boss_slayer.description','badge_boss_slayer','rare','{"type":"count","metric":"boss_checkins","gte":1}'::jsonb, 140),
+('globetrotter_25',   'achievements.defs.globetrotter_25.name','achievements.defs.globetrotter_25.description','badge_globetrotter_25','epic','{"type":"count","metric":"checkins","gte":25}'::jsonb, 150),
+('countries_5',       'achievements.defs.countries_5.name','achievements.defs.countries_5.description','badge_countries_5','epic','{"type":"count","metric":"countries_visited","gte":5}'::jsonb, 160),
+('journey_complete',  'achievements.defs.journey_complete.name','achievements.defs.journey_complete.description','badge_journey_complete','epic','{"type":"count","metric":"completed_trips","gte":1}'::jsonb, 170),
+('verified_traveler', 'achievements.defs.verified_traveler.name','achievements.defs.verified_traveler.description','badge_verified_traveler','epic','{"type":"boolean","metric":"identity_verified","value":true}'::jsonb, 180),
+('countries_10',      'achievements.defs.countries_10.name','achievements.defs.countries_10.description','badge_countries_10','legendary','{"type":"count","metric":"countries_visited","gte":10}'::jsonb, 190),
+('legend_10_trips',   'achievements.defs.legend_10_trips.name','achievements.defs.legend_10_trips.description','badge_legend_10_trips','legendary','{"type":"count","metric":"trips_created","gte":10}'::jsonb, 200)
+on conflict (id) do nothing;

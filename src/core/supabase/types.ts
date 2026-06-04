@@ -8,6 +8,42 @@ export type Database = {
   };
   public: {
     Tables: {
+      achievement_definitions: {
+        Row: {
+          created_at: string;
+          description_key: string;
+          id: string;
+          is_active: boolean;
+          name_key: string;
+          rarity: string;
+          sort_order: number;
+          sprite_id: string;
+          trigger_rule: Json;
+        };
+        Insert: {
+          created_at?: string;
+          description_key: string;
+          id: string;
+          is_active?: boolean;
+          name_key: string;
+          rarity: string;
+          sort_order?: number;
+          sprite_id: string;
+          trigger_rule: Json;
+        };
+        Update: {
+          created_at?: string;
+          description_key?: string;
+          id?: string;
+          is_active?: boolean;
+          name_key?: string;
+          rarity?: string;
+          sort_order?: number;
+          sprite_id?: string;
+          trigger_rule?: Json;
+        };
+        Relationships: [];
+      };
       checkins: {
         Row: {
           checked_in_at: string | null;
@@ -1010,6 +1046,42 @@ export type Database = {
           },
         ];
       };
+      user_achievements: {
+        Row: {
+          achievement_id: string;
+          trip_id: string | null;
+          unlocked_at: string;
+          user_id: string;
+        };
+        Insert: {
+          achievement_id: string;
+          trip_id?: string | null;
+          unlocked_at?: string;
+          user_id: string;
+        };
+        Update: {
+          achievement_id?: string;
+          trip_id?: string | null;
+          unlocked_at?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'user_achievements_achievement_id_fkey';
+            columns: ['achievement_id'];
+            isOneToOne: false;
+            referencedRelation: 'achievement_definitions';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'user_achievements_trip_id_fkey';
+            columns: ['trip_id'];
+            isOneToOne: false;
+            referencedRelation: 'trips';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       user_push_tokens: {
         Row: {
           created_at: string;
@@ -1089,6 +1161,21 @@ export type Database = {
       };
     };
     Functions: {
+      _evaluate_achievements: {
+        Args: { p_uid: string };
+        Returns: {
+          achievement_id: string;
+          trip_id: string | null;
+          unlocked_at: string;
+          user_id: string;
+        }[];
+        SetofOptions: {
+          from: '*';
+          to: 'user_achievements';
+          isOneToOne: false;
+          isSetofReturn: true;
+        };
+      };
       _postgis_deprecate: {
         Args: { newname: string; oldname: string; version: string };
         Returns: undefined;
@@ -1249,6 +1336,21 @@ export type Database = {
         | { Args: { table_name: string }; Returns: string };
       enablelongtransactions: { Args: never; Returns: string };
       equals: { Args: { geom1: unknown; geom2: unknown }; Returns: boolean };
+      evaluate_achievements: {
+        Args: never;
+        Returns: {
+          achievement_id: string;
+          trip_id: string | null;
+          unlocked_at: string;
+          user_id: string;
+        }[];
+        SetofOptions: {
+          from: '*';
+          to: 'user_achievements';
+          isOneToOne: false;
+          isSetofReturn: true;
+        };
+      };
       geometry: { Args: { '': string }; Returns: unknown };
       geometry_above: {
         Args: { geom1: unknown; geom2: unknown };

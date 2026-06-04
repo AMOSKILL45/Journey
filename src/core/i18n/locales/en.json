@@ -1,4 +1,12 @@
 {
+  "passport": {
+    "screen": {
+      "title": "Passport",
+      "counts": "%{countries} countries · %{stamps} stamps",
+      "empty": "Check in to your first milestone to earn a stamp.",
+      "refresh": "Refresh"
+    }
+  },
   "app": {
     "name": "This Is The Journey",
     "nameDisplay": "THIS IS THE\nJOURNEY",

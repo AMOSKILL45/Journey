@@ -1,4 +1,12 @@
 {
+  "passport": {
+    "screen": {
+      "title": "Passeport",
+      "counts": "%{countries} pays · %{stamps} tampons",
+      "empty": "Pointe ton premier jalon pour gagner un tampon.",
+      "refresh": "Actualiser"
+    }
+  },
   "app": {
     "name": "This Is The Journey",
     "nameDisplay": "THIS IS THE\nJOURNEY",

@@ -1194,6 +1194,7 @@ export type Database = {
         Args: { ''?: string; att_name: string; tbl: unknown };
         Returns: string;
       };
+      _rebuild_passport: { Args: { p_uid: string }; Returns: undefined };
       _st_3dintersects: {
         Args: { geom1: unknown; geom2: unknown };
         Returns: boolean;
@@ -1493,6 +1494,7 @@ export type Database = {
       };
       postgis_version: { Args: never; Returns: string };
       postgis_wagyu_version: { Args: never; Returns: string };
+      rebuild_my_passport: { Args: never; Returns: undefined };
       st_3dclosestpoint: {
         Args: { geom1: unknown; geom2: unknown };
         Returns: unknown;

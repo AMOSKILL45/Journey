@@ -50,6 +50,14 @@ export default function ProfileTab() {
       </PixelButton>
       <PixelButton
         variant="secondary"
+        onPress={() => router.push('/(modals)/passport')}
+        className="mb-3"
+        fullWidth
+      >
+        {t('passport.screen.title')}
+      </PixelButton>
+      <PixelButton
+        variant="secondary"
         onPress={() => router.push('/(modals)/reminders')}
         className="mb-6"
         fullWidth

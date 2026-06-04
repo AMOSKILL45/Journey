@@ -30,3 +30,17 @@ jest.mock('expo-constants', () => ({
     },
   },
 }));
+
+// Mock expo-haptics — no native module in unit tests (calling it throws "not available on ios").
+jest.mock('expo-haptics', () => ({
+  impactAsync: jest.fn(() => Promise.resolve()),
+  notificationAsync: jest.fn(() => Promise.resolve()),
+  selectionAsync: jest.fn(() => Promise.resolve()),
+  ImpactFeedbackStyle: { Light: 'light', Medium: 'medium', Heavy: 'heavy' },
+  NotificationFeedbackType: { Success: 'success', Warning: 'warning', Error: 'error' },
+}));
+
+// Mock expo-audio — native module absent in unit tests; sound.ts lazy-requires it.
+jest.mock('expo-audio', () => ({
+  createAudioPlayer: jest.fn(() => ({ play: jest.fn(), remove: jest.fn(), volume: 0, loop: false })),
+}));

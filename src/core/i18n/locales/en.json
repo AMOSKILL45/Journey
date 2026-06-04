@@ -1,4 +1,12 @@
 {
+  "feedback": {
+    "settings": { "title": "Sound & Haptics" },
+    "sfx": "Sound effects",
+    "uiSounds": "UI sounds",
+    "music": "Music",
+    "haptics": "Haptics",
+    "volume": "Volume"
+  },
   "passport": {
     "screen": {
       "title": "Passport",

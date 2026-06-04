@@ -1,4 +1,12 @@
 {
+  "feedback": {
+    "settings": { "title": "Son & vibrations" },
+    "sfx": "Effets sonores",
+    "uiSounds": "Sons d'interface",
+    "music": "Musique",
+    "haptics": "Vibrations",
+    "volume": "Volume"
+  },
   "passport": {
     "screen": {
       "title": "Passeport",

@@ -8,6 +8,9 @@ import { SOUND_IDS } from '../soundManifest';
 
 const SRC = path.join(__dirname, '../../..');
 const FEATURE_DIR = path.join(__dirname, '..');
+const PKG = JSON.parse(
+  fs.readFileSync(path.join(__dirname, '../../../../package.json'), 'utf8'),
+) as { dependencies?: Record<string, string>; devDependencies?: Record<string, string> };
 
 function resolveKey(obj: unknown, key: string): unknown {
   return key
@@ -31,6 +34,12 @@ function walk(dir: string): string[] {
 }
 
 describe('feedback runtime contracts', () => {
+  it('declares expo-audio + expo-haptics (expo-audio is lazy-required, so tsc cannot catch removal)', () => {
+    const deps = { ...PKG.dependencies, ...PKG.devDependencies };
+    expect(deps['expo-audio']).toBeDefined();
+    expect(deps['expo-haptics']).toBeDefined();
+  });
+
   it('every static t("feedback.*") key resolves in en and fr', () => {
     const keys = new Set<string>();
     for (const f of walk(FEATURE_DIR)) {

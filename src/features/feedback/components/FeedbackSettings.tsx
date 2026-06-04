@@ -70,6 +70,7 @@ export function FeedbackSettings() {
               key={step}
               testID={`vol-${step}`}
               accessibilityRole="button"
+              hitSlop={10}
               onPress={() => s.setVolume(step)}
               className={`h-6 w-6 rounded border-2 border-border ${
                 step > 0 && s.masterVolume >= step ? 'bg-accent-500' : 'bg-surface-alt'

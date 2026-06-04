@@ -41,6 +41,22 @@ describe('passport runtime contracts', () => {
     expect([...keys].filter((k) => typeof resolveKey(fr, k) !== 'string')).toEqual([]);
   });
 
+  it('counts interpolation: every var the screen passes has a matching %{var} in en + fr', () => {
+    // i18n-js uses %{var}. tsc and key-resolution both miss a placeholder/var-name mismatch —
+    // it silently renders a broken count. Scan BOTH sides and assert they agree.
+    const screen = fs.readFileSync(path.join(FEATURE_DIR, 'screens/PassportScreen.tsx'), 'utf8');
+    const call = screen.match(/t\(\s*['"]passport\.screen\.counts['"]\s*,\s*\{([^}]*)\}/);
+    expect(call).toBeTruthy();
+    const vars = [...call![1].matchAll(/(\w+)\s*:/g)].map((m) => m[1]);
+    expect(vars).toEqual(expect.arrayContaining(['countries', 'stamps']));
+    const enCounts = resolveKey(en, 'passport.screen.counts') as string;
+    const frCounts = resolveKey(fr, 'passport.screen.counts') as string;
+    for (const v of vars) {
+      expect(enCounts).toContain(`%{${v}}`);
+      expect(frCounts).toContain(`%{${v}}`);
+    }
+  });
+
   it('rebuild_my_passport RPC + passport columns exist in the generated types', () => {
     expect(TYPES).toMatch(/rebuild_my_passport/);
     expect(TYPES).toContain('passport_stamps');

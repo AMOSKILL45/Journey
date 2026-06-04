@@ -26,6 +26,7 @@ import { initPostHog } from '@core/posthog';
 import { initSentry } from '@core/sentry';
 import { supabase } from '@core/supabase/client';
 import { colors } from '@core/theme';
+import { AchievementUnlockPresenter } from '@features/achievements';
 import { addNotificationTapHandler, registerForPush } from '@features/notifications';
 import { AnimatedSplash, useAppReady } from '@features/splash';
 
@@ -79,6 +80,7 @@ export default function RootLayout() {
   );
 
   const router = useRouter();
+  const [userId, setUserId] = useState<string | null>(null);
 
   useEffect(() => {
     initSentry();
@@ -96,9 +98,11 @@ export default function RootLayout() {
   useEffect(() => {
     const unsub = addNotificationTapHandler((tripId) => router.push(`/(modals)/trip/${tripId}`));
     const { data: authSub } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUserId(session?.user?.id ?? null);
       if (session) void registerForPush();
     });
     void supabase.auth.getSession().then(({ data }) => {
+      setUserId(data.session?.user?.id ?? null);
       if (data.session) void registerForPush();
     });
     return () => {
@@ -144,6 +148,7 @@ export default function RootLayout() {
               options={{ presentation: 'modal', headerShown: false }}
             />
           </Stack>
+          <AchievementUnlockPresenter userId={userId} />
           {!splashAnimationDone && (
             <AnimatedSplash
               appReady={appReady}

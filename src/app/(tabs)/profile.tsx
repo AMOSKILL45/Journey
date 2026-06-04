@@ -42,6 +42,14 @@ export default function ProfileTab() {
       </PixelCard>
       <PixelButton
         variant="secondary"
+        onPress={() => router.push('/(modals)/achievements')}
+        className="mb-3"
+        fullWidth
+      >
+        {t('achievements.screen.title')}
+      </PixelButton>
+      <PixelButton
+        variant="secondary"
         onPress={() => router.push('/(modals)/reminders')}
         className="mb-6"
         fullWidth

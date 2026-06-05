@@ -28,6 +28,8 @@ create table public.poll_votes (
 );
 alter table public.poll_votes enable row level security;
 create policy votes_select on public.poll_votes for select using (is_trip_member((select trip_id from public.polls where id = poll_id), auth.uid()));
-create policy votes_insert on public.poll_votes for insert with check (user_id = auth.uid());
-create policy votes_update on public.poll_votes for update using (user_id = auth.uid());
+-- A vote must be cast by a MEMBER of the poll's trip (not merely a self-identified user),
+-- else a user who knows a poll UUID from another trip could stuff votes there.
+create policy votes_insert on public.poll_votes for insert with check (user_id = auth.uid() and is_trip_member((select trip_id from public.polls where id = poll_id), auth.uid()));
+create policy votes_update on public.poll_votes for update using (user_id = auth.uid() and is_trip_member((select trip_id from public.polls where id = poll_id), auth.uid()));
 alter publication supabase_realtime add table public.poll_votes;

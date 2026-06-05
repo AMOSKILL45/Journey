@@ -79,4 +79,18 @@ describe('polls runtime contracts', () => {
     expect(hook).toMatch(/table:\s*['"]poll_votes['"]/);
     expect(hook).toMatch(/postgres_changes/);
   });
+
+  it('poll_votes write policies require trip membership (no cross-trip vote stuffing)', () => {
+    const migrations = path.join(SRC_ROOT, '..', 'supabase', 'migrations');
+    const file = fs
+      .readdirSync(migrations)
+      .find((f) => f.includes('7b_polls') && !f.includes('fix'));
+    expect(file).toBeTruthy();
+    const sql = fs.readFileSync(path.join(migrations, file ?? ''), 'utf8');
+    // Both write policies must gate on is_trip_member — not merely user_id = auth.uid().
+    const insert = /create policy votes_insert[^;]*for insert[^;]*;/i.exec(sql)?.[0] ?? '';
+    const update = /create policy votes_update[^;]*for update[^;]*;/i.exec(sql)?.[0] ?? '';
+    expect(insert).toMatch(/is_trip_member/);
+    expect(update).toMatch(/is_trip_member/);
+  });
 });

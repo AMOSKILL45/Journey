@@ -40,18 +40,19 @@ achievement metric hooks (optional stretch).
   results via Realtime, optional expiry.
 - **.ics**: whole-trip export, one VEVENT per milestone, shared via the OS share sheet.
 
-## 2. Deferred to the /architecture (ADR) step
+## 2. Architecture decisions (resolved)
 
-These are HOW decisions, intentionally not frozen here:
+The three HOW decisions are resolved in
+`2026-06-05-journey-phase-7-architecture-adr.md` (all Accepted, 2026-06-05):
 
-1. **7C fetch strategy** — edge-function proxy (cacheable server-side, rate-limit friendly,
-   matches the existing `smart_reminders_cron` / `send_push` pattern) **vs** direct client
-   calls to the public OSRM demo + Open-Meteo with DB cache. Both APIs are free / no-auth.
-2. **7C distance storage** — dedicated `milestone_legs` cache table (from_id, to_id, …) **vs**
-   `milestones.metadata` jsonb (spec §451 hint).
-3. **7E render lib** — how to produce PNG + PDF inside a Deno edge function (e.g. `resvg`/
-   `@resvg/resvg-js` for SVG→PNG, an SVG→PDF path, or `@napi-rs/canvas`), and whether
-   rendering is server-side or a client Skia snapshot uploaded to Storage.
+1. **ADR-001 — 7C fetch strategy**: **edge-function proxy** `enrich_milestone` (service role
+   writes caches; client never calls OSRM/Open-Meteo directly). Matches the
+   `smart_reminders_cron` / `send_push` pattern; OSRM provider swappable without an OTA.
+2. **ADR-002 — 7C distance storage**: **`milestone_legs`** cache table (pairwise from→to),
+   `weather_cache` per-milestone. `milestones.metadata` left untouched.
+3. **ADR-003 — 7E render pipeline**: **hybrid** — PNG story card via **client Skia**
+   (`makeImageSnapshot`, pixel-perfect, OTA-safe), PDF album via the **`generate_scrapbook`
+   edge function** (`pdf-lib`, embeds photos). Preserves the 100% OTA property.
 
 ## 3. Sub-project specs
 
@@ -119,8 +120,9 @@ user_id)`). Realtime publication for live results.
 
 - `weather_cache` (`milestone_id` FK, `payload` jsonb, `fetched_at`, `expires_at`; PK or
   unique on `milestone_id`). TTL-based refresh.
-- Distance/duration between consecutive milestones — storage TBD in ADR (`milestone_legs`
-  table vs `milestones.metadata`).
+- `milestone_legs` (`trip_id` FK, `from_milestone_id` FK, `to_milestone_id` FK, `distance_m`,
+  `duration_s`, `mode`, `computed_at`) — pairwise distance/duration cache (ADR-002).
+  Affected legs recompute on milestone reorder/insert/delete.
 - **RLS**: member SELECT; writes via edge function (service role) or SECURITY DEFINER, never
   client-writable (cache integrity).
 
@@ -155,15 +157,19 @@ user_id)`). Realtime publication for live results.
 
 - **On-demand** button on TripDetailScreen, shown when the trip has content (≥1 milestone or
   photo).
+- **Hybrid render (ADR-003)**: the **PNG story card renders client-side via Skia**
+  (`makeImageSnapshot`, pixel-perfect, OTA-safe) and uploads to
+  `trip-scrapbooks/<trip>/<id>.png`. The client then invokes **`generate_scrapbook`** with
+  `{ trip_id, png_path }`.
 - **Edge function `generate_scrapbook`**: gathers trip + milestones + photos + stats (total
-  distance, countries visited, days, check-in count) → renders **PNG** (story-format pixel-art
-  recap card) **and PDF** (multi-page album) → uploads both to private bucket
-  `trip-scrapbooks` → returns signed URLs. Render lib → ADR. Budget < 30 s (spec §9 perf).
+  distance, countries visited, days, check-in count) → composes the **PDF** album via `pdf-lib`
+  (embeds photo bytes, service role) → uploads `<trip>/<id>.pdf` → INSERTs the `scrapbooks` row
+  with both paths → returns both signed URLs. Budget < 30 s (spec §9 perf).
 - `scrapbooks` (`id`, `trip_id` FK, `png_path`, `pdf_path`, `stats` jsonb, `generated_by` FK,
   `generated_at`). **RLS**: member SELECT, editor INSERT (via edge fn / SECURITY DEFINER).
-- **Client `src/features/scrapbook/`** — `api.ts` (invoke edge fn, await, list) + hook +
-  `ScrapbookButton`, `ScrapbookViewer` (preview PNG + download/share PNG and PDF),
-  `ScrapbookSection`.
+- **Client `src/features/scrapbook/`** — `ScrapbookCard` (Skia → PNG), `api.ts` (upload PNG,
+  invoke edge fn, await, list) + hook + `ScrapbookButton`, `ScrapbookViewer` (preview PNG +
+  download/share PNG and PDF), `ScrapbookSection`.
 - i18n `scrapbook.*`.
 - **Native**: none (sharing/file-system from 4A). OTA. Edge function is the heavy piece.
 

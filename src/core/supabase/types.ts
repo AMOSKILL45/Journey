@@ -944,6 +944,45 @@ export type Database = {
         };
         Relationships: [];
       };
+      reports: {
+        Row: {
+          created_at: string;
+          details: string | null;
+          id: string;
+          reason: string;
+          reporter_id: string;
+          resolved_at: string | null;
+          resolved_by: string | null;
+          status: string;
+          target_id: string;
+          target_type: string;
+        };
+        Insert: {
+          created_at?: string;
+          details?: string | null;
+          id?: string;
+          reason: string;
+          reporter_id: string;
+          resolved_at?: string | null;
+          resolved_by?: string | null;
+          status?: string;
+          target_id: string;
+          target_type: string;
+        };
+        Update: {
+          created_at?: string;
+          details?: string | null;
+          id?: string;
+          reason?: string;
+          reporter_id?: string;
+          resolved_at?: string | null;
+          resolved_by?: string | null;
+          status?: string;
+          target_id?: string;
+          target_type?: string;
+        };
+        Relationships: [];
+      };
       scrapbooks: {
         Row: {
           generated_at: string;
@@ -1108,6 +1147,35 @@ export type Database = {
           },
         ];
       };
+      trip_discovery_index: {
+        Row: {
+          countries: string[] | null;
+          date_range: unknown;
+          geo_bbox: unknown;
+          trip_id: string;
+        };
+        Insert: {
+          countries?: string[] | null;
+          date_range?: unknown;
+          geo_bbox?: unknown;
+          trip_id: string;
+        };
+        Update: {
+          countries?: string[] | null;
+          date_range?: unknown;
+          geo_bbox?: unknown;
+          trip_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'trip_discovery_index_trip_id_fkey';
+            columns: ['trip_id'];
+            isOneToOne: true;
+            referencedRelation: 'trips';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       trip_invitations: {
         Row: {
           accepted_at: string | null;
@@ -1162,6 +1230,68 @@ export type Database = {
           },
           {
             foreignKeyName: 'trip_invitations_trip_id_fkey';
+            columns: ['trip_id'];
+            isOneToOne: false;
+            referencedRelation: 'trips';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      trip_join_requests: {
+        Row: {
+          contact_exchanged_at: string | null;
+          created_at: string;
+          expires_at: string | null;
+          id: string;
+          match_score: number | null;
+          message: string | null;
+          proposed_milestones: string[] | null;
+          proposed_segment_end: string | null;
+          proposed_segment_start: string | null;
+          requester_id: string;
+          responded_at: string | null;
+          responded_by: string | null;
+          response_message: string | null;
+          status: string;
+          trip_id: string;
+        };
+        Insert: {
+          contact_exchanged_at?: string | null;
+          created_at?: string;
+          expires_at?: string | null;
+          id?: string;
+          match_score?: number | null;
+          message?: string | null;
+          proposed_milestones?: string[] | null;
+          proposed_segment_end?: string | null;
+          proposed_segment_start?: string | null;
+          requester_id: string;
+          responded_at?: string | null;
+          responded_by?: string | null;
+          response_message?: string | null;
+          status?: string;
+          trip_id: string;
+        };
+        Update: {
+          contact_exchanged_at?: string | null;
+          created_at?: string;
+          expires_at?: string | null;
+          id?: string;
+          match_score?: number | null;
+          message?: string | null;
+          proposed_milestones?: string[] | null;
+          proposed_segment_end?: string | null;
+          proposed_segment_start?: string | null;
+          requester_id?: string;
+          responded_at?: string | null;
+          responded_by?: string | null;
+          response_message?: string | null;
+          status?: string;
+          trip_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'trip_join_requests_trip_id_fkey';
             columns: ['trip_id'];
             isOneToOne: false;
             referencedRelation: 'trips';
@@ -1420,6 +1550,27 @@ export type Database = {
             referencedColumns: ['id'];
           },
         ];
+      };
+      user_blocks: {
+        Row: {
+          blocked_id: string;
+          blocker_id: string;
+          created_at: string;
+          reason: string | null;
+        };
+        Insert: {
+          blocked_id: string;
+          blocker_id: string;
+          created_at?: string;
+          reason?: string | null;
+        };
+        Update: {
+          blocked_id?: string;
+          blocker_id?: string;
+          created_at?: string;
+          reason?: string | null;
+        };
+        Relationships: [];
       };
       user_push_tokens: {
         Row: {
@@ -1822,6 +1973,32 @@ export type Database = {
         Returns: boolean;
       };
       geomfromewkt: { Args: { '': string }; Returns: unknown };
+      get_public_profile: {
+        Args: { p_user_id: string };
+        Returns: {
+          age_range: string;
+          avatar_color: string;
+          avatar_sprite_id: string;
+          badges: Json;
+          bio: string;
+          countries_visited: string[];
+          display_name: string;
+          gender: string;
+          id: string;
+          is_verified: boolean;
+          username: string;
+          verification_level: number;
+        }[];
+      };
+      get_trip_member_profiles: {
+        Args: { p_trip_id: string };
+        Returns: {
+          avatar_color: string;
+          avatar_sprite_id: string;
+          display_name: string;
+          id: string;
+        }[];
+      };
       gettransactionid: { Args: never; Returns: unknown };
       is_trip_editor: { Args: { trip: string; uid: string }; Returns: boolean };
       is_trip_member: { Args: { trip: string; uid: string }; Returns: boolean };

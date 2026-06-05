@@ -18,8 +18,11 @@ export {
   listMembers,
 } from './api/members';
 export type { TripInvitation, TripMember, TripMemberWithProfile } from './api/members';
+export { fetchPublicMilestones, fetchPublicTripByToken } from './api/publicTrip';
 export { TripCard } from './components/TripCard';
 export { InviteMemberForm } from './components/InviteMemberForm';
 export { MembersList } from './components/MembersList';
 export { CreateTripScreen } from './screens/CreateTripScreen';
+export { PublicTripScreen } from './screens/PublicTripScreen';
+export type { PublicTripScreenProps } from './screens/PublicTripScreen';
 export { TripDetailScreen } from './screens/TripDetailScreen';

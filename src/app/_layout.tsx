@@ -35,12 +35,35 @@ const QUERY_STALE_MS = 60_000;
 
 SplashScreen.preventAutoHideAsync();
 
-function handleDeepLink(url: string): void {
+// Public trip share links use the shorthand path `t/<token>` (journey://t/<token>),
+// which doesn't map to a route file directly — `(public)/trip/[token]` lives at
+// `/trip/<token>`. Extract the token so the handler can rewrite the path.
+export function parsePublicTripToken(url: string): string | null {
+  let path: string | null = null;
+  try {
+    path = Linking.parse(url).path;
+  } catch {
+    path = null;
+  }
+  if (!path) return null;
+  const segments = path.replace(/^\/+/, '').split('/');
+  if (segments.length === 2 && segments[0] === 't' && segments[1]) {
+    return segments[1];
+  }
+  return null;
+}
+
+function handleDeepLink(url: string, navigate: (href: string) => void): void {
   // Auth callback tokens live in the URL fragment (#access_token=…) which
   // expo-router doesn't expose to screens, so we still parse them globally.
   // Invite tokens live in the path (/invite/<token>) and are handled by the
   // src/app/invite/[token].tsx screen via useLocalSearchParams.
   handleAuthDeepLink(url);
+  // Public trip view: rewrite the `t/<token>` shorthand to the `(public)` route.
+  const publicTripToken = parsePublicTripToken(url);
+  if (publicTripToken) {
+    navigate(`/trip/${publicTripToken}`);
+  }
 }
 
 function handleAuthDeepLink(url: string): void {
@@ -91,12 +114,13 @@ export default function RootLayout() {
   useEffect(() => initReduceMotion(), []);
 
   useEffect(() => {
-    const sub = Linking.addEventListener('url', ({ url }) => handleDeepLink(url));
+    const navigate = (href: string) => router.push(href as Parameters<typeof router.push>[0]);
+    const sub = Linking.addEventListener('url', ({ url }) => handleDeepLink(url, navigate));
     void Linking.getInitialURL().then((url) => {
-      if (url) handleDeepLink(url);
+      if (url) handleDeepLink(url, navigate);
     });
     return () => sub.remove();
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     const unsub = addNotificationTapHandler((tripId) => router.push(`/(modals)/trip/${tripId}`));
@@ -145,6 +169,7 @@ export default function RootLayout() {
             <Stack.Screen name="(auth)" />
             <Stack.Screen name="auth/callback" />
             <Stack.Screen name="invite/[token]" />
+            <Stack.Screen name="(public)/trip/[token]" />
             <Stack.Screen name="(tabs)" />
             <Stack.Screen
               name="(modals)/onboarding"

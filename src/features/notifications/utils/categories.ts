@@ -6,6 +6,7 @@ export const NOTIFICATION_CATEGORIES = [
   'join',
   'polls',
   'achievements',
+  'time_capsule',
 ] as const;
 
 export type NotificationCategory = (typeof NOTIFICATION_CATEGORIES)[number];

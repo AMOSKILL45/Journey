@@ -403,7 +403,8 @@
       "life_reminders": "Rappels perso",
       "join": "Arrivées dans l'équipe",
       "polls": "Sondages",
-      "achievements": "Succès"
+      "achievements": "Succès",
+      "time_capsule": "Capsules temporelles"
     },
     "settings": {
       "title": "Notifications",
@@ -778,5 +779,48 @@
       "shareTitle": "Partage impossible",
       "shareBody": "Impossible d’ouvrir la fenêtre de partage. Veuillez réessayer."
     }
+  },
+  "boss": {
+    "cleared": "BOSS VAINCU !",
+    "subtitle": "Tu as conquis %{milestone}",
+    "skip": "Touche pour continuer"
+  },
+  "timeCapsules": {
+    "create": {
+      "title": "Sceller une capsule temporelle",
+      "seal": "Sceller la capsule",
+      "messageLabel": "Ton message",
+      "messagePlaceholder": "Écris un message pour le futur…",
+      "triggerDate": "À une date",
+      "triggerMilestone": "À une étape",
+      "recipientLabel": "Pour",
+      "recipientEveryone": "Tout le monde"
+    },
+    "sealed": "Scellée",
+    "opensIn": "S'ouvre dans %{days} j",
+    "opensAtMilestone": "S'ouvre quand tu atteins cette étape",
+    "open": "Ouvrir",
+    "empty": "Aucune capsule pour l'instant — scelle un message pour vos futurs vous.",
+    "notif": {
+      "title": "Une capsule s'est ouverte",
+      "body": "Touche pour la lire"
+    }
+  },
+  "caravan": {
+    "lead": "Mener la caravane",
+    "leading": "Aux commandes",
+    "stop": "Arrêter",
+    "join": "Rejoindre %{name}",
+    "following": "Tu suis %{name}",
+    "break": "Touche pour quitter"
+  },
+  "encounters": {
+    "title": "RENCONTRE ALÉATOIRE !",
+    "surprise": "Surprends-moi",
+    "add": "Ajouter au voyage",
+    "dismiss": "Ignorer",
+    "none": "Aucune rencontre à proximité — essaie un autre endroit.",
+    "error": "Service carto injoignable. Réessayer ?",
+    "retry": "Réessayer"
   }
 }

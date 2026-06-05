@@ -4,6 +4,9 @@ export const SOUND_IDS = [
   'milestone_powerup',
   'button_blip',
   'toggle_click',
+  'boss_cleared',
+  'capsule_open',
+  'encounter',
 ] as const;
 export type SoundId = (typeof SOUND_IDS)[number];
 
@@ -13,6 +16,9 @@ export const SOUND_CATEGORY: Record<SoundId, 'ui' | 'event'> = {
   milestone_powerup: 'event',
   button_blip: 'ui',
   toggle_click: 'ui',
+  boss_cleared: 'event',
+  capsule_open: 'event',
+  encounter: 'event',
 };
 
 // require() entries are added here when real CC0 files land in src/assets/sounds/.

@@ -403,7 +403,8 @@
       "life_reminders": "Life reminders",
       "join": "Crew joins",
       "polls": "Polls",
-      "achievements": "Achievements"
+      "achievements": "Achievements",
+      "time_capsule": "Time capsules"
     },
     "settings": {
       "title": "Notifications",
@@ -778,5 +779,48 @@
       "shareTitle": "Couldn’t share",
       "shareBody": "We couldn’t open the share sheet. Please try again."
     }
+  },
+  "boss": {
+    "cleared": "BOSS CLEARED!",
+    "subtitle": "You conquered %{milestone}",
+    "skip": "Tap to continue"
+  },
+  "timeCapsules": {
+    "create": {
+      "title": "Seal a time capsule",
+      "seal": "Seal capsule",
+      "messageLabel": "Your message",
+      "messagePlaceholder": "Write a message to the future…",
+      "triggerDate": "On a date",
+      "triggerMilestone": "At a milestone",
+      "recipientLabel": "For",
+      "recipientEveryone": "Everyone"
+    },
+    "sealed": "Sealed",
+    "opensIn": "Opens in %{days} d",
+    "opensAtMilestone": "Opens when you reach this stop",
+    "open": "Open",
+    "empty": "No time capsules yet — seal a message to your future selves.",
+    "notif": {
+      "title": "A time capsule opened",
+      "body": "Tap to read it"
+    }
+  },
+  "caravan": {
+    "lead": "Lead caravan",
+    "leading": "Leading",
+    "stop": "Stop",
+    "join": "Join %{name}",
+    "following": "Following %{name}",
+    "break": "Tap to break"
+  },
+  "encounters": {
+    "title": "RANDOM ENCOUNTER!",
+    "surprise": "Surprise me",
+    "add": "Add to trip",
+    "dismiss": "Dismiss",
+    "none": "No encounters nearby — try another spot.",
+    "error": "Couldn't reach the map service. Retry?",
+    "retry": "Retry"
   }
 }

@@ -1,6 +1,8 @@
 import { ScrollView, View } from 'react-native';
 import Svg from 'react-native-svg';
 
+import { DistancePill, legKey, useTripDistances } from '@features/enrichment';
+
 import type { Milestone } from '../api/milestones';
 import { nodePosition, NODE_RADIUS, totalPathHeight } from '../utils/pathLayout';
 
@@ -15,6 +17,9 @@ export interface PathViewProps {
 }
 
 const PATH_WIDTH = 320;
+// Half-extents used to center a distance pill on an edge midpoint.
+const PILL_HALF_WIDTH = 36;
+const PILL_HALF_HEIGHT = 10;
 
 function computeStates(milestones: Milestone[], checkedInIds: Set<string>) {
   // First non-checked-in milestone = current, all before = completed, after = locked
@@ -38,6 +43,11 @@ export function PathView({
 }: PathViewProps) {
   const states = computeStates(milestones, checkedInIds);
   const height = totalPathHeight(milestones.length);
+
+  // Trip-level enrichment trigger: fires the single enrich_milestone call (fills weather_cache
+  // AND milestone_legs) and exposes the keyed legs for the per-edge distance pills.
+  const tripId = milestones[0]?.trip_id;
+  const { byKey } = useTripDistances(tripId ?? '', { autoEnrich: Boolean(tripId) });
 
   return (
     <ScrollView contentContainerStyle={{ height, width: '100%' }}>
@@ -75,6 +85,25 @@ export function PathView({
                 onPress={() => onNodePress?.(m)}
                 onLongPress={() => onNodeLongPress?.(m)}
               />
+            </View>
+          );
+        })}
+        {milestones.slice(0, -1).map((m, i) => {
+          const leg = byKey.get(legKey(m.id, milestones[i + 1].id));
+          if (!leg) return null;
+          const from = nodePosition(i);
+          const to = nodePosition(i + 1);
+          return (
+            <View
+              key={`pill-${m.id}`}
+              style={{
+                position: 'absolute',
+                left: (from.x + to.x) / 2 - PILL_HALF_WIDTH,
+                top: (from.y + to.y) / 2 - PILL_HALF_HEIGHT,
+              }}
+              pointerEvents="none"
+            >
+              <DistancePill distanceM={leg.distance_m} durationS={leg.duration_s} />
             </View>
           );
         })}

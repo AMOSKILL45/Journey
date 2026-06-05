@@ -2,6 +2,7 @@ import { Image } from 'expo-image';
 import { Pressable, View } from 'react-native';
 
 import { findSpriteById } from '@assets/sprites/milestones/manifest';
+import { WeatherBadge, useMilestoneWeather } from '@features/enrichment';
 import { haptics } from '@features/feedback';
 import { cn } from '@shared/utils/cn';
 
@@ -35,6 +36,10 @@ export function MilestoneNode({ milestone, state, onPress, onLongPress }: Milest
   const sprite = milestone.sprite_id ? findSpriteById(milestone.sprite_id) : undefined;
   const sizeBoost = milestone.is_boss ? 1.35 : 1;
   const size = NODE_RADIUS * 2 * sizeBoost;
+
+  // Read-only weather (the trip-level useTripDistances in PathView triggers the single enrich
+  // that fills both weather_cache and milestone_legs — never auto-enrich per node).
+  const { data: weather } = useMilestoneWeather(milestone.id, { autoEnrich: false });
 
   const handlePress = () => {
     if (state === 'locked') {
@@ -84,6 +89,14 @@ export function MilestoneNode({ milestone, state, onPress, onLongPress }: Milest
           />
         ) : null}
       </View>
+      {weather ? (
+        <View style={{ position: 'absolute', top: -8, right: -8 }} pointerEvents="none">
+          <WeatherBadge
+            weatherCode={weather.payload.weatherCode}
+            temperatureC={weather.payload.temperatureC}
+          />
+        </View>
+      ) : null}
     </Pressable>
   );
 }

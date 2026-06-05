@@ -1,4 +1,35 @@
 {
+  "social": {
+    "visibility": {
+      "private": "Privé",
+      "unlisted": "Non répertorié",
+      "publicView": "Vue publique",
+      "openToJoinSoon": "Ouvert aux participants (bientôt)",
+      "explainer": "Toute personne ayant le lien peut voir ton parcours. Documents, checklists, photos et positions en direct restent toujours privés.",
+      "confirmTitle": "Rendre ce voyage visible ?",
+      "confirmBody": "Toute personne ayant le lien verra le nom et le parcours du voyage. Tes documents, checklists, photos, membres et positions en direct restent privés.",
+      "copyLink": "Copier le lien public",
+      "linkCopied": "Lien copié",
+      "changed": "Visibilité mise à jour"
+    },
+    "public": {
+      "viewOnly": "Tu consultes un voyage partagé",
+      "badge": "Lecture seule",
+      "askToJoin": "Demander à rejoindre",
+      "askToJoinSoon": "Rejoindre des voyages arrive bientôt",
+      "anonymous": "Un voyageur",
+      "notPublic": "Ce voyage n'est pas public."
+    },
+    "profile": {
+      "makePublic": "Rendre mon profil public",
+      "publicNote": "Le public voit ton nom, avatar, bio, pays et badges. Ton téléphone, passeport, nom légal et âge ne sont jamais partagés.",
+      "private": "Ce profil est privé.",
+      "showGender": "Montrer mon identité",
+      "showAge": "Montrer ma tranche d’âge",
+      "madePublic": "Profil désormais public",
+      "verified": "Vérifié"
+    }
+  },
   "feedback": {
     "settings": {
       "title": "Son & vibrations"

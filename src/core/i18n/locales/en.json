@@ -1,4 +1,35 @@
 {
+  "social": {
+    "visibility": {
+      "private": "Private",
+      "unlisted": "Unlisted",
+      "publicView": "Public view",
+      "openToJoinSoon": "Open to join (soon)",
+      "explainer": "Anyone with the link can view your path. Documents, checklists, photos and live locations always stay private.",
+      "confirmTitle": "Make this trip viewable?",
+      "confirmBody": "Anyone with the link will see your trip name and path. Your documents, checklists, photos, members and live locations stay private.",
+      "copyLink": "Copy public link",
+      "linkCopied": "Link copied",
+      "changed": "Visibility updated"
+    },
+    "public": {
+      "viewOnly": "You're viewing a shared trip",
+      "badge": "View only",
+      "askToJoin": "Ask to join",
+      "askToJoinSoon": "Joining trips is coming soon",
+      "anonymous": "A traveler",
+      "notPublic": "This trip isn't public."
+    },
+    "profile": {
+      "makePublic": "Make my profile public",
+      "publicNote": "Public shows your name, avatar, bio, countries and badges. Your phone, passport, legal name and age are never shared.",
+      "private": "This profile is private.",
+      "showGender": "Show my identity",
+      "showAge": "Show my age range",
+      "madePublic": "Profile is now public",
+      "verified": "Verified"
+    }
+  },
   "feedback": {
     "settings": {
       "title": "Sound & Haptics"

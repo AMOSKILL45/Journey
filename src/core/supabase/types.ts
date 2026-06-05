@@ -420,6 +420,27 @@ export type Database = {
           },
         ];
       };
+      encounter_cache: {
+        Row: {
+          cache_key: string;
+          expires_at: string;
+          fetched_at: string;
+          results: Json;
+        };
+        Insert: {
+          cache_key: string;
+          expires_at: string;
+          fetched_at?: string;
+          results: Json;
+        };
+        Update: {
+          cache_key?: string;
+          expires_at?: string;
+          fetched_at?: string;
+          results?: Json;
+        };
+        Relationships: [];
+      };
       milestone_legs: {
         Row: {
           computed_at: string;
@@ -985,6 +1006,70 @@ export type Database = {
         };
         Relationships: [];
       };
+      time_capsules: {
+        Row: {
+          author_id: string;
+          created_at: string;
+          id: string;
+          message: string;
+          milestone_id: string | null;
+          notified_at: string | null;
+          open_after: string | null;
+          open_at_milestone: string | null;
+          opened_at: string | null;
+          recipient_id: string | null;
+          trip_id: string;
+        };
+        Insert: {
+          author_id: string;
+          created_at?: string;
+          id?: string;
+          message: string;
+          milestone_id?: string | null;
+          notified_at?: string | null;
+          open_after?: string | null;
+          open_at_milestone?: string | null;
+          opened_at?: string | null;
+          recipient_id?: string | null;
+          trip_id: string;
+        };
+        Update: {
+          author_id?: string;
+          created_at?: string;
+          id?: string;
+          message?: string;
+          milestone_id?: string | null;
+          notified_at?: string | null;
+          open_after?: string | null;
+          open_at_milestone?: string | null;
+          opened_at?: string | null;
+          recipient_id?: string | null;
+          trip_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'time_capsules_milestone_id_fkey';
+            columns: ['milestone_id'];
+            isOneToOne: false;
+            referencedRelation: 'milestones';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'time_capsules_open_at_milestone_fkey';
+            columns: ['open_at_milestone'];
+            isOneToOne: false;
+            referencedRelation: 'milestones';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'time_capsules_trip_id_fkey';
+            columns: ['trip_id'];
+            isOneToOne: false;
+            referencedRelation: 'trips';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       trip_checklists: {
         Row: {
           created_at: string;
@@ -1444,6 +1529,10 @@ export type Database = {
       };
     };
     Functions: {
+      _capsule_is_open: {
+        Args: { p_open_after: string; p_open_at_milestone: string };
+        Returns: boolean;
+      };
       _evaluate_achievements: {
         Args: { p_uid: string };
         Returns: {
@@ -1736,7 +1825,22 @@ export type Database = {
       gettransactionid: { Args: never; Returns: unknown };
       is_trip_editor: { Args: { trip: string; uid: string }; Returns: boolean };
       is_trip_member: { Args: { trip: string; uid: string }; Returns: boolean };
+      list_trip_capsules: {
+        Args: { p_trip_id: string };
+        Returns: {
+          author_id: string;
+          created_at: string;
+          id: string;
+          is_open: boolean;
+          message: string;
+          open_after: string;
+          open_at_milestone: string;
+          opened_at: string;
+          recipient_id: string;
+        }[];
+      };
       longtransactionsenabled: { Args: never; Returns: boolean };
+      open_time_capsule: { Args: { p_capsule_id: string }; Returns: string };
       populate_geometry_columns:
         | { Args: { tbl_oid: unknown; use_typmod?: boolean }; Returns: number }
         | { Args: { use_typmod?: boolean }; Returns: string };

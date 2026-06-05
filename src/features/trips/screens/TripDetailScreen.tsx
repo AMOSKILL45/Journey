@@ -43,11 +43,26 @@ import { PixelCard } from '@shared/components/PixelCard';
 import { PixelText } from '@shared/components/PixelText';
 import { SCREEN_PADDING } from '@shared/constants/layout';
 
-import { deleteTrip } from '../api/trips';
+import { deleteTrip, setTripVisibility, type TripVisibility } from '../api/trips';
 import { InviteMemberForm } from '../components/InviteMemberForm';
 import { MembersList } from '../components/MembersList';
+import { VisibilityControl } from '../components/VisibilityControl';
 import { useTrip } from '../hooks/useTrip';
+import { useTripMembers } from '../hooks/useTripMembers';
 import { TRIPS_QUERY_KEY } from '../hooks/useTrips';
+
+const TRIP_VISIBILITIES: readonly TripVisibility[] = [
+  'private',
+  'unlisted',
+  'public_view',
+  'open_to_join',
+];
+
+function toTripVisibility(value: string | null): TripVisibility {
+  return (TRIP_VISIBILITIES as readonly string[]).includes(value ?? '')
+    ? (value as TripVisibility)
+    : 'private';
+}
 
 const EMPTY_MEMBERS: PresenceMember[] = [];
 
@@ -87,6 +102,7 @@ export function TripDetailScreen() {
 
   // Live presence: track self + read other members for the avatars layer.
   const { data: profile } = useProfile();
+  const { data: members = [] } = useTripMembers(tripId);
   const sharing = useLocationSharing(tripId);
   const currentMilestoneId = useMemo(() => {
     for (let i = milestones.length - 1; i >= 0; i -= 1) {
@@ -172,6 +188,22 @@ export function TripDetailScreen() {
       void qc.invalidateQueries({ queryKey: tripCheckinsQueryKey(tripId) });
     },
   });
+
+  // Visibility is an owner/editor-only control (RLS enforces it server-side too).
+  const visibility = useMutation({
+    mutationFn: (next: TripVisibility) => setTripVisibility(tripId, next),
+    onSuccess: (updated) => {
+      qc.setQueryData(['trips', tripId], updated);
+      void qc.invalidateQueries({ queryKey: TRIPS_QUERY_KEY });
+    },
+  });
+
+  const myRole = useMemo(
+    () => members.find((m) => m.user_id === profile?.id)?.role ?? null,
+    [members, profile?.id],
+  );
+  const canManageVisibility =
+    (!!profile && trip?.owner_id === profile.id) || myRole === 'owner' || myRole === 'editor';
 
   if (isLoading || !trip) {
     return (
@@ -290,6 +322,16 @@ export function TripDetailScreen() {
           {t('trips.detail.members')}
         </PixelText>
         <MembersList tripId={trip.id} />
+
+        {canManageVisibility ? (
+          <View className="mt-6">
+            <VisibilityControl
+              visibility={toTripVisibility(trip.visibility)}
+              shareToken={trip.share_token}
+              onChange={(next) => visibility.mutate(next)}
+            />
+          </View>
+        ) : null}
 
         <View className="mt-4">
           <SharingControls tripId={trip.id} />

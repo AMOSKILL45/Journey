@@ -20,7 +20,6 @@ import {
   milestonesQueryKey,
   type Milestone,
 } from '@features/milestones';
-import { PhotoSection } from '@features/photos';
 import { PollsSection } from '@features/polls';
 import { useProfile } from '@features/profile';
 import {
@@ -267,14 +266,6 @@ export function TripDetailScreen() {
         </View>
 
         <View className="mt-6">
-          <PhotoSection
-            tripId={trip.id}
-            currentUserId={profile?.id ?? null}
-            canManage={trip.owner_id === profile?.id}
-          />
-        </View>
-
-        <View className="mt-6">
           <PollsSection tripId={trip.id} />
         </View>
 
@@ -283,6 +274,16 @@ export function TripDetailScreen() {
         </View>
 
         <View className="mt-6">
+          <PixelButton
+            variant="secondary"
+            onPress={() => router.push(`/(modals)/photos/${trip.id}`)}
+            fullWidth
+          >
+            {t('photos.title')}
+          </PixelButton>
+        </View>
+
+        <View className="mt-3">
           <PixelButton
             variant="secondary"
             onPress={() => router.push(`/(modals)/documents/${trip.id}`)}

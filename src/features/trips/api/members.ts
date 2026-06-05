@@ -13,12 +13,37 @@ export interface TripMemberWithProfile extends TripMember {
 }
 
 export async function listMembers(tripId: string): Promise<TripMemberWithProfile[]> {
-  const { data, error } = await supabase
+  // The base `profiles` SELECT is own-only (PII hardening, Phase 9C) so a nested
+  // `profile:profiles(...)` embed returns null for everyone but the caller. Read
+  // membership rows plainly, then fetch the safe member-profile subset through the
+  // grant-hardened SECURITY DEFINER RPC and merge by user_id.
+  const { data: rows, error } = await supabase
     .from('trip_members')
-    .select('*, profile:profiles(display_name, avatar_sprite_id, avatar_color)')
+    .select('*')
     .eq('trip_id', tripId);
   if (error) throw error;
-  return (data ?? []) as unknown as TripMemberWithProfile[];
+  const members = (rows ?? []) as TripMember[];
+
+  const { data: profiles, error: profilesError } = await supabase.rpc('get_trip_member_profiles', {
+    p_trip_id: tripId,
+  });
+  if (profilesError) throw profilesError;
+
+  const profileById = new Map<string, TripMemberWithProfile['profile']>(
+    (profiles ?? []).map((p) => [
+      p.id,
+      {
+        display_name: p.display_name,
+        avatar_sprite_id: p.avatar_sprite_id,
+        avatar_color: p.avatar_color,
+      },
+    ]),
+  );
+
+  return members.map((member) => ({
+    ...member,
+    profile: profileById.get(member.user_id) ?? null,
+  }));
 }
 
 export async function listInvitations(tripId: string): Promise<TripInvitation[]> {

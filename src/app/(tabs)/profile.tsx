@@ -7,6 +7,10 @@ import { useAuth } from '@features/auth';
 import { FeedbackSettings } from '@features/feedback';
 import { NotificationSettings } from '@features/notifications';
 import { useProfile } from '@features/profile';
+import {
+  ProfileVisibilityToggle,
+  type ProfileVisibility,
+} from '@features/profile/components/ProfileVisibilityToggle';
 import { PixelButton } from '@shared/components/PixelButton';
 import { PixelCard } from '@shared/components/PixelCard';
 import { PixelText } from '@shared/components/PixelText';
@@ -15,8 +19,10 @@ export default function ProfileTab() {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
   const { logOut, pending } = useAuth();
-  const { data: profile } = useProfile();
+  const { data: profile, updateProfile } = useProfile();
   const router = useRouter();
+
+  const visibility: ProfileVisibility = profile?.visibility === 'public' ? 'public' : 'private';
 
   return (
     <ScrollView
@@ -43,6 +49,25 @@ export default function ProfileTab() {
       </PixelCard>
       <PixelCard padding="lg" className="mb-6">
         <FeedbackSettings />
+      </PixelCard>
+      <PixelCard padding="lg" className="mb-6">
+        <PixelText size="h2" className="mb-2">
+          {t('social.profile.makePublic')}
+        </PixelText>
+        <ProfileVisibilityToggle
+          visibility={visibility}
+          showGender={profile?.gender_visible_in_public ?? false}
+          showAge={profile?.show_age_in_public ?? false}
+          onChange={(next) => {
+            void updateProfile({ visibility: next });
+          }}
+          onChangeGender={(next) => {
+            void updateProfile({ gender_visible_in_public: next });
+          }}
+          onChangeAge={(next) => {
+            void updateProfile({ show_age_in_public: next });
+          }}
+        />
       </PixelCard>
       <PixelButton
         variant="secondary"

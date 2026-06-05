@@ -7,14 +7,17 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTranslation } from '@core/i18n';
 import { ExportTripButton } from '@features/calendar-export';
 import { TripReadinessCard } from '@features/checklists';
+import { EncounterCard, SurpriseButton, useEncounters, type Encounter } from '@features/encounters';
 import { MapModeToggle, TripMapView, type MapMode } from '@features/map';
 import {
+  BossClearPresenter,
   CheckinAnim,
   MilestoneCreationSheet,
   type MilestoneCreationSheetRef,
   PathView,
   createCheckin,
   tripCheckinsQueryKey,
+  useBossCutscene,
   useMilestones,
   useTripCheckinMilestoneIds,
   milestonesQueryKey,
@@ -34,6 +37,7 @@ import {
 } from '@features/realtime';
 import { ScrapbookSection } from '@features/scrapbook';
 import { SmartTipsSection } from '@features/smart-reminders';
+import { TimeCapsulesSection } from '@features/time-capsules';
 import { PixelButton } from '@shared/components/PixelButton';
 import { PixelCard } from '@shared/components/PixelCard';
 import { PixelText } from '@shared/components/PixelText';
@@ -62,6 +66,24 @@ export function TripDetailScreen() {
   const [deleteError, setDeleteError] = useState<string | null>(null);
   const [animMilestoneId, setAnimMilestoneId] = useState<string | null>(null);
   const [viewMode, setViewMode] = useState<MapMode>('path');
+  const bossCutscene = useBossCutscene();
+  const milestonesById = useMemo(() => {
+    const map = new Map<string, Milestone>();
+    for (const m of milestones) map.set(m.id, m);
+    return map;
+  }, [milestones]);
+
+  // Random encounters ("surprise me"): anchored at the latest reached milestone with
+  // coordinates, falling back to any milestone with coords. Manual-trigger only.
+  const encounters = useEncounters(tripId);
+  const [encounter, setEncounter] = useState<Encounter | null>(null);
+  const encounterAnchor = useMemo<{ lat: number; lng: number } | null>(() => {
+    for (let i = milestones.length - 1; i >= 0; i -= 1) {
+      const m = milestones[i];
+      if (m.lat != null && m.lng != null) return { lat: m.lat, lng: m.lng };
+    }
+    return null;
+  }, [milestones]);
 
   // Live presence: track self + read other members for the avatars layer.
   const { data: profile } = useProfile();
@@ -140,6 +162,11 @@ export function TripDetailScreen() {
       if (ctx?.previous) qc.setQueryData(tripCheckinsQueryKey(tripId), ctx.previous);
       setAnimMilestoneId(null);
     },
+    onSuccess: (_data, milestoneId: string) => {
+      // Queue the boss-clear cutscene; the hook ignores non-boss milestones.
+      const m = milestonesById.get(milestoneId);
+      if (m) bossCutscene.onCheckin({ id: m.id, name: m.name, is_boss: m.is_boss });
+    },
     onSettled: () => {
       void qc.invalidateQueries({ queryKey: milestonesQueryKey(tripId) });
       void qc.invalidateQueries({ queryKey: tripCheckinsQueryKey(tripId) });
@@ -173,6 +200,17 @@ export function TripDetailScreen() {
         onPress: () => checkin.mutate(milestone.id),
       },
     ]);
+  };
+
+  const handleSurprise = () => {
+    if (!encounterAnchor) return;
+    encounters.find.mutate(encounterAnchor, {
+      onSuccess: (results) => setEncounter(results[0] ?? null),
+    });
+  };
+
+  const handleAddEncounter = (enc: Encounter) => {
+    encounters.add.mutate(enc, { onSuccess: () => setEncounter(null) });
   };
 
   return (
@@ -270,6 +308,41 @@ export function TripDetailScreen() {
         </View>
 
         <View className="mt-6">
+          <TimeCapsulesSection tripId={trip.id} />
+        </View>
+
+        {encounterAnchor ? (
+          <View className="mt-6 gap-3">
+            <SurpriseButton onPress={handleSurprise} loading={encounters.find.isPending} />
+            {encounter ? (
+              <EncounterCard
+                encounter={encounter}
+                onAdd={handleAddEncounter}
+                onDismiss={() => setEncounter(null)}
+                adding={encounters.add.isPending}
+              />
+            ) : null}
+            {!encounter &&
+            encounters.find.isSuccess &&
+            (encounters.find.data?.length ?? 0) === 0 ? (
+              <PixelText size="small" className="text-center text-text-secondary">
+                {t('encounters.none')}
+              </PixelText>
+            ) : null}
+            {encounters.find.isError ? (
+              <View className="items-center gap-2">
+                <PixelText size="small" className="text-center text-error">
+                  {t('encounters.error')}
+                </PixelText>
+                <PixelButton variant="ghost" onPress={handleSurprise}>
+                  {t('encounters.retry')}
+                </PixelButton>
+              </View>
+            ) : null}
+          </View>
+        ) : null}
+
+        <View className="mt-6">
           <ScrapbookSection tripId={trip.id} tripName={trip.name} />
         </View>
 
@@ -335,6 +408,8 @@ export function TripDetailScreen() {
       <MilestoneCreationSheet ref={sheetRef} tripId={tripId} />
 
       <CheckinAnim visible={animMilestoneId !== null} onComplete={() => setAnimMilestoneId(null)} />
+
+      <BossClearPresenter cutscene={bossCutscene} />
     </View>
   );
 }

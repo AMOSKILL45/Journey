@@ -54,3 +54,13 @@ export type {
 } from './components/MilestoneCreationSheet';
 export { CheckinAnim } from './components/CheckinAnim';
 export type { CheckinAnimProps } from './components/CheckinAnim';
+export { BossClearCinematic } from './components/BossClearCinematic';
+export type { BossClearCinematicProps } from './components/BossClearCinematic';
+export { BossClearPresenter } from './components/BossClearPresenter';
+export type { BossClearPresenterProps } from './components/BossClearPresenter';
+export { useBossCutscene } from './hooks/useBossCutscene';
+export type {
+  ActiveBossCutscene,
+  BossCheckinMilestone,
+  UseBossCutscene,
+} from './hooks/useBossCutscene';

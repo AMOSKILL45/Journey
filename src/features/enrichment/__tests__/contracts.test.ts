@@ -93,10 +93,12 @@ describe('enrichment runtime contracts', () => {
     expect(fs.existsSync(path.join(FUNCTIONS_DIR, EDGE_SLUG, 'index.ts'))).toBe(true);
   });
 
-  it('the edge function is secret-gated like the existing crons', () => {
+  it('the edge function authorizes the caller as a trip member before service-role work', () => {
     const fn = fs.readFileSync(path.join(FUNCTIONS_DIR, EDGE_SLUG, 'index.ts'), 'utf8');
-    expect(fn).toContain('x-webhook-secret');
-    expect(fn).toContain('verify_webhook_secret');
+    // Client-triggered (verify_jwt=true): identify the caller from their JWT, then authorize
+    // them against trip_members — NOT the cron-style x-webhook-secret gate.
+    expect(fn).toMatch(/auth\.getUser/);
+    expect(fn).toMatch(/trip_members/);
     expect(fn).toMatch(/SUPABASE_SERVICE_ROLE_KEY/);
   });
 

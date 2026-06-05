@@ -1,6 +1,8 @@
 {
   "feedback": {
-    "settings": { "title": "Son & vibrations" },
+    "settings": {
+      "title": "Son & vibrations"
+    },
     "sfx": "Effets sonores",
     "uiSounds": "Sons d'interface",
     "music": "Musique",
@@ -38,8 +40,14 @@
     "error": "Quelque chose a mal tourné"
   },
   "map": {
-    "toggle": { "path": "Chemin", "map": "Carte" },
-    "themes": { "adventure-generic": "Aventure", "usa-desert": "Désert" },
+    "toggle": {
+      "path": "Chemin",
+      "map": "Carte"
+    },
+    "themes": {
+      "adventure-generic": "Aventure",
+      "usa-desert": "Désert"
+    },
     "offline": {
       "download": "Télécharger hors-ligne",
       "downloading": "Téléchargement…",
@@ -319,7 +327,10 @@
     "linkedDoc": "📎 Document",
     "startFromTemplate": "Partir d'un template",
     "applyTemplate": "Utiliser ce template",
-    "suggestions": { "title": "Ajout rapide", "dismiss": "Masquer" },
+    "suggestions": {
+      "title": "Ajout rapide",
+      "dismiss": "Masquer"
+    },
     "delete": {
       "item": "Supprimer l'item ?",
       "checklist": "Supprimer la checklist ?",
@@ -334,7 +345,9 @@
       "homeTitle": "Tes tâches pré-voyage",
       "homeCount": "%{count} items à cocher sur tes voyages"
     },
-    "errors": { "labelRequired": "Donne un libellé à l'item." },
+    "errors": {
+      "labelRequired": "Donne un libellé à l'item."
+    },
     "templates": {
       "international": {
         "name": "Voyage international",
@@ -399,7 +412,9 @@
     }
   },
   "smartReminders": {
-    "section": { "title": "Conseils malins" },
+    "section": {
+      "title": "Conseils malins"
+    },
     "actions": {
       "done": "Fait",
       "addToChecklist": "Ajouter à la checklist",
@@ -494,7 +509,10 @@
       "dateLabel": "Date (AAAA-MM-JJ)",
       "save": "Enregistrer"
     },
-    "tabs": { "notifications": "Notifications", "life": "Rappels perso" },
+    "tabs": {
+      "notifications": "Notifications",
+      "life": "Rappels perso"
+    },
     "remindMe": "Me rappeler avant l'expiration",
     "types": {
       "passport_expiry": "Expiration du passeport",
@@ -514,7 +532,10 @@
       "paused": "Présence seule",
       "never": "Désactivée"
     },
-    "panic": { "cta": "Me cacher 1h", "active": "Caché — touchez pour reprendre" },
+    "panic": {
+      "cta": "Me cacher 1h",
+      "active": "Caché — touchez pour reprendre"
+    },
     "permission": {
       "title": "Partager ta position en direct ?",
       "body": "Journey montre ton avatar à tes compagnons de voyage pendant que vous voyagez ensemble.",
@@ -623,6 +644,139 @@
         "name": "Légende vivante",
         "description": "Planifie 10 voyages."
       }
+    }
+  },
+  "calendarExport": {
+    "title": "Exporter le calendrier",
+    "export": "Ajouter le voyage au calendrier",
+    "empty": "Aucune étape datée pour l'instant",
+    "exportA11y": "Exporter ce voyage sous forme de fichier calendrier",
+    "errorTitle": "Échec de l'export",
+    "errorBody": "Impossible de créer le fichier calendrier. Veuillez réessayer."
+  },
+  "weather": {
+    "title": "Météo",
+    "clear": "Dégagé",
+    "cloudy": "Nuageux",
+    "fog": "Brouillard",
+    "drizzle": "Bruine",
+    "rain": "Pluie",
+    "snow": "Neige",
+    "showers": "Averses",
+    "thunderstorm": "Orage",
+    "temperature": "%{value}°",
+    "unavailable": "Météo indisponible"
+  },
+  "distance": {
+    "title": "Distance",
+    "legLabel": "%{distance} · %{duration} en voiture",
+    "driving": "En voiture",
+    "unavailable": "Itinéraire indisponible"
+  },
+  "photos": {
+    "title": "Photos",
+    "count": "%{count} photos",
+    "gridLabel": "Galerie photo",
+    "openPhoto": "Ouvrir la photo",
+    "addFromLibrary": "Galerie",
+    "addFromCamera": "Appareil photo",
+    "captionLabel": "Légende",
+    "captionPlaceholder": "Raconte ce moment…",
+    "saveCaption": "Enregistrer la légende",
+    "deletePhoto": "Supprimer la photo",
+    "empty": {
+      "title": "Pas encore de photos",
+      "body": "Prends une photo ou ajoute-en une depuis ta galerie — toute l'équipe la verra."
+    },
+    "errors": {
+      "permissionDenied": "Autorisation refusée.",
+      "tooLarge": "Photo trop volumineuse (max 25 Mo).",
+      "uploadFailed": "Échec de l'envoi. Réessaie.",
+      "saveFailed": "Impossible d'enregistrer la légende.",
+      "deleteFailed": "Impossible de supprimer la photo.",
+      "captionTooLong": "Légende trop longue (max 280 caractères)."
+    }
+  },
+  "reactions": {
+    "barLabel": "Réactions",
+    "toggle": "%{emoji}, %{count} réactions",
+    "label": {
+      "heart": "Cœur",
+      "fire": "Feu",
+      "laugh": "Rire",
+      "wow": "Wow",
+      "clap": "Applaudir",
+      "star": "Étoile"
+    }
+  },
+  "polls": {
+    "section": {
+      "title": "Sondages"
+    },
+    "empty": {
+      "body": "Aucun sondage pour l'instant. Posez une question au groupe !"
+    },
+    "createCta": "Nouveau sondage",
+    "close": "Clôturer",
+    "totalVotes": "%{count} votes",
+    "optionResult": "%{pct}% · %{count}",
+    "state": {
+      "open": "Ouvert",
+      "closed": "Clôturé"
+    },
+    "create": {
+      "title": "Nouveau sondage",
+      "question": "Question",
+      "questionPlaceholder": "Où mange-t-on ce soir ?",
+      "options": "Options",
+      "optionPlaceholder": "Option %{index}",
+      "addOption": "Ajouter une option",
+      "removeOption": "Supprimer l'option",
+      "milestone": "Associer à une étape",
+      "milestoneNone": "Aucune",
+      "expiry": "Définir une date de clôture",
+      "clearExpiry": "Effacer la date de clôture",
+      "cta": "Créer le sondage"
+    },
+    "errors": {
+      "questionRequired": "Ajoutez une question.",
+      "minOptions": "Ajoutez au moins %{min} options."
+    }
+  },
+  "scrapbook": {
+    "title": "Album",
+    "subtitle": "Transformez ce voyage en souvenir à partager.",
+    "create": "Créer l’album",
+    "createA11y": "Créer un album pour ce voyage",
+    "generating": "Création…",
+    "empty": "Aucun album pour l’instant. Créez-en un pour obtenir une carte souvenir à partager et un album PDF.",
+    "open": "Ouvrir",
+    "openA11y": "Ouvrir cet album",
+    "recapLabel": "Souvenir — %{date}",
+    "card": {
+      "subtitle": "Notre aventure, ensemble"
+    },
+    "stats": {
+      "distance": "Distance",
+      "countries": "Pays",
+      "days": "Jours",
+      "checkins": "Check-ins"
+    },
+    "viewer": {
+      "title": "Votre album",
+      "previewA11y": "Aperçu de la carte souvenir",
+      "noPreview": "Aperçu indisponible.",
+      "sharePng": "Partager la carte",
+      "sharePdf": "Partager l’album PDF",
+      "pdfPending": "Album PDF indisponible"
+    },
+    "errors": {
+      "renderTitle": "Impossible de créer la carte",
+      "renderBody": "Impossible de générer la carte souvenir sur cet appareil. Veuillez réessayer.",
+      "generateTitle": "Impossible de créer l’album",
+      "generateBody": "Une erreur est survenue lors de la création de votre album. Veuillez réessayer.",
+      "shareTitle": "Partage impossible",
+      "shareBody": "Impossible d’ouvrir la fenêtre de partage. Veuillez réessayer."
     }
   }
 }

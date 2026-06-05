@@ -1,6 +1,8 @@
 {
   "feedback": {
-    "settings": { "title": "Sound & Haptics" },
+    "settings": {
+      "title": "Sound & Haptics"
+    },
     "sfx": "Sound effects",
     "uiSounds": "UI sounds",
     "music": "Music",
@@ -38,8 +40,14 @@
     "error": "Something went wrong"
   },
   "map": {
-    "toggle": { "path": "Path", "map": "Map" },
-    "themes": { "adventure-generic": "Adventure", "usa-desert": "Desert" },
+    "toggle": {
+      "path": "Path",
+      "map": "Map"
+    },
+    "themes": {
+      "adventure-generic": "Adventure",
+      "usa-desert": "Desert"
+    },
     "offline": {
       "download": "Download offline",
       "downloading": "Downloading…",
@@ -295,7 +303,10 @@
     "all": "All",
     "mine": "My checklist",
     "progress": "%{done}/%{total} done",
-    "empty": { "title": "Nothing to pack… yet", "body": "Add items or start from a template." },
+    "empty": {
+      "title": "Nothing to pack… yet",
+      "body": "Add items or start from a template."
+    },
     "scope": {
       "label": "Who does it?",
       "shared": "Shared",
@@ -316,7 +327,10 @@
     "linkedDoc": "📎 Document",
     "startFromTemplate": "Start from a template",
     "applyTemplate": "Use this template",
-    "suggestions": { "title": "Quick add", "dismiss": "Dismiss" },
+    "suggestions": {
+      "title": "Quick add",
+      "dismiss": "Dismiss"
+    },
     "delete": {
       "item": "Delete item?",
       "checklist": "Delete checklist?",
@@ -331,7 +345,9 @@
       "homeTitle": "Your pre-trip tasks",
       "homeCount": "%{count} items to tick across your trips"
     },
-    "errors": { "labelRequired": "Give the item a label." },
+    "errors": {
+      "labelRequired": "Give the item a label."
+    },
     "templates": {
       "international": {
         "name": "International trip",
@@ -396,7 +412,9 @@
     }
   },
   "smartReminders": {
-    "section": { "title": "Smart tips" },
+    "section": {
+      "title": "Smart tips"
+    },
     "actions": {
       "done": "Done",
       "addToChecklist": "Add to checklist",
@@ -480,14 +498,21 @@
     }
   },
   "lifeReminders": {
-    "screen": { "title": "Reminders", "empty": "No reminders yet.", "add": "Add reminder" },
+    "screen": {
+      "title": "Reminders",
+      "empty": "No reminders yet.",
+      "add": "Add reminder"
+    },
     "form": {
       "titleLabel": "Title",
       "titlePlaceholder": "What should we remind you about?",
       "dateLabel": "Date (YYYY-MM-DD)",
       "save": "Save"
     },
-    "tabs": { "notifications": "Notifications", "life": "Life reminders" },
+    "tabs": {
+      "notifications": "Notifications",
+      "life": "Life reminders"
+    },
     "remindMe": "Remind me before this expires",
     "types": {
       "passport_expiry": "Passport expiry",
@@ -507,7 +532,10 @@
       "paused": "Presence only",
       "never": "Off"
     },
-    "panic": { "cta": "Hide me for 1h", "active": "Hidden — tap to resume" },
+    "panic": {
+      "cta": "Hide me for 1h",
+      "active": "Hidden — tap to resume"
+    },
     "permission": {
       "title": "Share your live location?",
       "body": "Journey shows your avatar to your trip companions while you travel together.",
@@ -616,6 +644,139 @@
         "name": "Living Legend",
         "description": "Plan 10 trips."
       }
+    }
+  },
+  "calendarExport": {
+    "title": "Export calendar",
+    "export": "Add trip to calendar",
+    "empty": "No dated milestones yet",
+    "exportA11y": "Export this trip as a calendar file",
+    "errorTitle": "Export failed",
+    "errorBody": "We couldn't create the calendar file. Please try again."
+  },
+  "weather": {
+    "title": "Weather",
+    "clear": "Clear",
+    "cloudy": "Cloudy",
+    "fog": "Fog",
+    "drizzle": "Drizzle",
+    "rain": "Rain",
+    "snow": "Snow",
+    "showers": "Showers",
+    "thunderstorm": "Thunderstorm",
+    "temperature": "%{value}°",
+    "unavailable": "Weather unavailable"
+  },
+  "distance": {
+    "title": "Distance",
+    "legLabel": "%{distance} · %{duration} driving",
+    "driving": "Driving",
+    "unavailable": "Route unavailable"
+  },
+  "photos": {
+    "title": "Photos",
+    "count": "%{count} photos",
+    "gridLabel": "Photo gallery",
+    "openPhoto": "Open photo",
+    "addFromLibrary": "Library",
+    "addFromCamera": "Camera",
+    "captionLabel": "Caption",
+    "captionPlaceholder": "Say something about this moment…",
+    "saveCaption": "Save caption",
+    "deletePhoto": "Delete photo",
+    "empty": {
+      "title": "No photos yet",
+      "body": "Snap a moment or add one from your library — the whole crew will see it."
+    },
+    "errors": {
+      "permissionDenied": "Permission denied.",
+      "tooLarge": "Photo is too large (max 25 MB).",
+      "uploadFailed": "Upload failed. Please try again.",
+      "saveFailed": "Could not save the caption.",
+      "deleteFailed": "Could not delete the photo.",
+      "captionTooLong": "Caption is too long (max 280 characters)."
+    }
+  },
+  "reactions": {
+    "barLabel": "Reactions",
+    "toggle": "%{emoji}, %{count} reactions",
+    "label": {
+      "heart": "Heart",
+      "fire": "Fire",
+      "laugh": "Laugh",
+      "wow": "Wow",
+      "clap": "Clap",
+      "star": "Star"
+    }
+  },
+  "polls": {
+    "section": {
+      "title": "Polls"
+    },
+    "empty": {
+      "body": "No polls yet. Ask the group a question!"
+    },
+    "createCta": "New poll",
+    "close": "Close",
+    "totalVotes": "%{count} votes",
+    "optionResult": "%{pct}% · %{count}",
+    "state": {
+      "open": "Open",
+      "closed": "Closed"
+    },
+    "create": {
+      "title": "New poll",
+      "question": "Question",
+      "questionPlaceholder": "Where should we eat tonight?",
+      "options": "Options",
+      "optionPlaceholder": "Option %{index}",
+      "addOption": "Add option",
+      "removeOption": "Remove option",
+      "milestone": "Pin to milestone",
+      "milestoneNone": "None",
+      "expiry": "Set a closing date",
+      "clearExpiry": "Clear closing date",
+      "cta": "Create poll"
+    },
+    "errors": {
+      "questionRequired": "Add a question.",
+      "minOptions": "Add at least %{min} options."
+    }
+  },
+  "scrapbook": {
+    "title": "Scrapbook",
+    "subtitle": "Turn this trip into a shareable recap.",
+    "create": "Create scrapbook",
+    "createA11y": "Create a scrapbook for this trip",
+    "generating": "Creating…",
+    "empty": "No scrapbooks yet. Create one to get a shareable story card and a PDF album.",
+    "open": "Open",
+    "openA11y": "Open this scrapbook",
+    "recapLabel": "Recap — %{date}",
+    "card": {
+      "subtitle": "Our journey, together"
+    },
+    "stats": {
+      "distance": "Distance",
+      "countries": "Countries",
+      "days": "Days",
+      "checkins": "Check-ins"
+    },
+    "viewer": {
+      "title": "Your scrapbook",
+      "previewA11y": "Scrapbook story card preview",
+      "noPreview": "Preview unavailable.",
+      "sharePng": "Share story card",
+      "sharePdf": "Share PDF album",
+      "pdfPending": "PDF album not ready"
+    },
+    "errors": {
+      "renderTitle": "Couldn’t build the card",
+      "renderBody": "We couldn’t render the story card on this device. Please try again.",
+      "generateTitle": "Couldn’t create the scrapbook",
+      "generateBody": "Something went wrong while creating your scrapbook. Please try again.",
+      "shareTitle": "Couldn’t share",
+      "shareBody": "We couldn’t open the share sheet. Please try again."
     }
   }
 }

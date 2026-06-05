@@ -420,6 +420,58 @@ export type Database = {
           },
         ];
       };
+      milestone_legs: {
+        Row: {
+          computed_at: string;
+          distance_m: number;
+          duration_s: number;
+          from_milestone_id: string;
+          mode: string;
+          to_milestone_id: string;
+          trip_id: string;
+        };
+        Insert: {
+          computed_at?: string;
+          distance_m: number;
+          duration_s: number;
+          from_milestone_id: string;
+          mode?: string;
+          to_milestone_id: string;
+          trip_id: string;
+        };
+        Update: {
+          computed_at?: string;
+          distance_m?: number;
+          duration_s?: number;
+          from_milestone_id?: string;
+          mode?: string;
+          to_milestone_id?: string;
+          trip_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'milestone_legs_from_milestone_id_fkey';
+            columns: ['from_milestone_id'];
+            isOneToOne: false;
+            referencedRelation: 'milestones';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'milestone_legs_to_milestone_id_fkey';
+            columns: ['to_milestone_id'];
+            isOneToOne: false;
+            referencedRelation: 'milestones';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'milestone_legs_trip_id_fkey';
+            columns: ['trip_id'];
+            isOneToOne: false;
+            referencedRelation: 'trips';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       milestones: {
         Row: {
           address: string | null;
@@ -602,6 +654,143 @@ export type Database = {
           },
         ];
       };
+      photos: {
+        Row: {
+          caption: string | null;
+          created_at: string;
+          height: number | null;
+          id: string;
+          milestone_id: string | null;
+          size_bytes: number;
+          storage_path: string;
+          taken_at: string | null;
+          trip_id: string;
+          user_id: string;
+          width: number | null;
+        };
+        Insert: {
+          caption?: string | null;
+          created_at?: string;
+          height?: number | null;
+          id?: string;
+          milestone_id?: string | null;
+          size_bytes?: number;
+          storage_path: string;
+          taken_at?: string | null;
+          trip_id: string;
+          user_id: string;
+          width?: number | null;
+        };
+        Update: {
+          caption?: string | null;
+          created_at?: string;
+          height?: number | null;
+          id?: string;
+          milestone_id?: string | null;
+          size_bytes?: number;
+          storage_path?: string;
+          taken_at?: string | null;
+          trip_id?: string;
+          user_id?: string;
+          width?: number | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'photos_milestone_id_fkey';
+            columns: ['milestone_id'];
+            isOneToOne: false;
+            referencedRelation: 'milestones';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'photos_trip_id_fkey';
+            columns: ['trip_id'];
+            isOneToOne: false;
+            referencedRelation: 'trips';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      poll_votes: {
+        Row: {
+          option_id: string;
+          poll_id: string;
+          user_id: string;
+          voted_at: string;
+        };
+        Insert: {
+          option_id: string;
+          poll_id: string;
+          user_id: string;
+          voted_at?: string;
+        };
+        Update: {
+          option_id?: string;
+          poll_id?: string;
+          user_id?: string;
+          voted_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'poll_votes_poll_id_fkey';
+            columns: ['poll_id'];
+            isOneToOne: false;
+            referencedRelation: 'polls';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      polls: {
+        Row: {
+          closed_at: string | null;
+          created_at: string;
+          created_by: string;
+          expires_at: string | null;
+          id: string;
+          milestone_id: string | null;
+          options: Json;
+          question: string;
+          trip_id: string;
+        };
+        Insert: {
+          closed_at?: string | null;
+          created_at?: string;
+          created_by: string;
+          expires_at?: string | null;
+          id?: string;
+          milestone_id?: string | null;
+          options: Json;
+          question: string;
+          trip_id: string;
+        };
+        Update: {
+          closed_at?: string | null;
+          created_at?: string;
+          created_by?: string;
+          expires_at?: string | null;
+          id?: string;
+          milestone_id?: string | null;
+          options?: Json;
+          question?: string;
+          trip_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'polls_milestone_id_fkey';
+            columns: ['milestone_id'];
+            isOneToOne: false;
+            referencedRelation: 'milestones';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'polls_trip_id_fkey';
+            columns: ['trip_id'];
+            isOneToOne: false;
+            referencedRelation: 'trips';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       profiles: {
         Row: {
           age_range: string | null;
@@ -706,6 +895,71 @@ export type Database = {
           visibility?: string | null;
         };
         Relationships: [];
+      };
+      reactions: {
+        Row: {
+          created_at: string;
+          emoji: string;
+          id: string;
+          target_id: string;
+          target_type: string;
+          user_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          emoji: string;
+          id?: string;
+          target_id: string;
+          target_type: string;
+          user_id: string;
+        };
+        Update: {
+          created_at?: string;
+          emoji?: string;
+          id?: string;
+          target_id?: string;
+          target_type?: string;
+          user_id?: string;
+        };
+        Relationships: [];
+      };
+      scrapbooks: {
+        Row: {
+          generated_at: string;
+          generated_by: string;
+          id: string;
+          pdf_path: string | null;
+          png_path: string | null;
+          stats: Json;
+          trip_id: string;
+        };
+        Insert: {
+          generated_at?: string;
+          generated_by: string;
+          id?: string;
+          pdf_path?: string | null;
+          png_path?: string | null;
+          stats?: Json;
+          trip_id: string;
+        };
+        Update: {
+          generated_at?: string;
+          generated_by?: string;
+          id?: string;
+          pdf_path?: string | null;
+          png_path?: string | null;
+          stats?: Json;
+          trip_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'scrapbooks_trip_id_fkey';
+            columns: ['trip_id'];
+            isOneToOne: false;
+            referencedRelation: 'trips';
+            referencedColumns: ['id'];
+          },
+        ];
       };
       spatial_ref_sys: {
         Row: {
@@ -1115,6 +1369,35 @@ export type Database = {
         };
         Relationships: [];
       };
+      weather_cache: {
+        Row: {
+          expires_at: string;
+          fetched_at: string;
+          milestone_id: string;
+          payload: Json;
+        };
+        Insert: {
+          expires_at: string;
+          fetched_at?: string;
+          milestone_id: string;
+          payload: Json;
+        };
+        Update: {
+          expires_at?: string;
+          fetched_at?: string;
+          milestone_id?: string;
+          payload?: Json;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'weather_cache_milestone_id_fkey';
+            columns: ['milestone_id'];
+            isOneToOne: true;
+            referencedRelation: 'milestones';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
     };
     Views: {
       geography_columns: {
@@ -1494,6 +1777,10 @@ export type Database = {
       };
       postgis_version: { Args: never; Returns: string };
       postgis_wagyu_version: { Args: never; Returns: string };
+      reaction_target_trip: {
+        Args: { p_id: string; p_type: string };
+        Returns: string;
+      };
       rebuild_my_passport: { Args: never; Returns: undefined };
       st_3dclosestpoint: {
         Args: { geom1: unknown; geom2: unknown };

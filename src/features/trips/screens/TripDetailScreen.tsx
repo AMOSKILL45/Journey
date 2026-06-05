@@ -5,6 +5,7 @@ import { Alert, ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTranslation } from '@core/i18n';
+import { ExportTripButton } from '@features/calendar-export';
 import { TripReadinessCard } from '@features/checklists';
 import { MapModeToggle, TripMapView, type MapMode } from '@features/map';
 import {
@@ -19,6 +20,8 @@ import {
   milestonesQueryKey,
   type Milestone,
 } from '@features/milestones';
+import { PhotoSection } from '@features/photos';
+import { PollsSection } from '@features/polls';
 import { useProfile } from '@features/profile';
 import {
   OfflineBanner,
@@ -30,6 +33,7 @@ import {
   useTripChannel,
   type PresenceMember,
 } from '@features/realtime';
+import { ScrapbookSection } from '@features/scrapbook';
 import { SmartTipsSection } from '@features/smart-reminders';
 import { PixelButton } from '@shared/components/PixelButton';
 import { PixelCard } from '@shared/components/PixelCard';
@@ -263,6 +267,22 @@ export function TripDetailScreen() {
         </View>
 
         <View className="mt-6">
+          <PhotoSection
+            tripId={trip.id}
+            currentUserId={profile?.id ?? null}
+            canManage={trip.owner_id === profile?.id}
+          />
+        </View>
+
+        <View className="mt-6">
+          <PollsSection tripId={trip.id} />
+        </View>
+
+        <View className="mt-6">
+          <ScrapbookSection tripId={trip.id} tripName={trip.name} />
+        </View>
+
+        <View className="mt-6">
           <PixelButton
             variant="secondary"
             onPress={() => router.push(`/(modals)/documents/${trip.id}`)}
@@ -280,6 +300,10 @@ export function TripDetailScreen() {
           >
             {t('checklists.title')}
           </PixelButton>
+        </View>
+
+        <View className="mt-3">
+          <ExportTripButton trip={trip} milestones={milestones} />
         </View>
 
         <View className="mt-6">

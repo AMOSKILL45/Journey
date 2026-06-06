@@ -546,6 +546,26 @@
       "turkey_evisa": {
         "title": "e-Visa Turquie",
         "body": "Certaines nationalités ont besoin d’un e-Visa pour la Türkiye. Faites la demande en ligne avant de partir — cela ne prend que quelques minutes."
+      },
+      "egypt_evisa": {
+        "title": "e-Visa Égypte",
+        "body": "Demandez un e-Visa Égypte en ligne avant de partir. Le e-Visa touristique à entrée unique est généralement délivré sous une semaine."
+      },
+      "morocco_entry": {
+        "title": "Maroc — entrée sans visa",
+        "body": "De nombreuses nationalités peuvent entrer au Maroc sans visa jusqu’à 90 jours. Assurez-vous que votre passeport est valide au moins 6 mois."
+      },
+      "uae_voa": {
+        "title": "Émirats — entrée à l’arrivée",
+        "body": "La plupart des voyageurs obtiennent un visa gratuit à l’arrivée ou une entrée sans visa aux Émirats. Vérifiez la durée de séjour autorisée pour votre nationalité."
+      },
+      "kenya_eta": {
+        "title": "eTA Kenya requis",
+        "body": "Tous les voyageurs vers le Kenya doivent obtenir une autorisation électronique de voyage (eTA) avant l’arrivée. Faites la demande quelques jours à l’avance."
+      },
+      "south_africa_entry": {
+        "title": "Afrique du Sud — entrée sans visa",
+        "body": "De nombreuses nationalités peuvent visiter l’Afrique du Sud sans visa jusqu’à 90 jours. Prévoyez un passeport avec au moins deux pages vierges."
       }
     }
   },

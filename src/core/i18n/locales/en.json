@@ -546,6 +546,26 @@
       "turkey_evisa": {
         "title": "Türkiye e-Visa",
         "body": "Some nationalities need an e-Visa for Türkiye. Apply online before you fly — it only takes a few minutes."
+      },
+      "egypt_evisa": {
+        "title": "Egypt e-Visa",
+        "body": "Apply for an Egypt e-Visa online before you travel. A single-entry tourist e-Visa is usually issued within a week."
+      },
+      "morocco_entry": {
+        "title": "Morocco — visa-free entry",
+        "body": "Many nationalities can enter Morocco visa-free for up to 90 days. Make sure your passport is valid for at least 6 months."
+      },
+      "uae_voa": {
+        "title": "UAE — entry on arrival",
+        "body": "Most visitors get a free visa-on-arrival or visa-free entry to the UAE. Check the stay length allowed for your nationality."
+      },
+      "kenya_eta": {
+        "title": "Kenya eTA required",
+        "body": "All travelers to Kenya must get an electronic travel authorization (eTA) before arrival. Apply a few days ahead."
+      },
+      "south_africa_entry": {
+        "title": "South Africa — visa-free entry",
+        "body": "Many nationalities can visit South Africa visa-free for up to 90 days. Bring a passport with at least two blank pages."
       }
     }
   },

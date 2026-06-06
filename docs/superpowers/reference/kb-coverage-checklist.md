@@ -32,6 +32,11 @@
 - [x] `vietnam_evisa` — Vietnam e-Visa
 - [x] `indonesia_voa` — Indonesia VOA / e-VOA
 - [x] `turkey_evisa` — Türkiye e-Visa
+- [x] `egypt_evisa` — Egypt e-Visa
+- [x] `morocco_entry` — Morocco visa-free entry
+- [x] `uae_voa` — UAE entry on arrival
+- [x] `kenya_eta` — Kenya eTA
+- [x] `south_africa_entry` — South Africa visa-free entry
 
 ## Backlog to ~150 — matrix to author + verify
 

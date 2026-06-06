@@ -109,7 +109,8 @@ Deno.serve(async (req) => {
   if (ok !== true) return new Response('forbidden', { status: 403 });
 
   const today = new Date().toISOString().slice(0, 10);
-  const { data: rules } = await sb.from('country_requirements').select('*');
+  // Only surface human-approved rows (ADR-1). Drafts (verified=false) stay invisible to users.
+  const { data: rules } = await sb.from('country_requirements').select('*').eq('verified', true);
   // NB: trips has no `purpose` column (v1.0) — purpose stays null, so purpose-gated rules match regardless.
   const { data: trips } = await sb
     .from('trips')

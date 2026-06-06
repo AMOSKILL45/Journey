@@ -48,8 +48,10 @@ any UI work (`ui-ux-pro-max` deliberately skipped — zero UI); the existing eng
 
 - **Decision**: Change `contracts.test.ts` to **glob all** `*country_requirements*.sql` migrations (not one
   hard-coded path), so every seeded `i18n_key` — in any migration — is gated for `.title`/`.body` in en+fr.
-  Add a "pilot rules well-formed" assertion (valid ISO alpha-2, `requirement_type`/`severity` ∈ CHECK set, ≥1
-  `source_url`, `verified=false` for new pilot rows). `/auditing-runtime-contracts` hardens this further post-run.
+  Stage 0 ships two **robust** gates: the generalized i18n parity test + a safety guard (no seed migration may set
+  `verified` — drafts stay false). Deeper per-field validation (ISO alpha-2, `requirement_type`/`severity` ∈ CHECK,
+  ≥1 `source_url`) is delegated to the post-run `/auditing-runtime-contracts` pass — robust SQL/DB-level parsing
+  belongs there, not in a hand-written Stage 0 test that would false-fail and stall Ralph.
 - **Why**: Without it, new rules pass in false-green — the exact static→runtime drift the audit skill targets.
 
 ### ADR-3 — Ralph runs LOCAL-only
@@ -67,9 +69,11 @@ any UI work (`ui-ux-pro-max` deliberately skipped — zero UI); the existing eng
 2. Add `verified = true` filter at **every** read site. Primary reader = `smart_reminders_cron` query of
    `country_requirements`; Stage 0 enumerates and patches any other direct reader (e.g. a client fetch in
    `src/features/smart-reminders/api/`).
-3. Generalize `contracts.test.ts` (glob migrations) + add the "pilot rules well-formed" test (ADR-2).
-4. `generate_typescript_types` regen (new column).
-5. Inline checks (`npm run typecheck` / `npm run lint` / `npm test`) green → **commit + push**. No prod apply yet.
+3. Generalize `contracts.test.ts` (glob migrations) + add the draft-safety guard test (ADR-2).
+4. `generate_typescript_types` regen (after the step-1 apply).
+5. Inline checks (`npm run typecheck` / `npm run lint` / `npm test`) green → **commit + push**. Step 1 is the only
+   prod write now (additive, approved); the ~14 `verified=false` pilot rows + the cron redeploy land together at the
+   final step, with approval.
 
 ## 5. Stage 1 — the Ralph loop
 

@@ -5,10 +5,21 @@ import en from '@core/i18n/locales/en.json';
 import fr from '@core/i18n/locales/fr.json';
 
 const FEATURE_DIR = path.join(__dirname, '..');
-const SEED = path.join(
-  __dirname,
-  '../../../../supabase/migrations/20260601090002_country_requirements.sql',
-);
+const MIGRATIONS_DIR = path.join(__dirname, '../../../../supabase/migrations');
+
+// All KB seed/alter migrations (not just the original) — so rules added in a later
+// migration are gated too. Fixes the hard-coded-path coverage gap (see ADR-2).
+function kbMigrationFiles(): string[] {
+  return fs
+    .readdirSync(MIGRATIONS_DIR)
+    .filter((f) => /country_requirements.*\.sql$/.test(f))
+    .map((f) => path.join(MIGRATIONS_DIR, f));
+}
+function kbMigrationsSql(): string {
+  return kbMigrationFiles()
+    .map((f) => fs.readFileSync(f, 'utf8'))
+    .join('\n');
+}
 
 function walk(dir: string): string[] {
   const out: string[] = [];
@@ -46,8 +57,8 @@ describe('smart-reminders runtime contracts', () => {
     expect([...keys].filter((k) => typeof resolveKey(fr, k) !== 'string')).toEqual([]);
   });
 
-  it('every seeded KB i18n_key has a .title and .body in en and fr', () => {
-    const sql = fs.readFileSync(SEED, 'utf8');
+  it('every seeded KB i18n_key (any migration) has a .title and .body in en and fr', () => {
+    const sql = kbMigrationsSql();
     const keys = [...sql.matchAll(/'(smartReminders\.kb\.[a-z0-9_]+)'/g)].map((m) => m[1]);
     expect(keys.length).toBeGreaterThan(0);
     for (const base of new Set(keys)) {
@@ -56,6 +67,17 @@ describe('smart-reminders runtime contracts', () => {
         expect(typeof resolveKey(loc, `${base}.body`)).toBe('string');
       }
     }
+  });
+
+  it('no KB seed migration auto-publishes drafts (only the *_verified_flag migration touches `verified`)', () => {
+    // Safety gate (ADR-1): drafted rows stay verified=false until a human flips them.
+    // Seeds must rely on the column DEFAULT — never set `verified` themselves. `last_verified`
+    // is a different column and does not trip the \bverified\b word boundary.
+    const offenders = kbMigrationFiles()
+      .filter((f) => !/verified_flag/.test(f))
+      .filter((f) => /\bverified\b/i.test(fs.readFileSync(f, 'utf8')))
+      .map((f) => path.basename(f));
+    expect(offenders).toEqual([]);
   });
 
   it('"smart_reminders" is a known notification category', () => {

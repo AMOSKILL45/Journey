@@ -2058,6 +2058,7 @@ export type Database = {
       };
       postgis_version: { Args: never; Returns: string };
       postgis_wagyu_version: { Args: never; Returns: string };
+      purge_account_data: { Args: { p_uid: string }; Returns: undefined };
       reaction_target_trip: {
         Args: { p_id: string; p_type: string };
         Returns: string;

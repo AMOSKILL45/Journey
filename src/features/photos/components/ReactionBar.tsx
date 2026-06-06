@@ -72,7 +72,10 @@ export function ReactionBar({
               <PixelText
                 size="caption"
                 family="body-bold"
-                className={tally.mine ? 'text-accent-700' : 'text-text-secondary'}
+                // On the accent-500 fill, dark text-primary (≈12:1) clears WCAG AA;
+                // amber accent-700 on yellow would fail. Selection is also conveyed
+                // by accessibilityState, so colour is never the sole signal.
+                className={tally.mine ? 'text-text-primary' : 'text-text-secondary'}
               >
                 {tally.count}
               </PixelText>

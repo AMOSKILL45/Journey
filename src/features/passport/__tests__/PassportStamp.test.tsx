@@ -20,4 +20,21 @@ describe('PassportStamp', () => {
     expect(getByText('🇯🇵')).toBeTruthy();
     expect(getByText('2026-06-04')).toBeTruthy();
   });
+
+  it('exposes one SR element labelled with place, country name and date (not the flag emoji)', () => {
+    const { getByTestId } = render(
+      <PassportStamp
+        stamp={{
+          milestone_id: 'm1',
+          trip_id: 't1',
+          label: 'Tokyo Tower',
+          country: 'JP',
+          at: '2026-06-04T10:00:00Z',
+        }}
+      />,
+    );
+    const node = getByTestId('stamp-m1');
+    expect(node.props.accessible).toBe(true);
+    expect(node.props.accessibilityLabel).toBe('Tokyo Tower, Japan, 2026-06-04');
+  });
 });

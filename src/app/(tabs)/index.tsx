@@ -8,7 +8,9 @@ import { HomeChecklistSummary } from '@features/checklists';
 import { PassportExpiryBanner } from '@features/identity';
 import { useProfile } from '@features/profile';
 import { useTrips } from '@features/trips';
-import { PixelButton } from '@shared/components/PixelButton';
+import { EmptyState } from '@shared/components/EmptyState';
+import { ErrorState } from '@shared/components/ErrorState';
+import { LoadingState } from '@shared/components/LoadingState';
 import { PixelCard } from '@shared/components/PixelCard';
 import { PixelText } from '@shared/components/PixelText';
 import { SCREEN_PADDING } from '@shared/constants/layout';
@@ -20,7 +22,9 @@ export default function HomeTab() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const { data: profile } = useProfile();
-  const { data: trips = [] } = useTrips();
+  const { data: trips = [], isLoading, error, refetch } = useTrips();
+
+  const goCreate = () => router.push('/(modals)/create-trip');
 
   const greeting = profile?.display_name
     ? t('home.greeting', { name: profile.display_name })
@@ -66,45 +70,65 @@ export default function HomeTab() {
 
       <PassportExpiryBanner />
 
-      {upcoming && upcoming.start_date ? (
-        <PixelCard
-          onPress={() => router.push(`/(modals)/trip/${upcoming.id}`)}
-          padding="lg"
-          variant="elevated"
-          accessibilityLabel={t('home.nextTripLabel', { name: upcoming.name })}
-        >
-          <PixelText size="caption" family="body-medium" className="text-text-secondary">
-            {t('home.nextTrip')}
-          </PixelText>
-          <PixelText size="h2" family="heading-bold" className="mt-1">
-            {upcoming.name}
-          </PixelText>
-          <PixelText size="small" className="mt-2 text-text-secondary">
-            {formatDate(upcoming.start_date)}
-          </PixelText>
-          <PixelText size="small" className="mt-1 text-primary-600" family="body-medium">
-            {t('home.inDays', { count: daysUntil(upcoming.start_date) })}
-          </PixelText>
-        </PixelCard>
+      {isLoading ? (
+        <LoadingState variant="skeleton" label={t('common.loading')} />
+      ) : error ? (
+        <ErrorState
+          title={t('common.somethingWentWrong')}
+          body={t('trips.errors.loadFailed')}
+          onRetry={() => void refetch()}
+        />
+      ) : trips.length === 0 ? (
+        <EmptyState
+          title={t('emptyStates.trips.title')}
+          body={t('emptyStates.trips.body')}
+          actionLabel={t('emptyStates.trips.action')}
+          onAction={goCreate}
+        />
       ) : (
-        <PixelCard padding="lg">
-          <PixelText size="h3" className="mb-2">
-            {t('home.emptyTitle')}
-          </PixelText>
-          <PixelText size="body" className="mb-4 text-text-secondary">
-            {t('home.emptyBody')}
-          </PixelText>
-          <PixelButton onPress={() => router.push('/(modals)/create-trip')}>
-            {t('home.createCta')}
-          </PixelButton>
-        </PixelCard>
-      )}
+        <>
+          {upcoming && upcoming.start_date ? (
+            <PixelCard
+              onPress={() => router.push(`/(modals)/trip/${upcoming.id}`)}
+              padding="lg"
+              variant="elevated"
+              accessibilityLabel={t('home.nextTripLabel', { name: upcoming.name })}
+            >
+              <PixelText size="caption" family="body-medium" className="text-text-secondary">
+                {t('home.nextTrip')}
+              </PixelText>
+              <PixelText size="h2" family="heading-bold" className="mt-1">
+                {upcoming.name}
+              </PixelText>
+              <PixelText size="small" className="mt-2 text-text-secondary">
+                {formatDate(upcoming.start_date)}
+              </PixelText>
+              <PixelText size="small" className="mt-1 text-primary-600" family="body-medium">
+                {t('home.inDays', { count: daysUntil(upcoming.start_date) })}
+              </PixelText>
+            </PixelCard>
+          ) : (
+            <PixelCard
+              onPress={goCreate}
+              padding="lg"
+              accessibilityLabel={t('emptyStates.trips.action')}
+            >
+              <PixelText size="h3" className="mb-2">
+                {t('emptyStates.trips.title')}
+              </PixelText>
+              <PixelText size="body" className="text-text-secondary">
+                {t('emptyStates.trips.body')}
+              </PixelText>
+            </PixelCard>
+          )}
 
-      {upcoming ? (
-        <View className="mt-4">
-          <HomeChecklistSummary tripId={upcoming.id} />
-        </View>
-      ) : null}
+          {upcoming ? (
+            <View className="mt-4">
+              <HomeChecklistSummary tripId={upcoming.id} />
+            </View>
+          ) : null}
+        </>
+      )}
     </ScrollView>
   );
 }

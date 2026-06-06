@@ -39,7 +39,9 @@ export function DocumentCard({
         accessibilityLabel={doc.name}
         className="flex-row items-center gap-3"
       >
-        <PixelText size="h2">{iconForFileType(doc.file_type as DocFileType)}</PixelText>
+        <PixelText size="h2" accessibilityElementsHidden importantForAccessibility="no">
+          {iconForFileType(doc.file_type as DocFileType)}
+        </PixelText>
         <View className="flex-1">
           <PixelText size="body" family="body-medium" numberOfLines={1}>
             {doc.name}

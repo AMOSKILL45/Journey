@@ -61,8 +61,8 @@ export function MilestoneNode({ milestone, state, onPress, onLongPress }: Milest
       onPress={handlePress}
       onLongPress={handleLongPress}
       accessibilityRole="button"
-      accessibilityLabel={`${milestone.name}, ${state}`}
-      accessibilityState={{ disabled: state === 'locked' }}
+      accessibilityLabel={milestone.name}
+      accessibilityState={{ disabled: state === 'locked', selected: state === 'current' }}
       hitSlop={8}
     >
       <View

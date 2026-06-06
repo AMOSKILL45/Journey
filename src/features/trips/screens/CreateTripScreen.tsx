@@ -2,12 +2,13 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { ActivityIndicator, Platform, ScrollView, View } from 'react-native';
+import { Platform, ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTranslation } from '@core/i18n';
 import { IdentityGate } from '@features/identity';
 import { CountryPicker, useProfile } from '@features/profile';
+import { LoadingState } from '@shared/components/LoadingState';
 import { PixelButton } from '@shared/components/PixelButton';
 import { PixelInput } from '@shared/components/PixelInput';
 import { PixelText } from '@shared/components/PixelText';
@@ -58,8 +59,8 @@ export function CreateTripScreen() {
 
   if (profileLoading) {
     return (
-      <View className="flex-1 items-center justify-center bg-cream">
-        <ActivityIndicator />
+      <View className="flex-1 bg-cream" style={{ paddingTop: insets.top }}>
+        <LoadingState variant="spinner" label={t('common.loading')} />
       </View>
     );
   }

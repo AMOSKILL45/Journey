@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { useRouter } from 'expo-router';
 import { ShieldCheck } from 'lucide-react-native';
 import { ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -6,6 +7,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTranslation } from '@core/i18n';
 import { colors } from '@core/theme';
 import { countryName, flagFor } from '@features/passport/flags';
+import { EmptyState } from '@shared/components/EmptyState';
+import { LoadingState } from '@shared/components/LoadingState';
 import { PixelAvatar } from '@shared/components/PixelAvatar';
 import { PixelCard } from '@shared/components/PixelCard';
 import { PixelChip } from '@shared/components/PixelChip';
@@ -18,6 +21,9 @@ const VERIFIED_ICON_SIZE = 20;
 // PixelAvatar falls back to its first sprite for unknown ids; this constant just
 // guarantees a non-null prop when a public profile has no avatar set.
 const AVATAR_FALLBACK_SPRITE = 'avatars/adventurer_1';
+// Reserved deletion sentinel (Phase 10E): a public profile resolving to this id is
+// a former (deleted) traveller — show the localized ghost name, never a raw id.
+const GHOST_AUTHOR_ID = 'de1e7e00-0000-4000-8000-000000000000';
 
 export interface PublicProfileScreenProps {
   userId: string;
@@ -43,6 +49,7 @@ function badgeLabels(badges: PublicProfile['badges']): string[] {
  */
 export function PublicProfileScreen({ userId }: PublicProfileScreenProps) {
   const { t } = useTranslation();
+  const router = useRouter();
   const insets = useSafeAreaInsets();
   const { data, isLoading } = useQuery({
     queryKey: ['public-profile', userId],
@@ -51,33 +58,32 @@ export function PublicProfileScreen({ userId }: PublicProfileScreenProps) {
 
   if (isLoading) {
     return (
-      <View
-        className="flex-1 items-center justify-center bg-cream"
-        style={{ paddingTop: insets.top }}
-      >
-        <PixelText size="body" className="text-text-secondary">
-          {t('common.loading')}
-        </PixelText>
+      <View className="flex-1 bg-cream" style={{ paddingTop: insets.top }}>
+        <LoadingState variant="spinner" label={t('common.loading')} />
       </View>
     );
   }
 
   if (!data) {
     return (
-      <View
-        className="flex-1 items-center justify-center bg-cream px-8"
-        style={{ paddingTop: insets.top }}
-      >
-        <PixelText size="body" className="text-center text-text-secondary">
-          {t('social.profile.private')}
-        </PixelText>
+      <View className="flex-1 bg-cream" style={{ paddingTop: insets.top }}>
+        <EmptyState
+          title={t('emptyStates.publicProfile.title')}
+          body={t('emptyStates.publicProfile.body')}
+          actionLabel={t('emptyStates.publicProfile.action')}
+          onAction={() => router.back()}
+        />
       </View>
     );
   }
 
   const countries = data.countries_visited ?? [];
   const badges = badgeLabels(data.badges);
-  const name = data.display_name ?? data.username ?? '';
+  // A profile resolving to the deletion sentinel renders as the localized ghost
+  // name ("former traveller"); otherwise fall back name → username → ghost.
+  const resolvedName = data.display_name ?? data.username ?? '';
+  const isGhost = userId === GHOST_AUTHOR_ID || resolvedName.length === 0;
+  const name = isGhost ? t('account.ghostName') : resolvedName;
 
   return (
     <ScrollView

@@ -17,6 +17,8 @@ import { ReactionBar } from './ReactionBar';
 export interface PhotoViewerProps {
   tripId: string;
   photo: PhotoWithUrl | null;
+  /** Resolved author display name (ghost-aware). Shown as a "Photo by …" byline. */
+  authorName?: string | null;
   currentUserId: string | null;
   canManage: boolean;
   onClose: () => void;
@@ -26,6 +28,7 @@ export interface PhotoViewerProps {
 export function PhotoViewer({
   tripId,
   photo,
+  authorName,
   currentUserId,
   canManage,
   onClose,
@@ -90,6 +93,16 @@ export function PhotoViewer({
           />
 
           <View className="gap-3 px-4 pt-4">
+            {authorName ? (
+              <PixelText
+                size="caption"
+                className="text-surface-alt"
+                accessibilityLabel={t('documents.uploadedBy', { name: authorName })}
+              >
+                {t('documents.uploadedBy', { name: authorName })}
+              </PixelText>
+            ) : null}
+
             <ReactionBar targetType="photo" targetId={photo.id} currentUserId={currentUserId} />
 
             {canEditCaption ? (

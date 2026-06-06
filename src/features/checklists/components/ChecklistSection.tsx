@@ -3,6 +3,7 @@ import { View } from 'react-native';
 
 import { useTranslation } from '@core/i18n';
 import { openDocument, useTripDocuments } from '@features/documents';
+import { EmptyState } from '@shared/components/EmptyState';
 import { PixelButton } from '@shared/components/PixelButton';
 import { PixelChip } from '@shared/components/PixelChip';
 import { PixelText } from '@shared/components/PixelText';
@@ -80,6 +81,12 @@ export function ChecklistSection({
     return Array.from(map.entries());
   }, [sectionItems]);
 
+  // True only when the whole checklist has no items (not merely filtered out by "mine").
+  const isChecklistEmpty = useMemo(
+    () => items.every((i) => i.checklist_id !== checklistId),
+    [items, checklistId],
+  );
+
   const prog = checklistProgress(readiness, checklistId);
 
   const myChecked = (i: ChecklistItem): boolean =>
@@ -123,6 +130,16 @@ export function ChecklistSection({
           dismissed={dismissed}
           onAdd={(label, scope) => addItem.mutate({ checklistId, tripId, label, scope })}
           onDismiss={(key) => dismiss.mutate(key)}
+        />
+      ) : null}
+
+      {isChecklistEmpty ? (
+        <EmptyState
+          testID="checklist-empty"
+          title={t('emptyStates.checklists.title')}
+          body={t('emptyStates.checklists.body')}
+          actionLabel={canManage ? t('emptyStates.checklists.action') : undefined}
+          onAction={canManage ? () => addRef.current?.open(checklistId) : undefined}
         />
       ) : null}
 

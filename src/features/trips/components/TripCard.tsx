@@ -39,7 +39,7 @@ export function TripCard({ trip }: { trip: Trip }) {
       </PixelText>
       {trip.destination_country ? (
         <PixelText size="small" className="mt-1 text-text-secondary">
-          📍 {trip.destination_country}
+          {trip.destination_country}
         </PixelText>
       ) : null}
     </PixelCard>

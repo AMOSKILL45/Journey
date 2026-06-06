@@ -1,7 +1,10 @@
 import { fireEvent, render } from '@testing-library/react-native';
 
+import { t } from '@core/i18n';
+
 import type { Poll, PollVote } from '../api';
 import { PollCard } from '../components/PollCard';
+import { GHOST_AUTHOR_ID } from '../data/ghostAuthor';
 
 const basePoll = {
   id: 'p1',
@@ -90,6 +93,54 @@ describe('PollCard', () => {
     );
     // On a closed poll the option label is plain text, not a pressable with that a11y label.
     expect(queryByLabelText('Pizza')).toBeNull();
+  });
+
+  it('renders an author byline with an accessibility label', () => {
+    const { getByLabelText } = render(
+      <PollCard
+        poll={basePoll}
+        votes={[]}
+        myUserId="me"
+        authorName="Sam"
+        canManage={false}
+        onVote={jest.fn()}
+        onClose={jest.fn()}
+      />,
+    );
+    expect(getByLabelText(t('documents.uploadedBy', { name: 'Sam' }))).toBeTruthy();
+  });
+
+  it('shows the ghost author name for a deleted author', () => {
+    // PollsSection resolves a sentinel created_by to t('account.ghostName') before
+    // passing authorName down; the card renders whatever resolved string it is given.
+    const ghostName = t('account.ghostName');
+    const ghostPoll = { ...basePoll, created_by: GHOST_AUTHOR_ID } as Poll;
+    const { getByLabelText } = render(
+      <PollCard
+        poll={ghostPoll}
+        votes={[]}
+        myUserId="me"
+        authorName={ghostName}
+        canManage={false}
+        onVote={jest.fn()}
+        onClose={jest.fn()}
+      />,
+    );
+    expect(getByLabelText(t('documents.uploadedBy', { name: ghostName }))).toBeTruthy();
+  });
+
+  it('omits the byline when no author name is provided', () => {
+    const { queryByLabelText } = render(
+      <PollCard
+        poll={basePoll}
+        votes={[]}
+        myUserId="me"
+        canManage={false}
+        onVote={jest.fn()}
+        onClose={jest.fn()}
+      />,
+    );
+    expect(queryByLabelText(t('documents.uploadedBy', { name: 'Sam' }))).toBeNull();
   });
 
   it('shows a close affordance only for managers on an open poll', () => {

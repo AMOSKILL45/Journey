@@ -9,6 +9,7 @@ import { useTranslation } from '@core/i18n';
 import { supabase } from '@core/supabase/client';
 import { colors } from '@core/theme';
 import { PathView } from '@features/milestones';
+import { ErrorState } from '@shared/components/ErrorState';
 import { PixelButton } from '@shared/components/PixelButton';
 import { PixelCard } from '@shared/components/PixelCard';
 import { PixelText } from '@shared/components/PixelText';
@@ -85,6 +86,19 @@ export function PublicTripScreen({ token }: PublicTripScreenProps) {
         <View className="mb-2 h-6 w-2/3 rounded bg-surface-alt" />
         <View className="mb-6 h-4 w-1/2 rounded bg-surface-alt" />
         <View className="h-64 rounded-xl bg-surface-alt" />
+      </View>
+    );
+  }
+
+  // A fetch failure must not masquerade as "private" — offer a real retry path.
+  if (tripQuery.isError) {
+    return (
+      <View className="flex-1 bg-cream" style={contentPadding}>
+        <ErrorState
+          title={t('common.somethingWentWrong')}
+          body={t('trips.errors.loadFailed')}
+          onRetry={() => void tripQuery.refetch()}
+        />
       </View>
     );
   }

@@ -54,13 +54,21 @@ export function AchievementToast({
     <Animated.View
       testID="achievement-toast"
       pointerEvents="none"
+      accessibilityLiveRegion="polite"
+      accessibilityRole="alert"
+      accessibilityLabel={`${t('achievements.toast.unlocked')} ${label}`.trim()}
       style={[styles.wrap, animatedStyle]}
     >
       <PixelCard variant="elevated" className="flex-row items-center">
-        <View className="mr-3 h-10 w-10 items-center justify-center rounded-lg border-2 border-accent-700 bg-accent-500">
-          <PixelText size="h3">{label ? label.slice(0, 1).toUpperCase() : '?'}</PixelText>
+        <View
+          className="mr-3 h-10 w-10 items-center justify-center rounded-lg border-2 border-accent-700 bg-accent-500"
+          importantForAccessibility="no"
+        >
+          <PixelText size="h3" importantForAccessibility="no">
+            {label ? label.slice(0, 1).toUpperCase() : '?'}
+          </PixelText>
         </View>
-        <View className="flex-1">
+        <View className="flex-1" importantForAccessibility="no">
           <PixelText size="caption" className="text-text-secondary">
             {t('achievements.toast.unlocked')}
           </PixelText>

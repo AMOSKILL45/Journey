@@ -3,8 +3,9 @@ import { ScrollView } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTranslation } from '@core/i18n';
+import { AccountSettings, AgeGate } from '@features/account';
 import { useAuth } from '@features/auth';
-import { FeedbackSettings } from '@features/feedback';
+import { A11ySettings, FeedbackSettings } from '@features/feedback';
 import { NotificationSettings } from '@features/notifications';
 import { useProfile } from '@features/profile';
 import {
@@ -51,6 +52,9 @@ export default function ProfileTab() {
         <FeedbackSettings />
       </PixelCard>
       <PixelCard padding="lg" className="mb-6">
+        <A11ySettings />
+      </PixelCard>
+      <PixelCard padding="lg" className="mb-6">
         <PixelText size="h2" className="mb-2">
           {t('social.profile.makePublic')}
         </PixelText>
@@ -93,9 +97,17 @@ export default function ProfileTab() {
       >
         {t('lifeReminders.screen.title')}
       </PixelButton>
-      <PixelButton variant="danger" onPress={logOut} loading={pending}>
+      <PixelButton
+        variant="secondary"
+        onPress={logOut}
+        loading={pending}
+        className="mb-6"
+        fullWidth
+      >
         {t('auth.signOut')}
       </PixelButton>
+      <AccountSettings />
+      <AgeGate />
     </ScrollView>
   );
 }

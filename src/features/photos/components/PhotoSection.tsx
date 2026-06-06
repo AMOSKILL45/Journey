@@ -1,11 +1,15 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { View } from 'react-native';
 
 import { useTranslation } from '@core/i18n';
-import { PixelCard } from '@shared/components/PixelCard';
+import { useTripMembers } from '@features/trips/hooks/useTripMembers';
+import { EmptyState } from '@shared/components/EmptyState';
+import { ErrorState } from '@shared/components/ErrorState';
+import { LoadingState } from '@shared/components/LoadingState';
 import { PixelText } from '@shared/components/PixelText';
 
 import type { PhotoWithUrl } from '../api';
+import { resolveAuthorName } from '../data/ghostAuthor';
 import { useTripPhotos } from '../hooks/useTripPhotos';
 
 import { PhotoGrid } from './PhotoGrid';
@@ -32,8 +36,16 @@ export function PhotoSection({
   hideTitle = false,
 }: PhotoSectionProps) {
   const { t } = useTranslation();
-  const { data: photos = [], isLoading } = useTripPhotos(tripId, milestoneId);
+  const { data: photos = [], isLoading, isError, refetch } = useTripPhotos(tripId, milestoneId);
+  const { data: members = [] } = useTripMembers(tripId);
   const [active, setActive] = useState<PhotoWithUrl | null>(null);
+
+  // Resolve the active photo's author to a display name (ghost-aware) for the viewer byline.
+  const activeAuthorName = useMemo(() => {
+    if (!active) return null;
+    const member = members.find((m) => m.user_id === active.user_id);
+    return resolveAuthorName(active.user_id, member?.profile?.display_name ?? null);
+  }, [active, members]);
 
   return (
     <View>
@@ -53,18 +65,15 @@ export function PhotoSection({
       </View>
 
       {isLoading ? (
-        <PixelText size="body" className="text-text-secondary">
-          {t('common.loading')}
-        </PixelText>
+        <LoadingState variant="skeleton" label={t('common.loading')} />
+      ) : isError ? (
+        <ErrorState
+          title={t('photos.title')}
+          body={t('common.somethingWentWrong')}
+          onRetry={() => void refetch()}
+        />
       ) : photos.length === 0 ? (
-        <PixelCard className="items-center">
-          <PixelText size="h3" className="mb-2">
-            {t('photos.empty.title')}
-          </PixelText>
-          <PixelText size="body" className="text-center text-text-secondary">
-            {t('photos.empty.body')}
-          </PixelText>
-        </PixelCard>
+        <EmptyState title={t('emptyStates.photos.title')} body={t('emptyStates.photos.body')} />
       ) : (
         <PhotoGrid photos={photos} onPressPhoto={setActive} />
       )}
@@ -72,6 +81,7 @@ export function PhotoSection({
       <PhotoViewer
         tripId={tripId}
         photo={active}
+        authorName={activeAuthorName}
         currentUserId={currentUserId}
         canManage={canManage}
         onClose={() => setActive(null)}

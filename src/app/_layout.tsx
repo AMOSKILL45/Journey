@@ -29,6 +29,7 @@ import { colors } from '@core/theme';
 import { AchievementUnlockPresenter } from '@features/achievements';
 import { initReduceMotion } from '@features/feedback';
 import { addNotificationTapHandler, registerForPush } from '@features/notifications';
+import { PrePermissionProvider } from '@features/onboarding';
 import { AnimatedSplash, useAppReady } from '@features/splash';
 
 const QUERY_STALE_MS = 60_000;
@@ -166,6 +167,7 @@ export default function RootLayout() {
             }}
           >
             <Stack.Screen name="index" />
+            <Stack.Screen name="(onboarding)" />
             <Stack.Screen name="(auth)" />
             <Stack.Screen name="auth/callback" />
             <Stack.Screen name="invite/[token]" />
@@ -177,6 +179,7 @@ export default function RootLayout() {
             />
           </Stack>
           <AchievementUnlockPresenter userId={userId} />
+          <PrePermissionProvider />
           {!splashAnimationDone && (
             <AnimatedSplash
               appReady={appReady}

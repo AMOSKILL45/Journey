@@ -199,7 +199,15 @@ export const AddItemSheet = forwardRef<AddItemSheetRef, AddItemSheetProps>(({ tr
         ) : null}
 
         <View className="flex-row items-center gap-3">
-          <PixelButton variant="ghost" onPress={() => setShowDate(true)}>
+          <PixelButton
+            variant="ghost"
+            onPress={() => setShowDate(true)}
+            accessibilityLabel={
+              dueDate
+                ? `${t('checklists.fields.dueDate')} ${dueDate}`
+                : t('checklists.fields.dueDate')
+            }
+          >
             {dueDate ? `⏰ ${dueDate}` : t('checklists.fields.dueDate')}
           </PixelButton>
           {dueDate ? (

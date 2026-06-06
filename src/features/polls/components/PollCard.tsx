@@ -11,6 +11,8 @@ export interface PollCardProps {
   poll: Poll;
   votes: PollVote[];
   myUserId: string | null;
+  /** Resolved author display name (ghost-aware). Shown as a "Poll by …" byline. */
+  authorName?: string | null;
   canManage: boolean;
   onVote: (optionId: string) => void;
   onClose: () => void;
@@ -18,16 +20,35 @@ export interface PollCardProps {
 
 const FULL_PCT = 100;
 
-export function PollCard({ poll, votes, myUserId, canManage, onVote, onClose }: PollCardProps) {
+export function PollCard({
+  poll,
+  votes,
+  myUserId,
+  authorName,
+  canManage,
+  onVote,
+  onClose,
+}: PollCardProps) {
   const { t } = useTranslation();
   const result = tally(poll, votes, myUserId);
 
   return (
     <PixelCard className="mb-3" accessibilityLabel={poll.question}>
       <View className="mb-2 flex-row items-start justify-between gap-2">
-        <PixelText size="body" family="body-bold" className="flex-1">
-          {poll.question}
-        </PixelText>
+        <View className="flex-1">
+          <PixelText size="body" family="body-bold">
+            {poll.question}
+          </PixelText>
+          {authorName ? (
+            <PixelText
+              size="caption"
+              className="text-text-secondary"
+              accessibilityLabel={t('documents.uploadedBy', { name: authorName })}
+            >
+              {t('documents.uploadedBy', { name: authorName })}
+            </PixelText>
+          ) : null}
+        </View>
         <View
           className={
             result.isOpen

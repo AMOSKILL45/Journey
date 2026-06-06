@@ -4,10 +4,13 @@ import { View } from 'react-native';
 import { useTranslation } from '@core/i18n';
 import { haptics } from '@features/feedback';
 import { useTripMembers } from '@features/trips/hooks/useTripMembers';
+import { EmptyState } from '@shared/components/EmptyState';
+import { ErrorState } from '@shared/components/ErrorState';
+import { LoadingState } from '@shared/components/LoadingState';
 import { PixelButton } from '@shared/components/PixelButton';
-import { PixelCard } from '@shared/components/PixelCard';
 import { PixelText } from '@shared/components/PixelText';
 
+import { resolveAuthorName } from '../data/ghostAuthor';
 import { usePollVote } from '../hooks/usePollVote';
 import { usePollVotes, usePolls, usePollsRealtime } from '../hooks/useTripPolls';
 
@@ -19,7 +22,7 @@ const EDITOR_ROLES = ['owner', 'editor'];
 export function PollsSection({ tripId }: { tripId: string }) {
   const { t } = useTranslation();
   const createRef = useRef<CreatePollSheetRef>(null);
-  const { data: polls = [], isLoading } = usePolls(tripId);
+  const { data: polls = [], isLoading, isError, refetch } = usePolls(tripId);
   const { data: votes = [] } = usePollVotes(tripId);
   const { data: members = [] } = useTripMembers(tripId);
   const { vote, close, userId } = usePollVote(tripId);
@@ -36,7 +39,11 @@ export function PollsSection({ tripId }: { tripId: string }) {
     return map;
   }, [votes]);
 
-  if (isLoading) return null;
+  // Ghost-aware author display name per poll (sentinel id → "former traveller").
+  const authorNameFor = (createdBy: string | null): string => {
+    const member = members.find((m) => m.user_id === createdBy);
+    return resolveAuthorName(createdBy, member?.profile?.display_name ?? null);
+  };
 
   return (
     <View className="gap-2">
@@ -44,12 +51,16 @@ export function PollsSection({ tripId }: { tripId: string }) {
         {t('polls.section.title')}
       </PixelText>
 
-      {polls.length === 0 ? (
-        <PixelCard className="items-center">
-          <PixelText size="body" className="mb-2 text-center text-text-secondary">
-            {t('polls.empty.body')}
-          </PixelText>
-        </PixelCard>
+      {isLoading ? (
+        <LoadingState variant="skeleton" label={t('common.loading')} />
+      ) : isError ? (
+        <ErrorState
+          title={t('polls.section.title')}
+          body={t('common.somethingWentWrong')}
+          onRetry={() => void refetch()}
+        />
+      ) : polls.length === 0 ? (
+        <EmptyState title={t('emptyStates.polls.title')} body={t('emptyStates.polls.body')} />
       ) : (
         polls.map((p) => (
           <PollCard
@@ -57,6 +68,7 @@ export function PollsSection({ tripId }: { tripId: string }) {
             poll={p}
             votes={votesByPoll.get(p.id) ?? []}
             myUserId={userId}
+            authorName={authorNameFor(p.created_by)}
             canManage={canManage}
             onVote={(optionId) => {
               haptics.selection();

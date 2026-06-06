@@ -96,6 +96,7 @@ export function WorldClearCinematic({
       <Pressable
         testID="worldclear-cinematic"
         accessibilityRole="button"
+        accessibilityLabel={t('achievements.cinematic.skip')}
         onPress={onDone}
         style={styles.overlay}
       >
@@ -111,6 +112,7 @@ export function WorldClearCinematic({
         <Pressable
           testID="worldclear-skip"
           accessibilityRole="button"
+          accessibilityLabel={t('achievements.cinematic.skip')}
           onPress={onDone}
           style={styles.skip}
         >

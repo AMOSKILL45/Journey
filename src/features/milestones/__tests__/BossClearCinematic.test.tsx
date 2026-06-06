@@ -15,7 +15,8 @@ describe('BossClearCinematic', () => {
       <BossClearCinematic milestoneName="Mount Doom" onDone={onDone} />,
     );
     expect(getByText(/Mount Doom/)).toBeTruthy();
-    fireEvent.press(getByLabelText('boss.skip'));
+    // The skip Pressable's a11y label is the resolved translation, not the raw key.
+    fireEvent.press(getByLabelText('Tap to continue'));
     expect(onDone).toHaveBeenCalled();
     await waitFor(() => expect(spy).toHaveBeenCalled());
   });

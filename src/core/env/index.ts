@@ -11,6 +11,10 @@ const envSchema = z.object({
   googleWebClientId: z.string().optional(),
   googleIosClientId: z.string().optional(),
   stripePublishableKey: z.string().optional(),
+  // Legal URLs (10E). Default to safe https placeholders so the env always parses and the
+  // Legal section renders before the real hosted pages exist (owner-provided content, §1.2).
+  privacyUrl: z.string().url().default('https://thisisthejourney.app/privacy'),
+  termsUrl: z.string().url().default('https://thisisthejourney.app/terms'),
 });
 
 const raw = (Constants.expoConfig?.extra ?? {}) as Record<string, unknown>;

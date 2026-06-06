@@ -2,8 +2,10 @@ import { useMemo, useRef, useState } from 'react';
 import { Alert, View } from 'react-native';
 
 import { useTranslation } from '@core/i18n';
+import { EmptyState } from '@shared/components/EmptyState';
+import { ErrorState } from '@shared/components/ErrorState';
+import { LoadingState } from '@shared/components/LoadingState';
 import { PixelButton } from '@shared/components/PixelButton';
-import { PixelCard } from '@shared/components/PixelCard';
 import { PixelText } from '@shared/components/PixelText';
 
 import type { DocumentRow } from '../api/documents';
@@ -41,7 +43,7 @@ export function DocumentsSection({
 }: DocumentsSectionProps) {
   const { t } = useTranslation();
   const sheetRef = useRef<DocumentUploadSheetRef>(null);
-  const { data: docs = [], isLoading } = useTripDocuments(tripId);
+  const { data: docs = [], isLoading, isError, refetch } = useTripDocuments(tripId);
   const { downloadedIds, busyId, downloadDocument, evictDocument, downloadAll } =
     useOfflineDocs(tripId);
   const del = useDeleteDocument(tripId);
@@ -103,21 +105,22 @@ export function DocumentsSection({
       ) : null}
 
       {isLoading ? (
-        <PixelText size="body" className="text-text-secondary">
-          {t('common.loading')}
-        </PixelText>
+        <LoadingState testID="documents-loading" variant="skeleton" label={t('common.loading')} />
+      ) : isError ? (
+        <ErrorState
+          testID="documents-error"
+          title={t('common.error')}
+          body={t('common.somethingWentWrong')}
+          onRetry={() => void refetch()}
+        />
       ) : docs.length === 0 ? (
-        <PixelCard className="items-center">
-          <PixelText size="h2" className="mb-2">
-            {t('documents.empty.title')}
-          </PixelText>
-          <PixelText size="body" className="mb-4 text-center text-text-secondary">
-            {t('documents.empty.body')}
-          </PixelText>
-          <PixelButton variant="primary" onPress={() => sheetRef.current?.open()}>
-            {t('documents.addCta')}
-          </PixelButton>
-        </PixelCard>
+        <EmptyState
+          testID="documents-empty"
+          title={t('emptyStates.documents.title')}
+          body={t('emptyStates.documents.body')}
+          actionLabel={t('emptyStates.documents.action')}
+          onAction={() => sheetRef.current?.open()}
+        />
       ) : (
         <>
           {grouped.map(([cat, items]) => (

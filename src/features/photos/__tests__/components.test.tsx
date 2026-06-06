@@ -1,6 +1,9 @@
 import { fireEvent, render, waitFor } from '@testing-library/react-native';
 
+import { t } from '@core/i18n';
+
 import type { PhotoWithUrl } from '../api';
+import { GHOST_AUTHOR_ID } from '../data/ghostAuthor';
 
 const mockToggle = { mutate: jest.fn() };
 const mockHapticsSelection = jest.fn();
@@ -36,6 +39,11 @@ jest.mock('../hooks/usePhotoReactions', () => ({
   usePhotoReactions: (...a: unknown[]) => mockUsePhotoReactions(...a),
 }));
 
+const mockUseTripMembers = jest.fn();
+jest.mock('@features/trips/hooks/useTripMembers', () => ({
+  useTripMembers: (...a: unknown[]) => mockUseTripMembers(...a),
+}));
+
 const mockUseTripPhotos = jest.fn();
 const mockUseUploadPhoto = jest.fn();
 const mockUseDeletePhoto = jest.fn();
@@ -52,6 +60,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { PhotoGrid } from '../components/PhotoGrid';
 import { PhotoSection } from '../components/PhotoSection';
 import { PhotoUploadButton } from '../components/PhotoUploadButton';
+import { PhotoViewer } from '../components/PhotoViewer';
 import { ReactionBar } from '../components/ReactionBar';
 
 const photo = (id: string): PhotoWithUrl =>
@@ -73,7 +82,13 @@ const photo = (id: string): PhotoWithUrl =>
 beforeEach(() => {
   jest.clearAllMocks();
   mockUsePhotoReactions.mockReturnValue({ data: [], toggle: mockToggle });
-  mockUseTripPhotos.mockReturnValue({ data: [], isLoading: false });
+  mockUseTripPhotos.mockReturnValue({
+    data: [],
+    isLoading: false,
+    isError: false,
+    refetch: jest.fn(),
+  });
+  mockUseTripMembers.mockReturnValue({ data: [] });
   mockUseUploadPhoto.mockReturnValue({ mutateAsync: jest.fn(), isPending: false });
   mockUseDeletePhoto.mockReturnValue({ mutateAsync: jest.fn(), isPending: false });
   mockUseUpdatePhotoCaption.mockReturnValue({ mutateAsync: jest.fn(), isPending: false });
@@ -161,17 +176,105 @@ describe('PhotoUploadButton', () => {
 });
 
 describe('PhotoSection', () => {
-  it('renders the empty state when there are no photos', () => {
-    const { UNSAFE_root } = render(
+  it('renders the shared empty state when there are no photos', () => {
+    const { getByText, queryAllByRole } = render(
       <PhotoSection tripId="t1" currentUserId="me" canManage={false} />,
     );
-    // No grid tiles rendered; component mounted without crashing.
-    expect(UNSAFE_root).toBeTruthy();
+    expect(getByText(t('emptyStates.photos.title'))).toBeTruthy();
+    expect(getByText(t('emptyStates.photos.body'))).toBeTruthy();
+    // No grid tiles in the empty state.
+    expect(queryAllByRole('imagebutton')).toHaveLength(0);
+  });
+
+  it('renders a skeleton loading state while photos load', () => {
+    mockUseTripPhotos.mockReturnValue({
+      data: [],
+      isLoading: true,
+      isError: false,
+      refetch: jest.fn(),
+    });
+    const { getByLabelText } = render(<PhotoSection tripId="t1" currentUserId="me" canManage />);
+    // LoadingState announces a loading label to screen readers.
+    expect(getByLabelText(t('common.loading'))).toBeTruthy();
+  });
+
+  it('renders an error state with a retry that refetches', () => {
+    const refetch = jest.fn();
+    mockUseTripPhotos.mockReturnValue({ data: [], isLoading: false, isError: true, refetch });
+    const { getByText } = render(<PhotoSection tripId="t1" currentUserId="me" canManage />);
+    expect(getByText(t('common.somethingWentWrong'))).toBeTruthy();
+    fireEvent.press(getByText(t('common.retry')));
+    expect(refetch).toHaveBeenCalledTimes(1);
   });
 
   it('renders a grid when photos exist', () => {
-    mockUseTripPhotos.mockReturnValue({ data: [photo('a')], isLoading: false });
+    mockUseTripPhotos.mockReturnValue({
+      data: [photo('a')],
+      isLoading: false,
+      isError: false,
+      refetch: jest.fn(),
+    });
     const { getAllByRole } = render(<PhotoSection tripId="t1" currentUserId="me" canManage />);
     expect(getAllByRole('imagebutton').length).toBeGreaterThan(0);
+  });
+});
+
+describe('PhotoViewer', () => {
+  const openPhoto = photo('a');
+
+  it('renders an author byline when an author name is provided', () => {
+    const { getByLabelText } = render(
+      <PhotoViewer
+        tripId="t1"
+        photo={openPhoto}
+        authorName="Ana"
+        currentUserId="me"
+        canManage={false}
+        onClose={jest.fn()}
+      />,
+    );
+    expect(getByLabelText(t('documents.uploadedBy', { name: 'Ana' }))).toBeTruthy();
+  });
+
+  it('shows the ghost author name for a deleted author', () => {
+    const ghostName = t('account.ghostName');
+    const ghostPhoto = { ...openPhoto, user_id: GHOST_AUTHOR_ID } as PhotoWithUrl;
+    const { getByLabelText } = render(
+      <PhotoViewer
+        tripId="t1"
+        photo={ghostPhoto}
+        authorName={ghostName}
+        currentUserId="me"
+        canManage={false}
+        onClose={jest.fn()}
+      />,
+    );
+    expect(getByLabelText(t('documents.uploadedBy', { name: ghostName }))).toBeTruthy();
+  });
+
+  it('omits the byline when no author name is given', () => {
+    const { queryByLabelText } = render(
+      <PhotoViewer
+        tripId="t1"
+        photo={openPhoto}
+        currentUserId="me"
+        canManage={false}
+        onClose={jest.fn()}
+      />,
+    );
+    expect(queryByLabelText(t('documents.uploadedBy', { name: 'Ana' }))).toBeNull();
+  });
+
+  it('renders nothing when there is no active photo', () => {
+    const { toJSON } = render(
+      <PhotoViewer
+        tripId="t1"
+        photo={null}
+        currentUserId="me"
+        canManage={false}
+        onClose={jest.fn()}
+      />,
+    );
+    expect(toJSON()).toBeNull();
   });
 });

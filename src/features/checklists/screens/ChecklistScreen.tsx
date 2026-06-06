@@ -6,6 +6,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTranslation } from '@core/i18n';
 import { supabase } from '@core/supabase/client';
 import { useTripMembers } from '@features/trips/hooks/useTripMembers';
+import { ErrorState } from '@shared/components/ErrorState';
+import { LoadingState } from '@shared/components/LoadingState';
 import { PixelButton } from '@shared/components/PixelButton';
 import { PixelText } from '@shared/components/PixelText';
 import { SCREEN_PADDING } from '@shared/constants/layout';
@@ -24,7 +26,12 @@ export function ChecklistScreen() {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
   const router = useRouter();
-  const { data: checklists = [], refetch: refetchLists } = useChecklists(id);
+  const {
+    data: checklists = [],
+    refetch: refetchLists,
+    isLoading: listsLoading,
+    isError: listsError,
+  } = useChecklists(id);
   const { data: items = [] } = useChecklistItems(id);
   const { data: completions = [] } = useCompletions(id);
   const { data: members = [] } = useTripMembers(id);
@@ -60,18 +67,35 @@ export function ChecklistScreen() {
         <PixelText size="h1" className="mb-4">
           {t('checklists.title')}
         </PixelText>
-        <ChecklistPicker checklists={checklists} selectedId={selectedId} onSelect={setSelectedId} />
-        {selectedId ? (
-          <ChecklistSection
-            tripId={id}
-            checklistId={selectedId}
-            items={items}
-            readiness={readiness.input}
-            userId={userId}
-            canManage={canManage}
-            onApplied={() => void refetchLists()}
+        {listsError ? (
+          <ErrorState
+            testID="checklist-error"
+            title={t('common.error')}
+            body={t('common.somethingWentWrong')}
+            onRetry={() => void refetchLists()}
           />
-        ) : null}
+        ) : listsLoading ? (
+          <LoadingState testID="checklist-loading" variant="skeleton" label={t('common.loading')} />
+        ) : (
+          <>
+            <ChecklistPicker
+              checklists={checklists}
+              selectedId={selectedId}
+              onSelect={setSelectedId}
+            />
+            {selectedId ? (
+              <ChecklistSection
+                tripId={id}
+                checklistId={selectedId}
+                items={items}
+                readiness={readiness.input}
+                userId={userId}
+                canManage={canManage}
+                onApplied={() => void refetchLists()}
+              />
+            ) : null}
+          </>
+        )}
         <View className="mt-8">
           <PixelButton variant="ghost" onPress={() => router.back()} fullWidth>
             {t('common.back')}

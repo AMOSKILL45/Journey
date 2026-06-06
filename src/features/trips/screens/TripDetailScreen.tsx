@@ -38,6 +38,9 @@ import {
 import { ScrapbookSection } from '@features/scrapbook';
 import { SmartTipsSection } from '@features/smart-reminders';
 import { TimeCapsulesSection } from '@features/time-capsules';
+import { EmptyState } from '@shared/components/EmptyState';
+import { ErrorState } from '@shared/components/ErrorState';
+import { LoadingState } from '@shared/components/LoadingState';
 import { PixelButton } from '@shared/components/PixelButton';
 import { PixelCard } from '@shared/components/PixelCard';
 import { PixelText } from '@shared/components/PixelText';
@@ -74,7 +77,7 @@ export function TripDetailScreen() {
   const router = useRouter();
   const qc = useQueryClient();
   const sheetRef = useRef<MilestoneCreationSheetRef>(null);
-  const { data: trip, isLoading } = useTrip(tripId);
+  const { data: trip, isLoading, error: tripError, refetch: refetchTrip } = useTrip(tripId);
   const { data: milestones = [] } = useMilestones(tripId);
   const { data: checkedInIds = [] } = useTripCheckinMilestoneIds(tripId);
   const checkedInSet = useMemo(() => new Set(checkedInIds), [checkedInIds]);
@@ -205,13 +208,22 @@ export function TripDetailScreen() {
   const canManageVisibility =
     (!!profile && trip?.owner_id === profile.id) || myRole === 'owner' || myRole === 'editor';
 
-  if (isLoading || !trip) {
+  if (isLoading) {
     return (
-      <View
-        className="flex-1 items-center justify-center bg-cream"
-        style={{ paddingTop: insets.top }}
-      >
-        <PixelText>{t('common.loading')}</PixelText>
+      <View className="flex-1 bg-cream" style={{ paddingTop: insets.top }}>
+        <LoadingState variant="spinner" label={t('common.loading')} />
+      </View>
+    );
+  }
+
+  if (tripError || !trip) {
+    return (
+      <View className="flex-1 bg-cream" style={{ paddingTop: insets.top }}>
+        <ErrorState
+          title={t('common.somethingWentWrong')}
+          body={t('trips.errors.loadFailed')}
+          onRetry={() => void refetchTrip()}
+        />
       </View>
     );
   }
@@ -274,24 +286,21 @@ export function TripDetailScreen() {
             ) : null}
             {trip.destination_country ? (
               <PixelText size="small" className="text-text-secondary">
-                📍 {trip.destination_country}
+                {trip.destination_country}
               </PixelText>
             ) : null}
           </View>
         </PixelCard>
 
         {milestones.length === 0 ? (
-          <PixelCard className="mb-6 items-center">
-            <PixelText size="h2" className="mb-2">
-              {t('milestones.empty.title')}
-            </PixelText>
-            <PixelText size="body" className="mb-4 text-center text-text-secondary">
-              {t('milestones.empty.body')}
-            </PixelText>
-            <PixelButton variant="primary" onPress={() => sheetRef.current?.open()}>
-              {t('milestones.addCta')}
-            </PixelButton>
-          </PixelCard>
+          <View className="mb-6">
+            <EmptyState
+              title={t('emptyStates.tripPath.title')}
+              body={t('emptyStates.tripPath.body')}
+              actionLabel={t('emptyStates.tripPath.action')}
+              onAction={() => sheetRef.current?.open()}
+            />
+          </View>
         ) : (
           <View className="mb-6">
             <MapModeToggle mode={viewMode} onChange={setViewMode} />
@@ -311,7 +320,11 @@ export function TripDetailScreen() {
               />
             )}
             <View className="mt-4 items-center">
-              <PixelButton variant="primary" onPress={() => sheetRef.current?.open()}>
+              <PixelButton
+                variant="primary"
+                onPress={() => sheetRef.current?.open()}
+                accessibilityLabel={t('emptyStates.tripPath.action')}
+              >
                 {t('milestones.addCta')}
               </PixelButton>
             </View>

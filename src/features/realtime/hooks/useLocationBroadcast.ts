@@ -1,6 +1,10 @@
 import * as Location from 'expo-location';
 import { useEffect, useRef } from 'react';
 
+// Import the standalone bridge (not the @features/onboarding barrel) so this
+// hook doesn't pull the carousel/provider components into the realtime bundle.
+import { requestPrePermission } from '@features/onboarding/prePermission';
+
 import { writeLastPosition } from '../api/position';
 import { cityRound, shouldBroadcast, type Stamped } from '../utils/geo';
 
@@ -33,6 +37,13 @@ export function useLocationBroadcast({
     let sub: Location.LocationSubscription | null = null;
 
     void (async () => {
+      // Pre-permission priming (10A): explain the value before the OS prompt.
+      // Only prime when not already granted; "Not now" defers without prompting.
+      const current = await Location.getForegroundPermissionsAsync();
+      if (cancelled) return;
+      if (current.status !== 'granted') {
+        if (!(await requestPrePermission('location'))) return;
+      }
       const { status } = await Location.requestForegroundPermissionsAsync();
       if (cancelled || status !== 'granted') return;
       sub = await Location.watchPositionAsync(

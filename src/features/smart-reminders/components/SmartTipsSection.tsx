@@ -1,6 +1,7 @@
 import { View } from 'react-native';
 
 import { useTranslation } from '@core/i18n';
+import { ErrorState } from '@shared/components/ErrorState';
 import { PixelText } from '@shared/components/PixelText';
 
 import { useSmartReminderActions, useSmartReminders } from '../hooks/useSmartReminders';
@@ -9,10 +10,25 @@ import { SmartTipCard } from './SmartTipCard';
 
 export function SmartTipsSection({ tripId }: { tripId: string }) {
   const { t } = useTranslation();
-  const { data, isLoading } = useSmartReminders(tripId);
+  const { data, isLoading, isError, refetch } = useSmartReminders(tripId);
   const { markDone, snooze, dismiss } = useSmartReminderActions(tripId);
   const pending = (data ?? []).filter((r) => r.status === 'pending');
-  if (isLoading || !pending.length) return null; // nothing pending -> no empty paralysis
+
+  // Advisory section embedded in the trip screen: stay silent while loading or
+  // when nothing is pending (no empty paralysis), but keep a recovery path on error.
+  if (isError) {
+    return (
+      <View className="mb-4">
+        <ErrorState
+          testID="smarttips-error"
+          title={t('common.error')}
+          body={t('common.somethingWentWrong')}
+          onRetry={() => void refetch()}
+        />
+      </View>
+    );
+  }
+  if (isLoading || !pending.length) return null;
 
   return (
     <View className="mb-4 gap-2">

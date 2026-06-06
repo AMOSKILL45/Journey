@@ -67,8 +67,10 @@
     "next": "Suivant",
     "skip": "Passer",
     "done": "Terminé",
-    "loading": "Chargement...",
-    "error": "Quelque chose a mal tourné"
+    "loading": "Chargement…",
+    "retry": "Réessayer",
+    "error": "Quelque chose a mal tourné",
+    "somethingWentWrong": "Une erreur est survenue"
   },
   "map": {
     "toggle": {
@@ -192,6 +194,9 @@
       "shareButton": "Partager",
       "shareMessage": "Rejoins mon aventure sur This Is The Journey : %{link}",
       "acceptError": "Impossible d'accepter l'invitation. Elle est peut-être expirée ou déjà utilisée."
+    },
+    "errors": {
+      "loadFailed": "Le chargement a échoué. Veuillez réessayer."
     }
   },
   "milestones": {
@@ -566,6 +571,22 @@
       "south_africa_entry": {
         "title": "Afrique du Sud — entrée sans visa",
         "body": "De nombreuses nationalités peuvent visiter l’Afrique du Sud sans visa jusqu’à 90 jours. Prévoyez un passeport avec au moins deux pages vierges."
+      },
+      "mexico_tourist": {
+        "title": "Mexique — entrée touristique",
+        "body": "De nombreuses nationalités peuvent visiter le Mexique sans visa jusqu’à 180 jours. Vous recevez un permis touristique (FMM) à l’arrivée — conservez-le pour le départ."
+      },
+      "argentina_visa_free": {
+        "title": "Argentine — entrée sans visa",
+        "body": "De nombreuses nationalités peuvent entrer en Argentine sans visa jusqu’à 90 jours. Vérifiez que votre passeport est valide pour tout le séjour."
+      },
+      "schengen_visa_short_stay": {
+        "title": "Visa Schengen court séjour",
+        "body": "Votre nationalité peut nécessiter un visa Schengen (type C) pour les séjours jusqu’à 90 jours. Déposez la demande au consulat de votre destination principale plusieurs semaines à l’avance."
+      },
+      "uk_standard_visitor": {
+        "title": "Visa visiteur standard (UK)",
+        "body": "Votre nationalité peut nécessiter un visa visiteur standard pour le Royaume-Uni. Faites la demande en ligne quelques semaines avant le départ — le traitement peut prendre environ 3 semaines."
       }
     }
   },
@@ -893,5 +914,140 @@
     "none": "Aucune rencontre à proximité — essaie un autre endroit.",
     "error": "Service carto injoignable. Réessayer ?",
     "retry": "Réessayer"
+  },
+  "onboarding": {
+    "screen1": {
+      "title": "Planifiez ensemble",
+      "body": "Créez un voyage, invitez vos amis et construisez l'itinéraire en équipe."
+    },
+    "screen2": {
+      "title": "Suivez le chemin",
+      "body": "Vos étapes deviennent un parcours façon Duolingo sur une carte de jeu."
+    },
+    "screen3": {
+      "title": "Voyagez en direct",
+      "body": "Voyez les avatars de chacun se déplacer sur la carte en temps réel."
+    },
+    "screen4": {
+      "title": "Privé par défaut",
+      "body": "Vous choisissez ce qui est partagé. Rien n'est public sans votre accord."
+    },
+    "skip": "Passer",
+    "next": "Suivant",
+    "getStarted": "C'est parti",
+    "priming": {
+      "notifications": {
+        "title": "Restez informé",
+        "body": "Recevez des rappels de visa et de préparation — uniquement quand ça compte."
+      },
+      "location": {
+        "title": "Voyagez ensemble, en direct",
+        "body": "Laissez vos amis voir votre avatar bouger sur la carte. Vous gardez le contrôle."
+      },
+      "allow": "Autoriser",
+      "notNow": "Plus tard"
+    }
+  },
+  "account": {
+    "ghostName": "Ancien voyageur",
+    "delete": {
+      "entry": "Supprimer mon compte",
+      "title": "Supprimer votre compte ?",
+      "warning": "Cette action supprime définitivement votre compte et vos données personnelles. Les voyages partagés sont conservés, mais votre nom est retiré. C'est irréversible.",
+      "confirmLabel": "Tapez SUPPRIMER pour confirmer",
+      "confirmCta": "Supprimer définitivement",
+      "cancel": "Conserver mon compte",
+      "success": "Votre compte a été supprimé.",
+      "error": "Impossible de supprimer votre compte. Réessayez."
+    },
+    "export": {
+      "entry": "Exporter mes données",
+      "cta": "Exporter mes données",
+      "preparing": "Préparation de vos données…",
+      "success": "Vos données sont prêtes à être partagées.",
+      "error": "Impossible d'exporter vos données. Réessayez."
+    },
+    "ageGate": {
+      "title": "Quel âge avez-vous ?",
+      "body": "Vous devez avoir au moins 13 ans (16 ans dans l'UE) pour utiliser This Is The Journey.",
+      "confirm": "J'ai l'âge requis"
+    }
+  },
+  "legal": {
+    "sectionTitle": "Mentions légales",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation"
+  },
+  "a11y": {
+    "sectionTitle": "Accessibilité",
+    "readableMode": "Texte lisible",
+    "readableModeDescription": "Remplace la police pixel par une police plus lisible dans toute l'app."
+  },
+  "emptyStates": {
+    "trips": {
+      "title": "Vos aventures vous attendent",
+      "body": "Planifiez votre premier voyage et regardez-le s'illuminer ici.",
+      "action": "Créer un voyage"
+    },
+    "tripPath": {
+      "title": "Aucune étape pour l'instant",
+      "body": "Ajoutez votre premier arrêt pour construire le chemin.",
+      "action": "Ajouter une étape"
+    },
+    "documents": {
+      "title": "Aucun document pour l'instant",
+      "body": "Ajoutez billets, réservations ou ESTA pour que toute l'équipe les ait.",
+      "action": "Ajouter un document"
+    },
+    "checklists": {
+      "title": "Rien à préparer… pour l'instant",
+      "body": "Ajoutez des éléments ou partez d'un modèle pour être prêt.",
+      "action": "Ajouter un élément"
+    },
+    "photos": {
+      "title": "Aucune photo pour l'instant",
+      "body": "Capturez un moment ou ajoutez-en depuis votre galerie — l'équipe la verra.",
+      "action": "Ajouter une photo"
+    },
+    "polls": {
+      "title": "Aucun sondage pour l'instant",
+      "body": "Posez une question au groupe et laissez chacun voter.",
+      "action": "Nouveau sondage"
+    },
+    "achievements": {
+      "title": "Aucun badge pour l'instant",
+      "body": "Commencez votre premier voyage pour débloquer un badge.",
+      "action": "Planifier un voyage"
+    },
+    "passport": {
+      "title": "Votre passeport est vide",
+      "body": "Pointez votre première étape pour gagner un tampon.",
+      "action": "Ouvrir un voyage"
+    },
+    "inbox": {
+      "title": "Vous êtes à jour",
+      "body": "Les notifications de vos voyages et de votre équipe apparaîtront ici.",
+      "action": "Explorer les voyages"
+    },
+    "smartReminders": {
+      "title": "Aucun conseil pour l'instant",
+      "body": "Nous afficherons ici les conseils visa et préparation à l'approche du voyage.",
+      "action": "Ouvrir un voyage"
+    },
+    "lifeReminders": {
+      "title": "Aucun rappel pour l'instant",
+      "body": "Ajoutez un rappel pour votre passeport, votre visa ou tout ce qui expire.",
+      "action": "Ajouter un rappel"
+    },
+    "publicProfile": {
+      "title": "Ce profil est privé",
+      "body": "Ce voyageur n'a pas rendu son profil public.",
+      "action": "Retour"
+    },
+    "discover": {
+      "title": "La découverte arrive bientôt",
+      "body": "Trouvez ici des voyages et des compagnons de route dans une prochaine mise à jour.",
+      "action": "Revenir à mes voyages"
+    }
   }
 }

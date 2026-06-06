@@ -1,6 +1,9 @@
 import { ReactNode } from 'react';
 import { Text, TextProps } from 'react-native';
 
+// Import from the store module (not the @features/feedback barrel) to avoid an
+// import cycle: the barrel re-exports FeedbackSettings, which renders PixelText.
+import { useReadableMode } from '@features/feedback/store/feedbackSettings';
 import { cn } from '@shared/utils/cn';
 
 type TextSize =
@@ -77,7 +80,11 @@ export const PixelText = ({
   children,
   ...rest
 }: PixelTextProps) => {
-  const resolvedFamily = family ?? sizeToDefaultFamily[size];
+  const readable = useReadableMode();
+  const base = family ?? sizeToDefaultFamily[size];
+  // Readable Mode (ADR-011): remap the decoration-grade pixel font to legible
+  // Fredoka 700, leaving everything already in Nunito/Fredoka untouched.
+  const resolvedFamily: TextFamily = readable && base === 'pixel' ? 'heading-bold' : base;
   return (
     <Text
       className={cn(

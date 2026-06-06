@@ -1,23 +1,23 @@
+import { useRouter } from 'expo-router';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTranslation } from '@core/i18n';
-import { PixelText } from '@shared/components/PixelText';
+import { EmptyState } from '@shared/components/EmptyState';
+import { SCREEN_PADDING_TOP_EXTRA } from '@shared/constants/layout';
 
 export default function DiscoverTab() {
   const { t } = useTranslation();
+  const router = useRouter();
   const insets = useSafeAreaInsets();
   return (
-    <View
-      className="flex-1 items-center justify-center bg-cream px-6"
-      style={{ paddingTop: insets.top + 24 }}
-    >
-      <PixelText size="h1" className="mb-2">
-        {t('tabs.discover')}
-      </PixelText>
-      <PixelText size="body" className="text-text-secondary">
-        Public trips discovery — v1.1
-      </PixelText>
+    <View className="flex-1 bg-cream" style={{ paddingTop: insets.top + SCREEN_PADDING_TOP_EXTRA }}>
+      <EmptyState
+        title={t('emptyStates.discover.title')}
+        body={t('emptyStates.discover.body')}
+        actionLabel={t('emptyStates.discover.action')}
+        onAction={() => router.replace('/(tabs)/trips')}
+      />
     </View>
   );
 }

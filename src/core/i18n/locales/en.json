@@ -67,8 +67,10 @@
     "next": "Next",
     "skip": "Skip",
     "done": "Done",
-    "loading": "Loading...",
-    "error": "Something went wrong"
+    "loading": "Loading…",
+    "retry": "Retry",
+    "error": "Something went wrong",
+    "somethingWentWrong": "Something went wrong"
   },
   "map": {
     "toggle": {
@@ -192,6 +194,9 @@
       "shareButton": "Share",
       "shareMessage": "Join my adventure on This Is The Journey: %{link}",
       "acceptError": "Could not accept invitation. It may be expired or already used."
+    },
+    "errors": {
+      "loadFailed": "We couldn't load this. Please try again."
     }
   },
   "milestones": {
@@ -566,6 +571,22 @@
       "south_africa_entry": {
         "title": "South Africa — visa-free entry",
         "body": "Many nationalities can visit South Africa visa-free for up to 90 days. Bring a passport with at least two blank pages."
+      },
+      "mexico_tourist": {
+        "title": "Mexico — tourist entry",
+        "body": "Many nationalities can visit Mexico visa-free for up to 180 days. You receive a tourist permit (FMM) on arrival — keep it for departure."
+      },
+      "argentina_visa_free": {
+        "title": "Argentina — visa-free entry",
+        "body": "Many nationalities can enter Argentina visa-free for up to 90 days. Check that your passport is valid for the whole stay."
+      },
+      "schengen_visa_short_stay": {
+        "title": "Schengen short-stay visa",
+        "body": "Your nationality may need a Schengen visa (type C) for trips up to 90 days. Apply at the consulate of your main destination several weeks ahead."
+      },
+      "uk_standard_visitor": {
+        "title": "UK Standard Visitor visa",
+        "body": "Your nationality may need a UK Standard Visitor visa. Apply online a few weeks before you travel — processing can take around 3 weeks."
       }
     }
   },
@@ -893,5 +914,140 @@
     "none": "No encounters nearby — try another spot.",
     "error": "Couldn't reach the map service. Retry?",
     "retry": "Retry"
+  },
+  "onboarding": {
+    "screen1": {
+      "title": "Plan together",
+      "body": "Create a trip, invite your friends, build the route as a team."
+    },
+    "screen2": {
+      "title": "Follow the path",
+      "body": "Milestones become a Duolingo-style path across a game-world map."
+    },
+    "screen3": {
+      "title": "Travel live",
+      "body": "See each other's avatars move on the map in real time."
+    },
+    "screen4": {
+      "title": "Private by default",
+      "body": "You choose what's shared. Nothing is public unless you say so."
+    },
+    "skip": "Skip",
+    "next": "Next",
+    "getStarted": "Get started",
+    "priming": {
+      "notifications": {
+        "title": "Stay in the loop",
+        "body": "Get reminded about visas & trip prep — only when it matters."
+      },
+      "location": {
+        "title": "Travel together, live",
+        "body": "Let friends see your avatar move on the map. You control this anytime."
+      },
+      "allow": "Allow",
+      "notNow": "Not now"
+    }
+  },
+  "account": {
+    "ghostName": "Former traveller",
+    "delete": {
+      "entry": "Delete my account",
+      "title": "Delete your account?",
+      "warning": "This permanently deletes your account and personal data. Trips you share with others stay, but your name is removed. This cannot be undone.",
+      "confirmLabel": "Type DELETE to confirm",
+      "confirmCta": "Delete forever",
+      "cancel": "Keep my account",
+      "success": "Your account has been deleted.",
+      "error": "We couldn't delete your account. Please try again."
+    },
+    "export": {
+      "entry": "Export my data",
+      "cta": "Export my data",
+      "preparing": "Preparing your data…",
+      "success": "Your data is ready to share.",
+      "error": "We couldn't export your data. Please try again."
+    },
+    "ageGate": {
+      "title": "How old are you?",
+      "body": "You must be at least 13 (16 in the EU) to use This Is The Journey.",
+      "confirm": "I'm old enough"
+    }
+  },
+  "legal": {
+    "sectionTitle": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  },
+  "a11y": {
+    "sectionTitle": "Accessibility",
+    "readableMode": "Readable text",
+    "readableModeDescription": "Swap the pixel font for an easier-to-read one across the app."
+  },
+  "emptyStates": {
+    "trips": {
+      "title": "Your adventures await",
+      "body": "Plan your first trip and watch it light up here.",
+      "action": "Create a trip"
+    },
+    "tripPath": {
+      "title": "No milestones yet",
+      "body": "Add your first stop to start building the path.",
+      "action": "Add a milestone"
+    },
+    "documents": {
+      "title": "No documents yet",
+      "body": "Add tickets, bookings or your ESTA so the whole crew has them.",
+      "action": "Add a document"
+    },
+    "checklists": {
+      "title": "Nothing to pack… yet",
+      "body": "Add items or start from a template to get trip-ready.",
+      "action": "Add an item"
+    },
+    "photos": {
+      "title": "No photos yet",
+      "body": "Snap a moment or add one from your library — the crew will see it.",
+      "action": "Add a photo"
+    },
+    "polls": {
+      "title": "No polls yet",
+      "body": "Ask the group a question and let everyone vote.",
+      "action": "New poll"
+    },
+    "achievements": {
+      "title": "No badges yet",
+      "body": "Start your first trip to unlock your first achievement.",
+      "action": "Plan a trip"
+    },
+    "passport": {
+      "title": "Your passport is empty",
+      "body": "Check in to your first milestone to earn a stamp.",
+      "action": "Open a trip"
+    },
+    "inbox": {
+      "title": "You're all caught up",
+      "body": "Notifications about your trips and crew will show up here.",
+      "action": "Explore trips"
+    },
+    "smartReminders": {
+      "title": "No smart tips right now",
+      "body": "We'll surface visa and prep tips here as your trip gets closer.",
+      "action": "Open a trip"
+    },
+    "lifeReminders": {
+      "title": "No reminders yet",
+      "body": "Add a reminder for your passport, visa or anything that expires.",
+      "action": "Add a reminder"
+    },
+    "publicProfile": {
+      "title": "This profile is private",
+      "body": "This traveller hasn't made their profile public.",
+      "action": "Go back"
+    },
+    "discover": {
+      "title": "Discovery is coming soon",
+      "body": "Find trips and travel companions here in a future update.",
+      "action": "Back to my trips"
+    }
   }
 }

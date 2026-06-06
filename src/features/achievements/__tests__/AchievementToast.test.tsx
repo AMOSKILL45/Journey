@@ -25,4 +25,13 @@ describe('AchievementToast', () => {
 
     expect(onDone).toHaveBeenCalledTimes(1);
   });
+
+  it('announces the unlock as a polite live region labelled with the achievement name', () => {
+    const { getByTestId } = render(
+      <AchievementToast name="achievements.defs.first_trip.name" onDone={jest.fn()} />,
+    );
+    const toast = getByTestId('achievement-toast');
+    expect(toast.props.accessibilityLiveRegion).toBe('polite');
+    expect(toast.props.accessibilityLabel).toBe('Unlocked! Bon Voyage');
+  });
 });

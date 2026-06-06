@@ -1,5 +1,6 @@
 import { View } from 'react-native';
 
+import { t } from '@core/i18n';
 import { PixelAvatar } from '@shared/components/PixelAvatar';
 
 /** Structurally compatible with realtime's PresenceMember; kept local so map has no realtime dep. */
@@ -59,7 +60,7 @@ export function LiveAvatarsLayer({ placements }: LiveAvatarsLayerProps) {
             <PixelAvatar
               spriteId={pl.member.avatar_sprite_id}
               color={pl.member.avatar_color}
-              label={pl.member.display_name ?? 'Traveler'}
+              label={pl.member.display_name ?? t('profile.anonymous')}
               size="sm"
             />
           </View>

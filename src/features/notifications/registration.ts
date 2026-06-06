@@ -5,6 +5,10 @@ import { getCalendars } from 'expo-localization';
 import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
 
+// Import the standalone bridge (not the @features/onboarding barrel) so this
+// non-React module doesn't pull the carousel/provider components into its bundle.
+import { requestPrePermission } from '@features/onboarding/prePermission';
+
 import { registerToken } from './api/pushTokens';
 
 const DEVICE_ID_KEY = 'push-device-id';
@@ -30,7 +34,13 @@ async function getOrCreateDeviceId(): Promise<string> {
 export async function registerForPush(): Promise<void> {
   if (!Device.isDevice) return; // push works on physical devices only
   const settings = await Notifications.getPermissionsAsync();
-  const granted = settings.granted || (await Notifications.requestPermissionsAsync()).granted;
+  let granted = settings.granted;
+  if (!granted) {
+    // Pre-permission priming (10A): show the value-framed sheet before the OS
+    // prompt. "Not now" defers — we skip the OS prompt this run.
+    if (!(await requestPrePermission('notifications'))) return;
+    granted = (await Notifications.requestPermissionsAsync()).granted;
+  }
   if (!granted) return;
 
   if (Platform.OS === 'android') {

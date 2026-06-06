@@ -24,4 +24,17 @@ describe('AchievementBadge', () => {
     const unlocked = render(<AchievementBadge def={{ ...base, unlocked: true }} />);
     expect(unlocked.getByTestId('badge-first_trip-unlocked')).toBeTruthy();
   });
+
+  it('exposes a single SR element labelled with name + lock state', () => {
+    // Locked: "Bon Voyage, Locked" (name resolves from achievements.defs.first_trip.name).
+    const locked = render(<AchievementBadge def={base} />);
+    const lockedNode = locked.getByTestId('badge-first_trip-locked');
+    expect(lockedNode.props.accessible).toBe(true);
+    expect(lockedNode.props.accessibilityLabel).toBe('Bon Voyage, Locked');
+
+    const unlocked = render(<AchievementBadge def={{ ...base, unlocked: true }} />);
+    expect(unlocked.getByTestId('badge-first_trip-unlocked').props.accessibilityLabel).toBe(
+      'Bon Voyage',
+    );
+  });
 });

@@ -35,6 +35,7 @@ export function SmartTipCard({
           testID="smarttip-done"
           onPress={onDone}
           accessibilityRole="button"
+          accessibilityLabel={t('smartReminders.actions.done')}
           className="rounded border-2 border-border bg-primary-600 px-3 py-2"
         >
           <PixelText size="caption" className="text-white">
@@ -45,6 +46,7 @@ export function SmartTipCard({
           testID="smarttip-checklist"
           onPress={onOpen}
           accessibilityRole="button"
+          accessibilityLabel={t('smartReminders.actions.addToChecklist')}
           className="rounded border-2 border-border bg-secondary-700 px-3 py-2"
         >
           <PixelText size="caption" className="text-white">
@@ -55,6 +57,7 @@ export function SmartTipCard({
           testID="smarttip-snooze"
           onPress={onSnooze}
           accessibilityRole="button"
+          accessibilityLabel={t('smartReminders.actions.snooze')}
           className="rounded border-2 border-border bg-surface-alt px-3 py-2"
         >
           <PixelText size="caption">{t('smartReminders.actions.snooze')}</PixelText>
@@ -63,6 +66,7 @@ export function SmartTipCard({
           testID="smarttip-dismiss"
           onPress={onDismiss}
           accessibilityRole="button"
+          accessibilityLabel={t('smartReminders.actions.dismiss')}
           className="rounded border-2 border-border bg-surface-alt px-3 py-2"
         >
           <PixelText size="caption">{t('smartReminders.actions.dismiss')}</PixelText>

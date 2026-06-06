@@ -4,6 +4,9 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTranslation } from '@core/i18n';
 import { TripCard, useTrips } from '@features/trips';
+import { EmptyState } from '@shared/components/EmptyState';
+import { ErrorState } from '@shared/components/ErrorState';
+import { LoadingState } from '@shared/components/LoadingState';
 import { PixelButton } from '@shared/components/PixelButton';
 import { PixelText } from '@shared/components/PixelText';
 
@@ -11,45 +14,39 @@ export default function TripsTab() {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
   const router = useRouter();
-  const { data: trips = [], isLoading, error } = useTrips();
+  const { data: trips = [], isLoading, error, refetch } = useTrips();
+
+  const goCreate = () => router.push('/(modals)/create-trip');
 
   if (isLoading) {
     return (
-      <View
-        className="flex-1 items-center justify-center bg-cream"
-        style={{ paddingTop: insets.top }}
-      >
-        <PixelText>{t('common.loading')}</PixelText>
+      <View className="flex-1 bg-cream" style={{ paddingTop: insets.top }}>
+        <LoadingState variant="skeleton" label={t('common.loading')} />
       </View>
     );
   }
 
   if (error) {
     return (
-      <View
-        className="flex-1 items-center justify-center bg-cream px-6"
-        style={{ paddingTop: insets.top }}
-      >
-        <PixelText className="text-error">{t('common.error')}</PixelText>
+      <View className="flex-1 bg-cream" style={{ paddingTop: insets.top }}>
+        <ErrorState
+          title={t('common.somethingWentWrong')}
+          body={t('trips.errors.loadFailed')}
+          onRetry={() => void refetch()}
+        />
       </View>
     );
   }
 
   if (trips.length === 0) {
     return (
-      <View
-        className="flex-1 items-center justify-center bg-cream px-6"
-        style={{ paddingTop: insets.top }}
-      >
-        <PixelText size="h2" className="mb-2 text-center">
-          {t('trips.list.empty.title')}
-        </PixelText>
-        <PixelText size="body" className="mb-6 text-center text-text-secondary">
-          {t('trips.list.empty.subtitle')}
-        </PixelText>
-        <PixelButton onPress={() => router.push('/(modals)/create-trip')}>
-          {t('trips.list.empty.cta')}
-        </PixelButton>
+      <View className="flex-1 bg-cream" style={{ paddingTop: insets.top }}>
+        <EmptyState
+          title={t('emptyStates.trips.title')}
+          body={t('emptyStates.trips.body')}
+          actionLabel={t('emptyStates.trips.action')}
+          onAction={goCreate}
+        />
       </View>
     );
   }
@@ -58,7 +55,11 @@ export default function TripsTab() {
     <View className="flex-1 bg-cream px-4" style={{ paddingTop: insets.top + 12 }}>
       <View className="mb-3 flex-row items-center justify-between">
         <PixelText size="h1">{t('trips.list.title')}</PixelText>
-        <PixelButton size="sm" onPress={() => router.push('/(modals)/create-trip')}>
+        <PixelButton
+          size="sm"
+          onPress={goCreate}
+          accessibilityLabel={t('emptyStates.trips.action')}
+        >
           {t('trips.list.newButton')}
         </PixelButton>
       </View>

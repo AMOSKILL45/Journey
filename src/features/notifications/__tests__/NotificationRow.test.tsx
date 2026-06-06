@@ -31,4 +31,15 @@ describe('NotificationRow', () => {
     const { queryByTestId } = render(<NotificationRow notification={read} onPress={jest.fn()} />);
     expect(queryByTestId('notification-unread-dot')).toBeNull();
   });
+
+  it('reads the whole row (title + body) as one SR label and hides the decorative dot', () => {
+    const { getByRole, getByTestId } = render(
+      <NotificationRow notification={base} onPress={jest.fn()} />,
+    );
+    expect(getByRole('button').props.accessibilityLabel).toBe(
+      'New traveler. Someone joined your trip.',
+    );
+    // Unread dot must not be its own SR element (color is not the sole cue).
+    expect(getByTestId('notification-unread-dot').props.importantForAccessibility).toBe('no');
+  });
 });

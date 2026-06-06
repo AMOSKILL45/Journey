@@ -113,5 +113,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     googleWebClientId: process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID,
     googleIosClientId: process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID,
     stripePublishableKey: process.env.EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY,
+    privacyUrl: process.env.EXPO_PUBLIC_PRIVACY_URL,
+    termsUrl: process.env.EXPO_PUBLIC_TERMS_URL,
   },
 });

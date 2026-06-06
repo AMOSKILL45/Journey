@@ -81,7 +81,7 @@ export function BossClearCinematic({
       <Pressable
         testID="bossclear-cinematic"
         accessibilityRole="button"
-        accessibilityLabel="boss.skip"
+        accessibilityLabel={t('boss.skip')}
         onPress={onDone}
         style={styles.overlay}
       >
@@ -129,7 +129,7 @@ function BossContent({ headline, subtitle, animate }: BossContentProps) {
   return (
     <Animated.View style={cardStyle} pointerEvents="none">
       <PixelCard variant="elevated" className="items-center px-6 py-5">
-        <PixelText size="h2" family="pixel" className="text-center text-accent-700">
+        <PixelText size="h2" family="pixel" className="text-center text-primary-600">
           {headline}
         </PixelText>
         <PixelText size="lead" family="heading-bold" className="mt-3 text-center text-text-primary">

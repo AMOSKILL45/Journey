@@ -41,7 +41,12 @@ export function ChecklistItemRow({
         }`}
       >
         {checked ? (
-          <PixelText size="caption" className="text-surface">
+          <PixelText
+            size="caption"
+            className="text-surface"
+            accessibilityElementsHidden
+            importantForAccessibility="no"
+          >
             ✓
           </PixelText>
         ) : null}
@@ -68,12 +73,21 @@ export function ChecklistItemRow({
             </PixelText>
           ) : null}
           {item.due_date ? (
-            <PixelText size="caption" className="text-text-secondary">
+            <PixelText
+              size="caption"
+              className="text-text-secondary"
+              accessibilityLabel={`${t('checklists.fields.dueDate')} ${item.due_date}`}
+            >
               ⏰ {item.due_date}
             </PixelText>
           ) : null}
           {item.document_id ? (
-            <Pressable testID="checklist-doc-badge" onPress={onOpenDoc} accessibilityRole="button">
+            <Pressable
+              testID="checklist-doc-badge"
+              onPress={onOpenDoc}
+              accessibilityRole="button"
+              accessibilityLabel={t('checklists.linkedDoc')}
+            >
               <PixelText size="caption" className="text-sky-700">
                 {t('checklists.linkedDoc')}
               </PixelText>

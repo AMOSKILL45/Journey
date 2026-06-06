@@ -1,6 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { QueryClient } from '@tanstack/react-query';
 
+// Leaf-module import (not the @features/onboarding barrel) to avoid pulling the carousel/
+// gesture-handler bundle into the account-deletion path.
+import { ONBOARDING_FLAGS_STORAGE_KEY } from '@features/onboarding/store/onboardingFlags';
+
 /**
  * AsyncStorage keys to drop on account deletion / hard sign-out so no per-user state leaks into
  * the next session on the same device. Kept explicit (vs `AsyncStorage.clear()`) to avoid nuking
@@ -9,7 +13,7 @@ import type { QueryClient } from '@tanstack/react-query';
  */
 export const CLEARED_STORAGE_KEYS = [
   // First-run intro gate (10A) — re-show the carousel for whoever signs in next.
-  'onboarding_intro_seen',
+  ONBOARDING_FLAGS_STORAGE_KEY,
   // Persisted UI settings (6C feedback store + 10C readable mode).
   'feedback.settings.v1',
   // Achievement "seen" dedupe set (6A).

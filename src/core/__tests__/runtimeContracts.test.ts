@@ -148,11 +148,17 @@ describe('runtime contract: onboarding route', () => {
 });
 
 describe('runtime contract: legal URL env', () => {
-  it('privacy/terms env keys read in @core/env are mapped into app.config extra', () => {
-    const env = read(path.join(SRC, 'core/env/index.ts'));
-    const cfg = read(path.join(REPO, 'app.config.ts'));
-    for (const key of ['EXPO_PUBLIC_PRIVACY_URL', 'EXPO_PUBLIC_TERMS_URL']) {
-      if (env.includes(key)) expect(cfg.includes(key)).toBe(true);
-    }
+  const env = read(path.join(SRC, 'core/env/index.ts'));
+  const cfg = read(path.join(REPO, 'app.config.ts'));
+
+  it('@core/env exposes privacyUrl + termsUrl (consumed by the Legal section)', () => {
+    expect(env).toMatch(/\bprivacyUrl\b/);
+    expect(env).toMatch(/\btermsUrl\b/);
+  });
+
+  it('app.config maps both EXPO_PUBLIC legal URL env vars into extra', () => {
+    // Both directions: env reads them, app.config must populate them or they are always undefined.
+    expect(cfg).toContain('EXPO_PUBLIC_PRIVACY_URL');
+    expect(cfg).toContain('EXPO_PUBLIC_TERMS_URL');
   });
 });

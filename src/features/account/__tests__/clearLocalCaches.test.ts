@@ -1,5 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import { ONBOARDING_FLAGS_STORAGE_KEY } from '@features/onboarding/store/onboardingFlags';
+
 import { CLEARED_STORAGE_KEYS, clearLocalCaches } from '../utils/clearLocalCaches';
 
 const multiRemove = AsyncStorage.multiRemove as jest.Mock;
@@ -17,8 +19,10 @@ describe('account/clearLocalCaches', () => {
 
     expect(clear).toHaveBeenCalledTimes(1);
     const removed = multiRemove.mock.calls[0][0] as string[];
-    // The first-run intro flag MUST be cleared so the next user re-sees onboarding.
-    expect(removed).toContain('onboarding_intro_seen');
+    // The first-run intro flag MUST be cleared (under the store's REAL persist key) so the next
+    // user on this device re-sees onboarding.
+    expect(removed).toContain(ONBOARDING_FLAGS_STORAGE_KEY);
+    expect(ONBOARDING_FLAGS_STORAGE_KEY).toBe('onboarding.flags.v1');
     for (const key of CLEARED_STORAGE_KEYS) expect(removed).toContain(key);
   });
 

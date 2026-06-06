@@ -18,6 +18,13 @@ interface OnboardingFlagsState {
   setHydrated: (v: boolean) => void;
 }
 
+/**
+ * AsyncStorage key for the persisted onboarding flags. Single source of truth — imported by
+ * `clearLocalCaches` (account deletion) so the two can never drift (a drift would silently skip
+ * the first-run intro for the next user on a device where an account was deleted).
+ */
+export const ONBOARDING_FLAGS_STORAGE_KEY = 'onboarding.flags.v1';
+
 export const useOnboardingFlags = create<OnboardingFlagsState>()(
   persist(
     (set) => ({
@@ -27,7 +34,7 @@ export const useOnboardingFlags = create<OnboardingFlagsState>()(
       setHydrated: (v) => set({ hydrated: v }),
     }),
     {
-      name: 'onboarding.flags.v1',
+      name: ONBOARDING_FLAGS_STORAGE_KEY,
       storage: createJSONStorage(() => AsyncStorage),
       partialize: (s) => ({ introSeen: s.introSeen }),
       onRehydrateStorage: () => (state) => {

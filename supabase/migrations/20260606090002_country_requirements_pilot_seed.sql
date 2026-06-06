@@ -47,3 +47,23 @@ VALUES
    'smartReminders.kb.south_africa_entry','http://www.dha.gov.za/',
    NULL,NULL,'{14}','2026-06-06','{http://www.dha.gov.za/index.php/immigration-services/types-of-visas}')
 ON CONFLICT (id) DO NOTHING;
+
+-- Batch 3: Mexico, Argentina, Schengen short-stay visa, UK Standard Visitor (last two = visa-required passports).
+INSERT INTO public.country_requirements
+  (id, destination_country, destination_regions, requirement_type, applies_to_passport_countries,
+   trip_duration_max_days, trip_purpose, severity, i18n_key, action_url,
+   estimated_processing_days, estimated_cost_usd, followup_lead_times, last_verified, source_urls)
+VALUES
+  ('mexico_tourist','MX','{}','other','{FR,DE,US,GB,CA,IT,ES,NL,JP,AU}',180,'{tourism,business}','good_to_know',
+   'smartReminders.kb.mexico_tourist','https://www.inm.gob.mx/',
+   NULL,NULL,'{14}','2026-06-06','{https://www.inm.gob.mx/}'),
+  ('argentina_visa_free','AR','{}','other','{FR,DE,US,GB,CA,IT,ES,NL,JP,AU}',90,'{tourism,business}','good_to_know',
+   'smartReminders.kb.argentina_visa_free','https://www.argentina.gob.ar/interior/migraciones',
+   NULL,NULL,'{14}','2026-06-06','{https://www.argentina.gob.ar/interior/migraciones}'),
+  ('schengen_visa_short_stay',NULL,'{schengen}','visa','{IN,CN,ZA,NG,KE,EG,MA,DZ,TR,RU,TH,VN,ID,PH}',90,'{tourism,business}','mandatory',
+   'smartReminders.kb.schengen_visa_short_stay','https://home-affairs.ec.europa.eu/policies/schengen-borders-and-visa/visa-policy_en',
+   15,90,'{60,30}','2026-06-06','{https://home-affairs.ec.europa.eu/policies/schengen-borders-and-visa/visa-policy_en}'),
+  ('uk_standard_visitor','GB','{}','visa','{IN,CN,ZA,NG,KE,EG,MA,DZ,TR,RU,TH,VN,ID,PH}',180,'{tourism,business}','mandatory',
+   'smartReminders.kb.uk_standard_visitor','https://www.gov.uk/standard-visitor',
+   15,160,'{60,30}','2026-06-06','{https://www.gov.uk/standard-visitor}')
+ON CONFLICT (id) DO NOTHING;

@@ -37,6 +37,10 @@
 - [x] `uae_voa` — UAE entry on arrival
 - [x] `kenya_eta` — Kenya eTA
 - [x] `south_africa_entry` — South Africa visa-free entry
+- [x] `mexico_tourist` — Mexico tourist entry (FMM)
+- [x] `argentina_visa_free` — Argentina visa-free entry
+- [x] `schengen_visa_short_stay` — Schengen short-stay (type C) visa, visa-required passports
+- [x] `uk_standard_visitor` — UK Standard Visitor visa, visa-required passports
 
 ## Backlog to ~150 — matrix to author + verify
 

@@ -22,6 +22,17 @@
 - [x] `cash_10k_eu`, `cash_10k_us`
 - [x] `travel_insurance_schengen`
 
+## Shipped — pilot batch (migration `20260606090002`, `verified=false` — PENDING human verification)
+
+> Drafted via the Ralph loop (2026-06-06). Not surfaced to users until a human source-checks each row
+> and flips `verified=true`. Covers backlog cells: SE-Asia, Turkey/Egypt/Morocco, Gulf, LatAm, Africa, Schengen/UK visa-required.
+
+- [x] `nz_nzeta` — New Zealand NZeTA
+- [x] `korea_keta` — South Korea K-ETA
+- [x] `vietnam_evisa` — Vietnam e-Visa
+- [x] `indonesia_voa` — Indonesia VOA / e-VOA
+- [x] `turkey_evisa` — Türkiye e-Visa
+
 ## Backlog to ~150 — matrix to author + verify
 
 Destinations (top ~30): US · GB · Schengen(26) · CA · AU · NZ · JP · KR · CN · IN · TH · VN · ID · SG · AE · TR · EG · MA · ZA · KE · BR · AR · MX · PE · CO · CU · CR · US territories …

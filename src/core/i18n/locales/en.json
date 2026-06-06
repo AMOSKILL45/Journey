@@ -526,6 +526,26 @@
       "vaccine_routine": {
         "title": "Check routine vaccines",
         "body": "Make sure your routine vaccinations are up to date before traveling."
+      },
+      "nz_nzeta": {
+        "title": "NZeTA required (New Zealand)",
+        "body": "Request your NZeTA online before flying to New Zealand — it also covers the IVL tourist levy. Allow a few days for approval."
+      },
+      "korea_keta": {
+        "title": "K-ETA required (South Korea)",
+        "body": "Apply for your K-ETA online before traveling to South Korea. Approval usually takes a few days."
+      },
+      "vietnam_evisa": {
+        "title": "Vietnam e-Visa",
+        "body": "Apply for a Vietnam e-Visa online a few weeks before your trip — it now allows stays of up to 90 days."
+      },
+      "indonesia_voa": {
+        "title": "Indonesia visa on arrival",
+        "body": "Most visitors need a Visa on Arrival for Bali/Indonesia. Buy the e-VOA online beforehand to skip the airport queue."
+      },
+      "turkey_evisa": {
+        "title": "Türkiye e-Visa",
+        "body": "Some nationalities need an e-Visa for Türkiye. Apply online before you fly — it only takes a few minutes."
       }
     }
   },

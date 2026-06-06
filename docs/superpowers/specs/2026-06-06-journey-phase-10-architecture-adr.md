@@ -1,6 +1,6 @@
 # Phase 10 — Architecture Decision Record
 
-> **Date**: 2026-06-06 · **Status**: Proposed (pending user review) · **Deciders**: Amos (solo dev)
+> **Date**: 2026-06-06 · **Status**: Accepted · **Deciders**: Amos (solo dev)
 > Resolves the three open questions flagged in the Phase 10 design spec
 > ([2026-06-06-journey-phase-10-stores-polish-design.md](2026-06-06-journey-phase-10-stores-polish-design.md) §4, §7.3, §8).
 > Continues the project ADR series (Phase 9 = ADR-007/008/009 → this = **ADR-010/011/012**).
@@ -15,7 +15,7 @@ introspection of the database's foreign-key graph.
 
 # ADR-010: Account-deletion mechanism — sentinel ghost + ordered server-side purge
 
-**Status:** Proposed
+**Status:** Accepted
 
 ## Context
 
@@ -117,7 +117,7 @@ risk inside one well-tested function. The ghost row is a small, permanent fixtur
 
 # ADR-011: Readable Mode font strategy
 
-**Status:** Proposed
+**Status:** Accepted
 
 ## Context
 
@@ -155,7 +155,7 @@ justify breaking OTA mid-polish-phase. Revisit only if beta a11y testing flags N
 
 # ADR-012: Phase 10 workflow shape — seed → (net-new ∥ feature-lots) → integrate
 
-**Status:** Proposed
+**Status:** Accepted
 
 ## Context
 

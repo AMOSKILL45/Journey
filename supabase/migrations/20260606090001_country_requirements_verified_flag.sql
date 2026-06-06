@@ -10,3 +10,11 @@ ALTER TABLE public.country_requirements
 -- Ordering guarantee: this migration (…090001) runs before any verified=false seed
 -- (…090002+), so this only ever touches the pre-existing curated rows.
 UPDATE public.country_requirements SET verified = true WHERE verified = false;
+
+-- Defense-in-depth (security review): clients/anon may only read approved rows.
+-- The cron uses the service role (bypasses RLS) and filters verified=true itself,
+-- so this is server-side-neutral — it only stops direct client/anon queries from
+-- reading unapproved drafts. No client currently reads this table directly.
+DROP POLICY IF EXISTS "Read country_requirements" ON public.country_requirements;
+CREATE POLICY "Read country_requirements" ON public.country_requirements
+  FOR SELECT USING (verified = true);

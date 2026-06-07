@@ -64,6 +64,29 @@
 - [x] `ethiopia_evisa` — Ethiopia e-Visa
 - [x] `us_b1b2_visa` — US B1/B2 visitor visa (non-VWP)
 
+## Shipped — batch 3 (migration `20260606090004`, `verified=false` — PENDING human verification)
+
+> Caribbean/Central America, more Africa & Asia, non-Schengen Europe, Middle East (2026-06-06, direct authoring).
+
+- [x] `dominican_republic_eticket` — Dominican Republic e-Ticket
+- [x] `jamaica_visa_free` — Jamaica visa-free
+- [x] `panama_visa_free` — Panama visa-free
+- [x] `nigeria_visa` — Nigeria visa
+- [x] `ghana_visa` — Ghana visa
+- [x] `senegal_visa_free` — Senegal visa-free
+- [x] `myanmar_evisa` — Myanmar e-Visa
+- [x] `bangladesh_voa` — Bangladesh visa on arrival
+- [x] `maldives_visa_free` — Maldives free VOA (IMUGA)
+- [x] `laos_evisa` — Laos e-Visa
+- [x] `mongolia_visa_free` — Mongolia visa-free
+- [x] `ecuador_visa_free` — Ecuador visa-free
+- [x] `uruguay_visa_free` — Uruguay visa-free
+- [x] `ireland_visa_free` — Ireland visa-free (non-Schengen)
+- [x] `georgia_visa_free` — Georgia visa-free
+- [x] `jordan_visa` — Jordan visa / Jordan Pass
+- [x] `bahrain_evisa` — Bahrain e-Visa
+- [x] `taiwan_visa_free` — Taiwan visa-free
+
 ## Backlog to ~150 — matrix to author + verify
 
 Destinations (top ~30): US · GB · Schengen(26) · CA · AU · NZ · JP · KR · CN · IN · TH · VN · ID · SG · AE · TR · EG · MA · ZA · KE · BR · AR · MX · PE · CO · CU · CR · US territories …

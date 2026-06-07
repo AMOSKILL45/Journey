@@ -655,6 +655,78 @@
       "us_b1b2_visa": {
         "title": "Visa visiteur B1/B2 (USA)",
         "body": "Si votre nationalité n’est pas dans le Visa Waiver Program, demandez un visa B1/B2 bien à l’avance — les délais d’entretien peuvent être longs."
+      },
+      "dominican_republic_eticket": {
+        "title": "République dominicaine — e-Ticket",
+        "body": "Remplissez le e-Ticket dominicain (gratuit) en ligne avant le départ et l’arrivée. La carte de tourisme est incluse dans la plupart des billets."
+      },
+      "jamaica_visa_free": {
+        "title": "Jamaïque — entrée sans visa",
+        "body": "De nombreuses nationalités visitent la Jamaïque sans visa. Remplissez le formulaire d’immigration/douane en ligne avant de partir."
+      },
+      "panama_visa_free": {
+        "title": "Panama — entrée sans visa",
+        "body": "De nombreuses nationalités peuvent visiter le Panama sans visa. Prévoyez une preuve de voyage de retour et des fonds suffisants."
+      },
+      "nigeria_visa": {
+        "title": "Visa Nigeria",
+        "body": "Le Nigeria exige un visa pour la plupart des voyageurs — demandez-le en ligne à l’avance. Un certificat de fièvre jaune est aussi requis."
+      },
+      "ghana_visa": {
+        "title": "Visa Ghana",
+        "body": "Le Ghana exige un visa pour la plupart des voyageurs — demandez-le à l’avance. Un certificat de fièvre jaune est requis à l’entrée."
+      },
+      "senegal_visa_free": {
+        "title": "Sénégal — entrée sans visa",
+        "body": "De nombreuses nationalités visitent le Sénégal sans visa jusqu’à 90 jours. La vaccination contre la fièvre jaune est recommandée."
+      },
+      "myanmar_evisa": {
+        "title": "e-Visa Myanmar",
+        "body": "Demandez un e-Visa touristique Myanmar en ligne avant de partir."
+      },
+      "bangladesh_voa": {
+        "title": "Visa à l’arrivée (Bangladesh)",
+        "body": "De nombreux voyageurs peuvent obtenir un visa à l’arrivée au Bangladesh ; vérifiez les conditions et prévoyez des USD pour les frais."
+      },
+      "maldives_visa_free": {
+        "title": "Maldives — visa gratuit à l’arrivée",
+        "body": "Tous les visiteurs reçoivent un visa gratuit de 30 jours à l’arrivée. Soumettez la déclaration IMUGA dans les 96h avant l’arrivée."
+      },
+      "laos_evisa": {
+        "title": "e-Visa Laos",
+        "body": "Demandez un e-Visa Laos en ligne avant de partir (le visa à l’arrivée existe aussi)."
+      },
+      "mongolia_visa_free": {
+        "title": "Mongolie — entrée sans visa",
+        "body": "De nombreuses nationalités peuvent visiter la Mongolie sans visa jusqu’à 30 jours. Vérifiez la liste à jour selon votre passeport."
+      },
+      "ecuador_visa_free": {
+        "title": "Équateur — entrée sans visa",
+        "body": "De nombreuses nationalités peuvent visiter l’Équateur sans visa jusqu’à 90 jours par an."
+      },
+      "uruguay_visa_free": {
+        "title": "Uruguay — entrée sans visa",
+        "body": "De nombreuses nationalités peuvent visiter l’Uruguay sans visa jusqu’à 90 jours."
+      },
+      "ireland_visa_free": {
+        "title": "Irlande — entrée sans visa",
+        "body": "De nombreuses nationalités peuvent visiter l’Irlande sans visa (l’Irlande n’est pas dans l’espace Schengen — c’est une entrée distincte)."
+      },
+      "georgia_visa_free": {
+        "title": "Géorgie — entrée sans visa",
+        "body": "De nombreuses nationalités peuvent rester en Géorgie sans visa jusqu’à un an. Vérifiez la liste selon votre passeport."
+      },
+      "jordan_visa": {
+        "title": "Visa Jordanie / Jordan Pass",
+        "body": "La plupart des voyageurs ont besoin d’un visa jordanien. Acheter le Jordan Pass avant l’arrivée annule les frais de visa et inclut Pétra."
+      },
+      "bahrain_evisa": {
+        "title": "e-Visa Bahreïn",
+        "body": "Demandez un e-Visa Bahreïn en ligne avant de partir, ou vérifiez votre éligibilité au visa à l’arrivée."
+      },
+      "taiwan_visa_free": {
+        "title": "Taïwan — entrée sans visa",
+        "body": "De nombreuses nationalités peuvent visiter Taïwan sans visa jusqu’à 90 jours. Conservez une preuve de voyage de retour."
       }
     }
   },

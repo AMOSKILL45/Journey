@@ -655,6 +655,78 @@
       "us_b1b2_visa": {
         "title": "US B1/B2 visitor visa",
         "body": "If your nationality is not in the Visa Waiver Program, apply for a US B1/B2 visa well ahead — interview wait times can be long."
+      },
+      "dominican_republic_eticket": {
+        "title": "Dominican Republic — e-Ticket",
+        "body": "Fill the free Dominican Republic e-Ticket online before departure and arrival. The tourist card is included in most airfares."
+      },
+      "jamaica_visa_free": {
+        "title": "Jamaica — visa-free entry",
+        "body": "Many nationalities visit Jamaica visa-free. Complete the online immigration/customs form before you travel."
+      },
+      "panama_visa_free": {
+        "title": "Panama — visa-free entry",
+        "body": "Many nationalities can visit Panama visa-free. Bring proof of onward travel and sufficient funds."
+      },
+      "nigeria_visa": {
+        "title": "Nigeria visa",
+        "body": "Nigeria requires a visa for most travelers — apply online ahead. A yellow fever certificate is also required."
+      },
+      "ghana_visa": {
+        "title": "Ghana visa",
+        "body": "Ghana requires a visa for most travelers — apply ahead. A yellow fever certificate is required to enter."
+      },
+      "senegal_visa_free": {
+        "title": "Senegal — visa-free entry",
+        "body": "Many nationalities visit Senegal visa-free for up to 90 days. A yellow fever vaccination is recommended."
+      },
+      "myanmar_evisa": {
+        "title": "Myanmar e-Visa",
+        "body": "Apply for a Myanmar tourist e-Visa online before you travel."
+      },
+      "bangladesh_voa": {
+        "title": "Bangladesh visa on arrival",
+        "body": "Many travelers can get a Bangladesh visa on arrival; check requirements and bring USD for the fee."
+      },
+      "maldives_visa_free": {
+        "title": "Maldives — free visa on arrival",
+        "body": "All visitors get a free 30-day visa on arrival. Submit the IMUGA traveller declaration within 96h before arrival."
+      },
+      "laos_evisa": {
+        "title": "Laos e-Visa",
+        "body": "Apply for a Laos e-Visa online before you travel (visa on arrival is also available)."
+      },
+      "mongolia_visa_free": {
+        "title": "Mongolia — visa-free entry",
+        "body": "Many nationalities can visit Mongolia visa-free for up to 30 days. Check the latest list for your passport."
+      },
+      "ecuador_visa_free": {
+        "title": "Ecuador — visa-free entry",
+        "body": "Many nationalities can visit Ecuador visa-free for up to 90 days per year."
+      },
+      "uruguay_visa_free": {
+        "title": "Uruguay — visa-free entry",
+        "body": "Many nationalities can visit Uruguay visa-free for up to 90 days."
+      },
+      "ireland_visa_free": {
+        "title": "Ireland — visa-free entry",
+        "body": "Many nationalities can visit Ireland visa-free (Ireland is not in the Schengen area — it is a separate entry)."
+      },
+      "georgia_visa_free": {
+        "title": "Georgia — visa-free entry",
+        "body": "Many nationalities can stay in Georgia visa-free for up to a year. Check the list for your passport."
+      },
+      "jordan_visa": {
+        "title": "Jordan visa / Jordan Pass",
+        "body": "Most travelers need a Jordan visa. Buying the Jordan Pass before arrival waives the visa fee and covers Petra."
+      },
+      "bahrain_evisa": {
+        "title": "Bahrain e-Visa",
+        "body": "Apply for a Bahrain e-Visa online before you travel, or check if you are eligible for visa on arrival."
+      },
+      "taiwan_visa_free": {
+        "title": "Taiwan — visa-free entry",
+        "body": "Many nationalities can visit Taiwan visa-free for up to 90 days. Keep proof of onward travel."
       }
     }
   },

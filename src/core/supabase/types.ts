@@ -308,6 +308,7 @@ export type Database = {
           trip_duration_min_days: number | null;
           trip_purpose: string[];
           updated_at: string;
+          verified: boolean;
         };
         Insert: {
           action_url?: string | null;
@@ -331,6 +332,7 @@ export type Database = {
           trip_duration_min_days?: number | null;
           trip_purpose?: string[];
           updated_at?: string;
+          verified?: boolean;
         };
         Update: {
           action_url?: string | null;
@@ -354,6 +356,7 @@ export type Database = {
           trip_duration_min_days?: number | null;
           trip_purpose?: string[];
           updated_at?: string;
+          verified?: boolean;
         };
         Relationships: [];
       };

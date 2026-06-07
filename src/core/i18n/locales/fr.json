@@ -587,6 +587,74 @@
       "uk_standard_visitor": {
         "title": "Visa visiteur standard (UK)",
         "body": "Votre nationalité peut nécessiter un visa visiteur standard pour le Royaume-Uni. Faites la demande en ligne quelques semaines avant le départ — le traitement peut prendre environ 3 semaines."
+      },
+      "singapore_visa_free": {
+        "title": "Singapour — carte d’arrivée",
+        "body": "La plupart des voyageurs entrent à Singapour sans visa, mais vous devez soumettre la SG Arrival Card (gratuite) en ligne dans les 3 jours avant l’arrivée."
+      },
+      "malaysia_visa_free": {
+        "title": "Malaisie — carte d’arrivée",
+        "body": "De nombreuses nationalités entrent en Malaisie sans visa jusqu’à 90 jours. Soumettez la Malaysia Digital Arrival Card (MDAC, gratuite) avant de partir."
+      },
+      "philippines_visa_free": {
+        "title": "Philippines — entrée sans visa",
+        "body": "De nombreuses nationalités peuvent visiter les Philippines sans visa 30 jours. Enregistrez votre eTravel en ligne avant l’arrivée."
+      },
+      "sri_lanka_eta": {
+        "title": "ETA Sri Lanka",
+        "body": "Demandez une ETA Sri Lanka en ligne avant de partir. L’approbation est généralement rapide."
+      },
+      "cambodia_evisa": {
+        "title": "e-Visa Cambodge",
+        "body": "Demandez un e-Visa Cambodge en ligne quelques jours avant le voyage (le visa à l’arrivée existe aussi)."
+      },
+      "nepal_voa": {
+        "title": "Visa à l’arrivée (Népal)",
+        "body": "La plupart des voyageurs obtiennent un visa à l’arrivée au Népal — remplissez le formulaire en ligne à l’avance et prévoyez des USD et une photo."
+      },
+      "qatar_visa_free": {
+        "title": "Qatar — exemption de visa",
+        "body": "De nombreuses nationalités obtiennent une exemption de visa gratuite à l’arrivée au Qatar. Vérifiez la durée de séjour selon votre passeport."
+      },
+      "saudi_evisa": {
+        "title": "e-Visa Arabie saoudite",
+        "body": "Demandez un e-Visa touristique saoudien en ligne avant de partir. (Le Hajj/Omra utilise un visa distinct.)"
+      },
+      "oman_evisa": {
+        "title": "e-Visa Oman",
+        "body": "Certaines nationalités ont besoin d’un e-Visa Oman ; demandez-le en ligne avant de partir. De courts séjours sans visa s’appliquent à d’autres."
+      },
+      "peru_visa_free": {
+        "title": "Pérou — entrée sans visa",
+        "body": "De nombreuses nationalités peuvent visiter le Pérou sans visa. Conservez votre justificatif d’entrée pour le départ."
+      },
+      "colombia_visa_free": {
+        "title": "Colombie — entrée sans visa",
+        "body": "De nombreuses nationalités peuvent entrer en Colombie sans visa jusqu’à 90 jours. Remplissez le formulaire Check-Mig avant chaque vol."
+      },
+      "chile_visa_free": {
+        "title": "Chili — entrée sans visa",
+        "body": "De nombreuses nationalités peuvent visiter le Chili sans visa jusqu’à 90 jours. Conservez votre carte de tourisme (PDI) pour le départ."
+      },
+      "costa_rica_visa_free": {
+        "title": "Costa Rica — entrée sans visa",
+        "body": "De nombreuses nationalités peuvent visiter le Costa Rica sans visa jusqu’à 90 jours. Prévoyez une preuve de voyage de retour."
+      },
+      "cuba_tourist_card": {
+        "title": "Carte de tourisme Cuba",
+        "body": "Cuba exige une carte de touriste (tarjeta del turista) et une assurance voyage. Achetez la carte avant de partir."
+      },
+      "tanzania_visa": {
+        "title": "Visa Tanzanie",
+        "body": "Demandez un e-Visa Tanzanie en ligne avant de partir (visa touristique à entrée unique)."
+      },
+      "ethiopia_evisa": {
+        "title": "e-Visa Éthiopie",
+        "body": "Demandez un e-Visa Éthiopie en ligne avant de partir — c’est le moyen le plus simple d’entrer."
+      },
+      "us_b1b2_visa": {
+        "title": "Visa visiteur B1/B2 (USA)",
+        "body": "Si votre nationalité n’est pas dans le Visa Waiver Program, demandez un visa B1/B2 bien à l’avance — les délais d’entretien peuvent être longs."
       }
     }
   },

@@ -42,6 +42,28 @@
 - [x] `schengen_visa_short_stay` — Schengen short-stay (type C) visa, visa-required passports
 - [x] `uk_standard_visitor` — UK Standard Visitor visa, visa-required passports
 
+## Shipped — batch 2 (migration `20260606090003`, `verified=false` — PENDING human verification)
+
+> Next tier (2026-06-06, direct authoring). Not surfaced to users until a human source-checks each row and flips `verified=true`.
+
+- [x] `singapore_visa_free` — Singapore (SG Arrival Card)
+- [x] `malaysia_visa_free` — Malaysia (MDAC)
+- [x] `philippines_visa_free` — Philippines (eTravel)
+- [x] `sri_lanka_eta` — Sri Lanka ETA
+- [x] `cambodia_evisa` — Cambodia e-Visa
+- [x] `nepal_voa` — Nepal visa on arrival
+- [x] `qatar_visa_free` — Qatar visa waiver
+- [x] `saudi_evisa` — Saudi Arabia e-Visa
+- [x] `oman_evisa` — Oman e-Visa
+- [x] `peru_visa_free` — Peru visa-free
+- [x] `colombia_visa_free` — Colombia visa-free
+- [x] `chile_visa_free` — Chile visa-free
+- [x] `costa_rica_visa_free` — Costa Rica visa-free
+- [x] `cuba_tourist_card` — Cuba tourist card
+- [x] `tanzania_visa` — Tanzania e-Visa
+- [x] `ethiopia_evisa` — Ethiopia e-Visa
+- [x] `us_b1b2_visa` — US B1/B2 visitor visa (non-VWP)
+
 ## Backlog to ~150 — matrix to author + verify
 
 Destinations (top ~30): US · GB · Schengen(26) · CA · AU · NZ · JP · KR · CN · IN · TH · VN · ID · SG · AE · TR · EG · MA · ZA · KE · BR · AR · MX · PE · CO · CU · CR · US territories …

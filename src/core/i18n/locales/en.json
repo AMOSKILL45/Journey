@@ -587,6 +587,74 @@
       "uk_standard_visitor": {
         "title": "UK Standard Visitor visa",
         "body": "Your nationality may need a UK Standard Visitor visa. Apply online a few weeks before you travel — processing can take around 3 weeks."
+      },
+      "singapore_visa_free": {
+        "title": "Singapore — arrival card",
+        "body": "Most visitors enter Singapore visa-free, but you must submit the free SG Arrival Card online within 3 days before you arrive."
+      },
+      "malaysia_visa_free": {
+        "title": "Malaysia — digital arrival card",
+        "body": "Many nationalities enter Malaysia visa-free for up to 90 days. Submit the free Malaysia Digital Arrival Card (MDAC) before you travel."
+      },
+      "philippines_visa_free": {
+        "title": "Philippines — visa-free entry",
+        "body": "Many nationalities can visit the Philippines visa-free for 30 days. Register your eTravel online before arrival."
+      },
+      "sri_lanka_eta": {
+        "title": "Sri Lanka ETA",
+        "body": "Apply for a Sri Lanka ETA online before you fly. Approval is usually quick."
+      },
+      "cambodia_evisa": {
+        "title": "Cambodia e-Visa",
+        "body": "Apply for a Cambodia e-Visa online a few days before your trip (visa on arrival is also available)."
+      },
+      "nepal_voa": {
+        "title": "Nepal visa on arrival",
+        "body": "Most visitors get a Nepal visa on arrival — fill the online form beforehand and bring USD plus a photo."
+      },
+      "qatar_visa_free": {
+        "title": "Qatar — visa waiver",
+        "body": "Many nationalities get a free visa waiver on arrival in Qatar. Check the stay length allowed for your passport."
+      },
+      "saudi_evisa": {
+        "title": "Saudi Arabia e-Visa",
+        "body": "Apply for a Saudi tourist e-Visa online before you travel. (Hajj/Umrah uses a separate visa.)"
+      },
+      "oman_evisa": {
+        "title": "Oman e-Visa",
+        "body": "Some nationalities need an Oman e-Visa; apply online before you fly. Short visa-free stays apply to others."
+      },
+      "peru_visa_free": {
+        "title": "Peru — visa-free entry",
+        "body": "Many nationalities can visit Peru visa-free. Keep your stamped entry slip for departure."
+      },
+      "colombia_visa_free": {
+        "title": "Colombia — visa-free entry",
+        "body": "Many nationalities can enter Colombia visa-free for up to 90 days. Fill the Check-Mig form before each flight."
+      },
+      "chile_visa_free": {
+        "title": "Chile — visa-free entry",
+        "body": "Many nationalities can visit Chile visa-free for up to 90 days. Keep your tourist card (PDI) for departure."
+      },
+      "costa_rica_visa_free": {
+        "title": "Costa Rica — visa-free entry",
+        "body": "Many nationalities can visit Costa Rica visa-free for up to 90 days. Bring proof of onward travel."
+      },
+      "cuba_tourist_card": {
+        "title": "Cuba tourist card",
+        "body": "Cuba requires a tourist card (tarjeta del turista) plus travel insurance. Buy the card before you fly."
+      },
+      "tanzania_visa": {
+        "title": "Tanzania visa",
+        "body": "Apply for a Tanzania e-Visa online before you travel (single-entry tourist visa)."
+      },
+      "ethiopia_evisa": {
+        "title": "Ethiopia e-Visa",
+        "body": "Apply for an Ethiopia e-Visa online before you fly — it is the simplest way to enter."
+      },
+      "us_b1b2_visa": {
+        "title": "US B1/B2 visitor visa",
+        "body": "If your nationality is not in the Visa Waiver Program, apply for a US B1/B2 visa well ahead — interview wait times can be long."
       }
     }
   },

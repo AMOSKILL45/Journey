@@ -44,3 +44,16 @@ jest.mock('expo-haptics', () => ({
 jest.mock('expo-audio', () => ({
   createAudioPlayer: jest.fn(() => ({ play: jest.fn(), remove: jest.fn(), volume: 0, loop: false })),
 }));
+
+// DiceBear is ESM (jest-expo doesn't transform it) and its style JSON resolves via the
+// package `exports` map — stub both so PixelAvatar's wiring (label, ring) is tested
+// without booting the avatar generator. Real SVG output is runtime-only (typecheck
+// still validates the real DiceBear types).
+jest.mock('@dicebear/core', () => ({
+  Avatar: class {
+    toString() {
+      return '<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"></svg>';
+    }
+  },
+}));
+jest.mock('@dicebear/styles/pixel-art.json', () => ({}), { virtual: true });

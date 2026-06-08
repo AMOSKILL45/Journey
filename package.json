@@ -22,6 +22,8 @@
     "supabase:types": "supabase gen types typescript --project-id $SUPABASE_PROJECT_ID > src/core/supabase/types.generated.ts"
   },
   "dependencies": {
+    "@dicebear/core": "^10.1.0",
+    "@dicebear/styles": "^10.2.0",
     "@expo-google-fonts/fredoka": "^0.4.1",
     "@expo-google-fonts/nunito": "^0.4.2",
     "@expo-google-fonts/press-start-2p": "^0.4.1",

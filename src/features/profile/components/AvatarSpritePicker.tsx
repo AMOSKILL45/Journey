@@ -1,7 +1,7 @@
-import { Image } from 'expo-image';
 import { FlatList, View } from 'react-native';
 
 import { AVATAR_SPRITES } from '@assets/sprites/avatars/manifest';
+import { PixelAvatar } from '@shared/components/PixelAvatar';
 import { PixelCard } from '@shared/components/PixelCard';
 
 export interface AvatarSpritePickerProps {
@@ -26,7 +26,7 @@ export function AvatarSpritePicker({ value, onChange }: AvatarSpritePickerProps)
           className={value === item.id ? 'border-primary-600' : ''}
         >
           <View className="h-14 w-14 items-center justify-center">
-            <Image source={item.source} style={{ width: 48, height: 48 }} contentFit="contain" />
+            <PixelAvatar spriteId={item.id} size="md" />
           </View>
         </PixelCard>
       )}

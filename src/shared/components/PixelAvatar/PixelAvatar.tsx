@@ -1,29 +1,39 @@
-import { Image, View } from 'react-native';
-
-import { AVATAR_SPRITES } from '@assets/sprites/avatars/manifest';
+import { Avatar } from '@dicebear/core';
+import pixelArt from '@dicebear/styles/pixel-art.json';
+import { useMemo } from 'react';
+import { View } from 'react-native';
+import { SvgXml } from 'react-native-svg';
 
 type AvatarSize = 'sm' | 'md';
 const DIM: Record<AvatarSize, number> = { sm: 28, md: 40 };
 
 export interface PixelAvatarProps {
+  /** Stable per-traveler seed (the chosen `avatar_sprite_id`) — drives a deterministic avatar. */
   spriteId: string;
+  /** Ring color (the traveler's `avatar_color`). */
   color?: string;
-  label: string;
+  /** A11y label. Omit to render decoratively inside an already-labeled control (e.g. the picker). */
+  label?: string;
   size?: AvatarSize;
 }
 
 /**
- * A traveler's avatar: pixel sprite in a color-ringed circle. Reused by the
- * live-avatars map layer and presence lists. Falls back to the first sprite
- * if the id is unknown.
+ * A traveler's avatar: a DiceBear "pixel-art" character (open-source, CC0) generated
+ * deterministically from `spriteId`, rendered as a local SVG (no network, no asset
+ * commission) inside a color-ringed circle. Reused by the live-avatars map layer,
+ * presence lists and profiles. Swap the imported style (e.g. `adventurer.json`) to
+ * change the look in one line.
  */
 export function PixelAvatar({ spriteId, color = '#0F1A2E', label, size = 'md' }: PixelAvatarProps) {
-  const sprite = AVATAR_SPRITES.find((s) => s.id === spriteId) ?? AVATAR_SPRITES[0];
   const d = DIM[size];
+  const svg = useMemo(() => new Avatar(pixelArt, { seed: spriteId }).toString(), [spriteId]);
+
   return (
     <View
-      accessibilityRole="image"
+      accessibilityRole={label ? 'image' : undefined}
       accessibilityLabel={label}
+      accessibilityElementsHidden={!label}
+      importantForAccessibility={label ? undefined : 'no-hide-descendants'}
       style={{
         width: d,
         height: d,
@@ -34,11 +44,7 @@ export function PixelAvatar({ spriteId, color = '#0F1A2E', label, size = 'md' }:
         backgroundColor: '#FFFFFF',
       }}
     >
-      <Image
-        source={sprite.source}
-        style={{ width: '100%', height: '100%' }}
-        resizeMode="contain"
-      />
+      <SvgXml xml={svg} width={d} height={d} />
     </View>
   );
 }

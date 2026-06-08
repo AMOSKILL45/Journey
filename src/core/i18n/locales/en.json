@@ -534,11 +534,11 @@
       },
       "nz_nzeta": {
         "title": "NZeTA required (New Zealand)",
-        "body": "Request your NZeTA online before flying to New Zealand — it also covers the IVL tourist levy. Allow a few days for approval."
+        "body": "Request your NZeTA online before flying to New Zealand. Note the separate IVL tourist levy (~NZD100) is charged on top. Allow a few days."
       },
       "korea_keta": {
-        "title": "K-ETA required (South Korea)",
-        "body": "Apply for your K-ETA online before traveling to South Korea. Approval usually takes a few days."
+        "title": "K-ETA (South Korea)",
+        "body": "K-ETA is currently optional for visa-waiver nationalities until 31 Dec 2026 (it still lets you skip the arrival card). Apply online a few days ahead if you want it."
       },
       "vietnam_evisa": {
         "title": "Vietnam e-Visa",
@@ -566,11 +566,11 @@
       },
       "kenya_eta": {
         "title": "Kenya eTA required",
-        "body": "All travelers to Kenya must get an electronic travel authorization (eTA) before arrival. Apply a few days ahead."
+        "body": "Most travellers to Kenya need an electronic travel authorization (eTA) before arrival; many African nationals are now exempt. Apply a few days ahead."
       },
       "south_africa_entry": {
         "title": "South Africa — visa-free entry",
-        "body": "Many nationalities can visit South Africa visa-free for up to 90 days. Bring a passport with at least two blank pages."
+        "body": "Many nationalities can visit South Africa visa-free for up to 90 days. Bring a passport with at least one blank page, valid 1 month past departure."
       },
       "mexico_tourist": {
         "title": "Mexico — tourist entry",
@@ -602,7 +602,7 @@
       },
       "sri_lanka_eta": {
         "title": "Sri Lanka ETA",
-        "body": "Apply for a Sri Lanka ETA online before you fly. Approval is usually quick."
+        "body": "Apply for your Sri Lanka ETA online before you fly — it is now free for most nationalities. Approval is usually quick."
       },
       "cambodia_evisa": {
         "title": "Cambodia e-Visa",
@@ -621,8 +621,8 @@
         "body": "Apply for a Saudi tourist e-Visa online before you travel. (Hajj/Umrah uses a separate visa.)"
       },
       "oman_evisa": {
-        "title": "Oman e-Visa",
-        "body": "Some nationalities need an Oman e-Visa; apply online before you fly. Short visa-free stays apply to others."
+        "title": "Oman — visa-free up to 14 days",
+        "body": "Most visitors get 14 days visa-free in Oman; you only need an e-Visa for longer stays. Apply online if staying longer."
       },
       "peru_visa_free": {
         "title": "Peru — visa-free entry",
@@ -718,7 +718,7 @@
       },
       "jordan_visa": {
         "title": "Jordan visa / Jordan Pass",
-        "body": "Most travelers need a Jordan visa. Buying the Jordan Pass before arrival waives the visa fee and covers Petra."
+        "body": "Most travelers need a Jordan visa. The Jordan Pass (bought before arrival) waives the visa fee and includes Petra — but only if you stay at least 2 nights."
       },
       "bahrain_evisa": {
         "title": "Bahrain e-Visa",

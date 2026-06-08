@@ -109,8 +109,9 @@ Deno.serve(async (req) => {
   if (ok !== true) return new Response('forbidden', { status: 403 });
 
   const today = new Date().toISOString().slice(0, 10);
-  // Only surface human-approved rows (ADR-1). Drafts (verified=false) stay invisible to users.
-  const { data: rules } = await sb.from('country_requirements').select('*').eq('verified', true);
+  // Evaluate ALL rules. `verified` is a trust badge shown client-side, not a visibility gate
+  // (ADR D1, 2026-06-07 KB trust & feedback) — the client adds the disclaimer + badge + report.
+  const { data: rules } = await sb.from('country_requirements').select('*');
   // NB: trips has no `purpose` column (v1.0) — purpose stays null, so purpose-gated rules match regardless.
   const { data: trips } = await sb
     .from('trips')

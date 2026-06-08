@@ -534,11 +534,11 @@
       },
       "nz_nzeta": {
         "title": "NZeTA requis (Nouvelle-Zélande)",
-        "body": "Demandez votre NZeTA en ligne avant de partir pour la Nouvelle-Zélande — elle inclut aussi la taxe touristique IVL. Prévoyez quelques jours pour l’approbation."
+        "body": "Demandez votre NZeTA en ligne avant de partir pour la Nouvelle-Zélande. La taxe touristique IVL (~100 NZD) est facturée en plus. Prévoyez quelques jours."
       },
       "korea_keta": {
-        "title": "K-ETA requis (Corée du Sud)",
-        "body": "Demandez votre K-ETA en ligne avant de voyager en Corée du Sud. L’approbation prend généralement quelques jours."
+        "title": "K-ETA (Corée du Sud)",
+        "body": "Le K-ETA est actuellement optionnel pour les nationalités exemptées de visa jusqu’au 31 déc. 2026 (il permet d’éviter la carte d’arrivée). Demandez-le en ligne quelques jours avant si vous le souhaitez."
       },
       "vietnam_evisa": {
         "title": "e-Visa Vietnam",
@@ -566,11 +566,11 @@
       },
       "kenya_eta": {
         "title": "eTA Kenya requis",
-        "body": "Tous les voyageurs vers le Kenya doivent obtenir une autorisation électronique de voyage (eTA) avant l’arrivée. Faites la demande quelques jours à l’avance."
+        "body": "La plupart des voyageurs vers le Kenya ont besoin d’une autorisation électronique (eTA) avant l’arrivée ; de nombreux ressortissants africains en sont désormais exemptés. Faites la demande quelques jours à l’avance."
       },
       "south_africa_entry": {
         "title": "Afrique du Sud — entrée sans visa",
-        "body": "De nombreuses nationalités peuvent visiter l’Afrique du Sud sans visa jusqu’à 90 jours. Prévoyez un passeport avec au moins deux pages vierges."
+        "body": "De nombreuses nationalités peuvent visiter l’Afrique du Sud sans visa jusqu’à 90 jours. Prévoyez un passeport avec au moins une page vierge, valide 1 mois après le départ."
       },
       "mexico_tourist": {
         "title": "Mexique — entrée touristique",
@@ -602,7 +602,7 @@
       },
       "sri_lanka_eta": {
         "title": "ETA Sri Lanka",
-        "body": "Demandez une ETA Sri Lanka en ligne avant de partir. L’approbation est généralement rapide."
+        "body": "Demandez votre ETA Sri Lanka en ligne avant de partir — c’est désormais gratuit pour la plupart des nationalités. L’approbation est généralement rapide."
       },
       "cambodia_evisa": {
         "title": "e-Visa Cambodge",
@@ -621,8 +621,8 @@
         "body": "Demandez un e-Visa touristique saoudien en ligne avant de partir. (Le Hajj/Omra utilise un visa distinct.)"
       },
       "oman_evisa": {
-        "title": "e-Visa Oman",
-        "body": "Certaines nationalités ont besoin d’un e-Visa Oman ; demandez-le en ligne avant de partir. De courts séjours sans visa s’appliquent à d’autres."
+        "title": "Oman — sans visa jusqu’à 14 jours",
+        "body": "La plupart des voyageurs ont 14 jours sans visa à Oman ; un e-Visa n’est nécessaire que pour les séjours plus longs. Demandez-le en ligne si vous restez plus longtemps."
       },
       "peru_visa_free": {
         "title": "Pérou — entrée sans visa",
@@ -718,7 +718,7 @@
       },
       "jordan_visa": {
         "title": "Visa Jordanie / Jordan Pass",
-        "body": "La plupart des voyageurs ont besoin d’un visa jordanien. Acheter le Jordan Pass avant l’arrivée annule les frais de visa et inclut Pétra."
+        "body": "La plupart des voyageurs ont besoin d’un visa jordanien. Le Jordan Pass (acheté avant l’arrivée) annule les frais de visa et inclut Pétra — mais seulement si vous restez au moins 2 nuits."
       },
       "bahrain_evisa": {
         "title": "e-Visa Bahreïn",

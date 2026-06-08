@@ -69,16 +69,9 @@ describe('smart-reminders runtime contracts', () => {
     }
   });
 
-  it('no KB seed migration auto-publishes drafts (only the *_verified_flag migration touches `verified`)', () => {
-    // Safety gate (ADR-1): drafted rows stay verified=false until a human flips them.
-    // Seeds must rely on the column DEFAULT — never set `verified` themselves. `last_verified`
-    // is a different column and does not trip the \bverified\b word boundary.
-    const offenders = kbMigrationFiles()
-      .filter((f) => !/verified_flag/.test(f))
-      .filter((f) => /\bverified\b/i.test(fs.readFileSync(f, 'utf8')))
-      .map((f) => path.basename(f));
-    expect(offenders).toEqual([]);
-  });
+  // (Removed 2026-06-07) The "no seed sets `verified`" guard is obsolete under the Waze model:
+  // `verified` is now a trust BADGE, not a visibility gate, so seeds/corrections may set it.
+  // See docs/superpowers/specs/2026-06-07-journey-kb-trust-feedback-design.md.
 
   it('"smart_reminders" is a known notification category', () => {
     // eslint-disable-next-line @typescript-eslint/no-require-imports

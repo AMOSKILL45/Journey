@@ -1,6 +1,16 @@
+import { useEffect } from 'react';
 import { View } from 'react-native';
+import Animated, {
+  cancelAnimation,
+  useAnimatedStyle,
+  useSharedValue,
+  withDelay,
+  withRepeat,
+  withTiming,
+} from 'react-native-reanimated';
 
 import { t } from '@core/i18n';
+import { useFeedbackSettings } from '@features/feedback/store/feedbackSettings';
 import { PixelAvatar } from '@shared/components/PixelAvatar';
 
 /** Structurally compatible with realtime's PresenceMember; kept local so map has no realtime dep. */
@@ -27,11 +37,53 @@ export interface LiveAvatarsLayerProps {
 const AVATAR = 28;
 const FAN_X = 18; // fan travelers that share a spot
 const ABOVE_NODE = 36; // sit avatars above the node circle
+const BOB_PX = 4; // gentle idle "breathing" height
+const BOB_MS = 1100;
+const PHASE_BUCKETS = 5; // desync travelers so they don't bob in lockstep
+
+/** Deterministic 0..PHASE_BUCKETS-1 offset from the user id, so co-located avatars desync. */
+function phaseFor(userId: string): number {
+  let sum = 0;
+  for (let i = 0; i < userId.length; i += 1) sum += userId.charCodeAt(i);
+  return sum % PHASE_BUCKETS;
+}
+
+/** One traveler avatar with a gentle idle bob (skipped under reduce-motion). */
+function BobbingAvatar({ member }: { member: LiveMember }) {
+  const reduceMotion = useFeedbackSettings((s) => s.osReduceMotion);
+  const y = useSharedValue(0);
+
+  useEffect(() => {
+    if (reduceMotion) {
+      y.value = 0;
+      return undefined;
+    }
+    y.value = withDelay(
+      phaseFor(member.user_id) * 160,
+      withRepeat(withTiming(-BOB_PX, { duration: BOB_MS }), -1, true),
+    );
+    return () => cancelAnimation(y);
+  }, [reduceMotion, member.user_id, y]);
+
+  const style = useAnimatedStyle(() => ({ transform: [{ translateY: y.value }] }));
+
+  return (
+    <Animated.View style={style}>
+      <PixelAvatar
+        spriteId={member.avatar_sprite_id}
+        color={member.avatar_color}
+        label={member.display_name ?? t('profile.anonymous')}
+        size="sm"
+      />
+    </Animated.View>
+  );
+}
 
 /**
  * Renders each present traveler's avatar at a screen position computed by the
  * layer that owns the camera (OverworldLayer) — so avatars stay glued to their
- * node (or live GPS point). Co-located avatars fan out. Pointer-transparent.
+ * node (or live GPS point). Co-located avatars fan out, each with a gentle idle
+ * bob so the world feels alive. Pointer-transparent.
  */
 export function LiveAvatarsLayer({ placements }: LiveAvatarsLayerProps) {
   const groups = new Map<string, AvatarPlacement[]>();
@@ -57,12 +109,7 @@ export function LiveAvatarsLayer({ placements }: LiveAvatarsLayerProps) {
               top: pl.y - AVATAR / 2 - ABOVE_NODE,
             }}
           >
-            <PixelAvatar
-              spriteId={pl.member.avatar_sprite_id}
-              color={pl.member.avatar_color}
-              label={pl.member.display_name ?? t('profile.anonymous')}
-              size="sm"
-            />
+            <BobbingAvatar member={pl.member} />
           </View>
         )),
       )}

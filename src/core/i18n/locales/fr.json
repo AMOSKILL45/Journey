@@ -751,9 +751,13 @@
       "add": "Ajouter un rappel"
     },
     "form": {
+      "heading": "Nouveau rappel",
       "titleLabel": "Titre",
       "titlePlaceholder": "Que doit-on vous rappeler ?",
-      "dateLabel": "Date (AAAA-MM-JJ)",
+      "dateLabel": "Date",
+      "pickDate": "Choisir une date",
+      "titleRequired": "Saisissez un titre.",
+      "dateRequired": "Choisissez une date.",
       "save": "Enregistrer"
     },
     "tabs": {

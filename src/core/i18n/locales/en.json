@@ -751,9 +751,13 @@
       "add": "Add reminder"
     },
     "form": {
+      "heading": "New reminder",
       "titleLabel": "Title",
       "titlePlaceholder": "What should we remind you about?",
-      "dateLabel": "Date (YYYY-MM-DD)",
+      "dateLabel": "Date",
+      "pickDate": "Pick a date",
+      "titleRequired": "Please enter a title.",
+      "dateRequired": "Please pick a date.",
       "save": "Save"
     },
     "tabs": {

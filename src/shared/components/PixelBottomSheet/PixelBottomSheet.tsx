@@ -39,6 +39,11 @@ export const PixelBottomSheet = forwardRef<PixelBottomSheetRef, PixelBottomSheet
         snapPoints={resolvedSnaps}
         enablePanDownToClose={enablePanDownToClose}
         onChange={onChange}
+        // Keyboard handling for sheets with inputs: pan the sheet above the keyboard
+        // instead of letting it cover the fields/CTA, and restore on blur.
+        keyboardBehavior="interactive"
+        keyboardBlurBehavior="restore"
+        android_keyboardInputMode="adjustResize"
         backgroundStyle={{
           backgroundColor: colors.surface,
           borderTopWidth: 3,

@@ -36,7 +36,7 @@ const QUERY_STALE_MS = 60_000;
 
 SplashScreen.preventAutoHideAsync();
 
-// Public trip share links use the shorthand path `t/<token>` (journey://t/<token>),
+// Public trip share links use the shorthand path `t/<token>` (thisisthejourney://t/<token>),
 // which doesn't map to a route file directly — `(public)/trip/[token]` lives at
 // `/trip/<token>`. Extract the token so the handler can rewrite the path.
 export function parsePublicTripToken(url: string): string | null {

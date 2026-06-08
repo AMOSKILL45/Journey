@@ -7,9 +7,10 @@ import * as AppleAuthentication from 'expo-apple-authentication';
 import { Platform } from 'react-native';
 
 import { env } from '@core/env';
+import { APP_SCHEME } from '@core/env/scheme';
 import { supabase } from '@core/supabase/client';
 
-export const AUTH_REDIRECT_URL = 'thisisthejourney://auth/callback';
+export const AUTH_REDIRECT_URL = `${APP_SCHEME}://auth/callback`;
 
 export class AuthCancelledError extends Error {
   constructor() {

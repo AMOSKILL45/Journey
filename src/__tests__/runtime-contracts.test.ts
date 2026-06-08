@@ -97,8 +97,8 @@ describe('phase 9 social-foundation contracts', () => {
   });
 
   it('the public deep-link builder targets routes that actually exist', () => {
-    // buildPublicTripLink emits journey://t/<token>; the route rendering it must exist at that path.
-    expect(buildPublicTripLink('abc')).toBe('journey://t/abc');
+    // buildPublicTripLink emits thisisthejourney://t/<token>; the route rendering it must exist at that path.
+    expect(buildPublicTripLink('abc')).toBe('thisisthejourney://t/abc');
     expect(fs.existsSync(path.join(SRC_DIR, 'app', '(public)', 'trip', '[token].tsx'))).toBe(true);
     expect(fs.existsSync(path.join(SRC_DIR, 'app', '(modals)', 'profile', '[id].tsx'))).toBe(true);
   });

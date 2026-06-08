@@ -32,7 +32,7 @@ const publicMilestonesQueryKey = (tripId: string) => ['public-milestones', tripI
 const publicOwnerQueryKey = (ownerId: string) => ['public-owner', ownerId] as const;
 
 /**
- * Read-only, shareable view of a trip reached via the `journey://t/:token` deep
+ * Read-only, shareable view of a trip reached via the `thisisthejourney://t/:token` deep
  * link. It exposes ONLY the safe subset — name, dates, destination, cover and
  * the milestone path. There is no FAB, no check-in and no edit; documents,
  * checklists, photos, members and live locations stay private (RLS + the fact

@@ -1,3 +1,4 @@
+import { APP_SCHEME } from '@core/env/scheme';
 import { supabase } from '@core/supabase/client';
 import type { Database } from '@core/supabase/types';
 
@@ -88,5 +89,5 @@ export function buildInvitationLink(token: string): string {
 
 export function buildInvitationScheme(token: string): string {
   // App scheme URL (alternative if user has the app installed but the universal link isn't configured).
-  return `thisisthejourney://invite/${token}`;
+  return `${APP_SCHEME}://invite/${token}`;
 }

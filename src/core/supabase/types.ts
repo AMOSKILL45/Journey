@@ -300,6 +300,7 @@ export type Database = {
           id: string;
           last_verified: string;
           passport_validity_required_months: number | null;
+          report_count: number;
           required: boolean;
           requirement_type: string;
           severity: string;
@@ -324,6 +325,7 @@ export type Database = {
           id: string;
           last_verified: string;
           passport_validity_required_months?: number | null;
+          report_count?: number;
           required?: boolean;
           requirement_type: string;
           severity?: string;
@@ -348,6 +350,7 @@ export type Database = {
           id?: string;
           last_verified?: string;
           passport_validity_required_months?: number | null;
+          report_count?: number;
           required?: boolean;
           requirement_type?: string;
           severity?: string;
@@ -443,6 +446,41 @@ export type Database = {
           results?: Json;
         };
         Relationships: [];
+      };
+      kb_rule_reports: {
+        Row: {
+          created_at: string;
+          details: string | null;
+          id: string;
+          reason: string;
+          reporter_id: string;
+          rule_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          details?: string | null;
+          id?: string;
+          reason: string;
+          reporter_id?: string;
+          rule_id: string;
+        };
+        Update: {
+          created_at?: string;
+          details?: string | null;
+          id?: string;
+          reason?: string;
+          reporter_id?: string;
+          rule_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'kb_rule_reports_rule_id_fkey';
+            columns: ['rule_id'];
+            isOneToOne: false;
+            referencedRelation: 'country_requirements';
+            referencedColumns: ['id'];
+          },
+        ];
       };
       milestone_legs: {
         Row: {

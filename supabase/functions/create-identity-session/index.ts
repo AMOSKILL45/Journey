@@ -171,9 +171,17 @@ Deno.serve(async (req: Request) => {
   let ephemeralKey: StripeEphemeralKey;
   try {
     session = await stripeCreateSession(STRIPE_SECRET_KEY, userId);
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e);
+    console.error('[create-identity-session] stripeCreateSession failed', msg);
+    return json({ error: `createSession: ${msg}` }, 502);
+  }
+  try {
     ephemeralKey = await stripeCreateEphemeralKey(STRIPE_SECRET_KEY, session.id);
   } catch (e) {
-    return json({ error: e instanceof Error ? e.message : 'Stripe failed' }, 502);
+    const msg = e instanceof Error ? e.message : String(e);
+    console.error('[create-identity-session] stripeCreateEphemeralKey failed', msg);
+    return json({ error: `createEphemeralKey: ${msg}` }, 502);
   }
 
   const { error: updateErr } = await admin

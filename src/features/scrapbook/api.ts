@@ -159,7 +159,7 @@ export async function fetchScrapbookInputs(tripId: string): Promise<ScrapbookInp
       .from('trips')
       .select('name, start_date, end_date, destination_country, destination_countries')
       .eq('id', tripId)
-      .single(),
+      .maybeSingle(),
     supabase
       .from('milestones')
       .select('id, is_boss, arrival_at, departure_at')
@@ -167,6 +167,9 @@ export async function fetchScrapbookInputs(tripId: string): Promise<ScrapbookInp
       .order('order_index', { ascending: true }),
   ]);
   if (tripRes.error) throw tripRes.error;
+  // .maybeSingle() returns null (not a PGRST116 throw) when the trip was deleted or the
+  // caller lost membership between navigation and fetch — surface a clear error instead.
+  if (!tripRes.data) throw new Error('Trip not found or no longer accessible.');
 
   const milestones = milestonesRes.data ?? [];
   const milestoneIds = milestones.map((m) => m.id);

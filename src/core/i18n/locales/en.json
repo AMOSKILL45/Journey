@@ -143,6 +143,7 @@
     "profile": "Profile"
   },
   "home": {
+    "eyebrow": "Let's go",
     "greeting": "Hey %{name} 👋",
     "greetingAnonymous": "Hey adventurer 👋",
     "emptyTitle": "🌍 Your adventures start here",

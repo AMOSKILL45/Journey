@@ -4,6 +4,7 @@ import { ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTranslation } from '@core/i18n';
+import { colors } from '@core/theme/tokens';
 import { HomeChecklistSummary } from '@features/checklists';
 import { PassportExpiryBanner } from '@features/identity';
 import { useProfile } from '@features/profile';
@@ -61,12 +62,19 @@ export default function HomeTab() {
         paddingBottom: insets.bottom + SCREEN_PADDING,
       }}
     >
-      <PixelText size="h1" className="mb-2">
-        {greeting}
-      </PixelText>
-      <PixelText size="body" className="mb-6 text-text-secondary">
-        {t('app.tagline')}
-      </PixelText>
+      <View className="mb-6">
+        <PixelText size="pixel" className="mb-2" style={{ color: colors.accent[700] }}>
+          {t('home.eyebrow')}
+        </PixelText>
+        <PixelText size="h1">{greeting}</PixelText>
+        <View
+          className="mt-2 rounded-full"
+          style={{ width: 44, height: 5, backgroundColor: colors.accent[500] }}
+        />
+        <PixelText size="body" className="mt-3 text-text-secondary">
+          {t('app.tagline')}
+        </PixelText>
+      </View>
 
       <PassportExpiryBanner />
 

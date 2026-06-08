@@ -14,6 +14,11 @@ jest.mock('../hooks/useSmartReminders', () => ({
   }),
 }));
 
+jest.mock('../hooks/useKbRules', () => ({
+  useKbRules: () => ({ byId: {} }),
+  useReportKbRule: () => ({ mutate: jest.fn() }),
+}));
+
 describe('SmartTipsSection', () => {
   beforeEach(() => {
     mockUseSmartReminders.mockReset();

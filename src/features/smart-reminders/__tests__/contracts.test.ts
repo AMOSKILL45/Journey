@@ -73,6 +73,25 @@ describe('smart-reminders runtime contracts', () => {
   // `verified` is now a trust BADGE, not a visibility gate, so seeds/corrections may set it.
   // See docs/superpowers/specs/2026-06-07-journey-kb-trust-feedback-design.md.
 
+  it('report reasons match the kb_rule_reports CHECK and resolve in i18n', () => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { REPORT_REASONS } = require('../utils/reportReasons');
+    const allMigrations = fs
+      .readdirSync(MIGRATIONS_DIR)
+      .filter((f) => f.endsWith('.sql'))
+      .map((f) => fs.readFileSync(path.join(MIGRATIONS_DIR, f), 'utf8'))
+      .join('\n');
+    const check = allMigrations.match(
+      /reason\s+text\s+NOT NULL\s+CHECK \(reason IN \(([^)]+)\)\)/i,
+    );
+    expect(check).toBeTruthy();
+    for (const reason of REPORT_REASONS) {
+      expect(check?.[0]).toContain(`'${reason}'`);
+      expect(typeof resolveKey(en, `smartReminders.report.${reason}`)).toBe('string');
+      expect(typeof resolveKey(fr, `smartReminders.report.${reason}`)).toBe('string');
+    }
+  });
+
   it('"smart_reminders" is a known notification category', () => {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { NOTIFICATION_CATEGORIES } = require('@features/notifications/utils/categories');

@@ -457,7 +457,9 @@
       "addToChecklist": "Add to checklist",
       "snooze": "Snooze",
       "dismiss": "Dismiss",
-      "open": "Open"
+      "open": "Open",
+      "source": "Official source",
+      "report": "Report"
     },
     "kb": {
       "us_esta": {
@@ -728,6 +730,18 @@
         "title": "Taiwan — visa-free entry",
         "body": "Many nationalities can visit Taiwan visa-free for up to 90 days. Keep proof of onward travel."
       }
+    },
+    "disclaimer": "Guidance only — entry rules change often and vary by nationality. Always check the official source before you travel.",
+    "badge": {
+      "verified": "✓ Verified",
+      "community": "Community info"
+    },
+    "report": {
+      "outdated": "Out of date",
+      "incorrect": "Incorrect",
+      "other": "Something else",
+      "countLabel": "travellers flagged this rule",
+      "prompt": "What's wrong with this rule?"
     }
   },
   "lifeReminders": {

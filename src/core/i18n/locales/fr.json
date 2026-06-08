@@ -457,7 +457,9 @@
       "addToChecklist": "Ajouter à la checklist",
       "snooze": "Plus tard",
       "dismiss": "Ignorer",
-      "open": "Ouvrir"
+      "open": "Ouvrir",
+      "source": "Source officielle",
+      "report": "Signaler"
     },
     "kb": {
       "us_esta": {
@@ -728,6 +730,18 @@
         "title": "Taïwan — entrée sans visa",
         "body": "De nombreuses nationalités peuvent visiter Taïwan sans visa jusqu’à 90 jours. Conservez une preuve de voyage de retour."
       }
+    },
+    "disclaimer": "Recommandations indicatives — les règles d'entrée changent souvent et dépendent de la nationalité. Vérifiez toujours la source officielle avant de partir.",
+    "badge": {
+      "verified": "✓ Vérifié",
+      "community": "Info communauté"
+    },
+    "report": {
+      "outdated": "Périmé",
+      "incorrect": "Incorrect",
+      "other": "Autre",
+      "countLabel": "voyageurs ont signalé cette règle",
+      "prompt": "Qu'est-ce qui ne va pas avec cette règle ?"
     }
   },
   "lifeReminders": {

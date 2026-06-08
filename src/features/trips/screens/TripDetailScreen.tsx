@@ -38,7 +38,6 @@ import {
 import { ScrapbookSection } from '@features/scrapbook';
 import { SmartTipsSection } from '@features/smart-reminders';
 import { TimeCapsulesSection } from '@features/time-capsules';
-import { EmptyState } from '@shared/components/EmptyState';
 import { ErrorState } from '@shared/components/ErrorState';
 import { LoadingState } from '@shared/components/LoadingState';
 import { PixelButton } from '@shared/components/PixelButton';
@@ -294,12 +293,35 @@ export function TripDetailScreen() {
 
         {milestones.length === 0 ? (
           <View className="mb-6">
-            <EmptyState
-              title={t('emptyStates.tripPath.title')}
-              body={t('emptyStates.tripPath.body')}
-              actionLabel={t('emptyStates.tripPath.action')}
-              onAction={() => sheetRef.current?.open()}
-            />
+            {/* Show the (empty) overworld from milestone zero, with a floating prompt
+                to drop the first node — so the world is visible before any data. */}
+            <View style={{ position: 'relative' }}>
+              <TripMapView
+                milestones={milestones}
+                checkedInIds={checkedInSet}
+                destinationCountry={trip.destination_country}
+              />
+              <View
+                style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
+                className="items-center justify-center px-6"
+                pointerEvents="box-none"
+              >
+                <View className="items-center rounded-md border-pixel border-border bg-surface px-5 py-4">
+                  <PixelText size="h3" className="text-center">
+                    {t('emptyStates.tripPath.title')}
+                  </PixelText>
+                  <PixelText size="small" className="mb-3 mt-1 text-center text-text-secondary">
+                    {t('emptyStates.tripPath.body')}
+                  </PixelText>
+                  <PixelButton
+                    onPress={() => sheetRef.current?.open()}
+                    accessibilityLabel={t('emptyStates.tripPath.action')}
+                  >
+                    {t('emptyStates.tripPath.action')}
+                  </PixelButton>
+                </View>
+              </View>
+            </View>
           </View>
         ) : (
           <View className="mb-6">

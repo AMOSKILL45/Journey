@@ -35,7 +35,7 @@ This Is The Journey stands on the shoulders of incredible open-source projects.
 - [Stripe Identity React Native](https://github.com/stripe/stripe-identity-react-native) (`@stripe/stripe-identity-react-native`) — MIT License. Identity verification (Phase 1.5).
 - [Expo Apple Authentication](https://github.com/expo/expo/tree/main/packages/expo-apple-authentication) (`expo-apple-authentication`) — MIT License.
 - [Google Sign-In for React Native](https://github.com/react-native-google-signin/google-signin) (`@react-native-google-signin/google-signin`) — MIT License.
-- [DiceBear](https://www.dicebear.com/) (`@dicebear/core`, `@dicebear/styles`) — MIT License (core). Generated traveler avatars; the "Pixel Art" style is CC0 (public domain, no attribution required).
+- [DiceBear](https://www.dicebear.com/) (`@dicebear/core`, `@dicebear/styles`) — MIT License (core). Generates traveler avatars. The **"Adventurer"** avatar style is by **[Lisa Wischofsky](https://www.instagram.com/lischi_art/)**, licensed **[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)** (colors/compositing varied per traveler at runtime); credited in-app under Settings → Legal. The "Pixel Art" style (alternative, CC0) requires no attribution.
 
 ## Assets
 

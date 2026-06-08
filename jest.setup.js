@@ -56,4 +56,4 @@ jest.mock('@dicebear/core', () => ({
     }
   },
 }));
-jest.mock('@dicebear/styles/pixel-art.json', () => ({}), { virtual: true });
+jest.mock('@dicebear/styles/adventurer.json', () => ({}), { virtual: true });

@@ -1,5 +1,5 @@
 import { Avatar } from '@dicebear/core';
-import pixelArt from '@dicebear/styles/pixel-art.json';
+import adventurer from '@dicebear/styles/adventurer.json';
 import { useMemo } from 'react';
 import { View } from 'react-native';
 import { SvgXml } from 'react-native-svg';
@@ -18,15 +18,16 @@ export interface PixelAvatarProps {
 }
 
 /**
- * A traveler's avatar: a DiceBear "pixel-art" character (open-source, CC0) generated
+ * A traveler's avatar: a DiceBear "adventurer" character (open-source, CC BY 4.0 —
+ * Lisa Wischofsky; credited in CREDITS.md + the in-app Legal section) generated
  * deterministically from `spriteId`, rendered as a local SVG (no network, no asset
  * commission) inside a color-ringed circle. Reused by the live-avatars map layer,
- * presence lists and profiles. Swap the imported style (e.g. `adventurer.json`) to
- * change the look in one line.
+ * presence lists and profiles. Swap the imported style (e.g. `pixel-art.json`, CC0)
+ * to change the look in one line.
  */
 export function PixelAvatar({ spriteId, color = '#0F1A2E', label, size = 'md' }: PixelAvatarProps) {
   const d = DIM[size];
-  const svg = useMemo(() => new Avatar(pixelArt, { seed: spriteId }).toString(), [spriteId]);
+  const svg = useMemo(() => new Avatar(adventurer, { seed: spriteId }).toString(), [spriteId]);
 
   return (
     <View

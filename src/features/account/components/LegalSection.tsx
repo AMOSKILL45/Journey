@@ -46,6 +46,11 @@ export function LegalSection() {
       </PixelText>
       <LegalLinkRow label={t('legal.privacy')} url={env.privacyUrl} />
       <LegalLinkRow label={t('legal.terms')} url={env.termsUrl} />
+      {/* CC BY 4.0 requires visible in-app credit for the DiceBear "Adventurer" avatars. */}
+      <LegalLinkRow
+        label={t('legal.avatarsCredit')}
+        url="https://creativecommons.org/licenses/by/4.0/"
+      />
     </View>
   );
 }
